@@ -1,0 +1,13 @@
+<html>
+<body>
+{% for message in messages %}
+{{ message }}
+{% endfor %}
+<form method="POST" action="/login/">
+{% csrf_token %}
+<input name="username"><br/>
+<input name="password" type="password">
+<input type="submit">
+</form>
+</body>
+</html>
