@@ -1,8 +1,6 @@
 # coding: utf-8
 from django.views.generic.base import TemplateView
-from django.contrib.auth import authenticate, login, logout
-from django.http.response import HttpResponseRedirect
-from django.contrib import messages
+from django.contrib.auth import logout
 
 
 class IndexView(TemplateView):
@@ -22,20 +20,53 @@ class LogoutView(TemplateView):
 
 
 class StockSearchView(TemplateView):
+    '''
+    智能检索
+    '''
     template_name = 'pages/search.html'
 
 
-class StockForecastByYearView(TemplateView):
-    template_name = 'pages/forecast_year.html'
+class StockForecastView(TemplateView):
+    '''
+    股票指标明细列表页
+    '''
+    template_name = 'pages/forecast.html'
 
-
-class StockForecastByReportView(TemplateView):
-    template_name = 'pages/forecast_report.html'
+    def get_context_data(self, **kwargs):
+        context_data = super(StockForecastView, self).get_context_data()
+        stock_code = kwargs.get('code')
+        context_data.update({'stock_code': stock_code})
+        return context_data
 
 
 class StockForecastMoreView(TemplateView):
+    '''
+    指标明细相关言报、公告、社交页面
+    '''
     template_name = 'pages/forecast_more.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super(StockForecastMoreView, self).get_context_data()
+        q = self.request.GET.get('q')
+        context_data.update({'q': q})
+        return context_data
 
 
 class StockForecastDiffView(TemplateView):
+    '''
+    股票对比页面
+    '''
     template_name = 'pages/forecast_diff.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super(StockForecastDiffView, self).get_context_data()
+        code = self.request.GET.get('code')
+        context_data.update({'stock_code': code})
+        return context_data
+
+
+class StockIndustryRankView(TemplateView):
+    '''
+    股票行业排名页面
+    '''
+    template_name = 'pages/industry_rank.html'
