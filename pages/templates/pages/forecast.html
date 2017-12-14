@@ -1,6 +1,5 @@
 {% extends 'pages/base_common.html' %}
 {% block css %}
-<!--<link rel="stylesheet" href="/static/css/useCenter.css">-->
 {% endblock %}
 
 {% block title %}
@@ -32,12 +31,23 @@
 
 <!--图表_start-->
 <div class="statistics-chart">
+    <div class="chart-tab">
+        <span class="active">毛利率</span>
+        <span>营业收入及增速</span>
+        <span>期间营业率</span>
+        <span>净利润增速</span>
+        <span>预售账款</span>
+        <span>资产周转率</span>
+        <span>单车价格</span>
+    </div>
     <div class="legend">
         <div class="column3"><img src="/static/images/legend.png" alt="">行业排名</div>
         <div class="column2"><span></span>毛利率</div>
         <div class="column1"><span></span>毛利率预测</div>
     </div>
+    <div id="chart_year" class="chart_year" style="width: 100%;height:400px;"></div>
 </div>
+
 <!--图表_end-->
 
 
@@ -59,7 +69,6 @@
     </ul>
 </div>
 <!--tab_end-->
-
 
 
 <!--数据_start-->
@@ -163,6 +172,146 @@
 
 {% block js %}
 <script src="/static/js/inputSearch.js"></script>
+<script src="/static/js/echarts.js"></script>
+<script>
+  // 基于准备好的dom，初始化echarts实例
+  var myChart1 = echarts.init(document.getElementById('chart_year'));
+  function mychart() {
+    var ratios = [-11, -1, 40, 30, 70, 80, 13.4, 10, 5, -10];
+    var ranks = [90, 90, 60, 50, 70, 78, 53, 58, 23, 8];
+//#F1F3F4
+    //配置及数据
+    optionWeek = {
+      tooltip: {
+        trigger: 'axis',
+        show: true
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['2010A', '2011A', '2012A', '2013A', '2014A', '2015A', '2016A', '2017E', '2018E', '2019E'],
+          axisPointer: {
+            type: 'shadow'
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: '#5A5B5A',
+              fontSize:'12'
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#EEF0F2'
+            }
+          },
+          splitLine:{
+            show:true,
+            lineStyle: {
+              color: ['#EEF0F2']
+            }
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          max:100,
+          min:-20,
+          axisTick: {
+            show: false
+          },
+          interval: 10,
+          axisLabel: {
+            formatter: '{value} %',
+            show: true,
+            textStyle: {
+              color: '#5A5B5A',
+              fontSize:'12'
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#EEF0F2'
+            }
+          },
+          splitLine:{
+            show:true,
+            lineStyle: {
+              color: ['#EEF0F2']
+            }
+          }
+        },
+        {
+          type: 'category',
+          data:['','','前100/100','90/100','80/100','70/100','60/100','前50/100','40/100','30/100','20/100','前10/100'],
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            show: true,
+            textStyle: {
+              color: '#5A5B5A',
+              fontSize:'12'
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#EEF0F2'
+            }
+          },
+          splitLine:{
+            show:true,
+            lineStyle: {
+              color: ['#EEF0F2']
+            }
+          }
+        }
+      ],
+      series: [
+        {
+          name: '毛利率预测',
+          type: 'bar',
+          data: ratios,
+          itemStyle: {
+            normal: {
+              color: function (params) {
+                var colorList = [
+                  '#6F64BA', '#6F64BA','#6F64BA', '#6F64BA','#6F64BA', '#6F64BA','#6F64BA', '#6F64BA', '#62B4F5', '#62B4F5'
+                ];
+                return colorList[params.dataIndex]
+              }
+            }
+          },
+          barWidth: 30
+        },
+        {
+          name: '行业排名',
+          type: 'line',
+          data: ranks,
+          itemStyle: {
+            normal: {
+              color: '#E4190D',
+              lineStyle: {
+                color: '#E4190D',
+                width: 2
+              }
+            }
+          }
+        }
+      ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(optionWeek);
+  }
+
+  mychart()
+
+</script>
+
 <script>
   $(function () {
     // 左右tab切换（按年度/按报告期）
@@ -208,10 +357,10 @@
     new InputSearch('#search-inp', '.search-container', '.search-container li', opts);
 
 
-    var start_year=3;
-    var len_year=7;
-    var start_report=4;
-    var len_report=8;
+    var start_year = 3;
+    var len_year = 7;
+    var start_report = 4;
+    var len_report = 8;
 
     // 初始化数据
     // 按年度数据
@@ -225,8 +374,8 @@
         console.log(res);
         var allData = res;
         $.each(res, function (index, item) {
-          len_year=item.cols_title.length;
-          start_year=len_year-4;
+          len_year = item.cols_title.length;
+          start_year = len_year - 4;
           $('.mask_arrow').hide();
           initTable('#year-data-', item, index);
         })
@@ -248,8 +397,8 @@
         console.log(res);
         var allData = res;
         $.each(res, function (index, item) {
-          len_report=item.cols_title.length;
-          start_report=len_report-4;
+          len_report = item.cols_title.length;
+          start_report = len_report - 4;
           $('.mask_arrow').hide();
           initTable('#report-data-', item, index);
         })
@@ -2367,6 +2516,7 @@
         initTable('#report-data-', item, index);
       })
     }
+
 //    test();
 
     // 渲染表格数据
@@ -2393,7 +2543,7 @@
           str += '<tr>';
           str += '<td class="first-col">' + index + '</td>'; // 第一列
           $.each(item, function (ind, ite) {
-            if (ind < titles.length -6) { // 13组数据显示后5列
+            if (ind < titles.length - 6) { // 13组数据显示后5列
               str += '<td style="display: none;">' + (ite.value ? ite.value : '--') + '</td>';
             } else {
               str += '<td>' + (ite.value ? ite.value : '--') + '</td>'
@@ -2403,20 +2553,20 @@
         });
         $(fixId + ind + ' tbody').html(str);
         // 初始化 箭头右边不可点
-        var len=titles.length-1;
-        var start=len-4;
-        var fix_id=fixId.split('-')[0];
-        if(start>0&&start+4<len){
-          $(fix_id+'-next-time').css('color','#515254');
-          $(fix_id+'-next-time').css('cursor','pointer');
-          $(fix_id+'-pre-time').css('color','#515254');
-          $(fix_id+'-pre-time').css('cursor','pointer');
-        }else if(start===0){
-          $(fix_id+'-pre-time').css('color','#ccc');
-          $(fix_id+'-pre-time').css('cursor','not-allowed');
-        }else if(start+4===len){
-          $(fix_id+'-next-time').css('color','#ccc');
-          $(fix_id+'-next-time').css('cursor','not-allowed');
+        var len = titles.length - 1;
+        var start = len - 4;
+        var fix_id = fixId.split('-')[0];
+        if (start > 0 && start + 4 < len) {
+          $(fix_id + '-next-time').css('color', '#515254');
+          $(fix_id + '-next-time').css('cursor', 'pointer');
+          $(fix_id + '-pre-time').css('color', '#515254');
+          $(fix_id + '-pre-time').css('cursor', 'pointer');
+        } else if (start === 0) {
+          $(fix_id + '-pre-time').css('color', '#ccc');
+          $(fix_id + '-pre-time').css('cursor', 'not-allowed');
+        } else if (start + 4 === len) {
+          $(fix_id + '-next-time').css('color', '#ccc');
+          $(fix_id + '-next-time').css('cursor', 'not-allowed');
         }
       } else {
         console.log('无数据')
@@ -2430,20 +2580,20 @@
       // 左右切换箭头样式
       for (var i = 0; i < total; i++) { // 遍历拼接id
         // 当前 start-start+4
-        for(var j=1;j<len+1;j++){
-          if(j<start){
+        for (var j = 1; j < len + 1; j++) {
+          if (j < start) {
             $(fixId + i + ' thead').find('td').eq(j).hide();
-            $(fixId + i + ' tbody tr').each(function (index,item) {
+            $(fixId + i + ' tbody tr').each(function (index, item) {
               $(item).find('td').eq(j).hide();
             });
-          }else if(j>(start+4)){
+          } else if (j > (start + 4)) {
             $(fixId + i + ' thead').find('td').eq(j).hide();
-            $(fixId + i + ' tbody tr').each(function (index,item) {
+            $(fixId + i + ' tbody tr').each(function (index, item) {
               $(item).find('td').eq(j).hide();
             });
-          }else {
+          } else {
             $(fixId + i + ' thead').find('td').eq(j).show();
-            $(fixId + i + ' tbody tr').each(function (index,item) {
+            $(fixId + i + ' tbody tr').each(function (index, item) {
               $(item).find('td').eq(j).show();
             });
           }
@@ -2453,78 +2603,76 @@
 
     // 按年度 切换上一个
     $('#year-pre-time').click(function () {
-      if(start_year>=0&&start_year+4<=len_year){
-        $('#year-next-time').css('color','#515254');
-        $('#year-next-time').css('cursor','pointer');
+      if (start_year >= 0 && start_year + 4 <= len_year) {
+        $('#year-next-time').css('color', '#515254');
+        $('#year-next-time').css('cursor', 'pointer');
       }
-      if(start_year>1){
+      if (start_year > 1) {
         start_year--;
         switchHead('#year-data-', 4, start_year, len_year);
-      }else {
+      } else {
         console.log('已经是最前了');
-        start_year=0;
-        $('#year-pre-time').css('color','#ccc');
-        $('#year-pre-time').css('cursor','not-allowed');
+        start_year = 0;
+        $('#year-pre-time').css('color', '#ccc');
+        $('#year-pre-time').css('cursor', 'not-allowed');
         return false;
       }
     });
 
     // 按年度 切换下一个
     $('#year-next-time').click(function () {
-      if(start_year>=0&&start_year+4<=len_year){
-        $('#year-pre-time').css('color','#515254');
-        $('#year-pre-time').css('cursor','pointer');
+      if (start_year >= 0 && start_year + 4 <= len_year) {
+        $('#year-pre-time').css('color', '#515254');
+        $('#year-pre-time').css('cursor', 'pointer');
       }
-      if(start_year+4<len_year){
+      if (start_year + 4 < len_year) {
         start_year++;
         switchHead('#year-data-', 4, start_year, len_year);
-      }else {
+      } else {
         console.log('已经是最后了');
-        start_year=len_year-4;
-        $('#year-next-time').css('color','#ccc');
-        $('#year-next-time').css('cursor','not-allowed');
+        start_year = len_year - 4;
+        $('#year-next-time').css('color', '#ccc');
+        $('#year-next-time').css('cursor', 'not-allowed');
         return false;
       }
     });
 
 
-
     // 按报告期 切换上一个
     $('#report-pre-time').click(function () {
-      if(start_report>=0&&start_report+4<=len_report){
-        $('#report-next-time').css('color','#515254');
-        $('#report-next-time').css('cursor','pointer');
+      if (start_report >= 0 && start_report + 4 <= len_report) {
+        $('#report-next-time').css('color', '#515254');
+        $('#report-next-time').css('cursor', 'pointer');
       }
-      if(start_report>1){
+      if (start_report > 1) {
         start_report--;
         switchHead('#report-data-', 4, start_report, len_report);
-      }else {
+      } else {
         console.log('已经是最前了');
-        start_report=0;
-        $('#report-pre-time').css('color','#ccc');
-        $('#report-pre-time').css('cursor','not-allowed');
+        start_report = 0;
+        $('#report-pre-time').css('color', '#ccc');
+        $('#report-pre-time').css('cursor', 'not-allowed');
         return false;
       }
     });
 
     // 按报告期 切换下一个
     $('#report-next-time').click(function () {
-      if(start_report>=0&&start_report+4<=len_report){
-        $('#report-pre-time').css('color','#515254');
-        $('#report-pre-time').css('cursor','pointer');
+      if (start_report >= 0 && start_report + 4 <= len_report) {
+        $('#report-pre-time').css('color', '#515254');
+        $('#report-pre-time').css('cursor', 'pointer');
       }
-      if(start_report+4<len_report){
+      if (start_report + 4 < len_report) {
         start_report++;
         console.log('一直加');
         switchHead('#report-data-', 4, start_report, len_report);
-      }else {
+      } else {
         console.log('已经是最后了');
-        $('#report-next-time').css('color','#ccc');
-        $('#report-next-time').css('cursor','not-allowed');
+        $('#report-next-time').css('color', '#ccc');
+        $('#report-next-time').css('cursor', 'not-allowed');
         return false;
       }
     });
-
 
 
   })
