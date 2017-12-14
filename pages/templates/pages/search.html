@@ -45,7 +45,7 @@
         <div class="column2"><span></span>毛利率</div>
         <div class="column1"><span></span>毛利率预测</div>
     </div>
-    <div id="chart_year" class="chart_year" style="width: 100%;height:400px;"></div>
+    <div id="chart_year" class="chart-year-1" style="width: 100%;height:400px;"></div>
 </div>
 
 <!--图表_end-->
@@ -175,7 +175,7 @@
 <script src="/static/js/echarts.js"></script>
 <script>
   // 基于准备好的dom，初始化echarts实例
-  var myChart1 = echarts.init(document.getElementById('chart_year'));
+  var chartYear1 = echarts.init(document.getElementById('chart-year-1'));
   function mychart() {
     var ratios = [-11, -1, 40, 30, 70, 80, 13.4, 10, 5, -10];
     var ranks = [90, 90, 60, 50, 70, 78, 53, 58, 23, 8];
@@ -200,7 +200,7 @@
             show: true,
             textStyle: {
               color: '#5A5B5A',
-              fontSize:'12'
+              fontSize: '12'
             }
           },
           axisLine: {
@@ -208,8 +208,8 @@
               color: '#EEF0F2'
             }
           },
-          splitLine:{
-            show:true,
+          splitLine: {
+            show: true,
             lineStyle: {
               color: ['#EEF0F2']
             }
@@ -219,8 +219,8 @@
       yAxis: [
         {
           type: 'value',
-          max:100,
-          min:-20,
+          max: 100,
+          min: -20,
           axisTick: {
             show: false
           },
@@ -230,7 +230,7 @@
             show: true,
             textStyle: {
               color: '#5A5B5A',
-              fontSize:'12'
+              fontSize: '12'
             }
           },
           axisLine: {
@@ -238,8 +238,8 @@
               color: '#EEF0F2'
             }
           },
-          splitLine:{
-            show:true,
+          splitLine: {
+            show: true,
             lineStyle: {
               color: ['#EEF0F2']
             }
@@ -247,7 +247,7 @@
         },
         {
           type: 'category',
-          data:['','','前100/100','90/100','80/100','70/100','60/100','前50/100','40/100','30/100','20/100','前10/100'],
+          data: ['', '', '前100/100', '90/100', '80/100', '70/100', '60/100', '前50/100', '40/100', '30/100', '20/100', '前10/100'],
           axisTick: {
             show: false
           },
@@ -255,7 +255,7 @@
             show: true,
             textStyle: {
               color: '#5A5B5A',
-              fontSize:'12'
+              fontSize: '12'
             }
           },
           axisLine: {
@@ -263,8 +263,8 @@
               color: '#EEF0F2'
             }
           },
-          splitLine:{
-            show:true,
+          splitLine: {
+            show: true,
             lineStyle: {
               color: ['#EEF0F2']
             }
@@ -280,7 +280,7 @@
             normal: {
               color: function (params) {
                 var colorList = [
-                  '#6F64BA', '#6F64BA','#6F64BA', '#6F64BA','#6F64BA', '#6F64BA','#6F64BA', '#6F64BA', '#62B4F5', '#62B4F5'
+                  '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#62B4F5', '#62B4F5'
                 ];
                 return colorList[params.dataIndex]
               }
@@ -305,11 +305,12 @@
       ]
     };
     // 使用刚指定的配置项和数据显示图表。
-    myChart1.setOption(optionWeek);
+    chartYear1.setOption(optionWeek);
   }
+  mychart();
 
-  mychart()
 
+  //
 </script>
 
 <script>
@@ -2573,7 +2574,6 @@
       }
     }
 
-
     // 左右切换表格年份公共方法
     function switchHead(fixId, total, start, len) {
       // fixId表的前缀名  total表的个数  start现在显示开始位置  len表头长度（需要去除第一列）
@@ -2601,6 +2601,7 @@
       }
     }
 
+
     // 按年度 切换上一个
     $('#year-pre-time').click(function () {
       if (start_year >= 0 && start_year + 4 <= len_year) {
@@ -2618,6 +2619,7 @@
         return false;
       }
     });
+
 
     // 按年度 切换下一个
     $('#year-next-time').click(function () {
@@ -2655,6 +2657,7 @@
         return false;
       }
     });
+
 
     // 按报告期 切换下一个
     $('#report-next-time').click(function () {
