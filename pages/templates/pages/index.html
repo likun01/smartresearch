@@ -1,0 +1,612 @@
+{% extends 'pages/base_common.html' %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/useCenter.css">
+{% endblock %}
+
+{% block title %}
+用户中心
+{% endblock %}
+
+{% block container %}
+<!--左侧内容_start-->
+<div class="left-table">
+    <!--关注股票_start-->
+    <div class="item-table search-outer">
+        <div class="btn-group">
+            <input class="follow" type="button" value="我关注的股票"/>
+            <!--<input class="recommend" type="button" value="推荐股票"/>-->
+            <input class="add-follow" id="search-inp" type="text" placeholder="股票名/代码">
+            <span class="add-follow-btn">添加</span>
+        </div>
+        <ul class="search-container">
+            <!--<li data-code='2000' data-name='zhongguo'>-->
+            <!--<div>600970</div>-->
+            <!--<div>中国才能</div>-->
+            <!--<div>zgcn</div>-->
+            <!--<div><button class="add-select">加入自选</button></div>-->
+            <!--</li>-->
+        </ul>
+        <ul class="follow-data" id="follow-data">
+            <!--<li>-->
+            <!--<span class="close">&times; </span>-->
+            <!--<span>平安银行</span>-->
+            <!--<span>000001</span>-->
+            <!--<span>11.29</span>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <!--关注股票_end-->
+
+
+    <!--预警模块_start-->
+    <div class="item-table">
+        <div class="btn-group">
+            <input class="early-warn" type="button" value="重要数据预警"/>
+        </div>
+        <div style="box-shadow: 0 0 1px 1px #E6E7E9">
+            <table class="warn-data" id="warn-data">
+                <thead class="warn-data-li-title">
+                <td>股票代码</td>
+                <td>股票名称</td>
+                <td>最新价格</td>
+                <td>预警内容</td>
+                </thead>
+                <tbody id="warn-data-container">
+                    <tr>
+                    <td>001</td>
+                    <td>平安银行</td>
+                    <td class="data-danger">11.29</td>
+                    <td>评级上调，六个月目标价1.3倍</td>
+                    </tr>
+                    <tr>
+                    <td>001</td>
+                    <td>平安银行</td>
+                    <td class="data-danger">11.29</td>
+                    <td>评级上调，六个月目标价1.3倍</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="warn-data-more" class="last-li-more">
+                <i class="iconfont icon-xia"></i>
+            </div>
+        </div>
+    </div>
+    <!--预警模块_end-->
+
+
+    <!--热点追踪_start-->
+    <div class="item-table reduceTop">
+        <div class="btn-group">
+            <input class="hot" type="button" value="社交大数据追踪"/>
+        </div>
+        <!--买入卖出占比_start-->
+        <span class="small-title">买入卖出占比</span>
+        <div style="box-shadow: 0 0 1px 1px #E6E7E9">
+            <table class="sell-data">
+                <thead class="sell-data-title">
+                <td>排名</td>
+                <td>股票代码</td>
+                <td>股票名称</td>
+                <td>最新价格</td>
+                <td style="width: 36%"></td>
+                </thead>
+                <tbody id="sell-data-container">
+                <tr>
+                <td>1</td>
+                <td>00001</td>
+                <td>平安银行</td>
+                <td>11.39 </td>
+                <td>上周交易频次32次，本周64次</td>
+                </tr>
+                <tr>
+                <td>1</td>
+                <td>00001</td>
+                <td>平安银行</td>
+                <td>11.39 </td>
+                <td>上周交易频次32次，本周64次</td>
+                </tr>
+                <tr>
+                <td>1</td>
+                <td>00001</td>
+                <td>平安银行</td>
+                <td>11.39 </td>
+                <td>上周交易频次32次，本周64次</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="sell-data-more" id="sell-data-more">
+                <i class="iconfont icon-xia"></i>
+            </div>
+        </div>
+        <!--买入卖出占比_end-->
+
+
+        <!--社交平台热度_start-->
+        <span class="small-title">社交平台热度</span>
+        <div style="box-shadow: 0 0 1px 1px #E6E7E9">
+            <table class="sell-data hot-data">
+                <thead>
+                <td>股票代码</td>
+                <td>股票名称</td>
+                <td>最新价格</td>
+                <td>上周曝光次数</td>
+                <td>本周曝光次数</td>
+                <td>增加比例</td>
+                </thead>
+                <tbody id="hot-data-container">
+                <!--<tr>-->
+                <!--<td>00001</td>-->
+                <!--<td>平安银行</td>-->
+                <!--<td class="data-danger">11.39</td>-->
+                <!--<td>20</td>-->
+                <!--<td>50</td>-->
+                <!--<td>230%</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>00001</td>-->
+                <!--<td>平安银行</td>-->
+                <!--<td class="data-danger">11.39</td>-->
+                <!--<td>20</td>-->
+                <!--<td>50</td>-->
+                <!--<td>230%</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>00001</td>-->
+                <!--<td>平安银行</td>-->
+                <!--<td class="data-danger">11.39</td>-->
+                <!--<td>20</td>-->
+                <!--<td>50</td>-->
+                <!--<td>230%</td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+            <div class="sell-data-more" id="hot-data-more">
+                <i class="iconfont icon-xia"></i>
+            </div>
+        </div>
+        <!--社交平台热度_end-->
+    </div>
+    <!--热点追踪_end-->
+
+
+</div>
+<!--左侧内容_end-->
+
+<!--右侧新闻_start-->
+<div class="right-news">
+    <input type="button" value="重要公告" class="btn-title">
+    <ul class="news-list" id="notice-news">
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
+        <li><span>平安银行融资融券信息,上周交易频次32次，本周64次</span><span>12-10</span></li>
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
+    </ul>
+
+    <input type="button" value="重要研报" class="btn-title">
+    <ul class="news-list" id="report-news">
+        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+    </ul>
+
+    <input type="button" value="重要舆情" class="btn-title">
+    <ul class="news-list" id="sent-news">
+        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+    </ul>
+</div>
+<!--右侧新闻_end-->
+{% endblock %}
+
+{% block js %}
+<script>
+  $(function () {
+//    var token= util.getCookie('token');
+    var token = '4b04089a2d9675d34942a202a10e9b7a';
+    // 存储start lenght
+    var dataDetail = {
+      warnDetail: {
+        start: 0,
+        length: 3
+      },
+      sellDetail: {
+        start: 0,
+        length: 3
+      },
+      hotDetail: {
+        start: 0,
+        length: 3
+      }
+    };
+
+    // 获取关注股票数据
+    function getFollow() {
+      $.ajax({
+        type: 'GET',
+        url: 'http://192.168.100.206:8000/api/research/stock/',
+        data: {
+          token: token
+        },
+        dataType: 'json',
+        success: function (res) {
+          initFollow(res);
+        },
+        error: function (e) {
+          if (e.status === 401 && JSON.parse(e.responseText).code === 40003) {
+            // token过期
+            console.log('过期');
+            alert('登录信息失效，请重新登录');
+          }
+          console.log(e);
+        }
+      });
+    }
+
+    getFollow();
+
+    // 显示关注股票信息   删除自选股
+    function initFollow(data) {
+      if (data && data.length) {
+        var str = '';
+        if (data && data.length) {
+          $.each(data, function (index, item) {
+            str += '<li data-code=' + item.code + ' data-name=' + item.name + '>';
+            str += '<span class="close">&times; </span>';
+            str += '<span>' + item.name + '</span>';
+            str += '<span>' + item.code + '</span>';
+            str += item.hq === 'drop' ? '<span style="color:#35FE36">' + item.price + '</span>' : (item.hq === '<span style="color:#FE5959">' + item.price + '</span>' ? '增' : '<span>' + item.price + '</span>');
+            str += '</li>';
+          });
+          $('#follow-data').html(str);
+        }
+        // 数据渲染结束后操作
+        // 关注股票 鼠标浮上显示关闭
+        $('.follow-data li .close').click(function () {
+          var code = $(this).parent().data('code');
+          var str = 'http://192.168.100.206:8000/api/research/stock/delete?token=' + token + '&code=' + code;
+          console.log(str);
+          $.ajax({
+            type: 'DELETE',
+            url: 'http://192.168.100.206:8000/api/research/stock/delete?token=' + token + '&code=' + code,
+            data: {
+              token: token,
+              code: Number(code)
+            },
+            success: function (res) {
+              if (res.code === 0) {
+                alert(res.detail);
+                $(this).parent().remove();
+              }
+            },
+            error: function (e) {
+              if (e.status === 401 && JSON.parse(e.responseText).code === 40003) {
+                // token过期
+                console.log('过期');
+                alert('登录信息失效，请重新登录');
+              }
+              console.log(e);
+            }
+          });
+        });
+      } else {
+        $('#follow-data').hide();
+      }
+    }
+
+    // 搜索框  添加自选股
+    function bindData(data) {
+      var str = '';
+      if (data && data.length) {
+        $.each(data, function (index, item) {
+          str += '<li data-code=' + item.code + ' data-name=' + item.name + '>';
+          str += '<div>' + item.code + '</div>';
+          str += '<div>' + item.name + '</div>';
+          str += '<div>' + item.initial + '</div>';
+          str += !item.choose ? '<div><button class="add-select" data-ischoose=' + item.choose + '>加入自选</button></div>' : '<div><button class="dis-select" disabled="disabled" data-ischoose=' + item.choose + '>已添加</button></div>';
+          str += '</li>';
+        });
+      } else {
+        // 无数据
+        str += '<li>无数据</li>';
+      }
+      $('.search-container').html(str).show();
+
+      // 添加关注的股票
+      $('.search-container .add-select').click(function () {
+        var $parent = $(this.parentNode.parentNode);
+        var opts = {
+          "name": $parent.data('name'),
+          "code": $parent.data('code'),
+          "token": token
+        };
+        opts = JSON.stringify(opts);
+        // 添加之前先检测是否已经存在
+        if ($(this).data('ischoose')) { // 用户已经添加过
+          alert('用户已经添加过');
+        } else {
+          $.ajax({
+            type: 'POST',
+            url: 'http://192.168.100.206:8000/api/research/stock/add/',
+            data: opts,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (res) {
+              if (res.code === 0) { // 添加成功
+                alert(res.detail);
+                $('.search-container').html(str).hide();
+                // 重新读取关注股票信息
+                getFollow();
+              } else if (res.code === 40008) { //  重复添加
+                alert(res.detail);
+                $('.search-container').html(str).hide();
+              }
+            },
+            error: function (e) {
+              if (e.status === 401 && JSON.parse(e.responseText).code === 40003) {
+                // token过期
+                console.log('过期');
+                alert('登录信息失效，请重新登录');
+              }
+              console.log(e);
+            }
+          });
+        }
+      });
+    }
+    var opts = {
+      url: 'http://192.168.100.206:8000/api/research/search',
+      token: token,
+      bindData: bindData,
+      searchRes: function () {
+
+      }
+    };
+    new InputSearch('#search-inp', '.search-container', '.search-container li', opts);
+
+
+    // 重要数据预警
+    function getWarnData() {
+      $.ajax({
+        type: 'GET',
+        url: './mock/earlyWarn.json',
+        dataType: 'json',
+        data: {
+          start: dataDetail.warnDetail.start,
+          length: dataDetail.warnDetail.length
+        },
+        success: function (res) {
+          if (res.state === 200) {
+            initEarlyWarn(res);
+          }
+          else {
+            alert('请求出错!');
+          }
+        }
+      });
+    }
+
+    getWarnData();
+
+    // 显示预警数据
+    function initEarlyWarn(res) {
+      var data = res.data;
+      if (dataDetail.warnDetail.start + data.length >= res.total) {
+        // 说明数据已经请求完 隐藏更多按钮
+        console.log('无再多数据');
+        $('#warn-data-more').css('display', 'none');
+      } else {
+        console.log('还有数据');
+        $('#warn-data-more').css('display', 'block');
+        $('#warn-data-more').click(function () {
+          console.log('继续请求数据');
+          getWarnData();
+        });
+      }
+      var frg = document.createDocumentFragment();
+      if (data && data.length) {
+        $.each(data, function (index, item) {
+          var oTr = document.createElement('tr');
+          var oTd1 = document.createElement('td');
+          oTd1.innerHTML = item.compID;
+
+          var oTd2 = document.createElement('td');
+          oTd2.innerHTML = item.compName;
+
+          var oTd3 = document.createElement('td');
+          oTd3.innerHTML = item.compVal;
+
+          var oTd4 = document.createElement('td');
+          oTd4.innerHTML = item.cont;
+          oTr.appendChild(oTd1);
+          oTr.appendChild(oTd2);
+          oTr.appendChild(oTd3);
+          oTr.appendChild(oTd4);
+          frg.appendChild(oTr);
+        });
+        $('#warn-data-container').append(frg);
+        frg = null;
+      }
+
+      // 请求成功后修改start length
+      dataDetail.warnDetail.start = dataDetail.warnDetail.start + data.length;
+      dataDetail.warnDetail.length = 5;
+    }
+
+
+    // 社交数据
+    // 1. 买入卖出
+    function getSellData() {
+      $.ajax({
+        type: 'GET',
+        url: './mock/sell.json',
+        dataType: 'json',
+        data: {
+          start: dataDetail.sellDetail.start,
+          length: dataDetail.sellDetail.length
+        },
+        success: function (res) {
+          if (res.state === 200) {
+            initSell(res);
+          }
+          else {
+            alert('请求出错!');
+          }
+        }
+      });
+    }
+
+    getSellData();
+
+    // 买入卖出数据显示
+    function initSell(res) {
+      var data = res.data;
+      if (dataDetail.sellDetail.start + data.length >= res.total) {
+        // 说明数据已经请求完 隐藏更多按钮
+        console.log('wu');
+        $('#sell-data-more').css('display', 'none');
+      } else {
+        console.log('you');
+        $('#sell-data-more').css('display', 'block');
+        $('#sell-data-more').click(function () {
+          console.log('继续请求数据');
+          getSellData();
+        });
+      }
+      var frg = document.createDocumentFragment();
+      if (data && data.length) {
+        $.each(data, function (index, item) {
+          var oTr = document.createElement('tr');
+          var oTd1 = document.createElement('td');
+          oTd1.innerHTML = item.rank;
+          var oTd2 = document.createElement('td');
+          oTd2.innerHTML = item.compID;
+          var oTd3 = document.createElement('td');
+          oTd3.innerHTML = item.compName;
+          var oTd4 = document.createElement('td');
+          oTd4.innerHTML = item.compID;
+          var oTd5 = document.createElement('td');
+          oTd5.innerHTML = item.description;
+          oTr.appendChild(oTd1);
+          oTr.appendChild(oTd2);
+          oTr.appendChild(oTd3);
+          oTr.appendChild(oTd4);
+          oTr.appendChild(oTd5);
+          frg.appendChild(oTr);
+        });
+        $('#sell-data-container').append(frg);
+        frg = null;
+      }
+
+      // 请求成功后修改start length
+      dataDetail.sellDetail.start = dataDetail.sellDetail.start + data.length;
+      dataDetail.sellDetail.length = 5;
+    }
+
+
+    // 2. 社交平台热度
+    function getHotData() {
+      $.ajax({
+        type: 'GET',
+        url: './mock/hot.json',
+        async: true,
+        cache: false,
+        dataType: 'json',
+        data: {
+          start: dataDetail.hotDetail.start,
+          length: dataDetail.hotDetail.length
+        },
+        success: function (res) {
+          if (res.state === 200) {
+            initHot(res);
+          }
+          else {
+            alert('请求出错!');
+          }
+        }
+      });
+    }
+
+    getHotData();
+
+    // 社交平台热度
+    function initHot(res) {
+      var data = res.data;
+      if (dataDetail.hotDetail.start + data.length >= res.total) {
+        // 说明数据已经请求完 隐藏更多按钮
+        console.log('wu');
+        $('#hot-data-more').css('display', 'none');
+      } else {
+        console.log('you');
+        $('#hot-data-more').css('display', 'block');
+        $('#hot-data-more').click(function () {
+          console.log('继续请求数据');
+          getHotData();
+        });
+      }
+      var frg = document.createDocumentFragment();
+      if (data && data.length) {
+        $.each(data, function (index, item) {
+          var oTr = document.createElement('tr');
+          var oTd1 = document.createElement('td');
+          oTd1.innerHTML = item.compID;
+          var oTd2 = document.createElement('td');
+          oTd2.innerHTML = item.compName;
+          var oTd3 = document.createElement('td');
+          oTd3.innerHTML = item.compVal;
+          var oTd4 = document.createElement('td');
+          oTd4.innerHTML = item.lastWeek;
+          var oTd5 = document.createElement('td');
+          oTd5.innerHTML = item.thisWeek;
+          var oTd6 = document.createElement('td');
+          oTd6.innerHTML = item.increase;
+          oTr.appendChild(oTd1);
+          oTr.appendChild(oTd2);
+          oTr.appendChild(oTd3);
+          oTr.appendChild(oTd4);
+          oTr.appendChild(oTd5);
+          oTr.appendChild(oTd6);
+          frg.appendChild(oTr);
+        });
+        $('#hot-data-container').append(frg);
+        frg = null;
+      }
+      dataDetail.hotDetail.start = dataDetail.hotDetail.start + data.length;
+      dataDetail.hotDetail.length = 5;
+    }
+
+
+    // 侧边栏新闻   暂时使用相同数据------------
+    $.ajax({
+      type: 'GET',
+      url: './mock/asideNews.json',
+      dataType: 'json',
+      success: function (res) {
+        if (res.state === 200) {
+          initAside(res.data, "#notice-news");
+          initAside(res.data, "#report-news");
+          initAside(res.data, "#sent-news");
+        }
+        else {
+          alert('请求出错!');
+        }
+      }
+    });
+
+    // 侧边栏新闻
+    function initAside(data, idStr) {
+      var str = '';
+      if (data && data.length) {
+        $.each(data, function (index, item) {
+          str += '<li>';
+          str += '<span>' + item.title + '</span>';
+          str += ' <span>' + item.createAt + '</span>';
+          str += '</li>';
+        });
+        $(idStr).html(str);
+      }
+    }
+
+
+  })
+</script>
+{% endblock %}
