@@ -24,14 +24,12 @@ InputSearch.prototype.inputChange = function () {
         url: _this.opts.url,
         type: 'GET',
         data: { // 向后台发送数据
-          wd: _this.inpValue, // 查询关键词
-          json: 1
+          q: _this.inpValue,
+          token:_this.opts.token
         },
-        dataType: 'jsonp', // 跨域请求  只要http协议，端口，域名任意一项不同就是跨域
-        jsonp: 'cb', // 指定函数名 cb(result)
         success: function (result) {
-          if (result.g) { // 从百度搜索得到的数据有一个g的属性,保存着搜索信息 是对象的格式（q st t 属性，q存着检索的信息，st是一个object，t是一个字符串）
-            _this.opts.bindData(result.g);
+          if (result.results) {
+            _this.opts.bindData(result.results);
             _this.listAll = $(_this.listStr);
             _this.lastInd = _this.listAll.length - 1; // 元素数组最后一个索引
           }
@@ -47,8 +45,8 @@ InputSearch.prototype.inputChange = function () {
 InputSearch.prototype.clickChoose = function () {
   var _this = this;
   this.listCont.on('click', function (e) {
-    var reg = /(<\w+>)|<\/\w+>/g;
-    _this.inpEle.val(e.target.innerHTML.replace(reg, ''));
+    // var reg = /(<\w+>)|<\/\w+>/g;
+    // _this.inpEle.val(e.target.innerHTML.replace(reg, ''));
     _this.opts.searchRes();
     _this.listCont.hide();
   });
@@ -71,9 +69,9 @@ InputSearch.prototype.keyCodeChange = function () {
         } else {
           _this.listAll.eq(_this.count).addClass('select').siblings().removeClass('select');
         }
-        var reg = /(<\w+>)|<\/\w+>/g;
-        _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
-        _this.inpEle.val(_this.word);
+        // var reg = /(<\w+>)|<\/\w+>/g;
+        // _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+        // _this.inpEle.val(_this.word);
 
 
       } else if (e.keyCode === 40) { //下
@@ -85,9 +83,9 @@ InputSearch.prototype.keyCodeChange = function () {
           return;
         }
         _this.listAll.eq(_this.count).addClass('select').siblings().removeClass('select');
-        var reg = /(<\w+>)|<\/\w+>/g;
-        _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
-        _this.inpEle.val(_this.word);
+        // var reg = /(<\w+>)|<\/\w+>/g;
+        // _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+        // _this.inpEle.val(_this.word);
       } else if (e.keyCode === 13) {
         console.log(_this.opts.searchRes);
         _this.listCont.hide();

@@ -1,0 +1,151 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/iconfont/iconfont.css">
+    <script src="/static/js/util.js"></script>
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    <script src="/static/js/inputSearch.js"></script>
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="out-container">
+    <!--左侧导航_start-->
+    <div class="nav-container ">
+        <div class="left-company">
+            <img class="comp-logo" src="/static/images/logo.png" alt=""/>
+            <span>嘉实智能投研平台</span>
+            <i class="iconfont icon-suoxiao"></i>
+        </div>
+        <div class="user-avatar">
+            <img src="/static/images/avatar.jpg" alt=""/>
+            <span>欢迎admin</span>
+        </div>
+        <div class="avatar-linear"></div>
+        <ul id="nav-list" class="nav-list">
+            <li>
+                <span class="linear"></span>
+                <i class="iconfont icon-accountfilling"></i><span class="title">用户中心</span>
+            </li>
+            <li>
+                <span class="linear"></span>
+                <i class="iconfont icon-tiaoxingtu"></i><span class="title">个股查询</span>
+            </li>
+            <li>
+                <span class="linear"></span>
+                <i class="iconfont icon-bangzhuzhongxin"></i><span class="title">研报查询</span>
+            </li>
+            <li>
+                <span class="linear"></span>
+                <i class="iconfont icon-dynamic_fill"></i><span class="title">股票对比</span>
+            </li>
+            <li>
+                <span class="linear"></span>
+                <i class="iconfont icon-icon"></i><span class="title">行业排名</span>
+            </li>
+            <li>
+                <span class="linear"></span><i class="iconfont icon-guanbishixin"></i><span class="title">退出登录</span>
+            </li>
+        </ul>
+        <ul class="aside-nav">
+            <li>用户中心</li>
+            <li>个股查询</li>
+            <li>研报查询</li>
+            <li>股票对比</li>
+            <li>行业排名</li>
+            <li>退出登录</li>
+        </ul>
+    </div>
+    <!--左侧导航_end-->
+
+
+    <!--右侧信息_start-->
+    <div class="right-container ">
+        <!--共有header_start-->
+        <div class="right-login">
+            <div class="user-login"><img src="/static/images/avatar.jpg" alt=""/>admin <span class="span-down"></span></div>
+        </div>
+        <ul class="user-manage">
+            <li>更改密码</li>
+            <li>账户设置</li>
+            <li><i class="iconfont icon-denglu"></i>退出登录</li>
+        </ul>
+        <!--共有header_end-->
+
+
+        <!--第侧内容_start-->
+        <div class="content-container outer-between">
+            {% block container %}
+            {% endblock %}
+        </div>
+        <!--第侧内容_end-->
+    </div>
+    <!--右侧信息_end-->
+</div>
+{% block js %}
+{% endblock %}
+
+
+<script>
+  $(function () {
+    // nav
+    $('.nav-list li').click(function () {
+      $(this).addClass('active').siblings().removeClass('active')
+    });
+    // 导航栏最小化
+    $('.icon-suoxiao').click(function () {
+      $('.nav-container').addClass('nav-close');
+      $('.aside-nav').css('display', 'block');
+      $('.user-avatar').css('display', 'none');
+      // 如果是最小化状态
+      if ($('.nav-close')[0]) {
+        $('.nav-close .nav-list').mouseenter(function () {
+          $('.nav-list li').mouseover(function () {
+            $('.aside-nav li').eq($(this).index()).addClass('aside-active').siblings().removeClass('aside-active')
+          })
+        });
+        $('.nav-close .nav-list').mouseleave(function () {
+          $('.aside-nav li').removeClass('aside-active')
+        });
+      }
+    });
+    // 导航栏还原   点击logo还原
+    $('.comp-logo').click(function () {
+      $('.user-avatar').css('display', 'block');
+      $('.user-avatar').css('display', 'block');
+      if ($('.nav-close')[0]) {
+        $('.aside-nav').css('display', 'none');
+      }
+      $('.nav-container').removeClass('nav-close');
+
+    });
+
+
+    // 用户登录退出弹框显示
+    $('.user-login').click(function () {
+      $('.user-manage').toggle();
+      if ($('.span-down')[0]) {
+        $('.span-down').removeClass('span-down').addClass('span-up');
+        // 用户退出选择项
+        $('.user-manage').click(function (e) {
+          // console.log(e.target.innerHTML);
+          // 获取相应的值 进行操作
+          // xxxxxxxxxxxx
+          $('.user-manage').hide();
+          $('.span-up').removeClass('span-up').addClass('span-down');
+        });
+      } else {
+        $('.span-up').removeClass('span-up').addClass('span-down');
+      }
+    });
+  })
+</script>
+</body>
+</html>

@@ -1,40 +1,29 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
-</head>
+{% extends 'pages/base.html' %}
 
-<body>
-{% for message in messages %}
-{{ message }}
-{% endfor %}
-<div class="container">
-    <form autocomplete="off" method="POST" action="/login/">
-        {% csrf_token %}
-        <img src="/static/images/logo.png" alt="">
-        <h2>嘉实智能投研后台系统</h2>
-        <div class="error-info">
-            <span class="error-cont"></span>
-            <span class="error-close">&times</span>
-        </div>
-        <input class="inpText" type="text" name="username" placeholder="请输入账号"/>
-        <input class="inpText" type="password" name="password" placeholder="请输入密码"/>
-        <div class="remember-pwd">
-            <input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">
-            <label for="checkbox-1"></label>
-            <span>记住密码</span>
-        </div>
-        <input class="loginBtn"  type="submit" value="提交"/>
-    </form>
-</div>
-<div class="copyright">
-    Copyright &copy; 2017信谁科技
-</div>
+{% block title %}
+登录
+{% endblock %}
+
+{% block container %}
+<form autocomplete="off" method="POST" action="/login/">
+    <img src="/static/images/logo.png" alt="">
+    <h2>嘉实智能投研后台系统</h2>
+    <div class="error-info">
+        <span class="error-cont"></span>
+        <span class="error-close">&times</span>
+    </div>
+    <input class="inpText" type="text" name="username" placeholder="请输入账号"/>
+    <input class="inpText" type="password" name="password" placeholder="请输入密码"/>
+    <div class="remember-pwd">
+        <input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">
+        <label for="checkbox-1"></label>
+        <span>记住密码</span>
+    </div>
+    <input class="loginBtn"  type="submit" value="提交"/>
 </form>
+{% endblock %}
 
-<script src="/static/js/jquery-1.11.3.js"></script>
-<script src="/static/js/util.js"></script>
+{% block js %}
 <script>
   $(function () {
     // 记住密码
@@ -100,6 +89,7 @@
           data: data,
           success: function (res) {
             if (res.code === 0) { // 账号密码正确
+              util.setCookie('token',res.active_token); // 更新token
               // 进行跳转
               // 如果记住密码 种植cookie
               if ($("[type='checkbox']:checkbox")[0].checked) {
@@ -109,7 +99,6 @@
                 util.delCookie('accountInfo');
               }
               // 跳转到主页面
-              //xxxxxxxxxxxxxxxx
               window.location.href='/';
             }
             return true;
@@ -134,5 +123,4 @@
   });
 
 </script>
-</body>
-</html>
+{% endblock %}

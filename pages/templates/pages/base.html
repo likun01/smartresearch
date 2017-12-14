@@ -1,0 +1,27 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    <script src="/static/js/util.js"></script>
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="container">
+    {% block container %}
+    {% endblock %}
+</div>
+<div class="copyright">
+    Copyright &copy; 2017信谁科技
+</div>
+{% block js %}
+{% endblock %}
+</body>
+</html>
