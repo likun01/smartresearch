@@ -14,24 +14,25 @@
 <!--顶部标题/搜索_start-->
 <div class="header-title">
     <div>
-        <span> 股票名称({{ stock_code }})&nbsp;</span>/&nbsp;指标详细
+        <span id="stock-title"><i></i>({{ stock_code }})&nbsp;</span>/&nbsp;指标详细
     </div>
     <div class="header-search">
-        <span>找相关</span>
+        <span id="search-relative">找相关</span>
         <input type="text" id="search-inp">
     </div>
 </div>
 <ul class="search-container">
-    <li><span>aaa</span></li>
-    <li><span>aaa</span></li>
-    <li><span>aaa</span></li>
-    <li><span>aaa</span></li>
+    <!--<li><span>aaa</span></li>-->
+    <!--<li><span>aaa</span></li>-->
+    <!--<li><span>aaa</span></li>-->
+    <!--<li><span>aaa</span></li>-->
 </ul>
 <!--顶部标题/搜索_end-->
 
 <!--图表_start-->
 <div class="statistics-chart">
-    <div class="chart-tab">
+    <!--按年度的tab-->
+    <div class="chart-tab" id="year-chart-tab">
         <span class="active">毛利率</span>
         <span>营业收入及增速</span>
         <span>期间营业率</span>
@@ -40,14 +41,35 @@
         <span>资产周转率</span>
         <span>单车价格</span>
     </div>
+    <!--按报告期的tab-->
+    <div class="chart-tab" id="report-chart-tab" style="display:none">
+        <span class="active">预售账款</span>
+        <span>净利润增速</span>
+        <span>毛利率</span>
+    </div>
     <div class="legend">
         <div class="column3"><img src="/static/images/legend.png" alt="">行业排名</div>
         <div class="column2"><span></span>毛利率</div>
         <div class="column1"><span></span>毛利率预测</div>
     </div>
-    <div id="chart_year" class="chart_year" style="width: 100%;height:400px;"></div>
+    <!--按年度的图表container-->
+    <div class="chart-cont">
+        <div id="year-chart-0" class="chart_year" style="width: 100%;height:360px;"></div>
+        <div id="year-chart-1" class="chart_year" style="width: 100%;height:360px;"></div>
+        <div id="year-chart-2" class="chart_year" style="width: 100%;height:360px;"></div>
+        <div id="year-chart-3" class="chart_year" style="width: 100%;height:360px;"></div>
+        <div id="year-chart-4" class="chart_year" style="width: 100%;height:360px;"></div>
+        <div id="year-chart-5" class="chart_year" style="width: 100%;height:360px;"></div>
+        <div id="year-chart-6" class="chart_year" style="width: 100%;height:360px;"></div>
+    </div>
+    <!--按报告期的图表container-->
+    <div class="chart-cont" style="display: none;">
+        <div id="report-chart-0" class="chart_report" style="width: 100%;height:360px;">a</div>
+        <div id="report-chart-1" class="chart_report" style="width: 100%;height:360px;">b</div>
+        <div id="report-chart-2" class="chart_report" style="width: 100%;height:360px;">c</div>
+        <div id="report-chart-3" class="chart_report" style="width: 100%;height:360px;">d</div>
+    </div>
 </div>
-
 <!--图表_end-->
 
 
@@ -63,9 +85,8 @@
         <!--导出数据弹框-->
     </div>
     <ul class="export-container">
-        <li>PDF格式</li>
-        <li>Excel格式</li>
-        <li>JPG格式</li>
+        <li class="export-csv"><a href="">CSV格式</a></li>
+        <li class="export-excel"><a href="">Excel格式</a></li>
     </ul>
 </div>
 <!--tab_end-->
@@ -162,7 +183,6 @@
             <tbody>
             </tbody>
         </table>
-
     </div>
 </div>
 <!--数据_end-->
@@ -175,11 +195,18 @@
 <script src="/static/js/echarts.js"></script>
 <script>
   // 基于准备好的dom，初始化echarts实例
-  var myChart1 = echarts.init(document.getElementById('chart_year'));
-  function mychart() {
-    var ratios = [-11, -1, 40, 30, 70, 80, 13.4, 10, 5, -10];
-    var ranks = [90, 90, 60, 50, 70, 78, 53, 58, 23, 8];
-//#F1F3F4
+  var yearChart0 = echarts.init(document.getElementById('year-chart-0'));
+  var yearChart1 = echarts.init(document.getElementById('year-chart-1'));
+  var yearChart2 = echarts.init(document.getElementById('year-chart-2'));
+  var yearChart3 = echarts.init(document.getElementById('year-chart-3'));
+  var yearChart4 = echarts.init(document.getElementById('year-chart-4'));
+  var yearChart5 = echarts.init(document.getElementById('year-chart-5'));
+  var yearChart6 = echarts.init(document.getElementById('year-chart-6'));
+  var ratios = [-11, -1, 40, 30, 70, 80, 13.4, 10, 5, -10];
+  var ranks = [90, 90, 60, 50, 70, 78, 53, 58, 23, 8];
+  var ratios1 = [11, 61, 90, 50, -10, 70, 13.4, 19, 5, 10];
+  var ranks1 = [90, 90, 60, 50, 70, 78, 53, 58, 23, 8];
+  function mychart(context,ratios,ranks) {
     //配置及数据
     optionWeek = {
       tooltip: {
@@ -200,7 +227,7 @@
             show: true,
             textStyle: {
               color: '#5A5B5A',
-              fontSize:'12'
+              fontSize: '12'
             }
           },
           axisLine: {
@@ -208,8 +235,8 @@
               color: '#EEF0F2'
             }
           },
-          splitLine:{
-            show:true,
+          splitLine: {
+            show: true,
             lineStyle: {
               color: ['#EEF0F2']
             }
@@ -219,8 +246,8 @@
       yAxis: [
         {
           type: 'value',
-          max:100,
-          min:-20,
+          max: 100,
+          min: -20,
           axisTick: {
             show: false
           },
@@ -230,7 +257,7 @@
             show: true,
             textStyle: {
               color: '#5A5B5A',
-              fontSize:'12'
+              fontSize: '12'
             }
           },
           axisLine: {
@@ -238,8 +265,8 @@
               color: '#EEF0F2'
             }
           },
-          splitLine:{
-            show:true,
+          splitLine: {
+            show: true,
             lineStyle: {
               color: ['#EEF0F2']
             }
@@ -247,7 +274,7 @@
         },
         {
           type: 'category',
-          data:['','','前100/100','90/100','80/100','70/100','60/100','前50/100','40/100','30/100','20/100','前10/100'],
+          data: ['', '', '前100/100', '90/100', '80/100', '70/100', '60/100', '前50/100', '40/100', '30/100', '20/100', '前10/100'],
           axisTick: {
             show: false
           },
@@ -255,7 +282,7 @@
             show: true,
             textStyle: {
               color: '#5A5B5A',
-              fontSize:'12'
+              fontSize: '12'
             }
           },
           axisLine: {
@@ -263,8 +290,8 @@
               color: '#EEF0F2'
             }
           },
-          splitLine:{
-            show:true,
+          splitLine: {
+            show: true,
             lineStyle: {
               color: ['#EEF0F2']
             }
@@ -280,7 +307,7 @@
             normal: {
               color: function (params) {
                 var colorList = [
-                  '#6F64BA', '#6F64BA','#6F64BA', '#6F64BA','#6F64BA', '#6F64BA','#6F64BA', '#6F64BA', '#62B4F5', '#62B4F5'
+                  '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#6F64BA', '#62B4F5', '#62B4F5'
                 ];
                 return colorList[params.dataIndex]
               }
@@ -305,15 +332,22 @@
       ]
     };
     // 使用刚指定的配置项和数据显示图表。
-    myChart1.setOption(optionWeek);
+    context.setOption(optionWeek);
   }
-
-  mychart()
+  mychart(yearChart0,ratios,ranks);
+  mychart(yearChart1,ratios1,ranks1);
+  mychart(yearChart2,ratios,ranks);
+  mychart(yearChart3,ratios,ranks);
+  mychart(yearChart4,ratios1,ranks1);
+  mychart(yearChart5,ratios,ranks);
+  mychart(yearChart6,ratios1,ranks1);
 
 </script>
 
 <script>
   $(function () {
+    var fix_url = 'http://api-pro.xin-shui.com';
+    var token = '5b2d5bcda394d1247069b53dff32d304';
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
@@ -321,8 +355,16 @@
       // 控制哪一组箭头显示
       $('.pre-time').eq($(this).index()).show().siblings('.pre-time').hide();
       $('.next-time').eq($(this).index()).show().siblings('.next-time').hide();
+      // 控制上面图表的tab
+      $('.chart-tab').eq($(this).index()).show().siblings('.chart-tab').hide();
+      // 控制上面图表哪组显示
+      $('.chart-cont').eq($(this).index()).show().siblings('.chart-cont').hide();
+      // 更改导出链接
+      $('.export-csv a').prop('href',exportLink[$(this).index()].csv);
+      $('.export-excel a').prop('href',exportLink[$(this).index()].excel);
+      console.log($(this).index());
+      $()
     });
-
 
     // 导出数据
     $('#export-btn').click(function () {
@@ -337,18 +379,18 @@
       }
     });
 
-
     // 搜索框
     function bindData(data) {
       var str = '';
       $.each(data, function () {
-        str += '<li><span>' + this.q + '</span></li>';
+        str += '<li><span>' + this.code + '</span><span>' + this.name + '</span></li>';
       });
       $('.search-container').html(str).show();
     }
 
     var opts = {
-      url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+      url: fix_url + '/api/research/search',
+      token: token,
       bindData: bindData,
       searchRes: function () {
 
@@ -356,13 +398,14 @@
     };
     new InputSearch('#search-inp', '.search-container', '.search-container li', opts);
 
-
     var start_year = 3;
     var len_year = 7;
     var start_report = 4;
     var len_report = 8;
 
-    // 初始化数据
+    // 保存导出链接
+    var exportLink=[{csv:'', excel:''},{csv:'', excel:''}]; // 0按年度  1按报告期
+
     // 按年度数据
     $.ajax({
       type: 'GET',
@@ -371,9 +414,17 @@
         code: '{{ stock_code }}'
       },
       success: function (res) {
-        console.log(res);
-        var allData = res;
-        $.each(res, function (index, item) {
+        // 替换标题
+        var nameSpan = $('#stock-title');
+        var val = nameSpan.html();
+        val = val.replace(/<i><\/i>/g, res.stock_name);
+        nameSpan.html(val);
+        // 按年度保存并且修改导出链接
+        exportLink[0].csv=res.export_csv;
+        exportLink[0].excel=res.export_excel;
+        $('.export-csv a').prop('href',res.export_csv);
+        $('.export-excel a').prop('href',res.export_excel);
+        $.each(res.table_data, function (index, item) {
           len_year = item.cols_title.length;
           start_year = len_year - 4;
           $('.mask_arrow').hide();
@@ -391,12 +442,17 @@
       type: 'GET',
       url: 'http://api-pro.xin-shui.com/api/research/forecast/report/',
       data: {
-        code: '002594'
+        code: '{{ stock_code }}'
       },
       success: function (res) {
-        console.log(res);
-        var allData = res;
-        $.each(res, function (index, item) {
+        var nameSpan = $('#stock-title');
+        var val = nameSpan.html();
+        val = val.replace(/<i><\/i>/g, res.stock_name);
+        nameSpan.html(val);
+        // 按报告期 保存导出链接
+        exportLink[1].csv=res.export_csv;
+        exportLink[1].excel=res.export_excel;
+        $.each(res.table_data, function (index, item) {
           len_report = item.cols_title.length;
           start_report = len_report - 4;
           $('.mask_arrow').hide();
@@ -409,2116 +465,6 @@
     });
 
 
-    function test() {
-      var res = [
-        {
-          "rows_title": [
-            "速动比率",
-            "销售净利率",
-            "同比增长率-利润总额 (%)",
-            "销售毛利率",
-            "净资产收益率",
-            "资产负债率",
-            "营业利润率",
-            "同比增长率-营业利润 (%)",
-            "营业收入同比增长率 (%)",
-            "每股净资产",
-            "流动比率",
-            "息税前利润率",
-            "每股经营活动产生的现金流量净额"
-          ],
-          "rows_data": {
-            "速动比率": [
-              {
-                "status": "normal",
-                "value": 0.5848
-              },
-              {
-                "status": "normal",
-                "value": 0.5468
-              },
-              {
-                "status": "normal",
-                "value": 0.5846
-              },
-              {
-                "status": "normal",
-                "value": 0.7897
-              },
-              {
-                "status": "normal",
-                "value": 0.7771
-              },
-              {
-                "status": "normal",
-                "value": 0.8254
-              },
-              {
-                "status": "normal",
-                "value": 0.8324
-              },
-              {
-                "status": "normal",
-                "value": 0.7854
-              }
-            ],
-            "销售净利率": [
-              {
-                "status": "normal",
-                "value": 3.9223
-              },
-              {
-                "status": "normal",
-                "value": 4.4251
-              },
-              {
-                "status": "normal",
-                "value": 5.493
-              },
-              {
-                "status": "normal",
-                "value": 5.4557
-              },
-              {
-                "status": "normal",
-                "value": 5.2962
-              },
-              {
-                "status": "normal",
-                "value": 3.7126
-              },
-              {
-                "status": "normal",
-                "value": 4.8075
-              },
-              {
-                "status": "normal",
-                "value": 4.6825
-              }
-            ],
-            "同比增长率-利润总额 (%)": [
-              {
-                "status": "normal",
-                "value": 334.2328
-              },
-              {
-                "status": "normal",
-                "value": 463.0215
-              },
-              {
-                "status": "normal",
-                "value": 262.3043
-              },
-              {
-                "status": "normal",
-                "value": 76.6599
-              },
-              {
-                "status": "normal",
-                "value": 73.0813
-              },
-              {
-                "status": "normal",
-                "value": -11.0488
-              },
-              {
-                "status": "normal",
-                "value": -11.9327
-              },
-              {
-                "status": "normal",
-                "value": -13.4973
-              }
-            ],
-            "销售毛利率": [
-              {
-                "status": "normal",
-                "value": 16.8674
-              },
-              {
-                "status": "normal",
-                "value": 19.0567
-              },
-              {
-                "status": "normal",
-                "value": 20.8258
-              },
-              {
-                "status": "normal",
-                "value": 21.0771
-              },
-              {
-                "status": "normal",
-                "value": 20.3625
-              },
-              {
-                "status": "normal",
-                "value": 21.0034
-              },
-              {
-                "status": "normal",
-                "value": 20.3213
-              },
-              {
-                "status": "normal",
-                "value": 19.8583
-              }
-            ],
-            "净资产收益率": [
-              {
-                "status": "normal",
-                "value": 9.7934
-              },
-              {
-                "status": "normal",
-                "value": 2.6018
-              },
-              {
-                "status": "normal",
-                "value": 6.7329
-              },
-              {
-                "status": "normal",
-                "value": 8.8439
-              },
-              {
-                "status": "normal",
-                "value": 12.0937
-              },
-              {
-                "status": "normal",
-                "value": 1.1734
-              },
-              {
-                "status": "normal",
-                "value": 3.3171
-              },
-              {
-                "status": "normal",
-                "value": 5.2989
-              }
-            ],
-            "资产负债率": [
-              {
-                "status": "normal",
-                "value": 68.802
-              },
-              {
-                "status": "normal",
-                "value": 67.1288
-              },
-              {
-                "status": "normal",
-                "value": 68.1381
-              },
-              {
-                "status": "normal",
-                "value": 59.207
-              },
-              {
-                "status": "normal",
-                "value": 61.8053
-              },
-              {
-                "status": "normal",
-                "value": 61.5018
-              },
-              {
-                "status": "normal",
-                "value": 62.8133
-              },
-              {
-                "status": "normal",
-                "value": 64.2587
-              }
-            ],
-            "营业利润率": [
-              {
-                "status": "normal",
-                "value": 3.9695
-              },
-              {
-                "status": "normal",
-                "value": 5.3432
-              },
-              {
-                "status": "normal",
-                "value": 6.2011
-              },
-              {
-                "status": "normal",
-                "value": 6.103
-              },
-              {
-                "status": "normal",
-                "value": 5.7855
-              },
-              {
-                "status": "normal",
-                "value": 3.9618
-              },
-              {
-                "status": "normal",
-                "value": 5.7628
-              },
-              {
-                "status": "normal",
-                "value": 5.5524
-              }
-            ],
-            "同比增长率-营业利润 (%)": [
-              {
-                "status": "normal",
-                "value": 1873.143
-              },
-              {
-                "status": "normal",
-                "value": 914.9354
-              },
-              {
-                "status": "normal",
-                "value": 502.9458
-              },
-              {
-                "status": "normal",
-                "value": 95.5291
-              },
-              {
-                "status": "normal",
-                "value": 88.4861
-              },
-              {
-                "status": "normal",
-                "value": -23.0713
-              },
-              {
-                "status": "normal",
-                "value": -6.8849
-              },
-              {
-                "status": "normal",
-                "value": -7.6025
-              }
-            ],
-            "营业收入同比增长率 (%)": [
-              {
-                "status": "normal",
-                "value": 37.4822
-              },
-              {
-                "status": "normal",
-                "value": 32.7351
-              },
-              {
-                "status": "normal",
-                "value": 42.3249
-              },
-              {
-                "status": "normal",
-                "value": 50.1184
-              },
-              {
-                "status": "normal",
-                "value": 29.323
-              },
-              {
-                "status": "normal",
-                "value": 3.751
-              },
-              {
-                "status": "normal",
-                "value": 0.1959
-              },
-              {
-                "status": "normal",
-                "value": 1.5593
-              }
-            ],
-            "每股净资产": [
-              {
-                "status": "normal",
-                "value": 13.043
-              },
-              {
-                "status": "normal",
-                "value": 11.8356
-              },
-              {
-                "status": "normal",
-                "value": 12.5337
-              },
-              {
-                "status": "normal",
-                "value": 17.1442
-              },
-              {
-                "status": "normal",
-                "value": 17.3965
-              },
-              {
-                "status": "normal",
-                "value": 17.6697
-              },
-              {
-                "status": "normal",
-                "value": 17.8979
-              },
-              {
-                "status": "normal",
-                "value": 18.4036
-              }
-            ],
-            "流动比率": [
-              {
-                "status": "normal",
-                "value": 0.823
-              },
-              {
-                "status": "normal",
-                "value": 0.8076
-              },
-              {
-                "status": "normal",
-                "value": 0.8038
-              },
-              {
-                "status": "normal",
-                "value": 1.0568
-              },
-              {
-                "status": "normal",
-                "value": 0.999
-              },
-              {
-                "status": "normal",
-                "value": 1.0587
-              },
-              {
-                "status": "normal",
-                "value": 1.0648
-              },
-              {
-                "status": "normal",
-                "value": 1.0057
-              }
-            ],
-            "息税前利润率": [
-              {
-                "status": "normal",
-                "value": 6.5725
-              },
-              {
-                "status": "normal",
-                "value": 7.072
-              },
-              {
-                "status": "normal",
-                "value": 8.554
-              },
-              {
-                "status": "normal",
-                "value": 8.0232
-              },
-              {
-                "status": "normal",
-                "value": 7.9398
-              },
-              {
-                "status": "normal",
-                "value": 6.6588
-              },
-              {
-                "status": "normal",
-                "value": 8.1432
-              },
-              {
-                "status": "normal",
-                "value": 7.8766
-              }
-            ],
-            "每股经营活动产生的现金流量净额": [
-              {
-                "status": "normal",
-                "value": "1.5517"
-              },
-              {
-                "status": "normal",
-                "value": "-0.5062"
-              },
-              {
-                "status": "normal",
-                "value": "-0.5769"
-              },
-              {
-                "status": "normal",
-                "value": "-1.0369"
-              },
-              {
-                "status": "normal",
-                "value": "-0.6765"
-              },
-              {
-                "status": "normal",
-                "value": "-0.8864"
-              },
-              {
-                "status": "normal",
-                "value": "-1.272"
-              },
-              {
-                "status": "normal",
-                "value": "0.2551"
-              }
-            ]
-          },
-          "cols_title": [
-            "2015Q4",
-            "2016Q1",
-            "2016Q2",
-            "2016Q3",
-            "2016Q4",
-            "2017Q1",
-            "2017Q2",
-            "2017Q3"
-          ],
-          "name": "主要财务比率"
-        },
-        {
-          "rows_title": [
-            "营业利润",
-            "营业外支出",
-            "营业成本",
-            "营业税金及附加",
-            "财务费用",
-            "营业外收入",
-            "营业支出",
-            "EBITDA",
-            "所得税",
-            "管理费用",
-            "营业收入",
-            "利润总额",
-            "净利润",
-            "少数股东损益"
-          ],
-          "rows_data": {
-            "营业利润": [
-              {
-                "status": "normal",
-                "value": 3175965000
-              },
-              {
-                "status": "normal",
-                "value": 1083880000
-              },
-              {
-                "status": "normal",
-                "value": 2787346000
-              },
-              {
-                "status": "normal",
-                "value": 4442837000
-              },
-              {
-                "status": "normal",
-                "value": 5986251000
-              },
-              {
-                "status": "normal",
-                "value": 833815000
-              },
-              {
-                "status": "normal",
-                "value": 2595439000
-              },
-              {
-                "status": "normal",
-                "value": 4105070000
-              }
-            ],
-            "营业外支出": [
-              {
-                "status": "normal",
-                "value": 84214000
-              },
-              {
-                "status": "normal",
-                "value": 31825000
-              },
-              {
-                "status": "normal",
-                "value": 53893000
-              },
-              {
-                "status": "normal",
-                "value": 164410000
-              },
-              {
-                "status": "normal",
-                "value": 262169000
-              },
-              {
-                "status": "normal",
-                "value": 21008000
-              },
-              {
-                "status": "normal",
-                "value": 50583000
-              },
-              {
-                "status": "normal",
-                "value": 72348000
-              }
-            ],
-            "营业成本": [
-              {
-                "status": "normal",
-                "value": 66513559000
-              },
-              {
-                "status": "normal",
-                "value": 16419554000
-              },
-              {
-                "status": "normal",
-                "value": 35588441000
-              },
-              {
-                "status": "normal",
-                "value": 57454150000
-              },
-              {
-                "status": "normal",
-                "value": 82400900000
-              },
-              {
-                "status": "normal",
-                "value": 16625725000
-              },
-              {
-                "status": "normal",
-                "value": 35885394000
-              },
-              {
-                "status": "normal",
-                "value": 59251044000
-              }
-            ],
-            "营业税金及附加": [
-              {
-                "status": "normal",
-                "value": 1267326000
-              },
-              {
-                "status": "normal",
-                "value": 307648000
-              },
-              {
-                "status": "normal",
-                "value": 616329000
-              },
-              {
-                "status": "normal",
-                "value": 928700000
-              },
-              {
-                "status": "normal",
-                "value": 1511717000
-              },
-              {
-                "status": "normal",
-                "value": 319927000
-              },
-              {
-                "status": "normal",
-                "value": 561938000
-              },
-              {
-                "status": "normal",
-                "value": 852762000
-              }
-            ],
-            "财务费用": [
-              {
-                "status": "normal",
-                "value": 1445995000
-              },
-              {
-                "status": "normal",
-                "value": 286037000
-              },
-              {
-                "status": "normal",
-                "value": 657280000
-              },
-              {
-                "status": "normal",
-                "value": 990438000
-              },
-              {
-                "status": "normal",
-                "value": 1222190000
-              },
-              {
-                "status": "normal",
-                "value": 379790000
-              },
-              {
-                "status": "normal",
-                "value": 974813000
-              },
-              {
-                "status": "normal",
-                "value": 1627732000
-              }
-            ],
-            "营业外收入": [
-              {
-                "status": "normal",
-                "value": 703235000
-              },
-              {
-                "status": "normal",
-                "value": 96475000
-              },
-              {
-                "status": "normal",
-                "value": 275622000
-              },
-              {
-                "status": "normal",
-                "value": 571873000
-              },
-              {
-                "status": "normal",
-                "value": 844328000
-              },
-              {
-                "status": "normal",
-                "value": 208824000
-              },
-              {
-                "status": "normal",
-                "value": 105154000
-              },
-              {
-                "status": "normal",
-                "value": 162917000
-              }
-            ],
-            "营业支出": [
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": null
-              }
-            ],
-            "EBITDA": [
-              {
-                "status": "normal",
-                "value": 8926871000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 6868341000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 15151121000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 6160160000
-              },
-              {
-                "status": "normal",
-                "value": null
-              }
-            ],
-            "所得税": [
-              {
-                "status": "normal",
-                "value": 656790000
-              },
-              {
-                "status": "normal",
-                "value": 250884000
-              },
-              {
-                "status": "normal",
-                "value": 540008000
-              },
-              {
-                "status": "normal",
-                "value": 878649000
-              },
-              {
-                "status": "normal",
-                "value": 1088398000
-              },
-              {
-                "status": "normal",
-                "value": 240265000
-              },
-              {
-                "status": "normal",
-                "value": 484847000
-              },
-              {
-                "status": "normal",
-                "value": 733761000
-              }
-            ],
-            "管理费用": [
-              {
-                "status": "normal",
-                "value": 5415060000
-              },
-              {
-                "status": "normal",
-                "value": 1298477000
-              },
-              {
-                "status": "normal",
-                "value": 3022396000
-              },
-              {
-                "status": "normal",
-                "value": 5440908000
-              },
-              {
-                "status": "normal",
-                "value": 6842635000
-              },
-              {
-                "status": "normal",
-                "value": 1556914000
-              },
-              {
-                "status": "normal",
-                "value": 3120342000
-              },
-              {
-                "status": "normal",
-                "value": 5066885000
-              }
-            ],
-            "营业收入": [
-              {
-                "status": "normal",
-                "value": 80008968000
-              },
-              {
-                "status": "normal",
-                "value": 20285247000
-              },
-              {
-                "status": "normal",
-                "value": 44949565000
-              },
-              {
-                "status": "normal",
-                "value": 72797790000
-              },
-              {
-                "status": "normal",
-                "value": 103469997000
-              },
-              {
-                "status": "normal",
-                "value": 21046138000
-              },
-              {
-                "status": "normal",
-                "value": 45037637000
-              },
-              {
-                "status": "normal",
-                "value": 73932895000
-              }
-            ],
-            "利润总额": [
-              {
-                "status": "normal",
-                "value": 3794986000
-              },
-              {
-                "status": "normal",
-                "value": 1148530000
-              },
-              {
-                "status": "normal",
-                "value": 3009075000
-              },
-              {
-                "status": "normal",
-                "value": 4850300000
-              },
-              {
-                "status": "normal",
-                "value": 6568410000
-              },
-              {
-                "status": "normal",
-                "value": 1021631000
-              },
-              {
-                "status": "normal",
-                "value": 2650010000
-              },
-              {
-                "status": "normal",
-                "value": 4195639000
-              }
-            ],
-            "净利润": [
-              {
-                "status": "normal",
-                "value": 2823441000
-              },
-              {
-                "status": "normal",
-                "value": 850708000
-              },
-              {
-                "status": "normal",
-                "value": 2259696000
-              },
-              {
-                "status": "normal",
-                "value": 3664126000
-              },
-              {
-                "status": "normal",
-                "value": 5052154000
-              },
-              {
-                "status": "normal",
-                "value": 605795000
-              },
-              {
-                "status": "normal",
-                "value": 1722914000
-              },
-              {
-                "status": "normal",
-                "value": 2791435000
-              }
-            ],
-            "少数股东损益": [
-              {
-                "status": "normal",
-                "value": 314755000
-              },
-              {
-                "status": "normal",
-                "value": 46938000
-              },
-              {
-                "status": "normal",
-                "value": 209371000
-              },
-              {
-                "status": "normal",
-                "value": 307525000
-              },
-              {
-                "status": "normal",
-                "value": 427858000
-              },
-              {
-                "status": "normal",
-                "value": 175571000
-              },
-              {
-                "status": "normal",
-                "value": 442249000
-              },
-              {
-                "status": "normal",
-                "value": 670443000
-              }
-            ]
-          },
-          "cols_title": [
-            "2015Q4",
-            "2016Q1",
-            "2016Q2",
-            "2016Q3",
-            "2016Q4",
-            "2017Q1",
-            "2017Q2",
-            "2017Q3"
-          ],
-          "name": "利润表"
-        },
-        {
-          "rows_title": [
-            "少数股东权益",
-            "应付票据",
-            "应收票据",
-            "其他流动资产",
-            "资产总计",
-            "长期借款",
-            "负债合计",
-            "负债及股东权益总计",
-            "货币资金",
-            "应付账款",
-            "无形资产",
-            "在建工程",
-            "固定资产",
-            "存货",
-            "应收账款",
-            "股东权益合计",
-            "非流动负债合计",
-            "流动资产合计",
-            "预付款项",
-            "应付债券",
-            "短期借款"
-          ],
-          "rows_data": {
-            "少数股东权益": [
-              {
-                "status": "normal",
-                "value": 3734837000
-              },
-              {
-                "status": "normal",
-                "value": 3782694000
-              },
-              {
-                "status": "normal",
-                "value": 3957908000
-              },
-              {
-                "status": "normal",
-                "value": 4064088000
-              },
-              {
-                "status": "normal",
-                "value": 4153434000
-              },
-              {
-                "status": "normal",
-                "value": 4331638000
-              },
-              {
-                "status": "normal",
-                "value": 4545134000
-              },
-              {
-                "status": "normal",
-                "value": 4772326000
-              }
-            ],
-            "应付票据": [
-              {
-                "status": "normal",
-                "value": 12897076000
-              },
-              {
-                "status": "normal",
-                "value": 14233655000
-              },
-              {
-                "status": "normal",
-                "value": 13866924000
-              },
-              {
-                "status": "normal",
-                "value": 14049464000
-              },
-              {
-                "status": "normal",
-                "value": 15742125000
-              },
-              {
-                "status": "normal",
-                "value": 15053586000
-              },
-              {
-                "status": "normal",
-                "value": 13485020000
-              },
-              {
-                "status": "normal",
-                "value": 14836173000
-              }
-            ],
-            "应收票据": [
-              {
-                "status": "normal",
-                "value": 6798810000
-              },
-              {
-                "status": "normal",
-                "value": 3954054000
-              },
-              {
-                "status": "normal",
-                "value": 5809411000
-              },
-              {
-                "status": "normal",
-                "value": 6581799000
-              },
-              {
-                "status": "normal",
-                "value": 6362378000
-              },
-              {
-                "status": "normal",
-                "value": 4399212000
-              },
-              {
-                "status": "normal",
-                "value": 4183255000
-              },
-              {
-                "status": "normal",
-                "value": 5583781000
-              }
-            ],
-            "其他流动资产": [
-              {
-                "status": "normal",
-                "value": 2492277000
-              },
-              {
-                "status": "normal",
-                "value": 2693086000
-              },
-              {
-                "status": "normal",
-                "value": 2762222000
-              },
-              {
-                "status": "normal",
-                "value": 3212535000
-              },
-              {
-                "status": "normal",
-                "value": 3786404000
-              },
-              {
-                "status": "normal",
-                "value": 4314787000
-              },
-              {
-                "status": "normal",
-                "value": 4077398000
-              },
-              {
-                "status": "normal",
-                "value": 4089372000
-              }
-            ],
-            "资产总计": [
-              {
-                "status": "normal",
-                "value": 115485755000
-              },
-              {
-                "status": "normal",
-                "value": 112205554000
-              },
-              {
-                "status": "normal",
-                "value": 121734837000
-              },
-              {
-                "status": "normal",
-                "value": 133924309000
-              },
-              {
-                "status": "normal",
-                "value": 145070778000
-              },
-              {
-                "status": "normal",
-                "value": 146326109000
-              },
-              {
-                "status": "normal",
-                "value": 153734972000
-              },
-              {
-                "status": "normal",
-                "value": 164727543000
-              }
-            ],
-            "长期借款": [
-              {
-                "status": "normal",
-                "value": 6745955000
-              },
-              {
-                "status": "normal",
-                "value": 5591491000
-              },
-              {
-                "status": "normal",
-                "value": 6192441000
-              },
-              {
-                "status": "normal",
-                "value": 6090552000
-              },
-              {
-                "status": "normal",
-                "value": 4847936000
-              },
-              {
-                "status": "normal",
-                "value": 7191753000
-              },
-              {
-                "status": "normal",
-                "value": 7316219000
-              },
-              {
-                "status": "normal",
-                "value": 7808930000
-              }
-            ],
-            "负债合计": [
-              {
-                "status": "normal",
-                "value": 79456514000
-              },
-              {
-                "status": "normal",
-                "value": 75322208000
-              },
-              {
-                "status": "normal",
-                "value": 82947757000
-              },
-              {
-                "status": "normal",
-                "value": 79292522000
-              },
-              {
-                "status": "normal",
-                "value": 89661415000
-              },
-              {
-                "status": "normal",
-                "value": 89993235000
-              },
-              {
-                "status": "normal",
-                "value": 96565937000
-              },
-              {
-                "status": "normal",
-                "value": 105851814000
-              }
-            ],
-            "负债及股东权益总计": [
-              {
-                "status": "normal",
-                "value": 115485755000
-              },
-              {
-                "status": "normal",
-                "value": 112205554000
-              },
-              {
-                "status": "normal",
-                "value": 121734837000
-              },
-              {
-                "status": "normal",
-                "value": 133924309000
-              },
-              {
-                "status": "normal",
-                "value": 145070778000
-              },
-              {
-                "status": "normal",
-                "value": 146326109000
-              },
-              {
-                "status": "normal",
-                "value": 153734972000
-              },
-              {
-                "status": "normal",
-                "value": 164727543000
-              }
-            ],
-            "货币资金": [
-              {
-                "status": "normal",
-                "value": 6596426000
-              },
-              {
-                "status": "normal",
-                "value": 3910076000
-              },
-              {
-                "status": "normal",
-                "value": 5468747000
-              },
-              {
-                "status": "normal",
-                "value": 7588506000
-              },
-              {
-                "status": "normal",
-                "value": 7693666000
-              },
-              {
-                "status": "normal",
-                "value": 9097580000
-              },
-              {
-                "status": "normal",
-                "value": 8701073000
-              },
-              {
-                "status": "normal",
-                "value": 8779718000
-              }
-            ],
-            "应付账款": [
-              {
-                "status": "normal",
-                "value": 18581611000
-              },
-              {
-                "status": "normal",
-                "value": 13483268000
-              },
-              {
-                "status": "normal",
-                "value": 15258184000
-              },
-              {
-                "status": "normal",
-                "value": 18147881000
-              },
-              {
-                "status": "normal",
-                "value": 19501485000
-              },
-              {
-                "status": "normal",
-                "value": 14149423000
-              },
-              {
-                "status": "normal",
-                "value": 16087628000
-              },
-              {
-                "status": "normal",
-                "value": 21656214000
-              }
-            ],
-            "无形资产": [
-              {
-                "status": "normal",
-                "value": 8790228000
-              },
-              {
-                "status": "normal",
-                "value": 9073892000
-              },
-              {
-                "status": "normal",
-                "value": 8950059000
-              },
-              {
-                "status": "normal",
-                "value": 9053848000
-              },
-              {
-                "status": "normal",
-                "value": 8946267000
-              },
-              {
-                "status": "normal",
-                "value": 8990259000
-              },
-              {
-                "status": "normal",
-                "value": 9234312000
-              },
-              {
-                "status": "normal",
-                "value": 9201793000
-              }
-            ],
-            "在建工程": [
-              {
-                "status": "normal",
-                "value": 5757798000
-              },
-              {
-                "status": "normal",
-                "value": 5946868000
-              },
-              {
-                "status": "normal",
-                "value": 5478912000
-              },
-              {
-                "status": "normal",
-                "value": 4754746000
-              },
-              {
-                "status": "normal",
-                "value": 4565424000
-              },
-              {
-                "status": "normal",
-                "value": 4880021000
-              },
-              {
-                "status": "normal",
-                "value": 4807610000
-              },
-              {
-                "status": "normal",
-                "value": 4784600000
-              }
-            ],
-            "固定资产": [
-              {
-                "status": "normal",
-                "value": 32368535000
-              },
-              {
-                "status": "normal",
-                "value": 32553067000
-              },
-              {
-                "status": "normal",
-                "value": 34972477000
-              },
-              {
-                "status": "normal",
-                "value": 35430943000
-              },
-              {
-                "status": "normal",
-                "value": 37483211000
-              },
-              {
-                "status": "normal",
-                "value": 38214112000
-              },
-              {
-                "status": "normal",
-                "value": 39700110000
-              },
-              {
-                "status": "normal",
-                "value": 41091889000
-              }
-            ],
-            "存货": [
-              {
-                "status": "normal",
-                "value": 15750550000
-              },
-              {
-                "status": "normal",
-                "value": 16490447000
-              },
-              {
-                "status": "normal",
-                "value": 16044181000
-              },
-              {
-                "status": "normal",
-                "value": 17792667000
-              },
-              {
-                "status": "normal",
-                "value": 17378439000
-              },
-              {
-                "status": "normal",
-                "value": 17102320000
-              },
-              {
-                "status": "normal",
-                "value": 18144296000
-              },
-              {
-                "status": "normal",
-                "value": 20132187000
-              }
-            ],
-            "应收账款": [
-              {
-                "status": "normal",
-                "value": 21519093000
-              },
-              {
-                "status": "normal",
-                "value": 22671297000
-              },
-              {
-                "status": "normal",
-                "value": 27669582000
-              },
-              {
-                "status": "normal",
-                "value": 33985044000
-              },
-              {
-                "status": "normal",
-                "value": 41768002000
-              },
-              {
-                "status": "normal",
-                "value": 41272389000
-              },
-              {
-                "status": "normal",
-                "value": 46530489000
-              },
-              {
-                "status": "normal",
-                "value": 51677203000
-              }
-            ],
-            "股东权益合计": [
-              {
-                "status": "normal",
-                "value": 32294404000
-              },
-              {
-                "status": "normal",
-                "value": 33100652000
-              },
-              {
-                "status": "normal",
-                "value": 34829172000
-              },
-              {
-                "status": "normal",
-                "value": 50567699000
-              },
-              {
-                "status": "normal",
-                "value": 51255929000
-              },
-              {
-                "status": "normal",
-                "value": 52001236000
-              },
-              {
-                "status": "normal",
-                "value": 52623901000
-              },
-              {
-                "status": "normal",
-                "value": 54103403000
-              }
-            ],
-            "非流动负债合计": [
-              {
-                "status": "normal",
-                "value": 13346390000
-              },
-              {
-                "status": "normal",
-                "value": 12093634000
-              },
-              {
-                "status": "normal",
-                "value": 9727901000
-              },
-              {
-                "status": "normal",
-                "value": 12660374000
-              },
-              {
-                "status": "normal",
-                "value": 11343811000
-              },
-              {
-                "status": "normal",
-                "value": 16706392000
-              },
-              {
-                "status": "normal",
-                "value": 18499720000
-              },
-              {
-                "status": "normal",
-                "value": 14473256000
-              }
-            ],
-            "流动资产合计": [
-              {
-                "status": "normal",
-                "value": 54411666000
-              },
-              {
-                "status": "normal",
-                "value": 51066219000
-              },
-              {
-                "status": "normal",
-                "value": 58850900000
-              },
-              {
-                "status": "normal",
-                "value": 70414591000
-              },
-              {
-                "status": "normal",
-                "value": 78240081000
-              },
-              {
-                "status": "normal",
-                "value": 77591345000
-              },
-              {
-                "status": "normal",
-                "value": 83126454000
-              },
-              {
-                "status": "normal",
-                "value": 91896516000
-              }
-            ],
-            "预付款项": [
-              {
-                "status": "normal",
-                "value": 226962000
-              },
-              {
-                "status": "normal",
-                "value": 341440000
-              },
-              {
-                "status": "normal",
-                "value": 265834000
-              },
-              {
-                "status": "normal",
-                "value": 343889000
-              },
-              {
-                "status": "normal",
-                "value": 205939000
-              },
-              {
-                "status": "normal",
-                "value": 307434000
-              },
-              {
-                "status": "normal",
-                "value": 264386000
-              },
-              {
-                "status": "normal",
-                "value": 380615000
-              }
-            ],
-            "应付债券": [
-              {
-                "status": "normal",
-                "value": 4483946000
-              },
-              {
-                "status": "normal",
-                "value": 4486254000
-              },
-              {
-                "status": "normal",
-                "value": 1494526000
-              },
-              {
-                "status": "normal",
-                "value": 4489583000
-              },
-              {
-                "status": "normal",
-                "value": 4490584000
-              },
-              {
-                "status": "normal",
-                "value": 7491851000
-              },
-              {
-                "status": "normal",
-                "value": 8985120000
-              },
-              {
-                "status": "normal",
-                "value": 4492480000
-              }
-            ],
-            "短期借款": [
-              {
-                "status": "normal",
-                "value": 19943800000
-              },
-              {
-                "status": "normal",
-                "value": 21344020000
-              },
-              {
-                "status": "normal",
-                "value": 25276808000
-              },
-              {
-                "status": "normal",
-                "value": 19170364000
-              },
-              {
-                "status": "normal",
-                "value": 25009611000
-              },
-              {
-                "status": "normal",
-                "value": 27976568000
-              },
-              {
-                "status": "normal",
-                "value": 34032436000
-              },
-              {
-                "status": "normal",
-                "value": 35295735000
-              }
-            ]
-          },
-          "cols_title": [
-            "2015Q4",
-            "2016Q1",
-            "2016Q2",
-            "2016Q3",
-            "2016Q4",
-            "2017Q1",
-            "2017Q2",
-            "2017Q3"
-          ],
-          "name": "资产负债表"
-        },
-        {
-          "rows_title": [
-            "现金及现金等价物净增加额",
-            "筹资活动产生的现金流量净额",
-            "投资活动产生的现金流量净额",
-            "汇率变动对现金的影响",
-            "投资活动现金流出",
-            "投资活动现金流入",
-            "固定资产折旧",
-            "经营活动产生的现金流量净额",
-            "无形资产摊销",
-            "净利润"
-          ],
-          "rows_data": {
-            "现金及现金等价物净增加额": [
-              {
-                "status": "normal",
-                "value": 2190065000
-              },
-              {
-                "status": "normal",
-                "value": -2634401000
-              },
-              {
-                "status": "normal",
-                "value": -1088204000
-              },
-              {
-                "status": "normal",
-                "value": 1032990000
-              },
-              {
-                "status": "normal",
-                "value": 1079063000
-              },
-              {
-                "status": "normal",
-                "value": 1462348000
-              },
-              {
-                "status": "normal",
-                "value": 961658000
-              },
-              {
-                "status": "normal",
-                "value": 1112450000
-              }
-            ],
-            "筹资活动产生的现金流量净额": [
-              {
-                "status": "normal",
-                "value": 8749785000
-              },
-              {
-                "status": "normal",
-                "value": 1139467000
-              },
-              {
-                "status": "normal",
-                "value": 6183547000
-              },
-              {
-                "status": "normal",
-                "value": 12651613000
-              },
-              {
-                "status": "normal",
-                "value": 16270217000
-              },
-              {
-                "status": "normal",
-                "value": 7387907000
-              },
-              {
-                "status": "normal",
-                "value": 11364523000
-              },
-              {
-                "status": "normal",
-                "value": 11555253000
-              }
-            ],
-            "投资活动产生的现金流量净额": [
-              {
-                "status": "normal",
-                "value": -10606440000
-              },
-              {
-                "status": "normal",
-                "value": -2512597000
-              },
-              {
-                "status": "normal",
-                "value": -5876262000
-              },
-              {
-                "status": "normal",
-                "value": -8841636000
-              },
-              {
-                "status": "normal",
-                "value": -13442642000
-              },
-              {
-                "status": "normal",
-                "value": -3500329000
-              },
-              {
-                "status": "normal",
-                "value": -6939226000
-              },
-              {
-                "status": "normal",
-                "value": -11138356000
-              }
-            ],
-            "汇率变动对现金的影响": [
-              {
-                "status": "normal",
-                "value": 204626000
-              },
-              {
-                "status": "normal",
-                "value": -7931000
-              },
-              {
-                "status": "normal",
-                "value": 33004000
-              },
-              {
-                "status": "normal",
-                "value": 51949000
-              },
-              {
-                "status": "normal",
-                "value": 97059000
-              },
-              {
-                "status": "normal",
-                "value": -6922000
-              },
-              {
-                "status": "normal",
-                "value": 6608000
-              },
-              {
-                "status": "normal",
-                "value": -455000
-              }
-            ],
-            "投资活动现金流出": [
-              {
-                "status": "normal",
-                "value": 13560753000
-              },
-              {
-                "status": "normal",
-                "value": 2770623000
-              },
-              {
-                "status": "normal",
-                "value": 6904201000
-              },
-              {
-                "status": "normal",
-                "value": 9931472000
-              },
-              {
-                "status": "normal",
-                "value": 14730655000
-              },
-              {
-                "status": "normal",
-                "value": 4299563000
-              },
-              {
-                "status": "normal",
-                "value": 9129027000
-              },
-              {
-                "status": "normal",
-                "value": 14478487000
-              }
-            ],
-            "投资活动现金流入": [
-              {
-                "status": "normal",
-                "value": 2954313000
-              },
-              {
-                "status": "normal",
-                "value": 258026000
-              },
-              {
-                "status": "normal",
-                "value": 1027939000
-              },
-              {
-                "status": "normal",
-                "value": 1089836000
-              },
-              {
-                "status": "normal",
-                "value": 1288013000
-              },
-              {
-                "status": "normal",
-                "value": 799234000
-              },
-              {
-                "status": "normal",
-                "value": 2189801000
-              },
-              {
-                "status": "normal",
-                "value": 3340131000
-              }
-            ],
-            "固定资产折旧": [
-              {
-                "status": "normal",
-                "value": 4485620000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 2524787000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 5308825000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 2563130000
-              },
-              {
-                "status": "normal",
-                "value": null
-              }
-            ],
-            "经营活动产生的现金流量净额": [
-              {
-                "status": "normal",
-                "value": 3842094000
-              },
-              {
-                "status": "normal",
-                "value": -1253340000
-              },
-              {
-                "status": "normal",
-                "value": -1428493000
-              },
-              {
-                "status": "normal",
-                "value": -2828936000
-              },
-              {
-                "status": "normal",
-                "value": -1845571000
-              },
-              {
-                "status": "normal",
-                "value": -2418308000
-              },
-              {
-                "status": "normal",
-                "value": -3470247000
-              },
-              {
-                "status": "normal",
-                "value": 696008000
-              }
-            ],
-            "无形资产摊销": [
-              {
-                "status": "normal",
-                "value": 930997000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 622705000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 1718744000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 622467000
-              },
-              {
-                "status": "normal",
-                "value": null
-              }
-            ],
-            "净利润": [
-              {
-                "status": "normal",
-                "value": 3138196000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 2469067000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 5480012000
-              },
-              {
-                "status": "normal",
-                "value": null
-              },
-              {
-                "status": "normal",
-                "value": 2165163000
-              },
-              {
-                "status": "normal",
-                "value": null
-              }
-            ]
-          },
-          "cols_title": [
-            "2015Q4",
-            "2016Q1",
-            "2016Q2",
-            "2016Q3",
-            "2016Q4",
-            "2017Q1",
-            "2017Q2",
-            "2017Q3"
-          ],
-          "name": "现金流量表"
-        }
-      ];
-      console.log(res[0].cols_title);
-      $.each(res, function (index, item) {
-        initTable('#year-data-', item, index);
-        initTable('#report-data-', item, index);
-      })
-    }
-
-//    test();
-
     // 渲染表格数据
     function initTable(fixId, data, ind) { // fixId  id的前缀  '#year-data-'
       if (data.cols_title && data.cols_title.length) { // 说明有数据
@@ -2528,7 +474,7 @@
         var titleStr = '';
         $.each(titles, function (index, item) {
           if (index === 0) {
-            titleStr += '<td class="first-col">' + item + '</td>';
+            titleStr += '<td class="first-col" style="color:#FD2F30">' + item + '</td>';
           } else if (index < titles.length - 5) { // 13组数据显示后5列
             titleStr += '<td style="display: none;">' + item + '</td>';
           } else {
@@ -2572,7 +518,6 @@
         console.log('无数据')
       }
     }
-
 
     // 左右切换表格年份公共方法
     function switchHead(fixId, total, start, len) {
@@ -2673,6 +618,33 @@
         return false;
       }
     });
+
+
+    // 按年度 切换上面图表tab
+    $('#year-chart-tab span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.chart-cont .chart_year').eq($(this).index()).show().siblings('.chart_year').hide();
+    });
+
+    // 按报告期 切换上面图表tab
+    $('#report-chart-tab span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
+    });
+
+    // 查找相关
+    $('#search-relative').click(function () {
+      var str=$('#search-inp').val();
+      var reg=/\d+/;
+      if(reg.test(str)===true){
+        var code=reg.exec(str)[0];
+        console.log(code);
+      }else {
+        console.log(str)
+      }
+    });
+
+
 
 
   })

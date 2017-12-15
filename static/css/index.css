@@ -364,10 +364,10 @@ button, input {
 
 .content-container .search-container {
   position: absolute;
-  top: 64px;
-  right: 94px;
+  top: 62px;
+  right: 93px;
   z-index: 999;
-  width: 140px;
+  width: 129px;
   font-size: 12px;
   border: 1px solid #C2C3C6;
   border-top: none;
@@ -378,7 +378,6 @@ button, input {
 .content-container .search-container li {
   height: 24px;
   line-height: 24px;
-  width: 95%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -400,11 +399,14 @@ button, input {
   font-size: 0;
   margin-bottom: 1px;
   position: relative;
+  overflow: hidden;
+  z-index: 9999;
 }
 
 .kind-tab .left-group {
   float: left;
   font-size: 0;
+  z-index: 99;
 }
 
 .kind-tab .right-group {
@@ -437,7 +439,6 @@ button, input {
   position: absolute;
   top: 28px;
   right: 79px;
-  z-index: 99;
   width: 80px;
   border-radius: 1px;
   background: #F3F5F6;
@@ -445,12 +446,39 @@ button, input {
   border: 1px solid #E0E1E3;
   border-top: none;
   font-size: 12px;
+  z-index: 9999;
 }
 
 .export-container li {
-  padding: 6px 10px;
+  height: 28px;
+  line-height: 28px;
+  width: 100%;
+  text-align: center;
   border-top: 1px solid #F3F5F6;
   border-bottom: 1px solid #F3F5F6;
+}
+
+.export-container li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  color: #48494B;
+}
+
+.export-container li a:link {
+  color: #48494B;
+}
+
+.export-container li a:visited {
+  color: #48494B;
+}
+
+.export-container li a:hover {
+  color: #F8FAFB;
+}
+
+.export-container li a:active {
+  color: #48494B;
 }
 
 .export-container .active, .export-container li:hover {
@@ -489,7 +517,7 @@ button, input {
 
 .table-container tbody td {
   border-right: 1px solid #A0C1E8;
-  padding: 7px 5px;
+  padding: 5px 5px;
   text-align: right;
   color: #6E6E71;
   font-family: arial, sans-serif, tahoma;
@@ -587,13 +615,12 @@ button, input {
 
 .data-cont {
   position: relative;
-  margin-top: 58px;
 }
 
 .data-cont .pre-time, .data-cont .next-time {
   display: inline-block;
   position: absolute;
-  top: 11px;
+  top: 21px;
   width: 20px;
   height: 20px;
   text-align: center;
@@ -613,9 +640,9 @@ button, input {
   width: 100%;
   height: 40px;
   background: #FEFFFE;
-  z-index: 999;
+  z-index: 99;
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 0;
 }
 
@@ -625,7 +652,14 @@ button, input {
   font-size: 12px;
   z-index: 99;
   margin-top: 20px;
-  margin-bottom:-30px;
+  margin-bottom: -30px;
+}
+
+.statistics-chart .chart-cont {
+  height: 360px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
 }
 
 .statistics-chart .chart-tab {
@@ -688,10 +722,6 @@ button, input {
   margin-right: 5px;
 }
 
-.chart_year {
-  height: 400px;
-  width: 100%;
-}
 
 /*图表样式_end*/
 

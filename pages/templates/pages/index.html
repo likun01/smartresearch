@@ -52,18 +52,18 @@
                 <td>预警内容</td>
                 </thead>
                 <tbody id="warn-data-container">
-                    <tr>
+                <tr>
                     <td>001</td>
                     <td>平安银行</td>
                     <td class="data-danger">11.29</td>
                     <td>评级上调，六个月目标价1.3倍</td>
-                    </tr>
-                    <tr>
+                </tr>
+                <tr>
                     <td>001</td>
                     <td>平安银行</td>
                     <td class="data-danger">11.29</td>
                     <td>评级上调，六个月目标价1.3倍</td>
-                    </tr>
+                </tr>
                 </tbody>
             </table>
             <div id="warn-data-more" class="last-li-more">
@@ -92,25 +92,25 @@
                 </thead>
                 <tbody id="sell-data-container">
                 <tr>
-                <td>1</td>
-                <td>00001</td>
-                <td>平安银行</td>
-                <td>11.39 </td>
-                <td>上周交易频次32次，本周64次</td>
+                    <td>1</td>
+                    <td>00001</td>
+                    <td>平安银行</td>
+                    <td>11.39</td>
+                    <td>上周交易频次32次，本周64次</td>
                 </tr>
                 <tr>
-                <td>1</td>
-                <td>00001</td>
-                <td>平安银行</td>
-                <td>11.39 </td>
-                <td>上周交易频次32次，本周64次</td>
+                    <td>1</td>
+                    <td>00001</td>
+                    <td>平安银行</td>
+                    <td>11.39</td>
+                    <td>上周交易频次32次，本周64次</td>
                 </tr>
                 <tr>
-                <td>1</td>
-                <td>00001</td>
-                <td>平安银行</td>
-                <td>11.39 </td>
-                <td>上周交易频次32次，本周64次</td>
+                    <td>1</td>
+                    <td>00001</td>
+                    <td>平安银行</td>
+                    <td>11.39</td>
+                    <td>上周交易频次32次，本周64次</td>
                 </tr>
                 </tbody>
             </table>
@@ -199,10 +199,12 @@
 {% endblock %}
 
 {% block js %}
+<script src="/static/js/inputSearch.js"></script>
 <script>
   $(function () {
 //    var token= util.getCookie('token');
-    var token = '4b04089a2d9675d34942a202a10e9b7a';
+    var token = '5b2d5bcda394d1247069b53dff32d304';
+    var fix_url = 'http://api-pro.xin-shui.com';
     // 存储start lenght
     var dataDetail = {
       warnDetail: {
@@ -223,7 +225,7 @@
     function getFollow() {
       $.ajax({
         type: 'GET',
-        url: 'http://192.168.100.206:8000/api/research/stock/',
+        url: fix_url + '/api/research/stock/',
         data: {
           token: token
         },
@@ -252,10 +254,11 @@
           $.each(data, function (index, item) {
             str += '<li data-code=' + item.code + ' data-name=' + item.name + '>';
             str += '<span class="close">&times; </span>';
+            str+='<a href="/forecast/'+item.code+'/">';
             str += '<span>' + item.name + '</span>';
             str += '<span>' + item.code + '</span>';
             str += item.hq === 'drop' ? '<span style="color:#35FE36">' + item.price + '</span>' : (item.hq === '<span style="color:#FE5959">' + item.price + '</span>' ? '增' : '<span>' + item.price + '</span>');
-            str += '</li>';
+            str += '</a></li>';
           });
           $('#follow-data').html(str);
         }
@@ -263,19 +266,19 @@
         // 关注股票 鼠标浮上显示关闭
         $('.follow-data li .close').click(function () {
           var code = $(this).parent().data('code');
-          var str = 'http://192.168.100.206:8000/api/research/stock/delete?token=' + token + '&code=' + code;
+          var str = fix_url + '/api/research/stock/delete?token=' + token + '&code=' + code;
           console.log(str);
           $.ajax({
             type: 'DELETE',
-            url: 'http://192.168.100.206:8000/api/research/stock/delete?token=' + token + '&code=' + code,
+            url: fix_url + '/api/research/stock/delete?token=' + token + '&code=' + code,
             data: {
               token: token,
               code: Number(code)
             },
             success: function (res) {
               if (res.code === 0) {
+                getFollow();
                 alert(res.detail);
-                $(this).parent().remove();
               }
             },
             error: function (e) {
@@ -326,16 +329,17 @@
         } else {
           $.ajax({
             type: 'POST',
-            url: 'http://192.168.100.206:8000/api/research/stock/add/',
+            url: fix_url + '/api/research/stock/add/',
             data: opts,
             contentType: 'application/json',
             dataType: 'json',
             success: function (res) {
               if (res.code === 0) { // 添加成功
-                alert(res.detail);
                 $('.search-container').html(str).hide();
                 // 重新读取关注股票信息
                 getFollow();
+                $('#search-inp').val('');
+                alert(res.detail);
               } else if (res.code === 40008) { //  重复添加
                 alert(res.detail);
                 $('.search-container').html(str).hide();
@@ -353,8 +357,9 @@
         }
       });
     }
+
     var opts = {
-      url: 'http://192.168.100.206:8000/api/research/search',
+      url: fix_url + '/api/research/search',
       token: token,
       bindData: bindData,
       searchRes: function () {

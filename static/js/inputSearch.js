@@ -45,9 +45,9 @@ InputSearch.prototype.inputChange = function () {
 InputSearch.prototype.clickChoose = function () {
   var _this = this;
   this.listCont.on('click', function (e) {
-    // var reg = /(<\w+>)|<\/\w+>/g;
-    // _this.inpEle.val(e.target.innerHTML.replace(reg, ''));
-    _this.opts.searchRes();
+    var reg = /(<\w+>)|<\/\w+>/g;
+    _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+    _this.inpEle.val(_this.word);
     _this.listCont.hide();
   });
 };
@@ -69,9 +69,9 @@ InputSearch.prototype.keyCodeChange = function () {
         } else {
           _this.listAll.eq(_this.count).addClass('select').siblings().removeClass('select');
         }
-        // var reg = /(<\w+>)|<\/\w+>/g;
-        // _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
-        // _this.inpEle.val(_this.word);
+        var reg = /(<\w+>)|<\/\w+>/g;
+        _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+        _this.inpEle.val(_this.word);
 
 
       } else if (e.keyCode === 40) { //下
@@ -83,9 +83,9 @@ InputSearch.prototype.keyCodeChange = function () {
           return;
         }
         _this.listAll.eq(_this.count).addClass('select').siblings().removeClass('select');
-        // var reg = /(<\w+>)|<\/\w+>/g;
-        // _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
-        // _this.inpEle.val(_this.word);
+        var reg = /(<\w+>)|<\/\w+>/g;
+        _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+        _this.inpEle.val(_this.word);
       } else if (e.keyCode === 13) {
         console.log(_this.opts.searchRes);
         _this.listCont.hide();
