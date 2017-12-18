@@ -1,0 +1,73 @@
+.temp-container{
+  margin:133px auto;
+  width:284px;
+  min-height: 450px;
+
+}
+.search-header{
+  width: 100%;
+  overflow: hidden;
+}
+.search-header .temp-inp{
+  width: 201px;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 3px;
+  border:1px solid #DCDDDC;
+  color: #767776;
+  float: left;
+}
+.search-header .out-search-btn{
+  width: 65px;
+  height: 28px;
+  line-height: 28px;
+  background: #0079BA;
+  color: #CAE3F0;
+  border:1px solid #006CB6;
+  border-radius: 1px;
+  text-align: center;
+  float: right;
+}
+.res-list{
+  border-spacing: 0;
+  border-collapse: collapse;
+  font-size: 12px;
+  border: 1px solid #DCDDDC;
+  width: 100%;
+  margin-top: 1px;
+  box-shadow: 0 1px 1px 1px #E7E8E7;
+  color: #686968;
+
+}
+.res-list tbody td{
+  font-size: 12px;
+  text-align: center;
+  padding: 3px 0;
+}
+.res-list tbody tr:hover{
+  background: #E4EEF9;
+}
+.res-list tbody tr span{
+  padding: 0 4px 1px 4px;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 12px;
+  -webkit-transform: scale(0.90);
+  -moz-transform: scale(0.90);
+  -ms-transform: scale(0.90);
+  -o-transform: scale(0.90);
+  transform: scale(0.90);
+  cursor: pointer;
+}
+.report-btn{
+  background: #E7524E;
+  color: #FDF2F2;
+}
+.finance-btn{
+  background: #49535E;
+  color: #E6E8EA;
+}
+.search-btn{
+  background: #0079BA;
+  color: #EDF6FA;
+}

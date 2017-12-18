@@ -347,7 +347,8 @@
 <script>
   $(function () {
     var fix_url = 'http://api-pro.xin-shui.com';
-    var token = '5b2d5bcda394d1247069b53dff32d304';
+    var token=util.getCookie('token');
+//    var token = '5b2d5bcda394d1247069b53dff32d304';
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
@@ -433,6 +434,7 @@
 
       },
       error: function (e) {
+        window.location.href = '/login';
         console.log(e)
       }
     });
@@ -463,7 +465,6 @@
         console.log(e)
       }
     });
-
 
     // 渲染表格数据
     function initTable(fixId, data, ind) { // fixId  id的前缀  '#year-data-'
