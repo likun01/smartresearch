@@ -437,7 +437,7 @@ button, input {
   display: none;
   position: absolute;
   top: 28px;
-  right: 79px;
+  right: 0;
   width: 80px;
   border-radius: 1px;
   background: #F3F5F6;
