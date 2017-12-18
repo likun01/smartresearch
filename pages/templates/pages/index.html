@@ -134,30 +134,30 @@
                 <td>增加比例</td>
                 </thead>
                 <tbody id="hot-data-container">
-                <!--<tr>-->
-                <!--<td>00001</td>-->
-                <!--<td>平安银行</td>-->
-                <!--<td class="data-danger">11.39</td>-->
-                <!--<td>20</td>-->
-                <!--<td>50</td>-->
-                <!--<td>230%</td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<td>00001</td>-->
-                <!--<td>平安银行</td>-->
-                <!--<td class="data-danger">11.39</td>-->
-                <!--<td>20</td>-->
-                <!--<td>50</td>-->
-                <!--<td>230%</td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                <!--<td>00001</td>-->
-                <!--<td>平安银行</td>-->
-                <!--<td class="data-danger">11.39</td>-->
-                <!--<td>20</td>-->
-                <!--<td>50</td>-->
-                <!--<td>230%</td>-->
-                <!--</tr>-->
+                <tr>
+                    <td>00001</td>
+                    <td>平安银行</td>
+                    <td class="data-danger">11.39</td>
+                    <td>20</td>
+                    <td>50</td>
+                    <td>230%</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>平安银行</td>
+                    <td class="data-danger">11.39</td>
+                    <td>20</td>
+                    <td>50</td>
+                    <td>230%</td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>平安银行</td>
+                    <td class="data-danger">11.39</td>
+                    <td>20</td>
+                    <td>50</td>
+                    <td>230%</td>
+                </tr>
                 </tbody>
             </table>
             <div class="sell-data-more" id="hot-data-more">
@@ -183,16 +183,16 @@
 
     <input type="button" value="重要研报" class="btn-title">
     <ul class="news-list" id="report-news">
-        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
-        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
-        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
     </ul>
 
     <input type="button" value="重要舆情" class="btn-title">
     <ul class="news-list" id="sent-news">
-        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
-        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
-        <!--<li><span>平安银行融资融券信息</span><span>12-10</span></li>-->
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
+        <li><span>平安银行融资融券信息</span><span>12-10</span></li>
     </ul>
 </div>
 <!--右侧新闻_end-->
@@ -202,8 +202,8 @@
 <script src="/static/js/inputSearch.js"></script>
 <script>
   $(function () {
-//    var token= util.getCookie('token');
-    var token = '5b2d5bcda394d1247069b53dff32d304';
+    var token = util.getCookie('token');
+//    var token = '5b2d5bcda394d1247069b53dff32d304';
     var fix_url = 'http://api-pro.xin-shui.com';
     // 存储start lenght
     var dataDetail = {
@@ -238,6 +238,7 @@
             // token过期
             console.log('过期');
             alert('登录信息失效，请重新登录');
+            window.location.href = '/login';
           }
           console.log(e);
         }
@@ -254,7 +255,7 @@
           $.each(data, function (index, item) {
             str += '<li data-code=' + item.code + ' data-name=' + item.name + '>';
             str += '<span class="close">&times; </span>';
-            str+='<a href="/forecast/'+item.code+'/">';
+            str += '<a href="/forecast/' + item.code + '/">';
             str += '<span>' + item.name + '</span>';
             str += '<span>' + item.code + '</span>';
             str += item.hq === 'drop' ? '<span style="color:#35FE36">' + item.price + '</span>' : (item.hq === '<span style="color:#FE5959">' + item.price + '</span>' ? '增' : '<span>' + item.price + '</span>');
@@ -350,6 +351,7 @@
                 // token过期
                 console.log('过期');
                 alert('登录信息失效，请重新登录');
+                window.location.href = '/login';
               }
               console.log(e);
             }
@@ -377,7 +379,8 @@
         dataType: 'json',
         data: {
           start: dataDetail.warnDetail.start,
-          length: dataDetail.warnDetail.length
+          length: dataDetail.warnDetail.length,
+          token: token
         },
         success: function (res) {
           if (res.state === 200) {
@@ -447,7 +450,8 @@
         dataType: 'json',
         data: {
           start: dataDetail.sellDetail.start,
-          length: dataDetail.sellDetail.length
+          length: dataDetail.sellDetail.length,
+          token: token
         },
         success: function (res) {
           if (res.state === 200) {
@@ -518,7 +522,8 @@
         dataType: 'json',
         data: {
           start: dataDetail.hotDetail.start,
-          length: dataDetail.hotDetail.length
+          length: dataDetail.hotDetail.length,
+          token: token
         },
         success: function (res) {
           if (res.state === 200) {

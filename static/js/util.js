@@ -3,7 +3,8 @@
     setCookie: function (c_name, value, expiremMinutes) {
       var exdate = new Date();
       exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
-      document.cookie = c_name + "=" + escape(value) + ((expiremMinutes == null) ? "" : ";expires=" + exdate.toGMTString());
+
+      document.cookie = c_name + "=" + escape(value) + ((expiremMinutes == null) ? "" : ";expires=" + exdate.toGMTString())+';path=/';
     },
 
     // 读取cookie
@@ -29,7 +30,18 @@
       if (cval != null) {
         document.cookie = c_name + "=" + cval + ";expires=" + exp.toGMTString();
       }
+    },
+
+    setSessionSto(s_name,s_val){
+      window.sessionStorage.setItem(s_name,s_val);
+    },
+    getSessionSto(s_name){
+      window.sessionStorage.getItem(s_name);
+    },
+    delSessionSto(s_name){
+      window.sessionStorage.setItem(s_name,null)
     }
+
   };
 
 

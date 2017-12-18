@@ -26,6 +26,7 @@
 {% block js %}
 <script>
   $(function () {
+    var fix_url = 'http://api-pro.xin-shui.com';
     // 记住密码
     function loadAccountInfo() {
       var accountInfo = util.getCookie('accountInfo');
@@ -51,24 +52,6 @@
 
     loadAccountInfo();
 
-//    $('.loginBtn').click(function () {
-//      var data={
-//        username:'research1',
-//        password:'research1'
-//      }
-//      $.ajax({
-//        url: 'http://192.168.100.206:8000/api/research/login/',
-//        type: 'POST',
-//        data: data,
-//        success: function (res) {
-//          console.log(res);
-//        },
-//        error:function (e) {
-//          console.log(e)
-//        }
-//      })
-//    });
-
     // 提交登录信息
     $("form").submit(function (e) {
       e.preventDefault();
@@ -84,7 +67,7 @@
       } else {
         // 登录请求
         $.ajax({
-          url: 'http://192.168.100.206:8000/api/research/login/',
+          url: fix_url+'/api/research/login/',
           type: 'POST',
           data: data,
           success: function (res) {
