@@ -412,8 +412,10 @@
       type: 'GET',
       url: 'http://api-pro.xin-shui.com/api/research/forecast/year/',
       data: {
-        code: '{{ stock_code }}'
+        code: '{{ stock_code }}',
+        token:token
       },
+
       success: function (res) {
         // 替换标题
         var nameSpan = $('#stock-title');
@@ -434,7 +436,7 @@
 
       },
       error: function (e) {
-        window.location.href = '/login';
+//        window.location.href = '/login';
         console.log(e)
       }
     });
@@ -444,8 +446,10 @@
       type: 'GET',
       url: 'http://api-pro.xin-shui.com/api/research/forecast/report/',
       data: {
-        code: '{{ stock_code }}'
+        code: '{{ stock_code }}',
+        token:token
       },
+
       success: function (res) {
         var nameSpan = $('#stock-title');
         var val = nameSpan.html();
