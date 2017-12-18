@@ -75,15 +75,18 @@
 
 <!--tab_start-->
 <div class="kind-tab" id="kind-tab">
-    <div class="left-group">
-        <span class="active">按年度</span>
-        <span>按报告期</span>
+    <div style="overflow: hidden">
+        <div class="left-group">
+            <span class="active">按年度</span>
+            <span>按报告期</span>
+        </div>
+        <div class="right-group">
+            <span class="active" id="export-btn">导出数据</span>
+            <span>加入对比</span>
+            <!--导出数据弹框-->
+        </div>
     </div>
-    <div class="right-group">
-        <span class="active" id="export-btn">导出数据</span>
-        <span>加入对比</span>
-        <!--导出数据弹框-->
-    </div>
+
     <ul class="export-container">
         <li class="export-csv"><a href="">CSV格式</a></li>
         <li class="export-excel"><a href="">Excel格式</a></li>
@@ -192,7 +195,10 @@
 
 {% block js %}
 <script src="/static/js/inputSearch.js"></script>
-<script src="/static/js/echarts.js"></script>
+<!--<script src="/static/js/echarts.min.js"></script>-->
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.js"></script>
+
+
 <script>
   // 基于准备好的dom，初始化echarts实例
   var yearChart0 = echarts.init(document.getElementById('year-chart-0'));
@@ -476,6 +482,7 @@
         // 渲染表头
         data.cols_title.unshift(data.name);
         var titles = data.cols_title;
+        console.log(titles);
         var titleStr = '';
         $.each(titles, function (index, item) {
           if (index === 0) {

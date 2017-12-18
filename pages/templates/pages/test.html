@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+  var q='中';
+  var str='中国彩钢';
+  var reg=new RegExp('/'+q+'/','g');
+  var temp=str.replace(reg,function (e) {
+    console.log(e);
+    return '<i style="color:#E86664">'+e+'<i>'
+  });
+  console.log(temp);
+</script>
+</body>
+</html>

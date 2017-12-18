@@ -79,7 +79,7 @@
     //渲染搜索结果
     function initSearch(data) {
       var q = $('.temp-inp').val();
-      var reg=new RegExp(q,'g');
+      var reg=new RegExp('(\\w+)|^'+q+'(\\w+)|$','g');
 
       if (data) {
         var str = '';
