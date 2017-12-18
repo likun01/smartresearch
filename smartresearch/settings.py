@@ -112,7 +112,12 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     BASE_DIR + '/static',
+    '/home/likun/env/lib/python2.7/site-packages/django/contrib/admin/static/',
 )
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "/home/likun/data/smartresearch/media/"
+
+STATIC_ROOT = '/home/likun/data/smartresearch/static/'
 
 # django_sult config
 SUIT_CONFIG = {
