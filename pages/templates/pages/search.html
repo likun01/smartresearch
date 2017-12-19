@@ -497,7 +497,6 @@
         </div>
         <!--左侧表格数据_end-->
 
-
         <!--右侧图表和新闻_start-->
         <div class="right-chart-news">
             <div class="right-title">
@@ -535,11 +534,11 @@
 
             </table>
 
-
             <div class="right-title">
                 <span>近期走势</span>
             </div>
-            <div class="tend-chart" id="tend-chart"></div>
+            <div class="tend-chart" id="tend-chart">
+            </div>
             <table class="tend-des">
                 <tr>
                     <td>近一周:</td>
@@ -559,7 +558,7 @@
             <div class="right-title">
                 <span>2017年EPS预测</span>
             </div>
-            <div style="position: relative;margin-top: -40px;margin-bottom: -30px;">
+            <div style="position: relative;margin-top: -20px;margin-bottom: -30px;">
                 <div class="forecast-chart" id="forecast-chart"></div>
                 <div class="xTitles"></div>
             </div>
@@ -870,6 +869,7 @@
     },
     xAxis: {
       type: 'time',
+      name: '时间',
       min: minTime,
       max: maxTime,
       axisTick: {
@@ -888,6 +888,7 @@
     },
     yAxis: {
       type: 'value',
+      name: '元',
       min: 4000,
       max: 8800,
       axisTick: {
@@ -958,12 +959,7 @@
         axisTick: {
           length: 0
         },
-      },
-      {
-        type: 'value',
-        yAxisIndex: 1,
       }
-
     ],
     series: [
       {

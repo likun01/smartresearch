@@ -79,28 +79,27 @@
 
     //渲染搜索结果
     function initSearch(data) {
-      var q = $('.temp-inp').val();
-      var reg=new RegExp('(\\w+)|^'+q+'(\\w+)|$','g');
-
       if (data) {
         var str = '';
         $.each(data, function (index, item) {
-          var tCode='';
-          var tName='';
-          tCode=item.code.toString();
-          tName=item.name;
+          var q = $('.temp-inp').val();
+          var reg = new RegExp(q, 'g');
+          var tCode=item.code.toString();
+          var tName=item.name;
           if(Number(q)){
-            tCode=item.code.replace(reg,function (e) {
-              return '<i style="color:#E86664">'+e+'<i>'
+            tCode=tCode.replace(reg,function (e) {
+              return '<i style="color:#E86664">'+e+'</i>'
             });
           }else{
-            tName=item.name.replace(reg,function (e) {
-              return '<i style="color:#E86664">'+e+'<i>'
+            tName=tName.replace(reg,function (e) {
+              return '<i style="color:#E86664">'+e+'</i>'
             });
             console.log(tName);
           }
+          console.log(tCode);
           str += '<tr>';
           str += '<td>' +tCode+'</td>';
+          console.log(str);
           str += '<td>' + tName+ '</td>';
           str += '<td >';
           str += '<a href="/forecast/' + item.code + '"><span class="report-btn">智能报告</span></a>';
