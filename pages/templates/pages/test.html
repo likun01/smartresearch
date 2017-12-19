@@ -7,14 +7,271 @@
 <body>
 <script>
 
-  var q='中';
-  var str='中国彩钢';
-  var reg=new RegExp('/'+q+'/','g');
-  var temp=str.replace(reg,function (e) {
+  var q = '中';
+  var str = '中国彩钢';
+  var reg = new RegExp('/' + q + '/', 'g');
+  var temp = str.replace(reg, function (e) {
     console.log(e);
-    return '<i style="color:#E86664">'+e+'<i>'
+    return '<i style="color:#E86664">' + e + '<i>'
   });
   console.log(temp);
+
+
+  var obj = {
+    "table_data": [
+      {
+      "rows_title": {
+        "流动比率": "s_fa_current",
+        "速动比率": "s_fa_quick",
+        "净利润率": "s_fa_netprofitmargin",
+        "营业利润率": "s_fa_optogr"
+      },
+      "rows_data": {
+        "营业利润率": [{"status": "normal", "value": 28.2}, {
+          "status": "normal",
+          "value": 21.9
+        }, {"status": "forecase", "value": 20.96666667}, {"status": "forecase", "value": 22.26666667}],
+        "净利润率": [{"status": "normal", "value": 41.2}, {"status": "normal", "value": 31.4}, {
+          "status": "forecase",
+          "value": 29.63333333
+        }, {"status": "forecase", "value": 30.63333333}],
+        "流动比率": [{"status": "normal", "value": 2.68}, {"status": "normal", "value": 1.12}, {
+          "status": "forecase",
+          "value": 1.33666667
+        }, {"status": "forecase", "value": 1.54}],
+        "速动比率": [{"status": "normal", "value": 2.57}, {"status": "normal", "value": 1.09}, {
+          "status": "forecase",
+          "value": 1.29666667
+        }, {"status": "forecase", "value": 1.49}]
+      },
+      "cols_title": ["2015A", "2016A", "2017E", "2018E"],
+      "name": "主要财务比率"
+    }, {
+      "rows_title": {
+        "营业利润": "oper_profit",
+        "营业成本": "less_oper_cost",
+        "营业税金及附加": "less_taxes_surcharges_ops",
+        "所得税": "inc_tax",
+        "营业外收支": "non_oper_rev_and_exp",
+        "管理费用": "less_gerl_admin_exp",
+        "EBITDA": "ebitda",
+        "财务费用": "less_fin_exp",
+        "归属母公司净利润": "net_profit_excl_min_int_inc",
+        "少数股东损益": "minority_int_inc",
+        "营业收入": "oper_rev",
+        "利润总额": "tot_profit",
+        "营业费用": "less_selling_dist_exp"
+      },
+      "rows_data": {
+        "营业收入": [{"status": "normal", "value": 5214.0}, {
+          "status": "normal",
+          "value": 8892.0
+        }, {"status": "forecase", "value": 13560.0}, {"status": "forecase", "value": 17216.66666667}],
+        "营业成本": [{"status": "normal", "value": 3066.0}, {"status": "normal", "value": 6101.0}, {
+          "status": "forecase",
+          "value": 9540.66666667
+        }, {"status": "forecase", "value": 11959.0}],
+        "营业税金及附加": [{"status": "normal", "value": 82.0}, {"status": "normal", "value": 51.0}, {
+          "status": "forecase",
+          "value": -75.33333333
+        }, {"status": "forecase", "value": -92.66666667}],
+        "营业费用": [{"status": "normal", "value": 127.0}, {"status": "normal", "value": 147.0}, {
+          "status": "forecase",
+          "value": -70.33333333
+        }, {"status": "forecase", "value": -78.0}],
+        "管理费用": [{"status": "normal", "value": 287.0}, {"status": "normal", "value": 409.0}, {
+          "status": "forecase",
+          "value": -178.66666667
+        }, {"status": "forecase", "value": -189.0}],
+        "财务费用": [{"status": "normal", "value": 47.0}, {"status": "normal", "value": 84.0}, {
+          "status": "forecase",
+          "value": -52.33333333
+        }, {"status": "forecase", "value": -60.0}],
+        "营业利润": [{"status": "normal", "value": 1470.0}, {"status": "normal", "value": 1949.0}, {
+          "status": "forecase",
+          "value": 2842.0
+        }, {"status": "forecase", "value": 3820.0}],
+        "利润总额": [{"status": "normal", "value": 1695.0}, {"status": "normal", "value": 2235.0}, {
+          "status": "forecase",
+          "value": 3129.0
+        }, {"status": "forecase", "value": 4087.66666667}],
+        "所得税": [{"status": "normal", "value": 238.0}, {"status": "normal", "value": 385.0}, {
+          "status": "forecase",
+          "value": -188.33333333
+        }, {"status": "forecase", "value": -245.33333333}],
+        "少数股东损益": [{"status": "normal", "value": 96.0}, {"status": "normal", "value": 4.0}, {
+          "status": "forecase",
+          "value": -1.66666667
+        }, {"status": "forecase", "value": -3.0}],
+        "归属母公司净利润": [{"status": "normal", "value": 1362.0}, {"status": "normal", "value": 1846.0}, {
+          "status": "forecase",
+          "value": 2561.33333333
+        }, {"status": "forecase", "value": 3343.66666667}],
+        "EBITDA": [{"status": "normal", "value": 1710.0}, {"status": "normal", "value": 2405.0}, {
+          "status": "forecase",
+          "value": 3479.66666667
+        }, {"status": "forecase", "value": 4465.33333333}],
+        "营业外收支": [{"status": "normal", "value": 225.0}, {"status": "normal", "value": 286.0}, {
+          "status": "forecase",
+          "value": 287.0
+        }, {"status": "forecase", "value": 268.0}]
+      },
+      "cols_title": ["2015A", "2016A", "2017E", "2018E"],
+      "name": "利润表"
+    }, {
+      "rows_title": {
+        "少数股东权益": "minority_int",
+        "负债及股东权益合计": "tot_liab_shrhldr_eqy",
+        "长期借款和应付债券": "lt_borrow_and_bonds",
+        "长期资产": "long_term_assets",
+        "非流动负债合计": "tot_non_cur_liab",
+        "其他流动资产": "oth_cur_assets",
+        "应付账款及票据": "payables",
+        "存货": "inventories",
+        "股东权益合计": "tot_shrhldr_eqy_excl_min_int",
+        "负债合计": "tot_liab",
+        "无形资产及其他长期资产": "intang_and_oth_long",
+        "流动资产合计": "tot_cur_assets",
+        "流动负债合计": "tot_cur_liab",
+        "应收账款及票据": "receivables",
+        "其他流动负债": "oth_cur_liab",
+        "预付款项": "prepay",
+        "货币资金": "monetary_cap",
+        "资产合计": "tot_assets",
+        "短期借款": "st_borrow"
+      },
+      "rows_data": {
+        "货币资金": [{"status": "normal", "value": 5300.0}, {
+          "status": "normal",
+          "value": 9056.0
+        }, {"status": "forecase", "value": 14086.66666667}, {"status": "forecase", "value": 19317.66666667}],
+        "应收账款及票据": [{"status": "unknow", "value": 0.0}, {"status": "unknow", "value": 0.0}, {
+          "status": "forecase",
+          "value": 4238.66666667
+        }, {"status": "forecase", "value": 5222.0}],
+        "预付款项": [{"status": "unknow", "value": 219.0}, {"status": "unknow", "value": 404.0}, {
+          "status": "forecase",
+          "value": 631.66666667
+        }, {"status": "forecase", "value": 792.0}],
+        "存货": [{"status": "unknow", "value": 346.0}, {"status": "unknow", "value": 431.0}, {
+          "status": "forecase",
+          "value": 673.33333333
+        }, {"status": "forecase", "value": 844.33333333}],
+        "其他流动资产": [{"status": "unknow", "value": 2896.0}, {"status": "unknow", "value": 5521.0}, {
+          "status": "forecase",
+          "value": 3822.0
+        }, {"status": "forecase", "value": 4827.66666667}],
+        "流动资产合计": [{"status": "unknow", "value": 8761.0}, {"status": "unknow", "value": 15412.0}, {
+          "status": "forecase",
+          "value": 23452.33333333
+        }, {"status": "forecase", "value": 31004.0}],
+        "无形资产及其他长期资产": [{"status": "unknow", "value": 6787.0}, {
+          "status": "unknow",
+          "value": 12537.0
+        }, {"status": "forecase", "value": 12390.0}, {"status": "forecase", "value": 12245.0}],
+        "长期资产": [{"status": "unknow", "value": 21.0}, {"status": "unknow", "value": 21.0}, {
+          "status": "forecase",
+          "value": 5546.0
+        }, {"status": "forecase", "value": 5650.33333333}],
+        "资产合计": [{"status": "unknow", "value": 18389.0}, {"status": "unknow", "value": 31806.0}, {
+          "status": "forecase",
+          "value": 40048.33333333
+        }, {"status": "forecase", "value": 47913.0}],
+        "短期借款": [{"status": "unknow", "value": 211.0}, {"status": "unknow", "value": 3392.0}, {
+          "status": "forecase",
+          "value": 3392.0
+        }, {"status": "forecase", "value": 3392.0}],
+        "应付账款及票据": [{"status": "unknow", "value": 411.0}, {"status": "unknow", "value": 2814.0}, {
+          "status": "forecase",
+          "value": 1001.66666667
+        }, {"status": "forecase", "value": 1061.33333333}],
+        "其他流动负债": [{"status": "unknow", "value": 2648.0}, {"status": "unknow", "value": 7533.0}, {
+          "status": "forecase",
+          "value": 13132.33333333
+        }, {"status": "forecase", "value": 15750.33333333}],
+        "流动负债合计": [{"status": "unknow", "value": 3270.0}, {"status": "unknow", "value": 13739.0}, {
+          "status": "forecase",
+          "value": 17526.66666667
+        }, {"status": "forecase", "value": 20203.66666667}],
+        "长期借款和应付债券": [{"status": "unknow", "value": 934.0}, {"status": "unknow", "value": 1467.0}, {
+          "status": "forecase",
+          "value": 2916.0
+        }, {"status": "forecase", "value": 4365.0}],
+        "非流动负债合计": [{"status": "unknow", "value": 989.0}, {"status": "unknow", "value": 1708.0}, {
+          "status": "forecase",
+          "value": 3157.0
+        }, {"status": "forecase", "value": 4606.0}],
+        "负债合计": [{"status": "unknow", "value": 4279.0}, {"status": "unknow", "value": 15472.0}, {
+          "status": "forecase",
+          "value": 20683.66666667
+        }, {"status": "forecase", "value": 24810.0}],
+        "少数股东权益": [{"status": "unknow", "value": 535.0}, {"status": "unknow", "value": 813.0}, {
+          "status": "forecase",
+          "value": 1458.0
+        }, {"status": "forecase", "value": 2107.0}],
+        "股东权益合计": [{"status": "unknow", "value": 13574.0}, {"status": "unknow", "value": 15521.0}, {
+          "status": "forecase",
+          "value": 17907.33333333
+        }, {"status": "forecase", "value": 20997.0}],
+        "负债及股东权益合计": [{"status": "unknow", "value": 18389.0}, {
+          "status": "unknow",
+          "value": 31806.0
+        }, {"status": "forecase", "value": 40048.33333333}, {"status": "forecase", "value": 47913.0}]
+      },
+      "cols_title": ["2015A", "2016A", "2017E", "2018E"],
+      "name": "资产负债表"
+    }, {
+      "rows_title": {
+        "投资活动现金流入": "stot_cash_inflows_inv_act",
+        "汇率变动对现金的影响": "eff_fx_flu_cash",
+        "投资活动现金流": "net_cash_flows_inv_act",
+        "现金净增加额": "net_incr_cash_cash_equ",
+        "折旧和摊销": "depr_and_amort",
+        "筹资活动现金流": "net_cash_flows_fnc_act",
+        "经营活动现金流": "net_cash_flows_oper_act",
+        "投资活动现金流出": "stot_cash_outflows_inv_act"
+      },
+      "rows_data": {
+        "折旧和摊销": [{"status": "normal", "value": 63.0}, {
+          "status": "normal",
+          "value": 90.0
+        }, {"status": "forecase", "value": 197.0}, {"status": "forecase", "value": 201.0}],
+        "经营活动现金流": [{"status": "normal", "value": 1359.0}, {"status": "normal", "value": 752.0}, {
+          "status": "forecase",
+          "value": 3599.66666667
+        }, {"status": "forecase", "value": 3989.66666667}],
+        "投资活动现金流入": [{"status": "unknow", "value": 0.0}, {"status": "unknow", "value": 0.0}, {
+          "status": "unknow",
+          "value": 0.0
+        }, {"status": "unknow", "value": 0.0}],
+        "投资活动现金流出": [{"status": "unknow", "value": 0.0}, {"status": "unknow", "value": 0.0}, {
+          "status": "unknow",
+          "value": -132.0
+        }, {"status": "unknow", "value": -186.66666667}],
+        "投资活动现金流": [{"status": "unknow", "value": 3756.0}, {"status": "unknow", "value": 4838.0}, {
+          "status": "unknow",
+          "value": -108.33333333
+        }, {"status": "unknow", "value": -136.0}],
+        "筹资活动现金流": [{"status": "unknow", "value": 5321.0}, {"status": "unknow", "value": 6335.0}, {
+          "status": "unknow",
+          "value": 1755.66666667
+        }, {"status": "unknow", "value": 1649.66666667}],
+        "汇率变动对现金的影响": [{"status": "unknow", "value": 0.0}, {"status": "unknow", "value": 13.0}, {
+          "status": "unknow",
+          "value": 0.0
+        }, {"status": "unknow", "value": 0.0}],
+        "现金净增加额": [{"status": "unknow", "value": 2924.0}, {"status": "unknow", "value": 2262.0}, {
+          "status": "unknow",
+          "value": 5030.66666667
+        }, {"status": "unknow", "value": 5231.33333333}]
+      },
+      "cols_title": ["2015A", "2016A", "2017E", "2018E"],
+      "name": "现金流量表"
+    }],
+    "stock_name": "碧水源",
+    "export_csv": "http://api-pro.xin-shui.com/research/forecast/year/export/?code=300070&format=csv",
+    "export_excel": "http://api-pro.xin-shui.com/research/forecast/year/export/?code=300070&format=excel"
+  }
 </script>
 </body>
 </html>

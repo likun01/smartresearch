@@ -721,7 +721,17 @@ button, input {
   margin-right: 5px;
 }
 
-
+.unknow-data{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  line-height: 5px;
+  text-align: center;
+  border-radius: 50%;
+  background: #000000;
+  color: #B5B6B5;
+  font-style: normal;
+}
 /*图表样式_end*/
 
 /*right_end*/

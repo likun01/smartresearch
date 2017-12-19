@@ -482,7 +482,7 @@
         // 渲染表头
         data.cols_title.unshift(data.name);
         var titles = data.cols_title;
-        console.log(titles);
+        console.log(data);
         var titleStr = '';
         $.each(titles, function (index, item) {
           if (index === 0) {
@@ -502,9 +502,10 @@
           str += '<td class="first-col">' + index + '</td>'; // 第一列
           $.each(item, function (ind, ite) {
             if (ind < titles.length - 6) { // 13组数据显示后5列
-              str += '<td style="display: none;">' + (ite.value ? ite.value : '--') + '</td>';
+              str += '<td style="display: none;">' + (ite.status==='unknow' ?'<i class="unknow-data">..</i>':(ite.status==='forecase'?'<i style="font-style: normal;color:#6364FC;">'+ite.value+'</i>':ite.value)) + '</td>';
             } else {
-              str += '<td>' + (ite.value ? ite.value : '--') + '</td>'
+              str += '<td>' + (ite.status==='unknow' ?'<i class="unknow-data">..</i>':(ite.status==='forecase'?'<i style="font-style: normal;color:#6364FC;">'+ite.value+'</i>':ite.value)) + '</td>';
+//              str += '<td>' + (ite.value ? ite.value : '--') + '</td>'
             }
           });
           str += '</tr>';
