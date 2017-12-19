@@ -1,598 +1,982 @@
-{% extends 'pages/base_common.html' %}
-{% block css %}
-<link rel="stylesheet" href="/static/css/detailMore.css">
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能图表PDF</title>
+    <link rel="stylesheet" href="/static/css/pageForPDF.css">
+</head>
+<body>
+<div class="container">
+    <h3 class="header-title">平安银行(000001)</h3>
+    <!--上半部分数据_start-->
+    <div class="top-container">
+        <!--左侧表格数据_start-->
+        <div class="table-left">
+            <!--财务信息表_start-->
+            <table class="finance-container">
+                <thead>
+                <td colspan="6">财务信息</td>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">关键指标</td>
+                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                        <table class="inner-table">
+                            <thead>
+                            <td></td>
+                            <td>16A</td>
+                            <td>17E</td>
+                            <td>18E</td>
+                            <td>19E</td>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>营业收入增长率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>净利润增长率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>毛利率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>总资产收益率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>净资产收益率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>每股净利润(元)</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>市盈率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>市净率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
 
-{% block title %}
-指标详细/更多
-{% endblock %}
+                            <tr>
+                                <td>EV/EBITDA</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>股息收利率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            </tbody>
 
-{% block container %}
+                        </table>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">资产负债</td>
+                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                        <table class="inner-table">
+                            <tbody>
+                            <tr>
+                                <td>流动资产</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>非流动资产</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>流动负债</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>非流动负债</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>所有者权益</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">现金流量表</td>
+                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                        <table class="inner-table">
+                            <tbody>
+                            <tr>
+                                <td>经营现金净额</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>投资现金净额</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>筹资现金净额</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">利润表</td>
+                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                        <table class="inner-table">
+                            <tbody>
+                            <tr>
+                                <td>营业收入</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>营业成本</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>营业利润</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>净利润</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">专用指标</td>
+                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                        <table class="inner-table">
+                            <tbody>
+                            <tr>
+                                <td>净息差</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>不良率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>不良生成率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>关注类贷款占比</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>非息收入占比</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>成本收入比</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            <tr>
+                                <td>核心一级资本充足率</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                                <td>234.33</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--财务信息表_end-->
 
 
-<!--右侧新闻_start-->
+            <!--行业对比表_start-->
+            <table class="comp-prepare">
+                <thead>
+                <td colspan="13">行业对比</td>
+                </thead>
+                <tbody>
+                <tr>
 
-<!--顶部标题/搜索_start-->
-<div class="header-title">
-    <div>
-        <span> {{ stock_name }}({{ stock_code }})&nbsp;</span>/&nbsp;<span>指标详细</span>/ 更多
-    </div>
-    <div class="header-search">
-        <span id="search-btn">找相关</span>
-        <input type="text" id="search-inp">
-    </div>
-</div>
-<ul class="search-container">
-    <li><span>aaa</span></li>
-    <li><span>aaa</span></li>
-    <li><span>aaa</span></li>
-    <li><span>aaa</span></li>
-</ul>
-<!--顶部标题/搜索_end-->
+                    <td rowspan="2">代码</td>
+                    <td rowspan="2">简称</td>
+                    <td rowspan="2">总市值</td>
+                    <td rowspan="2">市净率</td>
 
-<!--新闻_start-->
-<div class="query-container">
-    <!--标题tab_start-->
-    <div class="query-title">
-        <span class="active"><i class="iconfont icon-form"></i>研报</span>
-        <span><i class="iconfont icon-shengyin"></i>公告</span>
-        <span><i class="iconfont icon-friend"></i>社交</span>
-    </div>
-    <!--标题tab_end-->
+                    <td colspan="3">市盈率</td>
+                    <td colspan="3">ROE</td>
+                    <td colspan="3">净利润增速</td>
+                </tr>
+                <tr>
+                    <td>16E</td>
+                    <td>17E</td>
+                    <td>18E</td>
+                    <td>16E</td>
+                    <td>17E</td>
+                    <td>18E</td>
+                    <td>16E</td>
+                    <td>17E</td>
+                    <td>18E</td>
+                </tr>
+                <tr>
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr class="even-bg">
+                    <td colspan="2">行业平均</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+
+                <tr>
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr class="even-bg">
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr>
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr class="even-bg">
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr>
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr class="even-bg">
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr>
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr class="even-bg">
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr>
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                <tr class="even-bg">
+                    <td>000001</td>
+                    <td>平安银行</td>
+                    <td>3004</td>
+                    <td>12.2</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                    <td>502</td>
+                    <td>321</td>
+                    <td>321</td>
+                    <td>11.4</td>
+                    <td>12.9</td>
+                    <td>9.8</td>
+                </tr>
+                </tbody>
 
 
-    <!--研报_start-->
-    <div class="report-content container" id="report-content-0">
-        <div class="report-container pageDiv clearfix">
-            <div class="plain-news">
-                <div class="title-line">
-                    <span class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</span>
-                    <span class="span-btn">查看原文</span>
-                </div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont repairScale">
-                    京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。
-                </div>
+            </table>
+            <!--行业对比表_end-->
+        </div>
+        <!--左侧表格数据_end-->
+
+
+        <!--右侧图表和新闻_start-->
+        <div class="right-chart-news">
+            <div class="right-title">
+                <span>基本特征</span>
             </div>
-            <div class="plain-news">
-                <div class="title-line">
-                    <span class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</span>
-                    <span class="span-btn">查看原文</span>
-                </div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont repairScale">
-                    京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。
-                </div>
+            <table class="features-table">
+                <tbody>
+                <tr>
+                    <td>上市日</td>
+                    <td>1991-04-03</td>
+                    <td>行业</td>
+                    <td>银行</td>
+                </tr>
+                <tr>
+                    <td>总股本</td>
+                    <td>171.7亿</td>
+                    <td>总市值</td>
+                    <td>3000亿</td>
+                </tr>
+                <tr>
+                    <td>流通股</td>
+                    <td></td>
+                    <td>流通值</td>
+                    <td>169.2亿</td>
+                </tr>
+                <tr>
+                    <td>主题</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td>大股东</td>
+                    <td colspan="3"></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+
+            <div class="right-title">
+                <span>近期走势</span>
             </div>
-        </div>
-        <div class="notContent hide">
-            无数据
-        </div>
-        <div class="page-container">
-            <ul class="pageMenu clearfix">
-                <li class="firstPage">首页</li>
-                <li class="prevPage">&lt;</li>
-                <div class="pageObj clearfix"></div>
-                <li class="nextPage"> &gt;</li>
-                <li class="lastPage">尾页</li>
+            <div class="tend-chart" id="tend-chart"></div>
+            <table class="tend-des">
+                <tr>
+                    <td>近一周:</td>
+                    <td>1.12%</td>
+                    <td>近一月:</td>
+                    <td>2.12%</td>
+                </tr>
+                <tr>
+                    <td>近一季:</td>
+                    <td>-1.12%</td>
+                    <td>近一年:</td>
+                    <td>7.12%</td>
+                </tr>
+            </table>
+
+
+            <div class="right-title">
+                <span>2017年EPS预测</span>
+            </div>
+            <div style="position: relative;margin-top: -40px;margin-bottom: -30px;">
+                <div class="forecast-chart" id="forecast-chart"></div>
+                <div class="xTitles"></div>
+            </div>
+
+
+            <div class="right-title">
+                <span>智能预警</span>
+            </div>
+            <ul class="news-container">
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
             </ul>
-        </div>
-    </div>
-    <!--研报_end-->
 
 
-    <!--公告_start-->
-    <div class="notice-content container" id="notice-content-0">
-        <!--种类选择列表_start-->
-        <div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>
-        <ul id="notice-list" class="notice-list">
-            <li>
-                <input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">
-                <label for="checkbox-1"></label>
-                <span>全部</span>
-            </li>
-            <li>
-                <input type="checkbox" value="1" id="checkbox-2" style="display: none;">
-                <label for="checkbox-2"></label>
-                <span>财报</span>
-            </li>
-            <li>
-                <input type="checkbox" value="2" id="checkbox-3" style="display: none;">
-                <label for="checkbox-3"></label>
-                <span>重大事项</span>
-            </li>
-            <li>
-                <input type="checkbox" value="3" id="checkbox-4" style="display: none;">
-                <label for="checkbox-4"></label>
-                <span>其他</span>
-            </li>
-            <li>
-                <button id="kind-btn">提交</button>
-            </li>
-        </ul>
-        <!--种类选择列表_end-->
-
-        <!--公告内容_start-->
-        <ul class="news-container pageDiv clearfix" id="notice-container">
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">
-                    京东方A：关于SES-imagotag股份收购项目合作方股权安排公告.京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。
-                </div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告应用整合服务的转型发转策略战略。</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-        </ul>
-        <!--公告内容_end-->
-        <div class="notContent hide">
-            无数据
-        </div>
-        <div class="page-container">
-            <ul class="pageMenu clearfix">
-                <li class="firstPage">首页</li>
-                <li class="prevPage"> <</li>
-                <div class="pageObj clearfix">
-
-                </div>
-                <li class="nextPage"> ></li>
-                <li class="lastPage">尾页</li>
+            <div class="right-title">
+                <span>研究报告</span>
+            </div>
+            <ul class="news-container">
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="square"></span>
+                    <div class="right-cont">
+                        <p>
+                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
+                            <span style="float: right">2017-12-18</span>
+                        </p>
+                    </div>
+                </li>
             </ul>
+            <!--右侧图表和新闻_end-->
         </div>
+        <!--上半部分数据_end-->
+
     </div>
-    <!--公告_end-->
+    <!--下半部分脑图_start-->
+    <div class="brain-container">
+        <div class="brain-title">杜邦分析</div>
+        <div class="brain-pic">
+            <span class="ps-span">单位:元</span>
+            <span class="row-1">9.60%</span>
+            <span class="row-2-1">0.63%</span>
+            <span class="row-2-2">100%</span>
+            <span class="row-2-3">14.38</span>
 
+            <span class="row-3-1">23.99%</span>
+            <span class="row-3-2">2.62%</span>
+            <span class="row-3-3">93.05%</span>
 
-    <!--社交_start-->
-    <div class="social-content container" id="social-content-0">
-        <ul class="news-container pageDiv clearfix" id="social-container">
-            <li>
-                <div class="news-title">东方财富2017年10月30日:京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">
-                    京东方A：关于SES-imagotag股份收购项目合作方股权安排公告.京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。
-                </div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-            <li>
-                <div class="news-title">京东方A：关于SES-imagotag股份收购项目合作方股权安排公告</div>
-                <div class="news-info">东方财富2017年10月30日17:01</div>
-                <div class="news-cont">京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。京东方科技股份有限公司，根据软硬融合，应用整合服务的转型发转策略战略。</div>
-            </li>
-        </ul>
-        <div class="notContent hide">
-            无数据
+            <span class="row-4-1">192亿</span>
+            <span class="row-4-2">798亿</span>
+            <span class="row-4-3">798亿</span>
+            <span class="row-4-4">3.14亿</span>
+            <span class="row-4-5">2.92亿</span>
+            <span class="row-4-6">3.14亿</span>
+
+            <span class="row-5-1">805亿</span>
+            <span class="row-5-2">607亿</span>
+            <span class="row-5-3">--</span>
+            <span class="row-5-4">--</span>
+
+            <span class="row-6-1">798亿</span>
+            <span class="row-6-2">--</span>
+            <span class="row-6-3">--</span>
+            <span class="row-6-4">4468亿</span>
+            <span class="row-6-5">351亿</span>
+            <span class="row-6-6">45.8亿</span>
+
+            <span class="row-7-1">3400亿</span>
+            <span class="row-7-2">--</span>
+            <span class="row-7-3">--</span>
+            <span class="row-7-4">4468亿</span>
+            <span class="row-7-5">351亿</span>
+            <span class="row-7-6">45.8亿</span>
+
+            <span class="row-8-1">2800亿</span>
+            <span class="row-8-2">57.9亿</span>
+            <span class="row-8-3">--</span>
+            <span class="row-8-4">3857亿</span>
+            <span class="row-8-5">--</span>
+            <span class="row-8-6">75.7亿</span>
+
+            <span class="row-9-1">6.44亿</span>
+            <span class="row-9-2">328亿</span>
+            <span class="row-9-3">--</span>
+            <span class="row-9-4">--</span>
+            <span class="row-9-5">212亿</span>
+            <span class="row-9-6">--</span>
+
+            <span class="row-10-1">8900亿</span>
+            <span class="row-10-2">--</span>
+            <span class="row-10-3">78.8亿</span>
+            <span class="row-10-4">223亿</span>
+
+            <span class="row-11-1">--</span>
+            <span class="row-11-2">--</span>
+            <span class="row-11-3">--</span>
+
+            <span class="row-12-1">--</span>
         </div>
-        <div class="page-container">
-            <ul class="pageMenu clearfix">
-                <li class="firstPage">首页</li>
-                <li class="prevPage"> <</li>
-                <div class="pageObj clearfix">
+        <p style="padding: 10px 0">注:以上数据优先摘录上市公司定期报告中公布的数据，若报告其中没公布此项数据，则通过计算机得出此项数据。</p>
+        <h2 style="margin-top: 10px;font-size: 20px;font-weight: 400;">智能分析....</h2>
 
-                </div>
-                <li class="nextPage"> ></li>
-                <li class="lastPage">尾页</li>
-            </ul>
-        </div>
     </div>
-    <!--社交_end-->
-
+    <!--下半部分脑图_end-->
 
 </div>
-<!--新闻_end-->
-{% endblock %}
 
-{% block js %}
-<script src="/static/js/inputSearch.js"></script>
-<script src="/static/js/page.js"></script>
+<script src="/static/js/echarts.min.js"></script>
 <script>
-  $(function () {
-//    var token=util.getCookie('token');
-    var token = '253cd379536d93dae335deed00423889';
-    var fix_url = 'http://api-pro.xin-shui.com';
-    var count = 0; // 用于标记重新生成新闻容器
-    var countNotice=0;
-    var kind='';
 
-    // 搜索框
-    function bindData(data) {
-      var str = '';
-      $.each(data, function () {
-        str += '<li><span>' + this.code + '</span><span>' + this.name + '</span></li>';
-      });
-      $('.search-container').html(str).show();
-    }
-    var opts = {
-      url: fix_url + '/api/research/search',
-      bindData: bindData,
-      token: token,
-      searchRes: function () {
-
+  function xAxisArr() {
+    var current = new Date();
+    var currentMonth = current.getMonth();
+    var nextMonth = ++currentMonth;
+    var nextMonthDayOne = new Date(current.getFullYear(), nextMonth, 1);
+    var minusDate = 1000 * 60 * 60 * 24;
+    var lastDate = new Date(nextMonthDayOne.getTime() - minusDate);
+    var month = lastDate.getMonth() + 1; // 本月月数
+    var arr = [];
+    var lastYear = lastDate.getFullYear() - 1;
+    for (var i = 0; i < 13; i++) {
+      var cur = month - i;
+      if (cur <= 0) {
+        cur += 12;
+        if (cur == 12) {
+          cur = lastYear + '年' + cur;
+        }
       }
+      i % 2 === 0 ? arr.push(cur) : null;
+    }
+
+    var preMonthDayOne = null;
+    var stampArr = [];
+    for (var j = 0; j < 12; j++) {
+      preMonthDayOne = new Date(current.getFullYear(), nextMonth, 1);
+      stampArr.push(preMonthDayOne.getTime() - 1);
+      --nextMonth;
+    }
+    // lastDate:new Date(nextMonthDayOne.getTime() - 1),// 2017-12-31 23:59:59
+    // lastStamp:nextMonthDayOne.getTime() - 1, // 2017-12-31 23:59:59
+    return {
+      monthArr: arr,
+      stampArr: stampArr
     };
-    new InputSearch('#search-inp', '.search-container', '.search-container li', opts);
+  }
 
-    // tab 内容切换
-    $('.query-title span').click(function () {
-      $(this).addClass('active').siblings().removeClass('active');
-      $('.query-container .container').eq($(this).index()).css('display', 'block').siblings('.query-container .container').css('display', 'none');
-    });
+  var xArr = xAxisArr().monthArr;
+  var stampArr = xAxisArr().stampArr
+  var minTime = stampArr[0];
+  var maxTime = stampArr[stampArr.length - 1]
+  xStr = '';
+  for (var i = xArr.length - 1; i >= 0; i--) {
+    xStr += '<span>' + xArr[i] + '</span>';
+  }
 
-    // 新闻渲染到页面上，初始化时调用，搜索框变化时调用
-    function initNews() {
-      count++;
-      console.log('count',count);
-      console.log('countNotice',countNotice);
-
-      if (count === 1) {
-        // 研报数据
-        $("#report-content-"+(count-1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val(), /*接口*/
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<div class="plain-news">';
-            dataHtml += '<div class="title-line">';
-            dataHtml += '<span class="news-title">' + item.title + '</span>';
-            dataHtml += '<span class="span-btn">查看原文</span>';
-            dataHtml += '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</div>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-
-        // 公告数据
-        $("#notice-content-"+(count-1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val()+'&kind='+kind,
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<li>';
-            dataHtml += '<div class="news-title">' + item.title + '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</li>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-
-        // 社交数据
-        $("#social-content-"+(count-1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val(),
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<li>';
-            dataHtml += '<div class="news-title">' + item.title + '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</li>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-
-        noticeFilter();
-      } else {
-        var reportStr = '';
-        reportStr += '<div class="report-content container" id="report-content-' + (count-1) + '">';
-        reportStr += '<div class="report-container pageDiv clearfix">';
-        reportStr += '</div>';
-        reportStr += '<div class="notContent hide">无数据 </div>';
-        reportStr += '<div class="page-container">';
-        reportStr += '<ul class="pageMenu clearfix">';
-        reportStr += '<li class="firstPage">首页</li>';
-        reportStr += '<li class="prevPage">&lt;</li>';
-        reportStr += '<div class="pageObj clearfix"></div>';
-        reportStr += '<li class="nextPage"> &gt;</li>';
-        reportStr += '<li class="lastPage">尾页</li>';
-        reportStr += '</ul>';
-        reportStr += '</div>';
-        reportStr += '</div>';
-        $('.report-content').before(reportStr);
-        $('#report-content-'+(count-2)).remove();
-
-        var noticeStr='';
-        noticeStr+='<div class="notice-content container" id="notice-content-' + (count-1) + '">';
-        noticeStr+='<div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>';
-        noticeStr+='<ul id="notice-list" class="notice-list">';
-        noticeStr+='<li>';
-        noticeStr+='<input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">';
-        noticeStr+='<label for="checkbox-1"></label>';
-        noticeStr+='<span>全部</span>';
-        noticeStr+='</li>';
-        noticeStr+='<li>';
-        noticeStr+='<input type="checkbox" value="1" id="checkbox-2" style="display: none;">';
-        noticeStr+='<label for="checkbox-2"></label>';
-        noticeStr+='<span>财报</span>';
-        noticeStr+='</li>';
-        noticeStr+='<li>';
-        noticeStr+='<input type="checkbox" value="2" id="checkbox-3" style="display: none;">';
-        noticeStr+='<label for="checkbox-3"></label>';
-        noticeStr+='<span>重大事项</span>';
-        noticeStr+='</li>';
-        noticeStr+='<li>';
-        noticeStr+='<input type="checkbox" value="3" id="checkbox-4" style="display: none;">';
-        noticeStr+='<label for="checkbox-4"></label>';
-        noticeStr+='<span>其他</span>';
-        noticeStr+='</li>';
-        noticeStr+='<li>';
-        noticeStr+='<button id="kind-btn">提交</button>';
-        noticeStr+='</li>';
-        noticeStr+='</ul>';
-        noticeStr+='<ul class="news-container pageDiv clearfix" id="notice-container">';
-        noticeStr+='</ul>';
-        noticeStr+='<div class="notContent hide"> 无数据 </div>';
-        noticeStr+='<div class="page-container">';
-        noticeStr+='<ul class="pageMenu clearfix">';
-        noticeStr+='<li class="firstPage">首页</li>';
-        noticeStr+='<li class="prevPage"> <</li>';
-        noticeStr+='<div class="pageObj clearfix">';
-        noticeStr+='</div>';
-        noticeStr+='<li class="nextPage"> ></li>';
-        noticeStr+='<li class="lastPage">尾页</li>';
-        noticeStr+='</ul>';
-        noticeStr+='</div>';
-        noticeStr+='</div>';
-        $('.notice-content').before(noticeStr);
-        $('#notice-content-'+(count-2)).remove();
-        $('#notice-content-0'+(countNotice-1)).remove();
+  document.querySelector('.xTitles').innerHTML = xStr;
 
 
-        var socialStr='';
-        socialStr+='<div class="social-content container" id="social-content-' + (count-1) + '">';
-        socialStr+='<ul class="news-container pageDiv clearfix" id="social-container">';
-        socialStr+='</ul>';
-        socialStr+='<div class="notContent hide">数据</div>';
-        socialStr+='<div class="page-container">';
-        socialStr+='<ul class="pageMenu clearfix">';
-        socialStr+='<li class="firstPage">首页</li>';
-        socialStr+='<li class="prevPage"> <</li>';
-        socialStr+='<div class="pageObj clearfix">';
-        socialStr+='</div>';
-        socialStr+='<li class="nextPage"> ></li>';
-        socialStr+='<li class="lastPage">尾页</li>';
-        socialStr+='</ul>';
-        socialStr+='</div>';
-        socialStr+='</div>';
-        $('.social-content').before(socialStr);
-        $('#social-content-'+(count-2)).remove();
-
-        // 研报数据
-        $("#report-content-" + (count-1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val(), /*接口*/
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<div class="plain-news">';
-            dataHtml += '<div class="title-line">';
-            dataHtml += '<span class="news-title">' + item.title + '</span>';
-            dataHtml += '<span class="span-btn">查看原文</span>';
-            dataHtml += '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</div>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-
-        // 公告数据
-        $("#notice-content" + (count-1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val()+'&kind='+kind,
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<li>';
-            dataHtml += '<div class="news-title">' + item.title + '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</li>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-
-        // 社交数据
-        $("#social-content" + (count-1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val(),
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<li>';
-            dataHtml += '<div class="news-title">' + item.title + '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</li>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-
-        noticeFilter();
+  var data1 = [
+    [1485878399999, 4382],
+    [1488297599999, 4582],
+    [1512057599999, 7679],
+    [1512957599999, 7712],
+    [1498838399999, 5262],
+    [1493567999999, 5462],
+    [1496246399999, 5514],
+    [1504195199999, 5514],
+    [1506787199999, 5212],
+    [1509465599999, 6513]
+  ];
+  var data6 = [
+    [1485878399999, 4172],
+    [1488297599999, 4772],
+    [1493567999999, 4982],
+    [1496246399999, 5414],
+    [1498838399999, 5762],
+    [1504195199999, 5314],
+    [1506787199999, 5212],
+    [1509465599999, 6593],
+    [1512057599999, 7679],
+    [1512957599999, 7792]
+  ];
 
 
-      }
+  var interval = (1514735999999 - 1485878399999) / 6;
+
+  var seriesObj = [
+    {name: '东北证券  郑华', type: 'scatter', data: data1, itemStyle: {normal: {color: '#D9565A'}}},
+    {
+      name: ' 平均',
+      type: 'line',
+      data: data6,
+      itemStyle: {
+        normal: {
+          color: '#151615',
+          lineStyle: {width: 1}
+        }
+      },
+      symbol: 'none',
+      smooth: true
     }
+  ];
+  console.log(document.getElementById('forecast-chart'));
+  var myChart = echarts.init(document.getElementById('forecast-chart'));
 
-    initNews();
 
-    // 搜索数据 重新渲染页面
-    $('#search-btn').click(function () {
-      var q = $('#search-inp').val();
-      if (q) {
-        $('.search-container').hide();
-        console.log($('.query-title span').eq(0)[0]);
-        console.log($('.query-container .container').eq(0)[0]);
-        $('.query-title span').eq(0).addClass('active').siblings().removeClass('active');
-        $('.query-container .container').eq(0).css('display', 'block').siblings('.query-container .container').css('display', 'none');
-        initNews();
+  option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross'
+      },
+      textStyle: {
+        color: '#EEEFEE',
+        decoration: 'none',
+        fontSize: 12,
+      },
+      formatter: function (datas) {
+        console.log(datas);
+        console.log(datas[0].componentSubType);
+        var res = datas[0].seriesName + '</br>';
+        for (var i = 0, length = datas.length; i < length; i++) {
+          if (datas[i].componentSubType === 'scatter')
+            res += '所得税:' + datas[i].data[1] + '</br>';
+          else
+            res += '平均值:' + datas[i].value[1] + '</br>';
+        }
+        return res;
       }
-
-    });
-
-    // 公告中  下拉选择事件绑定
-    function noticeFilter(){
-      // 显示公告 选择列表
-      $('#notice-kind').click(function () {
-        $('#notice-list').toggle();
-      });
-      // 全选全部选
-      $('.select-all').click(function () {
-        console.log('全选');
-        if ($('.select-all')[0].checked) {
-          $('input[type="checkbox"]').each(function (index, item) {
-            item.checked = true
-          });
+    },
+    xAxis: {
+      type: 'time',
+      min: minTime,
+      max: maxTime,
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        show: false
+      },
+      interval: interval,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          type: 'dotted'
         }
-        else {
-          $('input[type="checkbox"]').each(function (index, item) {
-            item.checked = false;
-          });
+      },
+    },
+    yAxis: {
+      type: 'value',
+      min: 4000,
+      max: 8800,
+      axisTick: {
+        show: false
+      },
+      interval: 800,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          type: 'dotted'
         }
-      });
-      // 检测其他的checkbox，有其他未选中，取消全选
-      $('input[type="checkbox"]').click(function(){
-        if(!this.checked){
-          $('.select-all')[0].checked=false;
-        }
-      });
-      // 提交数据
-      $('#kind-btn').click(function () {
-        countNotice++;
-        var resList = [];
-        $('input[type="checkbox"]').each(function (index, item) {
-          item.checked ? resList.push(Number(item.value)) : null;
-        });
-        $('.notice-list').hide();
-        // 提交信息后清空选项
-        $('input[type="checkbox"]').each(function (index, item) {
-          item.checked = false;
-        });
-        // 公告中如果选择公告类别重新渲染公告页面
-        var noticeStr2 = '';
-        noticeStr2 += '<div class="notice-content container" style="display:block" id="notice-content-0' + (countNotice - 1) + '">';
-        noticeStr2 += '<div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>';
-        noticeStr2 += '<ul id="notice-list" class="notice-list">';
-        noticeStr2 += '<li>';
-        noticeStr2 += '<input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">';
-        noticeStr2 += '<label for="checkbox-1"></label>';
-        noticeStr2 += '<span>全部</span>';
-        noticeStr2 += '</li>';
-        noticeStr2 += '<li>';
-        noticeStr2 += '<input type="checkbox" value="1" id="checkbox-2" style="display: none;">';
-        noticeStr2 += '<label for="checkbox-2"></label>';
-        noticeStr2 += '<span>财报</span>';
-        noticeStr2 += '</li>';
-        noticeStr2 += '<li>';
-        noticeStr2 += '<input type="checkbox" value="2" id="checkbox-3" style="display: none;">';
-        noticeStr2 += '<label for="checkbox-3"></label>';
-        noticeStr2 += '<span>重大事项</span>';
-        noticeStr2 += '</li>';
-        noticeStr2 += '<li>';
-        noticeStr2 += '<input type="checkbox" value="3" id="checkbox-4" style="display: none;">';
-        noticeStr2 += '<label for="checkbox-4"></label>';
-        noticeStr2 += '<span>其他</span>';
-        noticeStr2 += '</li>';
-        noticeStr2 += '<li>';
-        noticeStr2 += '<button id="kind-btn">提交</button>';
-        noticeStr2 += '</li>';
-        noticeStr2 += '</ul>';
-        noticeStr2 += '<ul class="news-container pageDiv clearfix" id="notice-container">';
-        noticeStr2 += '</ul>';
-        noticeStr2 += '<div class="notContent hide"> 无数据 </div>';
-        noticeStr2 += '<div class="page-container">';
-        noticeStr2 += '<ul class="pageMenu clearfix">';
-        noticeStr2 += '<li class="firstPage">首页</li>';
-        noticeStr2 += '<li class="prevPage"> <</li>';
-        noticeStr2 += '<div class="pageObj clearfix">';
-        noticeStr2 += '</div>';
-        noticeStr2 += '<li class="nextPage"> ></li>';
-        noticeStr2 += '<li class="lastPage">尾页</li>';
-        noticeStr2 += '</ul>';
-        noticeStr2 += '</div>';
-        noticeStr2 += '</div>';
-        $('.notice-content').before(noticeStr2);
-        $('#notice-content-' + (count - 1)).remove();
-        $('#notice-content-0' + (countNotice - 2)).remove();
-        // 公告数据
-        $("#notice-content-0" + (countNotice - 1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val() + '&kind=' + kind,
-          pageSize: 6, /*pageSize*/
-          maxPage: 5, /*每次加载页数*/
-          dataFun: function (item) { // 数据渲染
-            var dataHtml = '';
-            dataHtml += '<li>';
-            dataHtml += '<div class="news-title">' + item.title + '</div>';
-            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
-            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
-            dataHtml += '</li>';
-            return dataHtml;
-          },
-          pageFun: function (i) { // 页码渲染
-            var pageHtml = '<li class="pageNum">' + i + '</li>';
-            return pageHtml;
-          }
-        });
-        noticeFilter();
-      });
-    }
+      },
+      axisLabel: {
+        margin: 8,
+      },
+    },
+    series: seriesObj
+  };
+  myChart.setOption(option);
 
-  })
 </script>
-{% endblock %}
+<script>
+  var time = ['2016-12-19', '03-19', '06-19', '09-19', '12-19'];
+  var data = [1865, 1869, 1870, 1865, 1877];
+  var min = Math.min.apply(null, data) - 50;
+  var myChart = echarts.init(document.getElementById('tend-chart'));
+  option = {
+    title: {
+      text: ''
+    },
+    xAxis: [
+      {
+        name: '时间',
+        nameLocation: 'end',
+        type: 'category',
+        boundaryGap: false,
+        data: time,
+        splitLine: {
+          show: true
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            fontSize: '10'
+          },
+          showMaxLabel: 1
+        },
+        axisTick: {
+          length: 0
+        }
+      }
+    ],
+    yAxis: [
+      {
+        name: '价格',
+        min: min,
+        type: 'value',
+        splitLine: {
+          show: true
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            fontSize: '10'
+          },
+          margin: 5
+        },
+        axisTick: {
+          length: 0
+        },
+      },
+      {
+        type: 'value',
+        yAxisIndex: 1,
+      }
+
+    ],
+    series: [
+      {
+        name: '年度数据',
+        type: 'line',
+        data: data
+      }
+    ]
+  };
+
+  myChart.setOption(option);
+
+</script>
+
+</body>
+</html>
