@@ -53,7 +53,7 @@
         <div class="column1"><span></span>毛利率预测</div>
     </div>
     <!--按年度的图表container-->
-    <div class="chart-cont">
+    <div class="chart-cont" id="year-chart">
         <div id="year-chart-0" class="chart_year" style="width: 100%;height:360px;"></div>
         <div id="year-chart-1" class="chart_year" style="width: 100%;height:360px;"></div>
         <div id="year-chart-2" class="chart_year" style="width: 100%;height:360px;"></div>
@@ -63,7 +63,7 @@
         <div id="year-chart-6" class="chart_year" style="width: 100%;height:360px;"></div>
     </div>
     <!--按报告期的图表container-->
-    <div class="chart-cont" style="display: none;">
+    <div class="chart-cont" style="display: none;" id="report-chart">
         <div id="report-chart-0" class="chart_report" style="width: 100%;height:360px;">a</div>
         <div id="report-chart-1" class="chart_report" style="width: 100%;height:360px;">b</div>
         <div id="report-chart-2" class="chart_report" style="width: 100%;height:360px;">c</div>
@@ -97,6 +97,7 @@
 
 <!--数据_start-->
 <div class="data-cont">
+    <!--历史排名弹框_start-->
     <div class="rank-container ">
         <span class="history-close">&times;</span>
         <table class="data-his-cont">
@@ -127,6 +128,44 @@
         <div class="chart-main" id="main" style="width: 200px;height:200px;"></div>
 
     </div>
+    <!--历史排名弹框_end-->
+
+
+    <!--预测弹框_start-->
+    <div class="mask-data-container" style="display: none;">
+        <!--文字内容_start-->
+        <div class="title-cont-chart" style="display: block">
+            <div>分析师(公司名称)</div>
+            <div>
+                时间
+                <span class="rank"><i id="time-up" class="rank-up"></i><i id="time-down" class="down-plain"></i></span>
+            </div>
+            <div>
+                数值(百万)
+                <span class="rank"><i id="val-up" class="rank-up"></i><i id="val-down" class="down-plain"></i></span>
+            </div>
+            <div id="toChart"><a href="javascript:;">图表</a></div>
+        </div>
+        <ul class="data-cont-chart" id="data-cont-chart-0" style="display: block">
+        </ul>
+        <div class="page-container" id="page-container-0" style="display: block">
+        </div>
+        <!--文字内容_end-->
+
+        <!--图表_start-->
+        <div class="chart-container" style="display: none">
+            <span class="close-data-mask">&times;</span>
+            <div class="to-word">
+                <a href="javascript:;">文字版</a>
+            </div>
+            <h4 class="chart-title">资产负债率</h4>
+            <div class="point-chart" id="point-cont" style="width: 400px;height:400px;"></div>
+        </div>
+        <!--图表_end-->
+    </div>
+    <!--预测弹框_start-->
+
+
     <!--左右切换年份_start-->
     <span class="pre-time" id="year-pre-time" style="display: block">&lt;</span>
     <span class="next-time" id="year-next-time" style="display: block">&gt;</span>
@@ -138,11 +177,13 @@
     <span class="next-time" id="report-next-time" style="display: none">&gt;</span>
     <!--左右切换报告期_end-->
 
+
     <!--切换箭头的遮罩层 数据请求回来后隐藏-->
     <div class="mask_arrow"></div>
 
 
-    <div class="data-table" style="display: block">
+    <!--表格数据_start-->
+    <div class="data-table" style="display: block" id="year-data">
         <table class="table-container" id="year-data-0">
             <thead>
             <!--<td class="first-col">资产表(百万元)</td>-->
@@ -191,7 +232,7 @@
         </table>
 
     </div>
-    <div class="data-table" style="display: none">
+    <div class="data-table" style="display: none" id="report-data">
         <table class="table-container" id="report-data-0">
             <thead>
             </thead>
@@ -217,6 +258,7 @@
             </tbody>
         </table>
     </div>
+    <!--表格数据_end-->
 </div>
 <!--数据_end-->
 
@@ -226,18 +268,51 @@
 {% block js %}
 <script src="/static/js/inputSearch.js"></script>
 <script src="/static/js/echarts.min.js"></script>
+<script src="/static/js/Pagination.js"></script>
 <!--<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.js"></script>-->
 
-
+<!--生成上半部分-->
 <script>
+  // 生成上半部分图片tab和容器
+  //  $.ajax({
+  //    type:'GET',
+  //    url:'xxxxxxxxx',
+  //    success:function (res) {
+  //      console.log(res);
+  //    },
+  //    error:function(e){
+  //      console.log(e);
+  //    }
+  //  });
+
+  function initTopCon(data) { //{year:['毛利润','营业增速'],report:[]}
+    if (data.year && data.year.length) {
+      var yearStr = '';
+      var yearCont = '';
+      $.each(data.year, function (index, item) {
+        index === 0 ? yearStr += '<span class="active">' + item + '</span>' : yearStr += '<span>' + item + '</span>';
+        yearCont += '<div id="year-chart-' + index + '" class="chart_year" style="width: 100%;height:360px;"></div>';
+      });
+      $('#year-chart-tab').html(yearStr);
+      $('#year-chart').html(yearCont);
+    }
+
+    if (data.report && data.report.length) {
+      var reportStr = '';
+      var reportCont = '';
+      $.each(data.report, function (index, item) {
+        index === 0 ? reportStr += '<span class="active">' + item + '</span>' : reportStr += '<span>' + item + '</span>';
+        reportCont += '<div id="year-chart-' + index + '" class="chart_year" style="width: 100%;height:360px;"></div>';
+      });
+      $('#year-chart-tab').html(reportStr);
+      $('#report-chart').html(reportCont);
+    }
+  }
+
+  // 填充图表数据
+
   // 基于准备好的dom，初始化echarts实例
   var yearChart0 = echarts.init(document.getElementById('year-chart-0'));
-  var yearChart1 = echarts.init(document.getElementById('year-chart-1'));
-  var yearChart2 = echarts.init(document.getElementById('year-chart-2'));
-  var yearChart3 = echarts.init(document.getElementById('year-chart-3'));
-  var yearChart4 = echarts.init(document.getElementById('year-chart-4'));
-  var yearChart5 = echarts.init(document.getElementById('year-chart-5'));
-  var yearChart6 = echarts.init(document.getElementById('year-chart-6'));
   var ratios = [-8, 21, 23, 23, 24, 24.5, 23.4, 24, 25, 8];
   var ranks = [0.90, 0.55, 0.45, 0.45, 0.45, 0.45, 0.33, 0.20, 0.10, 0.2];
 
@@ -252,12 +327,22 @@
     ranks.forEach(function () {
 
     });
-
     //配置及数据
     optionWeek = {
       tooltip: {
         trigger: 'axis',
-        show: true
+        show: true,
+        formatter: function (datas) {
+          var res = '';
+          if (datas[0].dataIndex < 8) {
+            res += datas[0].seriesName + datas[0].value + '%' + '</br>';
+          } else {
+            res += '毛利润预测' + datas[0].value + '%' + '</br>';
+          }
+
+          res += datas[1].seriesName + (datas[1].value * 100).toFixed(0) + '%' + '</br>';
+          return res;
+        }
       },
       xAxis: [
         {
@@ -332,13 +417,6 @@
             show: false
           }
         }
-//        {
-//          type: 'category',
-//          data:['100%','90%','80%','70%','60%','前50%','40%','30%','20%','前10%'],
-//          axisTick: {
-//            show: false
-//          }
-//        }
       ],
       series: [
         {
@@ -379,16 +457,9 @@
   }
 
   mychart(yearChart0, ratios, ranks);
-  //  mychart(yearChart1, ratios1, ranks1);
-  //  mychart(yearChart2, ratios, ranks);
-  //  mychart(yearChart3, ratios, ranks);
-  //  mychart(yearChart4, ratios1, ranks1);
-  //  mychart(yearChart5, ratios, ranks);
-  //  mychart(yearChart6, ratios1, ranks1);
 
 
 </script>
-
 <script>
   $(function () {
     var fix_url = 'http://api-pro.xin-shui.com';
@@ -409,8 +480,11 @@
       // 更改导出链接
       $('.export-csv a').prop('href', exportLink[$(this).index()].csv);
       $('.export-excel a').prop('href', exportLink[$(this).index()].excel);
+      // 隐藏弹框
+      $('.rank-container').hide();
       $()
     });
+
 
     // 导出数据
     $('#export-btn').click(function () {
@@ -424,6 +498,7 @@
         })
       }
     });
+
 
     // 搜索框
     function bindData(data) {
@@ -444,13 +519,15 @@
     };
     new InputSearch('#search-inp', '.search-container', '.search-container li', opts);
 
+
+    // 按年度  按季度 表格显示开始和数据总长度
     var start_year = 3;
     var len_year = 7;
     var start_report = 4;
     var len_report = 8;
-
     // 保存导出链接
     var exportLink = [{csv: '', excel: ''}, {csv: '', excel: ''}]; // 0按年度  1按报告期
+
 
     // 按年度数据
     $.ajax({
@@ -460,7 +537,6 @@
         code: '{{ stock_code }}',
         token: token
       },
-
       success: function (res) {
         // 替换标题
         var nameSpan = $('#stock-title');
@@ -478,10 +554,8 @@
           $('.mask_arrow').hide();
           initTable('#year-data-', item, index);
         });
-
         // 初始化表格后给每一个td绑定事件
         clickTdInit();
-
       },
       error: function (e) {
 //        window.location.href = '/login';
@@ -508,7 +582,7 @@
         exportLink[1].excel = res.export_excel;
         $.each(res.table_data, function (index, item) {
           len_report = item.cols_title.length;
-          start_report = len_report - 4;
+          start_report = 1;
           $('.mask_arrow').hide();
           initTable('#report-data-', item, index);
         });
@@ -527,51 +601,103 @@
         // 渲染表头
         data.cols_title.unshift(data.name);
         var titles = data.cols_title;
+        var rows_title = data.rows_title;
         var titleStr = '';
-        $.each(titles, function (index, item) {
-          if (index === 0) {
-            titleStr += '<td class="first-col" style="color:#FD2F30">' + item + '</td>';
-          } else if (index < titles.length - 5) { // 13组数据显示后5列
-            titleStr += '<td style="display: none;">' + item + '</td>';
-          } else {
-            titleStr += '<td>' + item + '</td>';
-          }
-        });
+        if (fixId === '#year-data-') {
+          $.each(titles, function (index, item) {
+            if (index === 0) {
+              titleStr += '<td class="first-col"  style="color:#FD2F30">' + item + '</td>';
+            } else if (index < titles.length - 5) { // 13组数据显示后5列
+              titleStr += '<td style="display: none;">' + item + '</td>';
+            } else {
+              titleStr += '<td>' + item + '</td>';
+            }
+          });
+        } else {
+          $.each(titles, function (index, item) {
+            if (index === 0) {
+              titleStr += '<td class="first-col" style="color:#FD2F30">' + item + '</td>';
+            } else if (index > 5) { // 13组数据显示后5列
+              titleStr += '<td style="display: none;">' + item + '</td>';
+            } else {
+              titleStr += '<td>' + item + '</td>';
+            }
+          });
+        }
+
         $(fixId + ind + ' thead').html(titleStr);
 
         // 主体表格数据
         var str = '';
-        $.each(data.rows_data, function (index, item) {
-          str += '<tr>';
-          str += '<td class="first-col">' + index + '</td>'; // 第一列
-          $.each(item, function (ind, ite) {
-            if (ind < titles.length - 6) { // 13组数据显示后5列
-              str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td data-val="' + ite.value + '"  style="display: none;color:#6364FC;" class="forecase-init">' + ite.value_format + '</td>' : '<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>')
-            } else {
-              str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td  data-val="' + ite.value + '"  class="forecase-init" style="color:#6364FC;">' + ite.value_format + '</td>' : '<td   data-val="' + ite.value + '"  class="normal-init">' + ite.value_format + '</td>')
-            }
+        if (fixId === '#year-data-') {
+          $.each(data.rows_data, function (index, item) {
+            str += '<tr>';
+            str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
+            $.each(item, function (ind, ite) {
+              if (ind < titles.length - 6) { // 13组数据显示后5列
+                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td data-val="' + ite.value + '"  style="display: none;color:#6364FC;" class="forecase-init">' + ite.value_format + '</td>' : '<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>')
+              } else {
+                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td  data-val="' + ite.value + '"  class="forecase-init" style="color:#6364FC;">' + ite.value_format + '</td>' : '<td   data-val="' + ite.value + '"  class="normal-init">' + ite.value_format + '</td>')
+              }
+            });
+            str += '</tr>';
           });
-          str += '</tr>';
-        });
+        } else {
+          $.each(data.rows_data, function (index, item) {
+            str += '<tr>';
+            str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
+            $.each(item, function (ind, ite) {
+              if (ind < 5) { // 前5列显示
+                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td  data-val="' + ite.value + '"  class="forecase-init" style="color:#6364FC;">' + ite.value_format + '</td>' : '<td   data-val="' + ite.value + '"  class="normal-init">' + ite.value_format + '</td>')
+              } else {
+                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td data-val="' + ite.value + '"  style="display: none;color:#6364FC;" class="forecase-init">' + ite.value_format + '</td>' : '<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>')
+              }
+            });
+            str += '</tr>';
+          });
+        }
+
         $(fixId + ind + ' tbody').html(str);
 
 
         // 初始化 箭头右边不可点
-        var len = titles.length - 1;
-        var start = len - 4;
-        var fix_id = fixId.split('-')[0];
-        if (start > 0 && start + 4 < len) {
-          $(fix_id + '-next-time').css('color', '#515254');
-          $(fix_id + '-next-time').css('cursor', 'pointer');
-          $(fix_id + '-pre-time').css('color', '#515254');
-          $(fix_id + '-pre-time').css('cursor', 'pointer');
-        } else if (start === 0) {
-          $(fix_id + '-pre-time').css('color', '#ccc');
-          $(fix_id + '-pre-time').css('cursor', 'not-allowed');
-        } else if (start + 4 === len) {
-          $(fix_id + '-next-time').css('color', '#ccc');
-          $(fix_id + '-next-time').css('cursor', 'not-allowed');
+        var len = 0;
+        var start = 0;
+        var fix_id = null;
+        if (fixId === '#year-data-') {
+          len = titles.length - 1;
+          start = len - 4;
+          fix_id = fixId.split('-')[0];
+          if (start > 0 && start + 4 < len) {
+            $(fix_id + '-next-time').css('color', '#515254');
+            $(fix_id + '-next-time').css('cursor', 'pointer');
+            $(fix_id + '-pre-time').css('color', '#515254');
+            $(fix_id + '-pre-time').css('cursor', 'pointer');
+          } else if (start === 0) {
+            $(fix_id + '-pre-time').css('color', '#ccc');
+            $(fix_id + '-pre-time').css('cursor', 'not-allowed');
+          } else if (start + 4 === len) {
+            $(fix_id + '-next-time').css('color', '#ccc');
+            $(fix_id + '-next-time').css('cursor', 'not-allowed');
+          }
+        } else {
+          len = titles.length - 1;
+          start = 0;
+          fix_id = fixId.split('-')[0];
+          if (start > 0 && start + 4 < len) {
+            $(fix_id + '-next-time').css('color', '#515254');
+            $(fix_id + '-next-time').css('cursor', 'pointer');
+            $(fix_id + '-pre-time').css('color', '#515254');
+            $(fix_id + '-pre-time').css('cursor', 'pointer');
+          } else if (start === 0) {
+            $(fix_id + '-pre-time').css('color', '#ccc');
+            $(fix_id + '-pre-time').css('cursor', 'not-allowed');
+          } else if (start + 4 === len) {
+            $(fix_id + '-next-time').css('color', '#ccc');
+            $(fix_id + '-next-time').css('cursor', 'not-allowed');
+          }
         }
+
       } else {
         console.log('无数据')
       }
@@ -703,22 +829,77 @@
     });
 
 
-    var num = 0;
-
-    // 点击某一个td触发时间 弹框
+    // 点击某一个td触发事件 弹框
     function clickTdInit() {
       $('.unknow-init').click(function () {
-        console.log('计算不出，跳转到研报页')
+        console.log('未知数据，跳转到研报');
+        // window.location.href = '/search/?code=100011&index=财务资产';
       });
 
+      // 按年度显示预测弹框
       $('.forecase-init').click(function () {
-        console.log('弹框专家预测/新闻')
+        var parentId = $(this).parent().parent().parent().prop('id');
+        // 位置设置
+        $('.mask-data-container').show();
+        var conH = 382; // 默认弹框高度为200px
+        var tdH = $(this).height();
+        var bodyH = $(document.body).height();
+        var offT = $(this).offset().top;
+        var offL = $(this).offset().left;
+        var conL = $('.data-table').offset().left;
+        var conT = $('.data-table').offset().top;
+        var l = offL - conL - ($('.mask-data-container').width() - $(this).width()) / 2;
+        var t = null;
+
+        var conL1 = $('#report-data').offset().left;
+        var conT1 = $('#report-data').offset().top;
+        var l1 = offL - conL1 - ($('.mask-data-container').width() - $(this).width()) / 2;
+        if (parentId.indexOf('year') > -1) { // 按年度
+          if (bodyH - (offT + tdH) > conH) {
+            // 显示在表格正下方
+            t = offT + tdH - conT + 10;
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l);
+          } else {
+            // 显示在表格的正上方
+            t = offT - tdH - conT - 292 + 17; // 292 rank-container 预测高度
+            console.log(offT);
+            console.log('X', t);
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l);
+          }
+        } else { // 按报告期
+          if (bodyH - (offT + tdH) > conH) {
+            // 显示在表格正下方
+            t = offT + tdH - conT1 + 10;
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l1);
+          } else {
+            // 显示在表格的正上方
+            t = offT - tdH - conT1 - 292 + 43; // 292 rank-container 预测高度
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l1);
+          }
+
+        }
+        // 重新获取数据 重新渲染
+        var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
+        var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html()
+        var code = '{{ stock_code }}';
+
+        console.log(keyword);
+        console.log(report_period);
+        console.log(code)
+
+
       });
 
+
+      // 按年度显示历史弹框
       $('.normal-init').click(function (e) {
         console.log('弹框历史数据');
-//        console.log(e.offsetX);
-
+        var parentId = $(this).parent().parent().parent().prop('id');
+        // 位置设置
         var conH = 292; // 默认弹框高度为200px
         var tdH = $(this).height();
         var bodyH = $(document.body).height();
@@ -727,22 +908,35 @@
         var conL = $('.data-table').offset().left;
         var conT = $('.data-table').offset().top;
         var l = offL - conL - ($('.rank-container').width() - $(this).width()) / 2;
-        var t=null;
-        if (bodyH - (offT + tdH) > conH) {
-          // 显示在表格正下方
-          t = offT + tdH -conT + 10;
-          $('.rank-container').css('top', t);
-          $('.rank-container').css('left', l);
-          console.log('S',t);
+        var t = null;
 
-        } else {
-
-          // 显示在表格的正上方
-          t=offT-tdH-conT-292+17; // 292 rank-container 预测高度
-          console.log(offT);
-          console.log('X',t);
-          $('.rank-container').css('top', t);
-          $('.rank-container').css('left', l);
+        var conL1 = $('#report-data').offset().left;
+        var conT1 = $('#report-data').offset().top;
+        var l1 = offL - conL1 - ($('.rank-container').width() - $(this).width()) / 2;
+        if (parentId.indexOf('year') > -1) { // 按年度
+          if (bodyH - (offT + tdH) > conH) {
+            // 显示在表格正下方
+            t = offT + tdH - conT + 10;
+            $('.rank-container').css('top', t);
+            $('.rank-container').css('left', l);
+          } else {
+            // 显示在表格的正上方
+            t = offT - tdH - conT - 292 + 17; // 292 rank-container 预测高度
+            $('.rank-container').css('top', t);
+            $('.rank-container').css('left', l);
+          }
+        } else { // 按报告期
+          if (bodyH - (offT + tdH) > conH) {
+            // 显示在表格正下方
+            t = offT + tdH - conT1 + 10;
+            $('.rank-container').css('top', t);
+            $('.rank-container').css('left', l1);
+          } else {
+            // 显示在表格的正上方
+            t = offT - tdH - conT1 - 292 + 17; // 292 rank-container 预测高度
+            $('.rank-container').css('top', t);
+            $('.rank-container').css('left', l1);
+          }
 
         }
 
@@ -765,7 +959,7 @@
           initHistoryChart(tdArr, titleArr);
           closeHistory();
         });
-      })
+      });
     }
 
     // 渲染历史弹框图表
@@ -864,9 +1058,7 @@
           }
         ]
       };
-
       myChart.setOption(option);
-
     }
 
     // 渲染历史弹框表格
@@ -889,8 +1081,328 @@
       });
     }
 
+    // 获取弹框中的预测数据
+    function getForecastData(code,report_period,keyword) {
+      $.ajax({
+        type:'GET',
+        url:fix_url+'/api/research/finical/analyst/',
+        data:{
+          code:code,
+          report_period:report_period,
+          keyword:keyword
+        },
+        success:function(res){
+          console.log(res);
+
+        },
+        error:function (e) {
+          console.log(e);
+        }
+      })
+    }
+
+    getForecastData('601006','2018E','oper_rev');
+
 
   })
 </script>
+<script>
+  var countTri = 0; // 三角形点击次数
+  function getAndInt(count, time, val) { // 时间和数值排序方式
+    if (count > 0) {
+      var str = '';
+      str += '<ul class="data-cont-chart" id="data-cont-chart-' + count + '">';
+      str += '</ul>';
+      str += '<div class="page-container" id="page-container-' + count + '">';
+      str += '</div>';
+      $('.data-cont-chart').before(str);
+      console.log('删除前', count);
+      $('#data-cont-chart-' + (count - 1)).remove();
+      $('#page-container-' + (count - 1)).remove();
+    }
 
+    var pageData = {
+      all: [],
+      dataList: [],
+      total: 0
+    };
+    $.ajax({
+      type: 'GET',
+      url: '/static/js/tableMask.json',
+      data: {
+        time: 'up',
+        val: 'up'
+      },
+      dataType: 'json',
+      async: false,
+      success: function (res) {
+        pageData.total = res.total;
+        pageData.all = res.data;
+      }
+    });
+
+    // 渲染对应页的数据
+    function onePageData(curPage, pageSize) {
+      pageData.dataList = [];
+      var offset = curPage * pageSize;   //(curPage-1)*pageSize;  此处不需要减1，pagination中curPage存的是当前索引值
+      var all = pageData.all;
+      for (var i = offset; i < offset + pageSize; i++) {
+        if (all[i]) {
+          pageData.dataList.push(all[i]);
+        }
+      }
+      console.log(pageData.dataList);
+      initDataDom(); // 每次获取数据需要重新渲染页面
+    }
+
+    // 生成Pagination实例
+    let opts1 = {
+      context: 'page-container-' + count,
+      pageSize: 10,
+      total: pageData.total,
+      callBack: onePageData
+    };
+    new Pagination(opts1);
+
+    // 把数据重新渲染到页面上
+    function initDataDom() {
+      var dataHtml = '';
+      $.each(pageData.dataList, function (index, item) {
+        dataHtml += '<li>';
+        dataHtml += '<span>' + item.name + '(' + item.comp + ')' + '</span>';
+        dataHtml += '<span>' + item.time + '</span>';
+        dataHtml += '<span>' + item.val + '</span>';
+        dataHtml += '<span><div class="span-link">原文链接</div></span>';
+        dataHtml += '</li>';
+      });
+      $('#data-cont-chart-' + count).html(dataHtml);
+    }
+  }
+
+  getAndInt(countTri, 'up', 'up');
+
+
+  // 时间升序降序/数值升序降序 请求数据
+  function timeOrder() {
+    var history = ['up', 'up'];
+    $('#time-up').click(function () {
+      if (history[0] === 'up') {
+        // 不需要根据时间的改变重新请求数据
+      } else {
+        history[0] = 'up';
+        $('#time-up').addClass('rank-up');
+        $('#time-up').removeClass('up-plain');
+        $('#time-down').removeClass('rank-down');
+        $('#time-down').addClass('down-plain');
+        countTri++;
+        getAndInt(countTri, history[0], history[1]);
+      }
+    });
+    $('#time-down').click(function () {
+      if (history[0] === 'down') {
+        // 不需要根据时间的改变重新请求数据
+      } else {
+        history[0] = 'down';
+        $('#time-down').addClass('rank-down');
+        $('#time-down').removeClass('down-plain');
+        $('#time-up').removeClass('rank-up');
+        $('#time-up').addClass('up-plain');
+        countTri++;
+        getAndInt(countTri, history[0], history[1]);
+
+      }
+    });
+
+    $('#val-up').click(function () {
+      if (history[1] === 'up') {
+        // 不需要因为数值的改变重新请求数据
+      } else {
+        history[1] = 'up';
+        $('#val-up').addClass('rank-up');
+        $('#val-up').removeClass('up-plain');
+        $('#val-down').removeClass('rank-down');
+        $('#val-down').addClass('down-plain');
+        countTri++;
+        getAndInt(countTri, history[0], history[1]);
+
+      }
+
+    });
+    $('#val-down').click(function () {
+      if (history[1] === 'down') {
+        // 不需要因为数值的改变重新请求数据
+      } else {
+        history[1] = 'down';
+        $('#val-down').addClass('rank-down');
+        $('#val-down').removeClass('down-plain');
+        $('#val-up').removeClass('rank-up');
+        $('#val-up').addClass('up-plain');
+        countTri++;
+        getAndInt(countTri, history[0], history[1]);
+      }
+    });
+  }
+
+  timeOrder();
+
+  // 切换到图表
+  $('#toChart').click(function () {
+    $('.title-cont-chart').hide();
+    $('.data-cont-chart').hide();
+    $('.page-container').hide();
+    $('.chart-container').show();
+  });
+
+  // 切换到文字
+  $('.to-word').click(function () {
+    $('.title-cont-chart').show();
+    $('.data-cont-chart').show();
+    $('.page-container').show();
+    $('.chart-container').hide();
+  });
+
+  // 关闭浮框
+  $('.close-data-mask').click(function () {
+    $('.mask-data-container').hide();
+  });
+
+
+  function forecastChart() {
+    var data1 = [
+      [1485878399999, 4382],
+      [1488297599999, 4582]
+    ];
+    var data2 = [
+      [1498838399999, 5262],
+      [1493567999999, 5462]
+    ]
+    var data3 = [
+      [1496246399999, 5514],
+      [1504195199999, 5514]
+    ];
+    var data4 = [
+      [1506787199999, 5212],
+      [1509465599999, 6513]];
+    var data5 = [
+      [1512057599999, 7679],
+      [1512957599999, 7712]
+    ];
+    var data6 = [
+      [1485878399999, 4172],
+      [1488297599999, 4772],
+      [1493567999999, 4982],
+      [1496246399999, 5414],
+      [1498838399999, 5762],
+      [1504195199999, 5314],
+      [1506787199999, 5212],
+      [1509465599999, 6593],
+      [1512057599999, 7679],
+      [1512957599999, 7792]
+    ];
+
+    var dates = [];
+
+    data6.forEach(function (item) {
+      dates.push(item[0]);
+    });
+    var maxDate = Math.max.apply(null, dates);
+    var minDate = Math.min.apply(null, dates);
+    var intervalDate = (maxDate - minDate) / 6;
+    var seriesObj = [
+      {name: '东北证券  郑华', type: 'scatter', data: data1, itemStyle: {normal: {color: '#D9565A'}}, symbolSize: 5},
+      {name: '东北 刘军', type: 'scatter', data: data2, itemStyle: {normal: {color: '#D9565A'}}, symbolSize: 5},
+      {name: '东北 张建科', type: 'scatter', data: data3, itemStyle: {normal: {color: '#D9565A'}}, symbolSize: 5},
+      {name: '华北财经 志祥', type: 'scatter', data: data4, itemStyle: {normal: {color: '#D9565A'}}, symbolSize: 5},
+      {name: '东北 王美玲', type: 'scatter', data: data5, itemStyle: {normal: {color: '#D9565A'}}, symbolSize: 5},
+      {
+        name: ' 平均',
+        type: 'line',
+        data: data6,
+        itemStyle: {
+          normal: {
+            color: '#151615',
+            lineStyle: {width: 1}
+          }
+        },
+        symbol: 'none',
+        smooth: true
+      }
+    ];
+    var myChart = echarts.init(document.getElementById('point-cont'));
+    option = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross'
+        },
+        textStyle: {
+          color: '#EEEFEE',
+          decoration: 'none',
+          fontSize: 12,
+        },
+        formatter: function (datas) {
+          var res = datas[0].seriesName + '</br>';
+          for (var i = 0, length = datas.length; i < length; i++) {
+            if (datas[i].componentSubType === 'scatter')
+              res += '所得税:' + datas[i].data[1] + '</br>';
+            else
+              res += '平均值:' + datas[i].value[1] + '</br>';
+          }
+          return res;
+        }
+      },
+      xAxis: {
+        type: 'time',
+        min: minDate,
+        max: maxDate,
+        interval: intervalDate,
+        axisTick: {
+          show: false
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dotted'
+          }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            fontSize: '10'
+          },
+          formatter: function (value) {
+            if (echarts.format.formatTime('MM', new Date(value))) {
+            }
+            return echarts.format.formatTime('MM', new Date(value)) + '月';
+          }
+        }
+
+      },
+      yAxis: {
+        type: 'value',
+        axisTick: {
+          show: false
+        },
+
+        splitLine: {
+          lineStyle: {
+            type: 'dotted'
+          }
+        },
+        axisLabel: {
+          margin: 8,
+        },
+        axisLine: {
+          lineStyle: {
+            shadowOffsetY: -10,
+          }
+        },
+      },
+      series: seriesObj
+    };
+    myChart.setOption(option);
+  }
+
+  forecastChart();
+</script>
 {% endblock %}

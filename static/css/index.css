@@ -552,6 +552,7 @@ button, input {
 
 .data-table {
   display: none;
+  width: 100%;
 }
 
 /*对比框*/
@@ -808,3 +809,225 @@ button, input {
   cursor: pointer;
 }
 
+
+
+/*预测数据弹框*/
+.mask-data-container {
+  position: absolute;
+  top:30px;
+  left: 0;
+  width: 400px;
+  min-height: 378px;
+  border: 1px solid #9FBFE9;
+  background: #FEFFFE;
+}
+
+.mask-data-container .title-cont-chart {
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  background: #E3EDF9;
+  font-weight: 500;
+  color: #5C5B5C;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.mask-data-container .title-cont-chart div {
+  display: inline-block;
+  font-size: 12px;
+  width: 25%;
+  text-align: center;
+}
+
+.mask-data-container .title-cont-chart div:nth-child(1) {
+  width: 30%;
+}
+
+.mask-data-container .title-cont-chart div:nth-child(3) {
+  width: 20%;
+}
+
+.mask-data-container .title-cont-chart span {
+  text-align: center;
+}
+
+.mask-data-container .title-cont-chart .rank {
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  background: red;
+  position: relative;
+}
+
+.mask-data-container .title-cont-chart .rank i {
+  margin: 1px 1px;
+  position: absolute;
+  left: 1px;
+  cursor: pointer;
+}
+
+.mask-data-container .title-cont-chart .rank .rank-up {
+  top: 1px;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid #5B5C5B;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+}
+
+.mask-data-container .title-cont-chart .rank .up-plain {
+  top: 1px;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid #ccc;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+}
+
+.mask-data-container .title-cont-chart .rank .down-plain {
+  top: 9px;
+  border-top: 3px solid #ccc;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+}
+
+.mask-data-container .title-cont-chart .rank .rank-down {
+  top: 9px;
+  border-top: 3px solid #5B5C5B;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+}
+
+.mask-data-container .data-cont-chart {
+  width: 400px;
+  min-height: 295px;
+  border-radius: 3px;
+  font-size: 0;
+  padding-top: 5px;
+  color: #5C5B5C;
+}
+
+.mask-data-container .data-cont-chart span {
+  display: inline-block;
+  width: 25%;
+  font-size: 12px;
+  text-align: center;
+}
+
+.mask-data-container .data-cont-chart span:nth-child(1) {
+  width: 30%;
+}
+
+.mask-data-container .data-cont-chart span:nth-child(3) {
+  width: 20%;
+}
+
+
+.mask-data-container .data-cont-chart li span {
+  font-size: 12px;
+  font-weight: normal;
+  padding: 5px 0;
+}
+
+.mask-data-container .data-cont-chart li .span-link {
+  display: inline-block;
+  padding: 0 4px;
+  border: 1px solid #9BB7D8;
+  background: #fff;
+  color: #498BC3;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.mask-data-container .data-cont-chart li .active {
+  background: #3879B9;
+  border: 1px solid #046FB5;
+  color: #D6E0EC;
+}
+
+/*分页*/
+.page-container {
+  width: 100%;
+  margin: 10px auto;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+}
+
+.page-container .page-num {
+  border: solid thin #D8DAD8;
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 1px 0;
+  width: 20px;
+  text-align: center;
+  margin-left: -1px;
+  cursor: pointer;
+  background: #fff;
+  color: #2D82CC;
+}
+
+.page-container .page-num:first-child {
+  border-radius: 1px;
+}
+
+.page-container .selected {
+  border: solid thin #0099FF;
+  background-color: #0099FF;
+  color: white;
+}
+
+.mask-data-container .chart-container {
+  width: 100%;
+  min-height: 380px;
+  color: #323332;
+  font-size: 12px;
+  position: relative;
+  overflow: hidden;
+  /*background: #4FAF53;*/
+}
+
+.mask-data-container .chart-container .close-data-mask {
+  position: absolute;
+  top: -3px;
+  right: 6px;
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #969798;
+  z-index: 999;
+
+}
+
+.mask-data-container .chart-container .to-word {
+  position: absolute;
+  top: 6px;
+  right: 30px;
+  width: 36px;
+  height: 14px;
+  float: right;
+  cursor: pointer;
+  z-index: 99999;
+}
+
+.mask-data-container .chart-container .to-word a {
+  z-index: 9999;
+}
+
+.chart-title {
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: 400;
+  text-align: center;
+}
+
+
+.point-chart {
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
