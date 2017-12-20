@@ -209,7 +209,7 @@ button, input {
 
 /*right_start*/
 .right-container {
-  overflow: auto;
+  overflow: hidden;
   background-color: #F3F3F3;
   min-width: 1000px;
   min-height: 700px;
@@ -302,7 +302,8 @@ button, input {
 
 .content-container {
   width: 71%;
-  margin: 10px 5%;
+  /*margin: 10px 5%;*/
+  margin: 10px auto;
   background: #fff;
   padding: 15px 15px 80px 15px;
   position: relative;
@@ -659,6 +660,7 @@ button, input {
   width: 100%;
   overflow: hidden;
   margin-bottom: 40px;
+  margin-top: 20px;
 }
 
 .statistics-chart .chart-tab {
@@ -721,7 +723,7 @@ button, input {
   margin-right: 5px;
 }
 
-.unknow-data{
+.unknow-data {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -732,6 +734,77 @@ button, input {
   color: #B5B6B5;
   font-style: normal;
 }
+
 /*图表样式_end*/
 
-/*right_end*/
+/*历史数据弹框*/
+.rank-container {
+  width: 200px;
+  border: 1px solid #9FBFE9;
+  background: #FEFFFE;
+  font-size: 12px;
+  position: absolute;
+  font-weight: normal;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.data-his-cont {
+  width: 200px;
+  border-bottom: 1px solid #EDEEED;
+  border-radius: 2px;
+  border-collapse: collapse;
+  text-align: center;
+  border-bottom: 1px solid #EDEEED;
+}
+
+.data-his-cont thead {
+  width: 100%;
+  background: #E3EDF9;
+  border-bottom: 1px solid #9FBFE9;
+  font-weight: 500;
+  color: #5C5B5C;
+  font-size: 12px;
+}
+
+.data-his-cont thead td {
+  padding: 6px 0;
+}
+
+.data-his-cont tbody tr {
+  font-size: 12px;
+  font-weight: 300;
+  overflow: hidden;
+  padding: 4px 0;
+  color: #5C5B5C;
+}
+
+.data-his-cont tbody td {
+  padding: 5px 0;
+}
+
+.data-his-cont tbody tr:nth-child(even) {
+  background: #F1F2F1;
+}
+
+.chart-main {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  margin: -40px 0 -30px 0;
+}
+
+.history-close {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  font-size: 12px;
+  color: #6D6E70;
+  z-index: 99;
+  cursor: pointer;
+}
+

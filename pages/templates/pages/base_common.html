@@ -16,67 +16,67 @@
 
 <body>
 
-<div class="out-container">
+<!--<div class="out-container">-->
     <!--左侧导航_start-->
-    <div class="nav-container ">
-        <div class="left-company">
-            <img class="comp-logo" src="/static/images/logo.png" alt=""/>
-            <span>嘉实智能投研平台</span>
-            <i class="iconfont icon-suoxiao"></i>
-        </div>
-        <div class="user-avatar">
-            <img src="/static/images/avatar.jpg" alt=""/>
-            <span>欢迎admin</span>
-        </div>
-        <div class="avatar-linear"></div>
-        <ul id="nav-list" class="nav-list">
-            <li>
-                <span class="linear"></span>
-                <i class="iconfont icon-accountfilling"></i><span class="title">用户中心</span>
-            </li>
-            <li>
-                <span class="linear"></span>
-                <i class="iconfont icon-tiaoxingtu"></i><span class="title">个股查询</span>
-            </li>
-            <li>
-                <span class="linear"></span>
-                <i class="iconfont icon-bangzhuzhongxin"></i><span class="title">研报查询</span>
-            </li>
-            <li>
-                <span class="linear"></span>
-                <i class="iconfont icon-dynamic_fill"></i><span class="title">股票对比</span>
-            </li>
-            <li>
-                <span class="linear"></span>
-                <i class="iconfont icon-icon"></i><span class="title">行业排名</span>
-            </li>
-            <li>
-                <span class="linear"></span><i class="iconfont icon-guanbishixin"></i><span class="title">退出登录</span>
-            </li>
-        </ul>
-        <ul class="aside-nav">
-            <li>用户中心</li>
-            <li>个股查询</li>
-            <li>研报查询</li>
-            <li>股票对比</li>
-            <li>行业排名</li>
-            <li>退出登录</li>
-        </ul>
-    </div>
+    <!--<div class="nav-container ">-->
+        <!--<div class="left-company">-->
+            <!--<img class="comp-logo" src="/static/images/logo.png" alt=""/>-->
+            <!--<span>嘉实智能投研平台</span>-->
+            <!--<i class="iconfont icon-suoxiao"></i>-->
+        <!--</div>-->
+        <!--<div class="user-avatar">-->
+            <!--<img src="/static/images/avatar.jpg" alt=""/>-->
+            <!--<span>欢迎admin</span>-->
+        <!--</div>-->
+        <!--<div class="avatar-linear"></div>-->
+        <!--<ul id="nav-list" class="nav-list">-->
+            <!--<li>-->
+                <!--<span class="linear"></span>-->
+                <!--<i class="iconfont icon-accountfilling"></i><span class="title">用户中心</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span class="linear"></span>-->
+                <!--<i class="iconfont icon-tiaoxingtu"></i><span class="title">个股查询</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span class="linear"></span>-->
+                <!--<i class="iconfont icon-bangzhuzhongxin"></i><span class="title">研报查询</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span class="linear"></span>-->
+                <!--<i class="iconfont icon-dynamic_fill"></i><span class="title">股票对比</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span class="linear"></span>-->
+                <!--<i class="iconfont icon-icon"></i><span class="title">行业排名</span>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<span class="linear"></span><i class="iconfont icon-guanbishixin"></i><span class="title">退出登录</span>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <!--<ul class="aside-nav">-->
+            <!--<li>用户中心</li>-->
+            <!--<li>个股查询</li>-->
+            <!--<li>研报查询</li>-->
+            <!--<li>股票对比</li>-->
+            <!--<li>行业排名</li>-->
+            <!--<li>退出登录</li>-->
+        <!--</ul>-->
+    <!--</div>-->
     <!--左侧导航_end-->
 
 
     <!--右侧信息_start-->
     <div class="right-container ">
         <!--共有header_start-->
-        <div class="right-login">
-            <div class="user-login"><img src="/static/images/avatar.jpg" alt=""/>admin <span class="span-down"></span></div>
-        </div>
-        <ul class="user-manage">
-            <li>更改密码</li>
-            <li>账户设置</li>
-            <li><i class="iconfont icon-denglu"></i>退出登录</li>
-        </ul>
+        <!--<div class="right-login">-->
+            <!--<div class="user-login"><img src="/static/images/avatar.jpg" alt=""/>admin <span class="span-down"></span></div>-->
+        <!--</div>-->
+        <!--<ul class="user-manage">-->
+            <!--<li>更改密码</li>-->
+            <!--<li>账户设置</li>-->
+            <!--<li><i class="iconfont icon-denglu"></i>退出登录</li>-->
+        <!--</ul>-->
         <!--共有header_end-->
 
 
@@ -88,7 +88,7 @@
         <!--第侧内容_end-->
     </div>
     <!--右侧信息_end-->
-</div>
+<!--</div>-->
 {% block js %}
 {% endblock %}
 
@@ -145,6 +145,10 @@
         $('.span-up').removeClass('span-up').addClass('span-down');
       }
     });
+
+    // right-container 更新大小
+    $('.right-container').css("min-height",$('body').height());
+
   })
 </script>
 </body>

@@ -94,12 +94,9 @@
             tName=tName.replace(reg,function (e) {
               return '<i style="color:#E86664">'+e+'</i>'
             });
-            console.log(tName);
           }
-          console.log(tCode);
           str += '<tr>';
           str += '<td>' +tCode+'</td>';
-          console.log(str);
           str += '<td>' + tName+ '</td>';
           str += '<td >';
           str += '<a href="/forecast/' + item.code + '"><span class="report-btn">智能报告</span></a>';
@@ -124,7 +121,8 @@
    $('.out-search-btn').click(function () {
      var val=$('.temp-inp').val();
      if(val){
-       $('.out-search-btn').prop('href','/search/?q='+val)
+       $('.temp-inp').val('');
+       $('.out-search-btn').prop('href','/search/?q='+val);
      }else {
        $('.out-search-btn').prop('href','javascript:;')
      }
