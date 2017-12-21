@@ -28,7 +28,9 @@ class StockSearchView(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(StockSearchView, self).get_context_data()
         q = self.request.GET.get('q')
-        context_data.update({'q': q})
+        stock_name = self.request.GET.get('stock_name')
+        ct = self.request.GET.get('ct')
+        context_data.update({'q': q, 'stock_name': stock_name, 'ct': ct})
         return context_data
 
 
@@ -54,7 +56,9 @@ class StockForecastMoreView(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(StockForecastMoreView, self).get_context_data()
         q = self.request.GET.get('q')
-        context_data.update({'q': q})
+        stock_name = self.request.GET.get('stock_name')
+        ct = self.request.GET.get('ct')
+        context_data.update({'q': q, 'stock_name': stock_name, 'ct': ct})
         return context_data
 
 
