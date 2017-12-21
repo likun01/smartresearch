@@ -7,7 +7,7 @@ Created on 2017年11月10日
 from django.conf.urls import url
 from pages.views import LoginView, IndexView, StockSearchView, LogoutView,\
     StockForecastView, StockForecastMoreView,\
-    StockForecastDiffView, StockIndustryRankView
+    StockForecastDiffView, StockIndustryRankView, StockArticleDetailView
 
 urlpatterns = (
     url(r'^login/$', LoginView.as_view(), name='pages_login'),
@@ -22,4 +22,6 @@ urlpatterns = (
         name='pages_forecast_diff'),
     url(r'^industryrank/$', StockIndustryRankView.as_view(),
         name='pages_industryrank'),
+    url(r'^article/$', StockArticleDetailView.as_view(),
+        name='pages_article'),
 )
