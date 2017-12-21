@@ -1,8 +1,9 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
-body,html{
+
+body, html {
   width: 100%;
   height: 100%;
   background: #FEFFFE;
@@ -16,10 +17,9 @@ body,html{
   position: relative;
 }
 
-
 .temp-container img {
-  width: 29%;
-  height:29%;
+  width: 150px;
+  height: 150px;
   margin: 30px auto;
 }
 
@@ -42,8 +42,8 @@ body,html{
 
 .search-header .temp-inp {
   width: 79%;
-  height: 30px;
-  line-height: 30px;
+  height: 35px;
+  line-height: 35px;
   padding-left: 3px;
   border: 1px solid #DCDDDC;
   color: #666766;
@@ -52,8 +52,8 @@ body,html{
 
 .search-header .out-search-btn {
   width: 19.4%;
-  height: 30px;
-  line-height: 30px;
+  height: 35px;
+  line-height: 35px;
   background: #2479BB;
   color: #FEFFFE;
   border: 1px solid #006CB6;
@@ -79,7 +79,30 @@ body,html{
 .res-list tbody td {
   font-size: 12px;
   text-align: center;
-  padding: 3px 0;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.res-list tbody td a {
+  text-decoration: none;
+  color: #717271;
+}
+
+lvha
+.res-list tbody td a:link {
+  color: #717271;
+}
+
+.res-list tbody td a:visited {
+  color: #717271;
+}
+
+.res-list tbody td a:hover {
+  color: #717271;
+}
+
+.res-list tbody td a:active {
+  color: #717271;
 }
 
 .res-list tbody tr:hover {

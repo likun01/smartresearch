@@ -1053,3 +1053,8 @@ button, input {
   display: inline-block;
   color: #676867;
 }
+
+.data-table .unknow-init,.data-table .forecase-init,.data-table .normal-init{
+  cursor: pointer;
+
+}
