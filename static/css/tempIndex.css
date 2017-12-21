@@ -11,21 +11,33 @@ body, html {
 
 .temp-container {
   margin: 0 auto;
-  width: 40%;
-  height: 100%;
+  width: 495px;
   text-align: center;
   position: relative;
+
+}
+.footer-container{
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #323332;
+  color: #E3E4E3;
+  font-size: 14px;
+  text-align: center;
 }
 
 .temp-container img {
-  width: 150px;
-  height: 150px;
-  margin: 30px auto;
+  width: 142px;
+  height: 142px;
+  margin-top: 100px;
 }
 
 .temp-container .top-title {
   width: 100%;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 400;
   color: #3E3F3E;
   margin-bottom: 30px;
@@ -41,7 +53,7 @@ body, html {
 }
 
 .search-header .temp-inp {
-  width: 79%;
+  width: 387px;
   height: 35px;
   line-height: 35px;
   padding-left: 3px;
@@ -51,7 +63,7 @@ body, html {
 }
 
 .search-header .out-search-btn {
-  width: 19.4%;
+  width: 100px;
   height: 35px;
   line-height: 35px;
   background: #2479BB;
@@ -73,6 +85,7 @@ body, html {
   margin-top: 1px;
   box-shadow: 0 1px 1px 1px #E7E8E7;
   color: #686968;
+  background: #FEFFFE;
 
 }
 
