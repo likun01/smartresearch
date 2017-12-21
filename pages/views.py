@@ -25,6 +25,12 @@ class StockSearchView(TemplateView):
     '''
     template_name = 'pages/search.html'
 
+    def get_context_data(self, **kwargs):
+        context_data = super(StockSearchView, self).get_context_data()
+        q = self.request.GET.get('q')
+        context_data.update({'q': q})
+        return context_data
+
 
 class StockForecastView(TemplateView):
     '''
