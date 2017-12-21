@@ -542,7 +542,9 @@
         var nameSpan = $('#stock-title');
         var val = nameSpan.html();
         val = val.replace(/<i><\/i>/g, res.stock_name);
+        console.log(val);
         nameSpan.html(val);
+//        $('title').html(+res.stock_name);
         // 按年度保存并且修改导出链接
         exportLink[0].csv = res.export_csv;
         exportLink[0].excel = res.export_excel;
