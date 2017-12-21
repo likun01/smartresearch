@@ -21,12 +21,6 @@
         <input type="text" id="search-inp">
     </div>
 </div>
-<ul class="search-container">
-    <!--<li><span>aaa</span></li>-->
-    <!--<li><span>aaa</span></li>-->
-    <!--<li><span>aaa</span></li>-->
-    <!--<li><span>aaa</span></li>-->
-</ul>
 <!--顶部标题/搜索_end-->
 
 <!--图表_start-->
@@ -526,25 +520,6 @@
     });
 
 
-    // 搜索框
-    function bindData(data) {
-      var str = '';
-      $.each(data, function () {
-        str += '<li><span>' + this.code + '</span><span>' + this.name + '</span></li>';
-      });
-      $('.search-container').html(str).show();
-    }
-
-    var opts = {
-      url: fix_url + '/api/research/search',
-      token: token,
-      bindData: bindData,
-      searchRes: function () {
-
-      }
-    };
-    new InputSearch('#search-inp', '.search-container', '.search-container li', opts);
-
     // 按年度数据
     $.ajax({
       type: 'GET',
@@ -839,13 +814,10 @@
 
     // 查找相关
     $('#search-relative').click(function () {
-      var str = $('#search-inp').val();
-      var reg = /\d+/;
-      if (reg.test(str) === true) {
-        var code = reg.exec(str)[0];
-        console.log(code);
-      } else {
-        console.log(str)
+      var q=$('#search-inp').val();
+      console.log(q);
+      if(q){
+        window.location.href='/forecast/more/?q=' + stock_name+q+'&ct=search';
       }
     });
 
@@ -862,6 +834,9 @@
         var parentId = $(this).parent().parent().parent().prop('id');
         // 位置设置
         $('.mask-data-container').show();
+        // 默认显示图表页
+        $('.all-data-cont').hide();
+        $('.chart-container').show();
         var conH = 382; // 默认弹框高度为200px
         var tdH = $(this).height();
         var bodyH = $(document.body).height();
@@ -1214,7 +1189,7 @@
           dataHtml += '<span>' + item.analyst + '(' + item.org + ')' + '</span>';
           dataHtml += '<span>' + item.published_dt_format + '</span>';
           dataHtml += '<span>' + item.value_format + '</span>';
-          dataHtml += '<span><div class="span-link">原文链接</div></span>';
+          dataHtml += item.gogoal_report_id?'<span><a href="/article/?pk='+item.gogoal_report_id+'&ct=report"><div class="span-link active">原文链接</div></a></span>':'<span><div class="span-link">原文链接</div></span>';
           dataHtml += '</li>';
         });
         $('#data-cont-chart-' + countTri).html(dataHtml);
@@ -1307,6 +1282,8 @@
     // 预测弹框 关闭浮框
     $('.close-data-mask').click(function () {
       $('.mask-data-container').hide();
+      $('.all-data-cont').hide();
+      $('.chart-container').show();
     });
 
     // 预测弹框 echart图表

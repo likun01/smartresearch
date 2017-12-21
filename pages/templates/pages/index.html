@@ -46,7 +46,7 @@
     var fix_url = 'http://api-pro.xin-shui.com';
 
     // 搜索框
-    $('.temp-inp').on('input propertychange', function () {
+    $('.temp-inp').on('input focus propertychange', function () {
       var q = $('.temp-inp').val();
       if (q) {
         $.ajax({
@@ -122,7 +122,7 @@
      var val=$('.temp-inp').val();
      if(val){
        $('.temp-inp').val('');
-       $('.out-search-btn').prop('href','/search/?q='+val);
+       $('.out-search-btn').prop('href','/forecast/more/?q='+val+'&ct=research&key=kw');
      }else {
        $('.out-search-btn').prop('href','javascript:;')
      }

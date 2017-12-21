@@ -313,7 +313,6 @@ button, input {
   padding: 13.33px 15px 13.33px 8px;
   background: #F5F5F5;
   font-size: 26px;
-  font-weight: 200;
   color: #7E7777;
   overflow: hidden;
 }
@@ -940,9 +939,9 @@ button, input {
 }
 
 .mask-data-container .data-cont-chart li .active {
-  background: #3879B9;
-  border: 1px solid #046FB5;
-  color: #D6E0EC;
+  background: #3277B8;
+  border: 1px solid #0064B2;
+  color: #EDF5FA;
 }
 
 /*分页*/

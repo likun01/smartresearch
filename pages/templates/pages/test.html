@@ -10,11 +10,10 @@
   var q = '国';
   var str = '中国彩钢';
   var reg = new RegExp(q, 'g');
-  var temp = str.replace(reg, function (e) {
+  var str = str.replace(reg, function (e) {
     console.log(e);
     return '<i style="color:#E86664">' + e + '</i>'
   });
-  console.log(temp);
   console.log(str);
 
   var obj={}
