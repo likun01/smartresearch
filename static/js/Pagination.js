@@ -24,7 +24,8 @@
 
   // 生成数字选项
   Pagination.prototype.initSpan = function () {
-    if (this.total > 0) {
+    console.log('allPage',this.allPage);
+    if (this.total > 0&&this.allPage>1) {
       var spanStr = '';
       for (var i = 0; i < this.allPage; i++) {
         spanStr += i === 0 ? '<span class="page-num selected">' + (i + 1) + '</span>' : '<span class="page-num">' + (i + 1) + '</span>';

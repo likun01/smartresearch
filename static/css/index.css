@@ -5,7 +5,7 @@
 
 body, html {
   width: 100%;
-  font-family: "Microsoft YaHei";
+  font-family: "arial,sans-serif";
   font-size: 12px;
 }
 
@@ -775,7 +775,6 @@ button, input {
 
 .data-his-cont tbody tr {
   font-size: 12px;
-  font-weight: 300;
   overflow: hidden;
   padding: 4px 0;
   color: #5C5B5C;
@@ -827,7 +826,7 @@ button, input {
   line-height: 30px;
   width: 100%;
   background: #E3EDF9;
-  font-weight: 500;
+  font-weight: 700;
   color: #5C5B5C;
   font-size: 0;
   overflow: hidden;
@@ -901,7 +900,7 @@ button, input {
 
 .mask-data-container .data-cont-chart {
   width: 400px;
-  min-height: 295px;
+  min-height: 300px;
   border-radius: 3px;
   font-size: 0;
   padding-top: 5px;
@@ -949,7 +948,7 @@ button, input {
 /*分页*/
 .page-container {
   width: 100%;
-  margin: 10px auto;
+  margin: 0 auto;
   font-size: 12px;
   display: inline-block;
   text-align: center;
@@ -981,7 +980,7 @@ button, input {
 .mask-data-container .chart-container {
   width: 100%;
   min-height: 380px;
-  color: #323332;
+  color: #4B4C4B;
   font-size: 12px;
   position: relative;
   overflow: hidden;
@@ -1030,4 +1029,27 @@ button, input {
   position: absolute;
   top: 0;
   left: 20px;
+}
+
+.all-data-cont{
+  position: relative;
+  height: 380px;
+
+}
+.download-cont{
+  width: 60px;
+  position: absolute;
+  bottom: 21px;
+  right: 10px;
+  cursor: pointer;
+}
+.download-cont img{
+  width: 12px;
+  height: 15px;
+  display: inline-block;
+  float: left;
+}
+.download-cont span{
+  display: inline-block;
+  color: #676867;
 }

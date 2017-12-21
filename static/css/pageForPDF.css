@@ -16,12 +16,10 @@ body {
 
 .container {
   width: 1200px; /*  150像素分辨率下  宽度1240px*/
-  height: 2650px;
   margin: 0 auto;
   background: #FEFFFE;
   padding: 20px 20px;
   overflow: hidden;
-  position:relative;
 }
 
 .header-title {
@@ -294,11 +292,7 @@ body {
 
 /*脑图*/
 .brain-container {
-  width: 1200px;
-  position: absolute;
-  top:1650px;
-  margin-left: -600px;
-  left: 50%;
+  width: 100%;
 }
 
 .brain-container .brain-title {

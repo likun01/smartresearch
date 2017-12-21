@@ -1,35 +1,70 @@
-.temp-container{
-  margin:133px auto;
-  width:284px;
-  min-height: 450px;
-text-align: center;
+*{
+  margin: 0;
+  padding: 0;
 }
-.search-header{
+body,html{
+  width: 100%;
+  height: 100%;
+  background: #FEFFFE;
+}
+
+.temp-container {
+  margin: 0 auto;
+  width: 40%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+
+
+.temp-container img {
+  width: 29%;
+  height:29%;
+  margin: 30px auto;
+}
+
+.temp-container .top-title {
+  width: 100%;
+  font-size: 24px;
+  font-weight: 400;
+  color: #3E3F3E;
+  margin-bottom: 30px;
+}
+
+.temp-container i {
+  font-style: normal;
+}
+
+.search-header {
   width: 100%;
   overflow: hidden;
 }
-.search-header .temp-inp{
-  width: 201px;
+
+.search-header .temp-inp {
+  width: 79%;
   height: 30px;
   line-height: 30px;
   padding-left: 3px;
-  border:1px solid #DCDDDC;
-  color: #767776;
+  border: 1px solid #DCDDDC;
+  color: #666766;
   float: left;
 }
-.search-header .out-search-btn{
-  width: 65px;
+
+.search-header .out-search-btn {
+  width: 19.4%;
   height: 30px;
   line-height: 30px;
-  background: #0079BA;
-  color: #CAE3F0;
-  border:1px solid #006CB6;
+  background: #2479BB;
+  color: #FEFFFE;
+  border: 1px solid #006CB6;
   border-radius: 1px;
   text-align: center;
-  float: right;
+  float: left;
   text-decoration: none;
+  font-weight: 300;
 }
-.res-list{
+
+.res-list {
   border-spacing: 0;
   border-collapse: collapse;
   font-size: 12px;
@@ -40,15 +75,18 @@ text-align: center;
   color: #686968;
 
 }
-.res-list tbody td{
+
+.res-list tbody td {
   font-size: 12px;
   text-align: center;
   padding: 3px 0;
 }
-.res-list tbody tr:hover{
+
+.res-list tbody tr:hover {
   background: #E4EEF9;
 }
-.res-list tbody tr span{
+
+.res-list tbody tr span {
   padding: 0 4px 1px 4px;
   border-radius: 2px;
   display: inline-block;
@@ -60,32 +98,21 @@ text-align: center;
   transform: scale(0.90);
   cursor: pointer;
 }
-.report-btn{
+
+.report-btn {
   background: #E7524E;
   color: #FDF2F2;
 }
-.finance-btn{
+
+.finance-btn {
   background: #49535E;
   color: #E6E8EA;
 }
-.search-btn{
+
+.search-btn {
   background: #0079BA;
   color: #EDF6FA;
 }
 
 
-.temp-container img{
-  width: 91px;
-  height: 91px;
-  margin:30px auto;
-}
-.temp-container .top-title{
-  width: 100%;
-  font-size: 24px;
-  font-weight: 400;
-  color: #3E3F3E;
-  margin-bottom:30px;
-}
-.temp-container i{
-  font-style: normal;
-}
+
