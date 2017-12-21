@@ -1,0 +1,29 @@
+.news-title{
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 23px;
+  color: #E40900;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.news-info{
+  text-align: center;
+  font-size: 14px;
+  color: #373837;
+  margin-bottom: 15px;
+}
+.news-info span{
+  display: inline-block;
+  margin: 0 5px;
+}
+.second-title{
+  padding: 5px;
+  font-size: 14px;
+  color: #373837;
+  text-align: center;
+}
+.news-cont{
+  font-size: 14px;
+  color: #373837;
+  line-height: 30px;
+}
