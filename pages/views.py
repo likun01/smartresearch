@@ -70,3 +70,17 @@ class StockIndustryRankView(TemplateView):
     股票行业排名页面
     '''
     template_name = 'pages/industry_rank.html'
+
+
+class StockArticleDetailView(TemplateView):
+    '''
+    文章详情页面
+    '''
+    template_name = 'pages/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super(StockArticleDetailView, self).get_context_data()
+        pk = self.request.GET.get('pk')
+        ct = self.request.GET.get('ct')
+        context_data.update({'pk': pk, 'ct': ct})
+        return context_data
