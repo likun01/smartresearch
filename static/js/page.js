@@ -32,16 +32,19 @@
         /*事件处理*/
       },
 
+
       getData: function () {
         $.ajax({
           url: opts.interFace,
           type: 'GET',
-          data: {start: (opts.cacheNum - 1) * opts.pageSize, length: opts.pageSize},
+          // data: {start: (opts.cacheNum - 1) * opts.pageSize, length: opts.pageSize},
+          data:{
+            page:opts.cacheNum
+          },
           dataType: 'json',
           success: function (res) {
-            if (res.state === 200) {
-              opts.res = res.data;
-              opts.pNum = Math.ceil(res.total / opts.pageSize);
+              opts.res = res.results;
+              opts.pNum = Math.ceil(res.count / opts.pageSize);
               if (res.total <= 0) { // 没数据 数据，页码隐藏
                 opts.notContent.removeClass("hide");
                 opts.firstPage.addClass("disabled");
@@ -79,7 +82,7 @@
               opts.totalPage.text(opts.pNum);
               Method.showPageindex(0, opts.maxPage, 0);
             }
-          }
+
         })
       },
 
@@ -190,16 +193,19 @@
         $.ajax({
           url: opts.interFace,
           type: 'GET',
-          data: {start: (opts.cacheNum - 1) * opts.pageSize, length: opts.pageSize},
+          // data: {start: (opts.cacheNum - 1) * opts.pageSize, length: opts.pageSize},
+          data:{
+            page:opts.cacheNum
+          },
           success: function (res) {
-            if (res.state === 200) {
-              opts.res = res.data;
+
+              opts.res = res.results;
               var domStr = [];
               for (var i = 0; i < opts.res.length; i++) {
                 domStr.push(opts.dataFun(opts.res[i]));
               }
               opts.pageDiv.html(domStr.join(''));
-            }
+
           }
         });
       },

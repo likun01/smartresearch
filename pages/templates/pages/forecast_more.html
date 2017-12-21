@@ -1,1 +1,515 @@
+{% extends 'pages/base_common.html' %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/detailMore.css">
+{% endblock %}
+
+{% block title %}
 指标详细/更多
+{% endblock %}
+
+{% block container %}
+
+
+<!--右侧新闻_start-->
+
+<!--顶部标题/搜索_start-->
+<div class="header-title">
+    <div>
+        <span> {{ stock_name }}&nbsp;</span>/ 更多
+        <!--<span> {{ stock_name }} </span>/&nbsp;<span>指标详细</span>/ 更多-->
+    </div>
+    <div class="header-search">
+        <span id="search-btn">找相关</span>
+        <input type="text" id="search-inp">
+    </div>
+</div>
+<!--<ul class="search-container">-->
+    <!--<li><span>aaa</span></li>-->
+    <!--<li><span>aaa</span></li>-->
+    <!--<li><span>aaa</span></li>-->
+    <!--<li><span>aaa</span></li>-->
+<!--</ul>-->
+<!--顶部标题/搜索_end-->
+
+<!--新闻_start-->
+<div class="query-container">
+    <!--标题tab_start-->
+    <div class="query-title">
+        <span class="active"><i class="iconfont icon-form"></i>研报</span>
+        <span><i class="iconfont icon-shengyin"></i>公告</span>
+        <span><i class="iconfont icon-friend"></i>社交</span>
+    </div>
+    <!--标题tab_end-->
+
+
+    <!--研报_start-->
+    <div class="report-content container" id="report-content-0">
+        <div class="report-container pageDiv clearfix">
+
+        </div>
+        <div class="notContent hide">
+            无数据
+        </div>
+        <div class="page-container">
+            <ul class="pageMenu clearfix">
+                <li class="firstPage">首页</li>
+                <li class="prevPage">&lt;</li>
+                <div class="pageObj clearfix"></div>
+                <li class="nextPage"> &gt;</li>
+                <li class="lastPage">尾页</li>
+            </ul>
+        </div>
+    </div>
+    <!--研报_end-->
+
+
+    <!--公告_start-->
+    <div class="notice-content container" id="notice-content-0">
+        <!--种类选择列表_start-->
+        <div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>
+        <ul id="notice-list" class="notice-list">
+            <li>
+                <input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">
+                <label for="checkbox-1"></label>
+                <span>全部</span>
+            </li>
+            <li>
+                <input type="checkbox" value="1" id="checkbox-2" style="display: none;">
+                <label for="checkbox-2"></label>
+                <span>财报</span>
+            </li>
+            <li>
+                <input type="checkbox" value="2" id="checkbox-3" style="display: none;">
+                <label for="checkbox-3"></label>
+                <span>重大事项</span>
+            </li>
+            <li>
+                <input type="checkbox" value="3" id="checkbox-4" style="display: none;">
+                <label for="checkbox-4"></label>
+                <span>其他</span>
+            </li>
+            <li>
+                <button id="kind-btn">提交</button>
+            </li>
+        </ul>
+        <!--种类选择列表_end-->
+
+        <!--公告内容_start-->
+        <ul class="news-container pageDiv clearfix" id="notice-container">
+
+        </ul>
+        <!--公告内容_end-->
+        <div class="notContent hide">
+            无数据
+        </div>
+        <div class="page-container">
+            <ul class="pageMenu clearfix">
+                <li class="firstPage">首页</li>
+                <li class="prevPage"> <</li>
+                <div class="pageObj clearfix">
+
+                </div>
+                <li class="nextPage"> ></li>
+                <li class="lastPage">尾页</li>
+            </ul>
+        </div>
+    </div>
+    <!--公告_end-->
+
+
+    <!--社交_start-->
+    <div class="social-content container" id="social-content-0">
+        <ul class="news-container pageDiv clearfix" id="social-container">
+
+        </ul>
+        <div class="notContent hide">
+            无数据
+        </div>
+        <div class="page-container">
+            <ul class="pageMenu clearfix">
+                <li class="firstPage">首页</li>
+                <li class="prevPage"> <</li>
+                <div class="pageObj clearfix">
+
+                </div>
+                <li class="nextPage"> ></li>
+                <li class="lastPage">尾页</li>
+            </ul>
+        </div>
+    </div>
+    <!--社交_end-->
+
+
+</div>
+<!--新闻_end-->
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/inputSearch.js"></script>
+<script src="/static/js/page.js"></script>
+<script>
+  $(function () {
+//    var token=util.getCookie('token');
+    var token = '253cd379536d93dae335deed00423889';
+    var fix_url = 'http://api-pro.xin-shui.com';
+    var count = 0; // 用于标记重新生成新闻容器
+    var countNotice=0;
+
+
+    // tab 内容切换
+    $('.query-title span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.query-container .container').eq($(this).index()).css('display', 'block').siblings('.query-container .container').css('display', 'none');
+    });
+
+    // 新闻渲染到页面上，初始化时调用，搜索框变化时调用
+    function initNews() {
+      count++;
+
+      if (count === 1) {
+        // 研报数据
+        $("#report-content-"+(count-1)).pageFun({
+          interFace:fix_url + '/api/research/forecast/search/?q=' + '碧水源'+'&ct=research',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<div class="plain-news">';
+            dataHtml += '<div class="title-line">';
+            dataHtml += '<span class="news-title">' + item.title + '</span>';
+            dataHtml += '<span class="span-btn">查看原文</span>';
+            dataHtml += '</div>';
+            dataHtml += '<div class="news-info">' + item.bigv.brief +(item.bigv.brief?'':'')+ item.bigv.name + ' '+item.bigv.article_publish_on+'</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</div>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 公告数据
+        $("#notice-content-"+(count-1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + '碧水源'+'&ct=notice',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title">' + item.title + '</div>';
+            dataHtml += '<div class="news-info">' + item.publish_date+'</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 社交数据
+        $("#social-content-"+(count-1)).pageFun({
+          interFace:fix_url + '/api/research/forecast/search/?q=' + '碧水源'+'&ct=social',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title">' + item.title + '</div>';
+            dataHtml += '<div class="news-info">' + (item.bigv.brief?item.bigv.brief:'') +(item.bigv.brief?':':'')+ item.bigv.name + ' '+item.bigv.article_publish_on+'</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        noticeFilter();
+      } else {
+        var reportStr = '';
+        reportStr += '<div class="report-content container" id="report-content-' + (count-1) + '">';
+        reportStr += '<div class="report-container pageDiv clearfix">';
+        reportStr += '</div>';
+        reportStr += '<div class="notContent hide">无数据 </div>';
+        reportStr += '<div class="page-container">';
+        reportStr += '<ul class="pageMenu clearfix">';
+        reportStr += '<li class="firstPage">首页</li>';
+        reportStr += '<li class="prevPage">&lt;</li>';
+        reportStr += '<div class="pageObj clearfix"></div>';
+        reportStr += '<li class="nextPage"> &gt;</li>';
+        reportStr += '<li class="lastPage">尾页</li>';
+        reportStr += '</ul>';
+        reportStr += '</div>';
+        reportStr += '</div>';
+        $('.report-content').before(reportStr);
+        $('#report-content-'+(count-2)).remove();
+
+        var noticeStr='';
+        noticeStr+='<div class="notice-content container" id="notice-content-' + (count-1) + '">';
+        noticeStr+='<div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>';
+        noticeStr+='<ul id="notice-list" class="notice-list">';
+        noticeStr+='<li>';
+        noticeStr+='<input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">';
+        noticeStr+='<label for="checkbox-1"></label>';
+        noticeStr+='<span>全部</span>';
+        noticeStr+='</li>';
+        noticeStr+='<li>';
+        noticeStr+='<input type="checkbox" value="1" id="checkbox-2" style="display: none;">';
+        noticeStr+='<label for="checkbox-2"></label>';
+        noticeStr+='<span>财报</span>';
+        noticeStr+='</li>';
+        noticeStr+='<li>';
+        noticeStr+='<input type="checkbox" value="2" id="checkbox-3" style="display: none;">';
+        noticeStr+='<label for="checkbox-3"></label>';
+        noticeStr+='<span>重大事项</span>';
+        noticeStr+='</li>';
+        noticeStr+='<li>';
+        noticeStr+='<input type="checkbox" value="3" id="checkbox-4" style="display: none;">';
+        noticeStr+='<label for="checkbox-4"></label>';
+        noticeStr+='<span>其他</span>';
+        noticeStr+='</li>';
+        noticeStr+='<li>';
+        noticeStr+='<button id="kind-btn">提交</button>';
+        noticeStr+='</li>';
+        noticeStr+='</ul>';
+        noticeStr+='<ul class="news-container pageDiv clearfix" id="notice-container">';
+        noticeStr+='</ul>';
+        noticeStr+='<div class="notContent hide"> 无数据 </div>';
+        noticeStr+='<div class="page-container">';
+        noticeStr+='<ul class="pageMenu clearfix">';
+        noticeStr+='<li class="firstPage">首页</li>';
+        noticeStr+='<li class="prevPage"> <</li>';
+        noticeStr+='<div class="pageObj clearfix">';
+        noticeStr+='</div>';
+        noticeStr+='<li class="nextPage"> ></li>';
+        noticeStr+='<li class="lastPage">尾页</li>';
+        noticeStr+='</ul>';
+        noticeStr+='</div>';
+        noticeStr+='</div>';
+        $('.notice-content').before(noticeStr);
+        $('#notice-content-'+(count-2)).remove();
+        $('#notice-content-0'+(countNotice-1)).remove();
+
+
+        var socialStr='';
+        socialStr+='<div class="social-content container" id="social-content-' + (count-1) + '">';
+        socialStr+='<ul class="news-container pageDiv clearfix" id="social-container">';
+        socialStr+='</ul>';
+        socialStr+='<div class="notContent hide">数据</div>';
+        socialStr+='<div class="page-container">';
+        socialStr+='<ul class="pageMenu clearfix">';
+        socialStr+='<li class="firstPage">首页</li>';
+        socialStr+='<li class="prevPage"> <</li>';
+        socialStr+='<div class="pageObj clearfix">';
+        socialStr+='</div>';
+        socialStr+='<li class="nextPage"> ></li>';
+        socialStr+='<li class="lastPage">尾页</li>';
+        socialStr+='</ul>';
+        socialStr+='</div>';
+        socialStr+='</div>';
+        $('.social-content').before(socialStr);
+        $('#social-content-'+(count-2)).remove();
+
+        // 研报数据
+        $("#report-content-" + (count-1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + '碧水源'+ $('#search-inp').val()+'&ct=research',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<div class="plain-news">';
+            dataHtml += '<div class="title-line">';
+            dataHtml += '<span class="news-title">' + item.title + '</span>';
+            dataHtml += '<span class="span-btn">查看原文</span>';
+            dataHtml += '</div>';
+            dataHtml += '<div class="news-info">' + item.bigv.brief +(item.bigv.brief?'':'')+ item.bigv.name + ' '+item.bigv.article_publish_on+'</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</div>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 公告数据
+        $("#notice-content" + (count-1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + '碧水源'+ $('#search-inp').val()+'&ct=notice',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title">' + item.title + '</div>';
+            dataHtml += '<div class="news-info">' + item.publish_date+'</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 社交数据
+        $("#social-content" + (count-1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + '碧水源'+ $('#search-inp').val()+'&ct=social',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title">' + item.title + '</div>';
+            dataHtml += '<div class="news-info">' + item.bigv.brief +(item.bigv.brief?'':'')+ item.bigv.name + ' '+item.bigv.article_publish_on+'</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        noticeFilter();
+
+
+      }
+    }
+
+    initNews();
+
+    // 搜索数据 重新渲染页面
+    $('#search-btn').click(function () {
+      var q = $('#search-inp').val();
+      if (q) {
+        $('.search-container').hide();
+        console.log($('.query-title span').eq(0)[0]);
+        console.log($('.query-container .container').eq(0)[0]);
+        $('.query-title span').eq(0).addClass('active').siblings().removeClass('active');
+        $('.query-container .container').eq(0).css('display', 'block').siblings('.query-container .container').css('display', 'none');
+        initNews();
+      }
+
+    });
+
+    // 公告中  下拉选择事件绑定
+    function noticeFilter(){
+      // 显示公告 选择列表
+      $('#notice-kind').click(function () {
+        $('#notice-list').toggle();
+      });
+      // 全选全部选
+      $('.select-all').click(function () {
+        console.log('全选');
+        if ($('.select-all')[0].checked) {
+          $('input[type="checkbox"]').each(function (index, item) {
+            item.checked = true
+          });
+        }
+        else {
+          $('input[type="checkbox"]').each(function (index, item) {
+            item.checked = false;
+          });
+        }
+      });
+      // 检测其他的checkbox，有其他未选中，取消全选
+      $('input[type="checkbox"]').click(function(){
+        if(!this.checked){
+          $('.select-all')[0].checked=false;
+        }
+      });
+      // 提交数据
+      $('#kind-btn').click(function () {
+        countNotice++;
+        var resList = [];
+        $('input[type="checkbox"]').each(function (index, item) {
+          item.checked ? resList.push(Number(item.value)) : null;
+        });
+        $('.notice-list').hide();
+        // 提交信息后清空选项
+        $('input[type="checkbox"]').each(function (index, item) {
+          item.checked = false;
+        });
+        // 公告中如果选择公告类别重新渲染公告页面
+        var noticeStr2 = '';
+        noticeStr2 += '<div class="notice-content container" style="display:block" id="notice-content-0' + (countNotice - 1) + '">';
+        noticeStr2 += '<div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>';
+        noticeStr2 += '<ul id="notice-list" class="notice-list">';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-1"></label>';
+        noticeStr2 += '<span>全部</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input type="checkbox" value="1" id="checkbox-2" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-2"></label>';
+        noticeStr2 += '<span>财报</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input type="checkbox" value="2" id="checkbox-3" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-3"></label>';
+        noticeStr2 += '<span>重大事项</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input type="checkbox" value="3" id="checkbox-4" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-4"></label>';
+        noticeStr2 += '<span>其他</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<button id="kind-btn">提交</button>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '</ul>';
+        noticeStr2 += '<ul class="news-container pageDiv clearfix" id="notice-container">';
+        noticeStr2 += '</ul>';
+        noticeStr2 += '<div class="notContent hide"> 无数据 </div>';
+        noticeStr2 += '<div class="page-container">';
+        noticeStr2 += '<ul class="pageMenu clearfix">';
+        noticeStr2 += '<li class="firstPage">首页</li>';
+        noticeStr2 += '<li class="prevPage"> <</li>';
+        noticeStr2 += '<div class="pageObj clearfix">';
+        noticeStr2 += '</div>';
+        noticeStr2 += '<li class="nextPage"> ></li>';
+        noticeStr2 += '<li class="lastPage">尾页</li>';
+        noticeStr2 += '</ul>';
+        noticeStr2 += '</div>';
+        noticeStr2 += '</div>';
+        $('.notice-content').before(noticeStr2);
+        $('#notice-content-' + (count - 1)).remove();
+        $('#notice-content-0' + (countNotice - 2)).remove();
+        // 公告数据
+        $("#notice-content-0" + (countNotice - 1)).pageFun({
+          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val() + '&kind=' + kind,
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title">' + item.title + '</div>';
+            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+        noticeFilter();
+      });
+    }
+
+
+
+  })
+</script>
+{% endblock %}
