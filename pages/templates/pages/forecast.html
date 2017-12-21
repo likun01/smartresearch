@@ -490,6 +490,7 @@
       analystsData: {},
       line_data: []
     };
+    var stock_name='';
 
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
@@ -557,9 +558,8 @@
         var nameSpan = $('#stock-title');
         var val = nameSpan.html();
         val = val.replace(/<i><\/i>/g, res.stock_name);
-        console.log(val);
-        nameSpan.html(val);
-        $('title').html('指标详情（'+res.stock_name+'）');
+        $('title').html('指标详情（'+res.stock_name+'）')
+        stock_name=res.stock_name;
         // 按年度保存并且修改导出链接
         exportLink[0].csv = res.export_csv;
         exportLink[0].excel = res.export_excel;
@@ -614,8 +614,8 @@
     // 渲染表格数据   初始化表格后给每一个td绑定事件
     function initTable(fixId, data, ind) { // fixId  id的前缀  '#year-data-'
       if (data.cols_title && data.cols_title.length) { // 说明有数据
-        console.log(data);
         // 渲染表头
+        console.log(data);
         data.cols_title.unshift(data.name);
         var titles = data.cols_title;
         var rows_title = data.rows_title;
@@ -685,7 +685,6 @@
           len = titles.length - 1;
           start = len - 4;
           fix_id = fixId.split('-')[0];
-          console.log('len',len,'start',start);
           if (start > 1 && start + 4 < len) {
             $(fix_id + '-next-time').css('color', '#515254');
             $(fix_id + '-next-time').css('cursor', 'pointer');
@@ -854,8 +853,8 @@
     // 点击某一个td触发事件 弹框 unknown forecase normal
     function clickTdInit() {
       $('.unknow-init').click(function () {
-        console.log('未知数据，跳转到研报');
-        // window.location.href = '/search/?code=100011&index=财务资产';
+
+         window.location.href = '/forecast/more/?q='+stock_name+'&ct=research';
       });
 
       // 按年度显示预测弹框
