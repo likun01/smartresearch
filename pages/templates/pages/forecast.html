@@ -18,7 +18,7 @@
     </div>
     <div class="header-search">
         <span id="search-relative">找相关</span>
-        <input type="text" id="search-inp">
+        <input type="text" id="search-inp" >
     </div>
 </div>
 <!--顶部标题/搜索_end-->
@@ -136,7 +136,7 @@
                     <span class="rank"><i id="time-up" class="rank-up"></i><i id="time-down" class="down-plain"></i></span>
                 </div>
                 <div>
-                    数值(百万)
+                    数值
                     <span class="rank"><i id="val-up" class="rank-up"></i><i id="val-down" class="down-plain"></i></span>
                 </div>
                 <div id="toChart"><a href="javascript:;">图表</a></div>
@@ -156,7 +156,7 @@
             <div class="to-word">
                 <a href="javascript:;">文字版</a>
             </div>
-            <h4 class="chart-title">资产负债率</h4>
+            <h4 class="chart-title"></h4>
             <div class="point-chart" id="point-cont" style="width: 400px;height:400px;"></div>
         </div>
         <!--图表_end-->
@@ -485,6 +485,7 @@
       line_data: []
     };
     var stock_name='';
+    var cur_title='';
 
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
@@ -825,12 +826,17 @@
     // 点击某一个td触发事件 弹框 unknown forecase normal
     function clickTdInit() {
       $('.unknow-init').click(function () {
+        var q=$(this).parent().find('.first-col').html();
+        console.log(q)
 
-         window.location.href = '/forecast/more/?q='+stock_name+'&ct=research';
+         window.location.href = '/forecast/more/?q='+stock_name+q+'&stock_name='+stock_name+'&ct=research';
       });
 
       // 按年度显示预测弹框
       $('.forecase-init').click(function () {
+        cur_title=$(this).parent().find('.first-col').html();
+        $('.chart-title').html(cur_title);
+        console.log(cur_title);
         var parentId = $(this).parent().parent().parent().prop('id');
         // 位置设置
         $('.mask-data-container').show();
@@ -1338,7 +1344,12 @@
           splitLine: {
             show: true,
             lineStyle: {
-              type: 'dotted'
+              type: 'dotted',
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#6D6E70'
             }
           },
           axisLabel: {
@@ -1374,8 +1385,9 @@
           axisLine: {
             lineStyle: {
               shadowOffsetY: -10,
+              color: '#6D6E70'
             }
-          },
+          }
         },
         series: seriesObj
       };

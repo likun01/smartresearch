@@ -21,7 +21,8 @@
     </div>
     <div class="header-search">
         <span id="search-btn">找相关</span>
-        <input type="text" id="search-inp">
+        <input type="text" id="search-inp" >
+        <!--<input type="text" id="search-inp" value="{{ stock_name }}">-->
     </div>
 </div>
 <!--<ul class="search-container">-->
@@ -167,13 +168,13 @@
     });
 
     // 新闻渲染到页面上，初始化时调用，搜索框变化时调用
-    function initNews() {
+    function initNews(kw) {
       count++;
 
       if (count === 1) {
         // 研报数据
         $("#report-content-" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + '{{ q }}' + '&ct=research',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=research',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -203,7 +204,7 @@
 
         // 公告数据
         $("#notice-content-" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + '{{ q }}' + '&ct=notice',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=notice',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -229,7 +230,7 @@
 
         // 社交数据
         $("#social-content-" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + '{{ q }}' + '&ct=social',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=social',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -341,7 +342,7 @@
 
         // 研报数据
         $("#report-content-" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + '{{ q }}' + $('#search-inp').val() + '&ct=research',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=research',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -370,7 +371,7 @@
 
         // 公告数据
         $("#notice-content" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + '{{ q }}' + $('#search-inp').val() + '&ct=notice',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=notice',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -396,7 +397,7 @@
 
         // 社交数据
         $("#social-content" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + '{{ q }}' + $('#search-inp').val() + '&ct=social',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw+ $('#search-inp').val() + '&ct=social',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -426,7 +427,16 @@
       }
     }
 
-    initNews();
+    initNews('{{q}}');
+
+    if(url.indexOf('stock_name') > -1){ // 从指标详情页跳转过来
+      var stock_name='{{stock_name}}';
+      var q_index='{{q}}';
+      var reg_index=new RegExp(stock_name,'g');
+      q_index=q_index.replace(reg_index,''); // 得到指标名
+      $('.keyword').html(stock_name);
+      $('.keyword').after('<span class="subkw"> / ' + q_index + '</span>');
+    }
 
     // 搜索数据 重新渲染页面
     $('#search-btn').click(function () {
@@ -441,19 +451,26 @@
         if (url.indexOf('key=kw') > -1) { // 含有key=kw说明是关键词搜索，再次搜索时直接替换头部
           console.log('替换');
           $('.keyword').html(val);
+          initNews('{{q}}');
 
-        } else { // 说明是名称搜索，再次搜索时头部进行拼接
+        }else if(url.indexOf('stock_name') > -1){
           console.log('拼接');
-          var subStr = '<span class="subkw">/ ' + val + '</span>';
+          var subStr = '<span class="subkw"> / ' + val + '</span>';
           $('.keyword').siblings('.subkw').remove();
           $('.keyword').after(subStr);
-
-
+          initNews('{{stock_name}}');
+        }else { // 说明是名称搜索，再次搜索时头部进行拼接
+          console.log('拼接');
+          var subStr = '<span class="subkw"> / ' + val + '</span>';
+          $('.keyword').siblings('.subkw').remove();
+          $('.keyword').after(subStr);
+          initNews('{{q}}');
         }
-        initNews();
       }
 
     });
+
+
 
     // 公告中  下拉选择事件绑定
     function noticeFilter() {
