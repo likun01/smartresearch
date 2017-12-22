@@ -10,7 +10,6 @@
 
 
 <!--右侧新闻_start-->
-
 <!--顶部标题/搜索_start-->
 <div class="header-title">
     <div>
@@ -37,10 +36,10 @@
         <div class="column1"><span></span>毛利率预测</div>
     </div>
     <!--按年度的图表container-->
-    <div class="chart-cont" id="year-chart">
+    <div class="chart-cont" id="year-chart" style="display:block;">
     </div>
     <!--按报告期的图表container-->
-    <div class="chart-cont" style="display: none;" id="report-chart">
+    <div class="chart-cont" style="display: block;" id="report-chart">
     </div>
 </div>
 <!--图表_end-->
@@ -251,117 +250,69 @@
 
 <!--上半部分-->
 <script>
-  // 生成上半部分图片tab和容器
+
   // 按年度
-  $.ajax({
-    type: 'GET',
-    url: 'http://api-pro.xin-shui.com/api/research/forecast/picked/?code={{stock_code}}&report_type=year',
-    success: function (res) {
-      console.log(res);
-      console.log('!!!!!!!!!!!!!!!!!!!!');
-      var rows_title = res.data.rows_title;
-      var rows_data = res.data.rows_data;
-      var titlesArr = []; // tab框数据列表
-      var columsDatas = []; // 按年度的柱状图数据
-      var titles = res.data.cols_title; // 图表底部标题
-      $.each(rows_title, function (index, item) {
-        titlesArr.push(index);
-        columsDatas.push(rows_data[index]);
-      });
-      console.log(columsDatas);
-      // 生成容器
-      initTopCon({year: titlesArr});
-      // 生成颜色列表
-      var temp = [];
-      var colors = [];
-      $.each(rows_data, function (index, item) {
-        temp = rows_data[index]
-      });
-      $.each(temp, function (index, item) {
-        item.status === 'normal' ? colors.push('#62B4F5') : colors.push('#6F64BA');
-      });
-
-      // 处理柱状图数据
-      var ratiosArr = [];
-      var ranksArr = [];
-      $.each(columsDatas, function (index, item) {
-        ratiosArr.push([]);
-        ranksArr.push([]);
-        $.each(item, function (ind, ite) {
-          ratiosArr[index].push(ite.value);
-          ranksArr[index].push(ite.value);
-        })
-      });
-
-      // 生成图表
-      $.each(columsDatas, function (index, item) {
-        var context = 'year-chart-' + index;
-        console.log(ratiosArr[index]);
-//        topRankChart(context, titles, colors, ratiosArr[index]);
-      })
-      topRankChart('year-chart-0', titles, colors, ratiosArr[0]);
-
-
-    },
-    error: function (e) {
-      console.log(e);
-    }
-  });
+  getDataInitDom('year');
 
   // 按报告期
-  $.ajax({
-    type: 'GET',
-    url: 'http://api-pro.xin-shui.com/api/research/forecast/picked/?code={{stock_code}}&report_type=report',
-    success: function (res) {
-      console.log(res);
-      console.log('!!!!!!!!!!!!!!!!!!!!');
-      var rows_title = res.data.rows_title;
-      var rows_data = res.data.rows_data;
-      var titlesArr = [];
-      var columsDatas = [];
-      var titles = res.data.cols_title; // 图表底部标题
-      $.each(rows_title, function (index, item) {
-        titlesArr.push(index);
-        columsDatas.push(rows_data[index]);// 按报告期的柱状图数据
-      });
-      // 生成容器
-      initTopCon({report: titlesArr});
-      // 生成颜色列表
-      var temp = [];
-      var colors = [];
-      $.each(rows_data, function (index, item) {
-        temp = rows_data[index]
-      });
-      $.each(temp, function (index, item) {
-        item.status === 'normal' ? colors.push('#62B4F5') : colors.push('#6F64BA');
-      });
+  getDataInitDom('report');
 
-      // 处理柱状图数据
-      var ratiosArr = [];
-      var ranksArr = [];
-      $.each(columsDatas, function (index, item) {
-        ratiosArr.push([]);
-        ranksArr.push([]);
-        $.each(item, function (ind, ite) {
-          ratiosArr[index].push(ite.value);
-//          ranksArr[index].push(ite.value);
-        })
-      });
+  // 获取数据并且渲染tab、图表
+  function getDataInitDom(kind) { // kind区分year report
+    $.ajax({
+      type: 'GET',
+      url: 'http://api-pro.xin-shui.com/api/research/forecast/picked/?code={{stock_code}}&report_type=' + kind,
+      success: function (res) {
+        console.log(res);
+        console.log('!!!!!!!!!!!!!!!!!!!!');
+        var rows_title = res.data.rows_title;
+        var rows_data = res.data.rows_data;
+        var titlesArr = [];
+        var columsDatas = [];
+        var titles = res.data.cols_title; // 图表底部标题
+        $.each(rows_title, function (index, item) {
+          titlesArr.push(index);
+          columsDatas.push(rows_data[index]);// 按报告期的柱状图数据
+        });
+        // 生成容器
+        var obj = {};
+        obj[kind] = titlesArr;
+        initTopCon(obj);
+        // 生成颜色列表
+        var temp = [];
+        var colors = [];
+        $.each(rows_data, function (index, item) {
+          temp = rows_data[index]
+        });
+        $.each(temp, function (index, item) {
+          item.status === 'normal' ? colors.push('#62B4F5') : colors.push('#6F64BA');
+        });
 
-      // 生成图表
-      $.each(columsDatas, function (index, item) {
-        var context = 'report-chart-' + index;
-        console.log(ratiosArr[index]);
-//        topRankChart(context, titles, colors, ratiosArr[index]);
-      });
+        // 处理柱状图数据
+        var ratiosArr = [];
+        var ranksArr = [];
+        $.each(columsDatas, function (index, item) {
+          ratiosArr.push([]);
+          ranksArr.push([]);
+          $.each(item, function (ind, ite) {
+            ratiosArr[index].push(ite.value);
+            ranksArr[index].push(ite.value);
+          })
+        });
 
-
-
-    },
-    error: function (e) {
-      console.log(e);
-    }
-  });
+        // 生成图表
+        $.each(columsDatas, function (index, item) {
+          var context = kind + '-chart-' + index;
+          console.log(context);
+          console.log('ratiosArr--------', ratiosArr[index]);
+          topRankChart(context, titles, colors, ratiosArr[index]);
+        });
+      },
+      error: function (e) {
+        console.log(e);
+      }
+    });
+  }
 
   // 生成tab和容器
   function initTopCon(data) { //{year:['毛利润','营业增速'],report:[]}
@@ -374,7 +325,6 @@
       });
       $('#year-chart-tab').html(yearStr);
       $('#year-chart').html(yearCont);
-      $('#year-chart-0').show().siblings().hide()
 
     }
 
@@ -383,11 +333,10 @@
       var reportCont = '';
       $.each(data.report, function (index, item) {
         index === 0 ? reportStr += '<span class="active">' + item + '</span>' : reportStr += '<span>' + item + '</span>';
-        reportCont += '<div id="report-chart-' + index + '" class="chart_year" style="height: 360px;width: 100%" ></div>';
+        reportCont += '<div id="report-chart-' + index + '" class="chart_report" style="height: 360px;width: 100%" ></div>';
       });
       $('#report-chart-tab').html(reportStr);
       $('#report-chart').html(reportCont);
-      $('#report-chart-0').show().siblings().hide()
     }
   }
 
@@ -397,7 +346,8 @@
     var context = echarts.init(document.getElementById(context));
     var min = Math.min.apply(null, ratios);
     var max = Math.max.apply(null, ratios);
-    min % 9 === 0 ? null : (min < 0 ? min = (parseInt(min / 9) - 1) * 9 : min = (parseInt(min / 9) + 1) * 9);
+
+    min % 9 === 0 ? null : (min < 0 ? min = (parseInt(min / 9) - 1) * 9 : min = parseInt(min / 9) * 9);
     max % 9 === 0 ? null : (max > 0 ? max = (parseInt(max / 9) + 1) * 9 : max = (parseInt(max / 9) - 1) * 9);
     var interval = (max - min) / 9;
 
@@ -435,6 +385,8 @@
       ],
       yAxis: [
         {
+//          min: min,
+//          max: max,
           type: 'value',
           name: '毛利率预测',
           axisLabel: {
@@ -448,9 +400,7 @@
               shadowOffsetY: -10,
             }
           },
-          min: min,
-          max: max,
-          interval: interval
+//          interval: interval
         },
         {
           nameLocation: 'start',
@@ -558,6 +508,9 @@
     };
     var stock_name = '';
     var cur_title = '';
+
+
+    $('#report-chart').hide();
 
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
@@ -879,6 +832,7 @@
 
     // 按报告期 切换上面图表tab
     $('#report-chart-tab span').click(function () {
+      console.log('zhixing')
       $(this).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
     });
@@ -1481,5 +1435,4 @@
 
   })
 </script>
-
 {% endblock %}
