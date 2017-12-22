@@ -128,7 +128,7 @@
      var val=$('.temp-inp').val();
      if(val){
        $('.temp-inp').val('');
-       $('.out-search-btn').prop('href','/forecast/more/?q='+val+'&ct=research&key=kw');
+       $('.out-search-btn').prop('href','/search/?q='+val+'&ct=research&key=kw');
      }else {
        $('.out-search-btn').prop('href','javascript:;')
      }

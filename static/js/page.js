@@ -70,8 +70,9 @@
               for (var i = 0; i < opts.res.length; i++) {
                 opts.pageDiv.append(opts.dataFun(opts.res[i]));
               }
+            console.log(opts.pageDiv);
 
-              // 页码渲染
+            // 页码渲染
               for (var i = 0; i < opts.pNum; i++) {
                 opts.pageObj.append(opts.pageFun(i + 1));
               }
@@ -204,8 +205,7 @@
               for (var i = 0; i < opts.res.length; i++) {
                 domStr.push(opts.dataFun(opts.res[i]));
               }
-              opts.pageDiv.html(domStr.join(''));
-
+            opts.pageDiv.html(domStr.join(''));
           }
         });
       },

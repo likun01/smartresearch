@@ -21,7 +21,7 @@
     </div>
     <div class="header-search">
         <span id="search-btn">找相关</span>
-        <input type="text" id="search-inp" >
+        <input type="text" id="search-inp">
         <!--<input type="text" id="search-inp" value="{{ stock_name }}">-->
     </div>
 </div>
@@ -97,7 +97,7 @@
         <!--种类选择列表_end-->
 
         <!--公告内容_start-->
-        <ul class="news-container pageDiv clearfix" id="notice-container">
+        <ul class="news-container pageDiv clearfix" >
 
         </ul>
         <!--公告内容_end-->
@@ -121,7 +121,7 @@
 
     <!--社交_start-->
     <div class="social-content container" id="social-content-0">
-        <ul class="news-container pageDiv clearfix" id="social-container">
+        <ul class="news-container pageDiv clearfix" >
 
         </ul>
         <div class="notContent hide">
@@ -302,7 +302,7 @@
         noticeStr += '<button id="kind-btn">提交</button>';
         noticeStr += '</li>';
         noticeStr += '</ul>';
-        noticeStr += '<ul class="news-container pageDiv clearfix" id="notice-container">';
+        noticeStr += '<ul class="news-container pageDiv clearfix" >';
         noticeStr += '</ul>';
         noticeStr += '<div class="notContent hide"> 无数据 </div>';
         noticeStr += '<div class="page-container">';
@@ -321,9 +321,11 @@
         $('#notice-content-0' + (countNotice - 1)).remove();
 
 
+
+
         var socialStr = '';
         socialStr += '<div class="social-content container" id="social-content-' + (count - 1) + '">';
-        socialStr += '<ul class="news-container pageDiv clearfix" id="social-container">';
+        socialStr += '<ul class="news-container pageDiv clearfix">';
         socialStr += '</ul>';
         socialStr += '<div class="notContent hide">数据</div>';
         socialStr += '<div class="page-container">';
@@ -370,7 +372,7 @@
         });
 
         // 公告数据
-        $("#notice-content" + (count - 1)).pageFun({
+        $('#notice-content-' + (count - 1)).pageFun({
           interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=notice',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
@@ -396,8 +398,8 @@
         });
 
         // 社交数据
-        $("#social-content" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + kw+ $('#search-inp').val() + '&ct=social',
+        $('#social-content-' + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=social',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -429,11 +431,11 @@
 
     initNews('{{q}}');
 
-    if(url.indexOf('stock_name') > -1){ // 从指标详情页跳转过来
-      var stock_name='{{stock_name}}';
-      var q_index='{{q}}';
-      var reg_index=new RegExp(stock_name,'g');
-      q_index=q_index.replace(reg_index,''); // 得到指标名
+    if (url.indexOf('stock_name') > -1) { // 从指标详情页跳转过来
+      var stock_name = '{{stock_name}}';
+      var q_index = '{{q}}';
+      var reg_index = new RegExp(stock_name, 'g');
+      q_index = q_index.replace(reg_index, ''); // 得到指标名
       $('.keyword').html(stock_name);
       $('.keyword').after('<span class="subkw"> / ' + q_index + '</span>');
     }
@@ -453,13 +455,13 @@
           $('.keyword').html(val);
           initNews('{{q}}');
 
-        }else if(url.indexOf('stock_name') > -1){
+        } else if (url.indexOf('stock_name') > -1) {
           console.log('拼接');
           var subStr = '<span class="subkw"> / ' + val + '</span>';
           $('.keyword').siblings('.subkw').remove();
           $('.keyword').after(subStr);
           initNews('{{stock_name}}');
-        }else { // 说明是名称搜索，再次搜索时头部进行拼接
+        } else { // 说明是名称搜索，再次搜索时头部进行拼接
           console.log('拼接');
           var subStr = '<span class="subkw"> / ' + val + '</span>';
           $('.keyword').siblings('.subkw').remove();
@@ -469,7 +471,6 @@
       }
 
     });
-
 
 
     // 公告中  下拉选择事件绑定

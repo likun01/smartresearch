@@ -250,10 +250,8 @@
 
 <!--上半部分-->
 <script>
-
   // 按年度
   getDataInitDom('year');
-
   // 按报告期
   getDataInitDom('report');
 
@@ -263,8 +261,6 @@
       type: 'GET',
       url: 'http://api-pro.xin-shui.com/api/research/forecast/picked/?code={{stock_code}}&report_type=' + kind,
       success: function (res) {
-        console.log(res);
-        console.log('!!!!!!!!!!!!!!!!!!!!');
         var rows_title = res.data.rows_title;
         var rows_data = res.data.rows_data;
         var titlesArr = [];
@@ -303,8 +299,6 @@
         // 生成图表
         $.each(columsDatas, function (index, item) {
           var context = kind + '-chart-' + index;
-          console.log(context);
-          console.log('ratiosArr--------', ratiosArr[index]);
           topRankChart(context, titles, colors, ratiosArr[index]);
         });
       },

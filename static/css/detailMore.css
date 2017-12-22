@@ -484,3 +484,27 @@ ul {
 
 /*社交_end*/
 /*query_end*/
+
+
+
+
+/*搜索页*/
+.report-query {
+  width: 100%;
+  height: 70px;
+}
+
+.report-query input {
+  width: 136px;
+  padding: 5px 2px;
+  border: 1px solid #E5E6E5;
+  margin-right: 10px;
+}
+
+.report-query button {
+  padding: 4px 20px;
+  background: #0079BA;
+  color: #FDFEFD;
+  border: 1px solid #0063B3;
+  border-radius: 0;
+}
