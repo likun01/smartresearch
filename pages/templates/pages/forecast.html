@@ -826,7 +826,6 @@
 
     // 按报告期 切换上面图表tab
     $('#report-chart-tab span').click(function () {
-      console.log('zhixing')
       $(this).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
     });
@@ -834,9 +833,8 @@
     // 查找相关
     $('#search-relative').click(function () {
       var q = $('#search-inp').val();
-      console.log(q);
       if (q) {
-        window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search';
+        window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name='+stock_name;
       }
     });
 
@@ -845,7 +843,6 @@
     function clickTdInit() {
       $('.unknow-init').click(function () {
         var q = $(this).parent().find('.first-col').html();
-        console.log(q)
 
         window.location.href = '/forecast/more/?q=' + stock_name + q + '&stock_name=' + stock_name + '&ct=research';
       });
@@ -854,7 +851,6 @@
       $('.forecase-init').click(function () {
         cur_title = $(this).parent().find('.first-col').html();
         $('.chart-title').html(cur_title);
-        console.log(cur_title);
         var parentId = $(this).parent().parent().parent().prop('id');
         // 位置设置
         $('.mask-data-container').show();
@@ -883,8 +879,6 @@
           } else {
             // 显示在表格的正上方
             t = offT - tdH - conT - 292 - 72; // 292 rank-container 预测高度
-            console.log(offT);
-            console.log('X', t);
             $('.mask-data-container').css('top', t);
             $('.mask-data-container').css('left', l);
           }
@@ -906,15 +900,11 @@
         var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
         var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html()
         var code = '{{ stock_code }}';
-        console.log(keyword);
-        console.log(report_period);
-        console.log(code)
         getForecastData(code, report_period, keyword);
       });
 
       // 按年度显示历史弹框
       $('.normal-init').click(function (e) {
-        console.log('弹框历史数据');
         var parentId = $(this).parent().parent().parent().prop('id');
         // 位置设置
         var conH = 292; // 默认弹框高度为200px
@@ -1117,7 +1107,6 @@
           keyword: keyword
         },
         success: function (res) {
-          console.log(res);
           pageData.all = res.table_data || []; // 默认排序
           pageData.total = res.table_data.length;
           pageData.analystsData = res.analysts || {};
@@ -1354,7 +1343,6 @@
             fontSize: 12,
           },
           formatter: function (datas) {
-            console.log(datas);
             var res = datas[0].seriesName + '</br>';
             for (var i = 0, length = datas.length; i < length; i++) {
               if (datas[i].componentSubType === 'scatter')

@@ -271,7 +271,6 @@
         $('.follow-data li .close').click(function () {
           var code = $(this).parent().data('code');
           var str = fix_url + '/api/research/stock/delete?token=' + token + '&code=' + code;
-          console.log(str);
           $.ajax({
             type: 'DELETE',
             url: fix_url + '/api/research/stock/delete?token=' + token + '&code=' + code,

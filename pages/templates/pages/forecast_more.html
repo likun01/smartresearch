@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block title %}
-指标详细/更多
+{{ q }}
 {% endblock %}
 
 {% block container %}
@@ -15,7 +15,7 @@
 <!--顶部标题/搜索_start-->
 <div class="header-title">
     <div>
-        <span class="keyword"> {{ q }}&nbsp;</span>
+        <span class="keyword"> {{ q }}</span>
         <!--keyword 关键字或者股票名-->
         <!--<span> {{ stock_name }} </span>/&nbsp;<span>指标详细</span>/ 更多-->
     </div>
@@ -97,7 +97,7 @@
         <!--种类选择列表_end-->
 
         <!--公告内容_start-->
-        <ul class="news-container pageDiv clearfix" >
+        <ul class="news-container pageDiv clearfix">
 
         </ul>
         <!--公告内容_end-->
@@ -121,7 +121,7 @@
 
     <!--社交_start-->
     <div class="social-content container" id="social-content-0">
-        <ul class="news-container pageDiv clearfix" >
+        <ul class="news-container pageDiv clearfix">
 
         </ul>
         <div class="notContent hide">
@@ -321,8 +321,6 @@
         $('#notice-content-0' + (countNotice - 1)).remove();
 
 
-
-
         var socialStr = '';
         socialStr += '<div class="social-content container" id="social-content-' + (count - 1) + '">';
         socialStr += '<ul class="news-container pageDiv clearfix">';
@@ -445,24 +443,19 @@
       var val = $('#search-inp').val();
       if (val) {
         $('.search-container').hide();
-        console.log($('.query-title span').eq(0)[0]);
-        console.log($('.query-container .container').eq(0)[0]);
         $('.query-title span').eq(0).addClass('active').siblings().removeClass('active');
         $('.query-container .container').eq(0).css('display', 'block').siblings('.query-container .container').css('display', 'none');
         reg = new RegExp(val, 'g');
         if (url.indexOf('key=kw') > -1) { // 含有key=kw说明是关键词搜索，再次搜索时直接替换头部
-          console.log('替换');
           $('.keyword').html(val);
           initNews('{{q}}');
 
         } else if (url.indexOf('stock_name') > -1) {
-          console.log('拼接');
           var subStr = '<span class="subkw"> / ' + val + '</span>';
           $('.keyword').siblings('.subkw').remove();
           $('.keyword').after(subStr);
           initNews('{{stock_name}}');
         } else { // 说明是名称搜索，再次搜索时头部进行拼接
-          console.log('拼接');
           var subStr = '<span class="subkw"> / ' + val + '</span>';
           $('.keyword').siblings('.subkw').remove();
           $('.keyword').after(subStr);
@@ -481,7 +474,6 @@
       });
       // 全选全部选
       $('.select-all').click(function () {
-        console.log('全选');
         if ($('.select-all')[0].checked) {
           $('input[type="checkbox"]').each(function (index, item) {
             item.checked = true

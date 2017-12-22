@@ -44,9 +44,6 @@
 <script src="/static/js/util.js"></script>
 <script>
   $(function () {
-
-    console.log($('body').width());
-
     var token = util.getCookie('token');
     // var token = '5b2d5bcda394d1247069b53dff32d304';
     var fix_url = 'http://api-pro.xin-shui.com';
@@ -90,20 +87,20 @@
         $.each(data, function (index, item) {
           var q = $('.temp-inp').val();
           var reg = new RegExp(q, 'g');
-          var tCode=item.code.toString();
-          var tName=item.name;
-          if(Number(q)){
-            tCode=tCode.replace(reg,function (e) {
-              return '<i style="color:#E86664">'+e+'</i>'
+          var tCode = item.code.toString();
+          var tName = item.name;
+          if (Number(q)) {
+            tCode = tCode.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
             });
-          }else{
-            tName=tName.replace(reg,function (e) {
-              return '<i style="color:#E86664">'+e+'</i>'
+          } else {
+            tName = tName.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
             });
           }
           str += '<tr>';
-          str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/export/' + item.code + '">' +tCode+'</a></td>';
-          str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/export/' + item.code + '">' + tName+ '</a></td>';
+          str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/export/' + item.code + '">' + tCode + '</a></td>';
+          str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/export/' + item.code + '">' + tName + '</a></td>';
           str += '<td >';
           str += '<a href="http://api-pro.xin-shui.com/research/finical/pick/export/' + item.code + '"><span class="report-btn">智能报告</span></a>';
           str += '</td>';
@@ -111,7 +108,7 @@
           str += '<a href="/forecast/' + item.code + '"><span class="finance-btn">财报</span></a>';
           str += '</td>';
           str += '<td>';
-          str += '<a href="/forecast/more/?q='+item.name+'&ct=research"><span class="search-btn">搜索</span></a>';
+          str += '<a href="/forecast/more/?q=' + item.name + '&ct=research"><span class="search-btn">搜索</span></a>';
           str += '</td>';
           str += '</tr>';
         });
@@ -124,16 +121,16 @@
 
 
     // 搜索
-   $('.out-search-btn').click(function () {
-     var val=$('.temp-inp').val();
-     if(val){
-       $('.temp-inp').val('');
-       $('.out-search-btn').prop('href','/search/?q='+val+'&ct=research&key=kw');
-     }else {
-       $('.out-search-btn').prop('href','javascript:;')
-     }
+    $('.out-search-btn').click(function () {
+      var val = $('.temp-inp').val();
+      if (val) {
+        $('.temp-inp').val('');
+        $('.out-search-btn').prop('href', '/search/?q=' + val + '&ct=research&key=kw');
+      } else {
+        $('.out-search-btn').prop('href', 'javascript:;')
+      }
 
-   })
+    })
 
   })
 </script>
