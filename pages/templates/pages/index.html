@@ -62,7 +62,11 @@
           },
           success: function (res) {
             if (res.results) {
-              initSearch(res.results)
+              if(res.results&&res.results.length){
+                initSearch(res.results)
+              }else {
+                $('.res-list').hide()
+              }
             }
           },
           error: function (e) {
