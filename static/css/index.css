@@ -671,7 +671,7 @@ button, input {
 
 .statistics-chart .chart-tab span {
   display: inline-block;
-  padding: 6px 15px;
+  padding: 6px 10px;
   color: #616261;
   text-align: center;
   border-radius: 1px;
@@ -734,6 +734,8 @@ button, input {
   color: #B5B6B5;
   font-style: normal;
 }
+
+
 
 /*图表样式_end*/
 
