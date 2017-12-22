@@ -501,6 +501,8 @@
     };
     var stock_name = '';
     var cur_title = '';
+    var total_year = 0;
+    var total_report = 0;
 
 
     $('#report-chart').hide();
@@ -557,9 +559,9 @@
         exportLink[0].excel = res.export_excel;
         $('.export-csv a').prop('href', res.export_csv);
         $('.export-excel a').prop('href', res.export_excel);
-        var len = res.table_data.length || 0;
+        total_year = res.table_data.length || 0;
         // 生成表格容器
-        createTableContainer('year-data', len);
+        createTableContainer('year-data', total_year);
 
         // 表格中填数据
         $.each(res.table_data, function (index, item) {
@@ -594,9 +596,9 @@
         // 按报告期 保存导出链接
         exportLink[1].csv = res.export_csv;
         exportLink[1].excel = res.export_excel;
-        var len = res.table_data.length || 0;
+        total_report = res.table_data.length || 0;
         // 生成表格容器
-        createTableContainer('report-data', len);
+        createTableContainer('report-data', total_report);
         // 表格中填数据
         $.each(res.table_data, function (index, item) {
           len_report = item.cols_title.length;
@@ -774,7 +776,7 @@
       }
       if (start_year > 1) {
         start_year--;
-        switchHead('#year-data-', 4, start_year, len_year);
+        switchHead('#year-data-', total_year, start_year, len_year);
       } else {
         console.log('已经是最前了');
         start_year = 0;
@@ -792,7 +794,7 @@
       }
       if (start_year + 4 < len_year) {
         start_year++;
-        switchHead('#year-data-', 4, start_year, len_year);
+        switchHead('#year-data-', total_year, start_year, len_year);
       } else {
         console.log('已经是最后了');
         start_year = len_year - 4;
@@ -811,7 +813,7 @@
       }
       if (start_report > 1) {
         start_report--;
-        switchHead('#report-data-', 4, start_report, len_report);
+        switchHead('#report-data-', total_report, start_report, len_report);
       } else {
         console.log('已经是最前了');
         start_report = 0;
@@ -830,7 +832,7 @@
       if (start_report + 4 < len_report) {
         start_report++;
         console.log('一直加');
-        switchHead('#report-data-', 4, start_report, len_report);
+        switchHead('#report-data-', total_report, start_report, len_report);
       } else {
         console.log('已经是最后了');
         $('#report-next-time').css('color', '#ccc');
