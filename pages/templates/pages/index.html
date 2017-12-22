@@ -11,7 +11,7 @@
 
 
 <div class="temp-container">
-    <img src="/static/images/logo-fff.png" alt="">
+    <img src="/static/images/logo_index.png" alt="">
     <div class="top-title">嘉实智能投研系统</div>
     <div class="search-header">
         <input type="text" class="temp-inp" placeholder="输入股票代码、名称或者关键词">
@@ -44,6 +44,9 @@
 <script src="/static/js/util.js"></script>
 <script>
   $(function () {
+
+    console.log($('body').width());
+
     var token = util.getCookie('token');
     // var token = '5b2d5bcda394d1247069b53dff32d304';
     var fix_url = 'http://api-pro.xin-shui.com';

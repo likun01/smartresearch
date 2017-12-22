@@ -6,40 +6,103 @@
 body, html {
   width: 100%;
   height: 100%;
-  background: #FEFFFE;
+  /*background-color: #FEFFFE;*/
+  background-image: url("/static/images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (min-width: 500px) {
+  .temp-container {
+    width: 495px;
+  }
+
+  .temp-container img {
+    width: 142px;
+    height: 142px;
+  }
+
+  .temp-container .top-title {
+    font-size: 32px
+  }
+
+  .search-header .temp-inp {
+    width: 387px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  .search-header .out-search-btn {
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  .res-list {
+    width: 492px;
+
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .temp-container {
+    width: 300px;
+  }
+
+  .temp-container img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .temp-container .top-title {
+    font-size: 24px
+  }
+
+  .search-header .temp-inp {
+    width: 220px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .search-header .out-search-btn {
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .res-list {
+    width: 297px;
+  }
 }
 
 .temp-container {
   margin: 0 auto;
-  width: 495px;
   text-align: center;
   position: relative;
-
 }
-.footer-container{
+
+.footer-container {
   width: 100%;
-  height: 35px;
-  line-height: 35px;
+  height: 40px;
+  line-height: 40px;
+  background: #323332;
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #323332;
   color: #E3E4E3;
   font-size: 14px;
   text-align: center;
 }
 
 .temp-container img {
-  width: 142px;
-  height: 142px;
-  margin-top: 100px;
+  margin-top: 130px;
+  margin-bottom: 30px;
 }
 
 .temp-container .top-title {
   width: 100%;
-  font-size: 30px;
   font-weight: 400;
-  color: #3E3F3E;
+  color: #FEFFFE;
   margin-bottom: 30px;
 }
 
@@ -53,19 +116,14 @@ body, html {
 }
 
 .search-header .temp-inp {
-  width: 387px;
-  height: 35px;
-  line-height: 35px;
   padding-left: 3px;
-  border: 1px solid #DCDDDC;
-  color: #666766;
+  border: 1px solid #FEFFFE;
+  color: #FEFFFE;
   float: left;
+  background: transparent;
 }
 
 .search-header .out-search-btn {
-  width: 100px;
-  height: 35px;
-  line-height: 35px;
   background: #2479BB;
   color: #FEFFFE;
   border: 1px solid #006CB6;
@@ -81,12 +139,11 @@ body, html {
   border-collapse: collapse;
   font-size: 12px;
   border: 1px solid #DCDDDC;
-  width: 100%;
+
   margin-top: 1px;
   box-shadow: 0 1px 1px 1px #E7E8E7;
   color: #686968;
   background: #FEFFFE;
-
 }
 
 .res-list tbody td {
@@ -101,7 +158,6 @@ body, html {
   color: #717271;
 }
 
-lvha
 .res-list tbody td a:link {
   color: #717271;
 }
