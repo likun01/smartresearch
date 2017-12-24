@@ -125,7 +125,8 @@
             </ul>
             <div class="page-container" id="page-container-0">
             </div>
-            <div class="download-cont"><a id="expForecastData" href="" target="_blank"><img src="/static/images/download.png" alt=""><span>导出数据</span></a></div>
+            <div class="download-cont"><a id="expForecastData" href="" target="_blank"><img
+                    src="/static/images/download.png" alt=""><span>导出数据</span></a></div>
         </div>
         <!--文字内容_end-->
 
@@ -318,7 +319,6 @@
       });
       $('#year-chart-tab').html(yearStr);
       $('#year-chart').html(yearCont);
-
     }
 
     if (data.report && data.report.length) {
@@ -331,6 +331,8 @@
       $('#report-chart-tab').html(reportStr);
       $('#report-chart').html(reportCont);
     }
+    // 生成tab和容器后調用 切換tab
+    changeTopTab();
   }
 
   // 顶部柱状图和折线图
@@ -469,6 +471,21 @@
     };
     // 使用刚指定的配置项和数据显示图表。
     context.setOption(optionWeek);
+  }
+
+  // 切換tab和圖表
+  function changeTopTab() {
+    // 按年度 切换上面图表tab
+    $('#year-chart-tab span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.chart-cont .chart_year').eq($(this).index()).show().siblings('.chart_year').hide();
+    });
+
+    // 按报告期 切换上面图表tab
+    $('#report-chart-tab span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
+    });
   }
 
 
@@ -842,18 +859,6 @@
     });
 
 
-    // 按年度 切换上面图表tab
-    $('#year-chart-tab span').click(function () {
-      $(this).addClass('active').siblings().removeClass('active');
-      $('.chart-cont .chart_year').eq($(this).index()).show().siblings('.chart_year').hide();
-    });
-
-    // 按报告期 切换上面图表tab
-    $('#report-chart-tab span').click(function () {
-      $(this).addClass('active').siblings().removeClass('active');
-      $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
-    });
-
     // 查找相关
     $('#search-relative').click(function () {
       var q = $('#search-inp').val();
@@ -1180,7 +1185,7 @@
           forecastChart(res.analysts, res.line_data);
 
           // 导出数据href赋值
-          $('#expForecastData').prop('href',res.export_url);
+          $('#expForecastData').prop('href', res.export_url);
 
 
         },
