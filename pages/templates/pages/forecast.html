@@ -125,7 +125,7 @@
             </ul>
             <div class="page-container" id="page-container-0">
             </div>
-            <div class="download-cont"><img src="/static/images/download.png" alt=""><span>导出数据</span></div>
+            <div class="download-cont"><a id="expForecastData" href="" target="_blank"><img src="/static/images/download.png" alt=""><span>导出数据</span></a></div>
         </div>
         <!--文字内容_end-->
 
@@ -1175,8 +1175,13 @@
 
           // 列表数据渲染
           clickRankBtn('up', 'up');
+
           // 图表数据渲染
-          forecastChart(res.analysts, res.line_data)
+          forecastChart(res.analysts, res.line_data);
+
+          // 导出数据href赋值
+          $('#expForecastData').prop('href',res.export_url);
+
 
         },
         error: function (e) {
@@ -1231,6 +1236,7 @@
         });
         $('#data-cont-chart-' + countTri).html(dataHtml);
       }
+
 
       // 生成Pagination实例
       let opts1 = {
