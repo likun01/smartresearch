@@ -680,15 +680,33 @@
     <div class="brain-container">
         <div class="brain-title">杜邦分析</div>
         <div class="brain-pic">
-            <span class="ps-span">单位:元</span>
-            <span class="row-1">9.60%</span>
+
+            <div class="ps-legend"><i class="ps-red">红色</i>
+                <i class="ps-new">:2017三季报告</i>
+                <i class="ps-blue">蓝色</i>
+                <i class="ps-pre">:2016三季报告</i>
+            </div>
+
+
+            <span class="row-1">11%</span>
+
+            <span class="pre-1">0</span>
+
             <span class="row-2-1">0.63%</span>
             <span class="row-2-2">100%</span>
             <span class="row-2-3">14.38</span>
 
+            <span class="pre-2-1">0.63%</span>
+            <span class="pre-2-2">100%</span>
+            <span class="pre-2-3">14.38</span>
+
             <span class="row-3-1">23.99%</span>
             <span class="row-3-2">2.62%</span>
             <span class="row-3-3">93.05%</span>
+
+            <span class="pre-3-1">23.99%</span>
+            <span class="pre-3-2">2.62%</span>
+            <span class="pre-3-3">93.05%</span>
 
             <span class="row-4-1">192亿</span>
             <span class="row-4-2">798亿</span>
@@ -697,49 +715,25 @@
             <span class="row-4-5">2.92亿</span>
             <span class="row-4-6">3.14亿</span>
 
+
+            <span class="pre-4-1">192亿</span>
+            <span class="pre-4-2">798亿</span>
+            <span class="pre-4-3">798亿</span>
+            <span class="pre-4-4">3.14亿</span>
+            <span class="pre-4-5">2.92亿</span>
+            <span class="pre-4-6">3.14亿</span>
+
             <span class="row-5-1">805亿</span>
             <span class="row-5-2">607亿</span>
             <span class="row-5-3">--</span>
             <span class="row-5-4">--</span>
 
-            <span class="row-6-1">798亿</span>
-            <span class="row-6-2">--</span>
-            <span class="row-6-3">--</span>
-            <span class="row-6-4">4468亿</span>
-            <span class="row-6-5">351亿</span>
-            <span class="row-6-6">45.8亿</span>
+            <span class="pre-5-1">805亿</span>
+            <span class="pre-5-2">607亿</span>
+            <span class="pre-5-3">--</span>
+            <span class="pre-5-4">--</span>
 
-            <span class="row-7-1">3400亿</span>
-            <span class="row-7-2">--</span>
-            <span class="row-7-3">--</span>
-            <span class="row-7-4">4468亿</span>
-            <span class="row-7-5">351亿</span>
-            <span class="row-7-6">45.8亿</span>
 
-            <span class="row-8-1">2800亿</span>
-            <span class="row-8-2">57.9亿</span>
-            <span class="row-8-3">--</span>
-            <span class="row-8-4">3857亿</span>
-            <span class="row-8-5">--</span>
-            <span class="row-8-6">75.7亿</span>
-
-            <span class="row-9-1">6.44亿</span>
-            <span class="row-9-2">328亿</span>
-            <span class="row-9-3">--</span>
-            <span class="row-9-4">--</span>
-            <span class="row-9-5">212亿</span>
-            <span class="row-9-6">--</span>
-
-            <span class="row-10-1">8900亿</span>
-            <span class="row-10-2">--</span>
-            <span class="row-10-3">78.8亿</span>
-            <span class="row-10-4">223亿</span>
-
-            <span class="row-11-1">--</span>
-            <span class="row-11-2">--</span>
-            <span class="row-11-3">--</span>
-
-            <span class="row-12-1">--</span>
         </div>
         <p style="padding: 10px 0">注:以上数据优先摘录上市公司定期报告中公布的数据，若报告期中没公布此项数据，则通过计算得出此项数据。</p>
 
@@ -909,6 +903,17 @@
   option = {
     title: {
       text: ''
+    },
+    legend: {
+      data: ['年度数据', '趋势'],
+      textStyle: {
+        fontSize: '10'
+      },
+      x: 'right',
+      y: 'top',
+      itemWidth: 20,             // 图例图形宽度
+      itemHeight: 10,
+      padding: 30,
     },
     xAxis: [
       {
