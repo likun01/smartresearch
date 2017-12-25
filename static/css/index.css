@@ -336,6 +336,8 @@ button, input {
   line-height: 28px;
   border: 1px solid #A5C2E9;
   float: right;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .content-container .header-search span {

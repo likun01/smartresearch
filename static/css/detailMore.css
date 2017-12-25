@@ -499,6 +499,8 @@ ul {
   padding: 5px 2px;
   border: 1px solid #E5E6E5;
   margin-right: 10px;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .report-query button {

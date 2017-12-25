@@ -1001,7 +1001,7 @@
     // 渲染历史弹框图表
     function initHistoryChart(tdArr, titleArr) {
       $('.rank-container').show();
-      var min = Math.min.apply(null, tdArr) + 1;
+      var min = Math.min.apply(null, tdArr) - 1;
       var max = Math.max.apply(null, tdArr) + 1;
       var interval = (max - min) / 5;
       var myChart = echarts.init(document.getElementById('main'));

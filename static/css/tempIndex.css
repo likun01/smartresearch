@@ -9,7 +9,7 @@ body, html {
   /*background-color: #FEFFFE;*/
   background-image: url("/static/images/bg.png");
   background-repeat: no-repeat;
-  background-size:100% 100%;
+  background-size: 100% 100%;
   background-attachment: fixed;
 }
 
@@ -43,6 +43,7 @@ body, html {
     width: 492px;
 
   }
+
   .temp-container .top-title {
     margin-bottom: 30px;
   }
@@ -77,6 +78,7 @@ body, html {
   .res-list {
     width: 297px;
   }
+
   .temp-container .top-title {
     margin-bottom: 20px;
   }
@@ -128,6 +130,8 @@ body, html {
   color: #FEFFFE;
   float: left;
   background: transparent;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .search-header .out-search-btn {
