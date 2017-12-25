@@ -36,10 +36,10 @@
         <div class="column1"><span></span>毛利率预测</div>
     </div>
     <!--按年度的图表container-->
-    <div class="chart-cont" id="year-chart" style="display:block;">
+    <div class="chart-cont" id="year-chart" >
     </div>
     <!--按报告期的图表container-->
-    <div class="chart-cont" style="display: block;" id="report-chart">
+    <div class="chart-cont" id="report-chart">
     </div>
 </div>
 <!--图表_end-->
@@ -252,8 +252,12 @@
 <script>
   // 按年度
   getDataInitDom('year');
+  console.log(1)
   // 按报告期
   getDataInitDom('report');
+  console.log(2)
+//  $('#report-chart').hide();
+  console.log(3)
 
   // 获取数据并且渲染tab、图表
   function getDataInitDom(kind) { // kind区分year report
@@ -319,6 +323,7 @@
       });
       $('#year-chart-tab').html(yearStr);
       $('#year-chart').html(yearCont);
+
     }
 
     if (data.report && data.report.length) {
@@ -522,8 +527,6 @@
     var total_report = 0;
 
 
-    $('#report-chart').hide();
-
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
@@ -534,7 +537,8 @@
       // 控制上面图表的tab
       $('.chart-tab').eq($(this).index()).show().siblings('.chart-tab').hide();
       // 控制上面图表哪组显示
-      $('.chart-cont').eq($(this).index()).show().siblings('.chart-cont').hide();
+//      $('.chart-cont').eq($(this).index()).show().siblings('.chart-cont').hide();
+      $('.chart-cont').eq($(this).index()).css('opacity',1).css('z-index',99).siblings('.chart-cont').css('opacity',0).css('z-index',-99);
       // 更改导出链接
       $('.export-csv a').prop('href', exportLink[$(this).index()].csv);
       $('.export-excel a').prop('href', exportLink[$(this).index()].excel);

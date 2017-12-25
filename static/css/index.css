@@ -655,15 +655,31 @@ button, input {
   z-index: 99;
   margin-top: 20px;
   margin-bottom: -30px;
+  height: 400px;
+  position: relative;
 }
 
 .statistics-chart .chart-cont {
   height: 360px;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 40px;
-  margin-top: 20px;
+  /*margin-bottom: 40px;*/
+  /*margin-top: 20px;*/
+  position: absolute;
+  top:40px;
+  left: 0;
 }
+#year-chart{
+  z-index: 99;
+  opacity: 1;
+  filter:alpha(opacity=1);
+}
+#report-chart{
+  z-index: 99;
+  opacity: 0;
+  filter:alpha(opacity=0);
+}
+
 
 .statistics-chart .chart-tab {
   width: 100%;
