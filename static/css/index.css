@@ -666,7 +666,7 @@ button, input {
   /*margin-bottom: 40px;*/
   /*margin-top: 20px;*/
   position: absolute;
-  top:40px;
+  top:50px;
   left: 0;
 }
 #year-chart{
@@ -703,7 +703,7 @@ button, input {
 }
 
 .legend {
-  margin-top: 20px;
+  margin-top: 5px;
   overflow: hidden;
   margin-bottom: -40px;
   padding-right: 20px;

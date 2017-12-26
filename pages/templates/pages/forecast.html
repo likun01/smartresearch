@@ -32,11 +32,11 @@
     </div>
     <div class="legend">
         <div class="column3"><img src="/static/images/legend.png" alt="">行业排名</div>
-        <div class="column2"><span></span>毛利率</div>
-        <div class="column1"><span></span>毛利率预测</div>
+        <div class="column2"><span></span><i style="font-style: normal" class="legend-pre">历史数据</i></div>
+        <div class="column1"><span></span><i style="font-style: normal" class="legend-next">预测数据</i></div>
     </div>
     <!--按年度的图表container-->
-    <div class="chart-cont" id="year-chart" >
+    <div class="chart-cont" id="year-chart">
     </div>
     <!--按报告期的图表container-->
     <div class="chart-cont" id="report-chart">
@@ -252,12 +252,10 @@
 <script>
   // 按年度
   getDataInitDom('year');
-  console.log(1)
+
   // 按报告期
   getDataInitDom('report');
-  console.log(2)
-//  $('#report-chart').hide();
-  console.log(3)
+
 
   // 获取数据并且渲染tab、图表
   function getDataInitDom(kind) { // kind区分year report
@@ -267,7 +265,7 @@
       success: function (res) {
         var rows_title = res.data.rows_title;
         var rows_data = res.data.rows_data;
-        var titlesArr = [];
+        var titlesArr = []; // 每组数据的标题数组
         var columsDatas = [];
         var titles = res.data.cols_title; // 图表底部标题
         $.each(rows_title, function (index, item) {
@@ -303,7 +301,7 @@
         // 生成图表
         $.each(columsDatas, function (index, item) {
           var context = kind + '-chart-' + index;
-          topRankChart(context, titles, colors, ratiosArr[index]);
+          topRankChart(context, titles, colors,titlesArr[index], ratiosArr[index]);
         });
       },
       error: function (e) {
@@ -314,17 +312,26 @@
 
   // 生成tab和容器
   function initTopCon(data) { //{year:['毛利润','营业增速'],report:[]}
+    var tab_cont=null;
     if (data.year && data.year.length) {
       var yearStr = '';
       var yearCont = '';
       $.each(data.year, function (index, item) {
         index === 0 ? yearStr += '<span class="active">' + item + '</span>' : yearStr += '<span>' + item + '</span>';
         yearCont += '<div id="year-chart-' + index + '" class="chart_year" style="height: 360px;width: 100%" ></div>';
+        index === 0 ?tab_cont=item:'';
+
       });
       $('#year-chart-tab').html(yearStr);
       $('#year-chart').html(yearCont);
-
+      // 初始化legend
+      $('.legend-pre').html(tab_cont+'历史数据');
+      $('.legend-next').html(tab_cont+'预测数据');
     }
+
+
+
+
 
     if (data.report && data.report.length) {
       var reportStr = '';
@@ -338,18 +345,22 @@
     }
     // 生成tab和容器后調用 切換tab
     changeTopTab();
+
+
+
+
   }
 
   // 顶部柱状图和折线图
-  function topRankChart(context, titles, colors, ratios, ranks) {
-    // context, titles, colors,ratios,ranks  容器 标题 颜色 条形图数据  折线图数据
+  function topRankChart(context, titles, colors,y_name, ratios, ranks) {
+    // context, titles, colors,y_name,ratios,ranks  容器 标题 颜色 y轴名称 条形图数据  折线图数据
     var context = echarts.init(document.getElementById(context));
-    var min = Math.min.apply(null, ratios);
-    var max = Math.max.apply(null, ratios);
-
-    min % 9 === 0 ? null : (min < 0 ? min = (parseInt(min / 9) - 1) * 9 : min = parseInt(min / 9) * 9);
-    max % 9 === 0 ? null : (max > 0 ? max = (parseInt(max / 9) + 1) * 9 : max = (parseInt(max / 9) - 1) * 9);
-    var interval = (max - min) / 9;
+//    var min = Math.min.apply(null, ratios);
+//    var max = Math.max.apply(null, ratios);
+//
+//    min % 9 === 0 ? null : (min < 0 ? min = (parseInt(min / 9) - 1) * 9 : min = parseInt(min / 9) * 9);
+//    max % 9 === 0 ? null : (max > 0 ? max = (parseInt(max / 9) + 1) * 9 : max = (parseInt(max / 9) - 1) * 9);
+//    var interval = (max - min) / 9;
 
     //配置及数据
     optionWeek = {
@@ -385,13 +396,11 @@
       ],
       yAxis: [
         {
-//          min: min,
-//          max: max,
           type: 'value',
-          name: '毛利率预测',
-          axisLabel: {
-            formatter: '{value} %'
-          },
+          name: y_name,
+//          axisLabel: {
+//            formatter: '{value} %'
+//          },
           axisTick: {
             show: false
           },
@@ -399,8 +408,7 @@
             lineStyle: {
               shadowOffsetY: -10,
             }
-          },
-//          interval: interval
+          }
         },
         {
           nameLocation: 'start',
@@ -484,12 +492,21 @@
     $('#year-chart-tab span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart_year').eq($(this).index()).show().siblings('.chart_year').hide();
+      // 获取当前tab内容值
+
+      var tab_cont=$(this).html();
+      $('.legend-pre').html(tab_cont+'历史数据');
+      $('.legend-next').html(tab_cont+'预测数据');
+
     });
 
     // 按报告期 切换上面图表tab
     $('#report-chart-tab span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
+      var tab_cont=$(this).html();
+      $('.legend-pre').html(tab_cont+'历史数据');
+      $('.legend-next').html(tab_cont+'预测数据');
     });
   }
 
@@ -538,14 +555,17 @@
       $('.chart-tab').eq($(this).index()).show().siblings('.chart-tab').hide();
       // 控制上面图表哪组显示
 //      $('.chart-cont').eq($(this).index()).show().siblings('.chart-cont').hide();
-      $('.chart-cont').eq($(this).index()).css('opacity',1).css('z-index',99).siblings('.chart-cont').css('opacity',0).css('z-index',-99);
+      $('.chart-cont').eq($(this).index()).css('opacity', 1).css('z-index', 99).siblings('.chart-cont').css('opacity', 0).css('z-index', -99);
       // 更改导出链接
       $('.export-csv a').prop('href', exportLink[$(this).index()].csv);
       $('.export-excel a').prop('href', exportLink[$(this).index()].excel);
       // 隐藏弹框
       $('.rank-container').hide();
       $('.mask-data-container').hide();
-      $()
+      // legend 修改
+      var tab_cont=$('.chart-tab').eq($(this).index()).show().find('.active').html();
+      $('.legend-pre').html(tab_cont+'历史数据');
+      $('.legend-next').html(tab_cont+'预测数据');
     });
 
     // 导出数据
@@ -625,7 +645,7 @@
         $.each(res.table_data, function (index, item) {
           len_report = item.cols_title.length;
 //          start_report = 1;
-          start_report = len_report-4;
+          start_report = len_report - 4;
           $('.mask_arrow').hide();
           initTable('#report-data-', item, index);
         });
@@ -646,7 +666,7 @@
         var titles = data.cols_title;
         var rows_title = data.rows_title;
         var titleStr = '';
-        if (fixId === '#year-data-'||fixId === '#report-data-') {
+        if (fixId === '#year-data-' || fixId === '#report-data-') {
           $.each(titles, function (index, item) {
             if (index === 0) {
               titleStr += '<td class="first-col"  style="color:#FD2F30">' + item + '</td>';
@@ -673,7 +693,7 @@
 
         // 主体表格数据
         var str = '';
-        if (fixId === '#year-data-'||fixId === '#report-data-') {
+        if (fixId === '#year-data-' || fixId === '#report-data-') {
           $.each(data.rows_data, function (index, item) {
             str += '<tr>';
             str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
@@ -709,7 +729,7 @@
         var len = 0;
         var start = 0;
         var fix_id = null;
-        if (fixId === '#year-data-'||fixId === '#report-data-') {
+        if (fixId === '#year-data-' || fixId === '#report-data-') {
           len = titles.length - 1;
           start = len - 4;
           fix_id = fixId.split('-')[0];
