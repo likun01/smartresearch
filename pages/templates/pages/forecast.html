@@ -624,7 +624,8 @@
         // 表格中填数据
         $.each(res.table_data, function (index, item) {
           len_report = item.cols_title.length;
-          start_report = 1;
+//          start_report = 1;
+          start_report = len_report-4;
           $('.mask_arrow').hide();
           initTable('#report-data-', item, index);
         });
@@ -645,7 +646,7 @@
         var titles = data.cols_title;
         var rows_title = data.rows_title;
         var titleStr = '';
-        if (fixId === '#year-data-') {
+        if (fixId === '#year-data-'||fixId === '#report-data-') {
           $.each(titles, function (index, item) {
             if (index === 0) {
               titleStr += '<td class="first-col"  style="color:#FD2F30">' + item + '</td>';
@@ -655,23 +656,24 @@
               titleStr += '<td>' + item + '</td>';
             }
           });
-        } else {
-          $.each(titles, function (index, item) {
-            if (index === 0) {
-              titleStr += '<td class="first-col" style="color:#FD2F30">' + item + '</td>';
-            } else if (index > 5) { // 13组数据显示后5列
-              titleStr += '<td style="display: none;">' + item + '</td>';
-            } else {
-              titleStr += '<td>' + item + '</td>';
-            }
-          });
         }
+//        else {
+//          $.each(titles, function (index, item) {
+//            if (index === 0) {
+//              titleStr += '<td class="first-col" style="color:#FD2F30">' + item + '</td>';
+//            } else if (index > 5) { // 13组数据显示后5列
+//              titleStr += '<td style="display: none;">' + item + '</td>';
+//            } else {
+//              titleStr += '<td>' + item + '</td>';
+//            }
+//          });
+//        }
 
         $(fixId + ind + ' thead').html(titleStr);
 
         // 主体表格数据
         var str = '';
-        if (fixId === '#year-data-') {
+        if (fixId === '#year-data-'||fixId === '#report-data-') {
           $.each(data.rows_data, function (index, item) {
             str += '<tr>';
             str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
@@ -684,20 +686,21 @@
             });
             str += '</tr>';
           });
-        } else {
-          $.each(data.rows_data, function (index, item) {
-            str += '<tr>';
-            str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
-            $.each(item, function (ind, ite) {
-              if (ind < 5) { // 前5列显示
-                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td  data-val="' + ite.value + '"  class="forecase-init" style="color:#6364FC;">' + ite.value_format + '</td>' : '<td   data-val="' + ite.value + '"  class="normal-init">' + ite.value_format + '</td>')
-              } else {
-                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td data-val="' + ite.value + '"  style="display: none;color:#6364FC;" class="forecase-init">' + ite.value_format + '</td>' : '<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>')
-              }
-            });
-            str += '</tr>';
-          });
         }
+//        else {
+//          $.each(data.rows_data, function (index, item) {
+//            str += '<tr>';
+//            str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
+//            $.each(item, function (ind, ite) {
+//              if (ind < 5) { // 前5列显示
+//                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td  data-val="' + ite.value + '"  class="forecase-init" style="color:#6364FC;">' + ite.value_format + '</td>' : '<td   data-val="' + ite.value + '"  class="normal-init">' + ite.value_format + '</td>')
+//              } else {
+//                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td data-val="' + ite.value + '"  style="display: none;color:#6364FC;" class="forecase-init">' + ite.value_format + '</td>' : '<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>')
+//              }
+//            });
+//            str += '</tr>';
+//          });
+//        }
 
         $(fixId + ind + ' tbody').html(str);
 
@@ -706,7 +709,7 @@
         var len = 0;
         var start = 0;
         var fix_id = null;
-        if (fixId === '#year-data-') {
+        if (fixId === '#year-data-'||fixId === '#report-data-') {
           len = titles.length - 1;
           start = len - 4;
           fix_id = fixId.split('-')[0];
@@ -724,25 +727,26 @@
             $(fix_id + '-next-time').css('color', '#ccc');
             $(fix_id + '-next-time').css('cursor', 'not-allowed');
           }
-        } else {
-          len = titles.length - 1;
-          start = 0;
-          fix_id = fixId.split('-')[0];
-          if (start > 1 && start + 4 < len) {
-            $(fix_id + '-next-time').css('color', '#515254');
-            $(fix_id + '-next-time').css('cursor', 'pointer');
-            $(fix_id + '-pre-time').css('color', '#515254');
-            $(fix_id + '-pre-time').css('cursor', 'pointer');
-          }
-          if (start <= 1) {
-            $(fix_id + '-pre-time').css('color', '#ccc');
-            $(fix_id + '-pre-time').css('cursor', 'not-allowed');
-          }
-          if (start + 4 >= len) {
-            $(fix_id + '-next-time').css('color', '#ccc');
-            $(fix_id + '-next-time').css('cursor', 'not-allowed');
-          }
         }
+//        else {
+//          len = titles.length - 1;
+//          start = 0;
+//          fix_id = fixId.split('-')[0];
+//          if (start > 1 && start + 4 < len) {
+//            $(fix_id + '-next-time').css('color', '#515254');
+//            $(fix_id + '-next-time').css('cursor', 'pointer');
+//            $(fix_id + '-pre-time').css('color', '#515254');
+//            $(fix_id + '-pre-time').css('cursor', 'pointer');
+//          }
+//          if (start <= 1) {
+//            $(fix_id + '-pre-time').css('color', '#ccc');
+//            $(fix_id + '-pre-time').css('cursor', 'not-allowed');
+//          }
+//          if (start + 4 >= len) {
+//            $(fix_id + '-next-time').css('color', '#ccc');
+//            $(fix_id + '-next-time').css('cursor', 'not-allowed');
+//          }
+//        }
 
       } else {
         console.log('无数据')
