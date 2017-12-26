@@ -352,7 +352,8 @@ a:active {
   font-size: 12px;
   text-align: right;
 }
-.ps-legend i{
+
+.ps-legend i {
   font-style: normal;
 }
 
@@ -363,9 +364,11 @@ a:active {
 .ps-blue {
   color: #1E87E4;
 }
-.ps-new{
+
+.ps-new {
   margin-right: 12px;
 }
+
 .row-1 {
   left: 394px;
   top: 26px;
@@ -582,5 +585,46 @@ a:active {
   color: #1E87E4;
 }
 
+/*杜邦分析*/
+ul{
+  list-style: none;
+}
+.analysis-container {
+  width: 100%;
+}
 
+.analysis-container .analysis-title {
+  width: 100%;
+  margin-top: 30px
+}
 
+.analysis-container .analysis-title span {
+  padding: 2px 0;
+  border-bottom: 2px solid #A30000;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.analysis-container .square-point {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #A30000;
+  margin-right: 3px;
+  border-radius: 2px;
+  float: left;
+  margin-top: 3px;
+}
+.analysis-container ul li{
+  padding: 3px 0;
+  overflow: hidden;
+}
+.analysis-info{
+  display: inline-block;
+  float: left;
+  width: 98%;
+}
+
+.color-item{
+  color: #6AB1ED;
+}
