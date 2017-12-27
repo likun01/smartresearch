@@ -1077,3 +1077,13 @@ button, input {
   cursor: pointer;
 
 }
+
+.data-table .forecase-init{
+  color: #6364FC;
+}
+.data-table .green-init{
+  color: #4FFC51;
+}
+.data-table .red-init{
+  color: #F73F3D;
+}
