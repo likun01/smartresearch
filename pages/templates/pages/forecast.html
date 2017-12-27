@@ -312,21 +312,16 @@
 
   // 生成tab和容器
   function initTopCon(data) { //{year:['毛利润','营业增速'],report:[]}
-    var tab_cont=null;
     if (data.year && data.year.length) {
       var yearStr = '';
       var yearCont = '';
       $.each(data.year, function (index, item) {
         index === 0 ? yearStr += '<span class="active">' + item + '</span>' : yearStr += '<span>' + item + '</span>';
         yearCont += '<div id="year-chart-' + index + '" class="chart_year" style="height: 360px;width: 100%" ></div>';
-        index === 0 ?tab_cont=item:'';
 
       });
       $('#year-chart-tab').html(yearStr);
       $('#year-chart').html(yearCont);
-      // 初始化legend
-      $('.legend-pre').html(tab_cont+'历史数据');
-      $('.legend-next').html(tab_cont+'预测数据');
     }
 
 
@@ -494,19 +489,12 @@
       $('.chart-cont .chart_year').eq($(this).index()).show().siblings('.chart_year').hide();
       // 获取当前tab内容值
 
-      var tab_cont=$(this).html();
-      $('.legend-pre').html(tab_cont+'历史数据');
-      $('.legend-next').html(tab_cont+'预测数据');
-
     });
 
     // 按报告期 切换上面图表tab
     $('#report-chart-tab span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart_report').eq($(this).index()).show().siblings('.chart_report').hide();
-      var tab_cont=$(this).html();
-      $('.legend-pre').html(tab_cont+'历史数据');
-      $('.legend-next').html(tab_cont+'预测数据');
     });
   }
 
@@ -562,10 +550,6 @@
       // 隐藏弹框
       $('.rank-container').hide();
       $('.mask-data-container').hide();
-      // legend 修改
-      var tab_cont=$('.chart-tab').eq($(this).index()).show().find('.active').html();
-      $('.legend-pre').html(tab_cont+'历史数据');
-      $('.legend-next').html(tab_cont+'预测数据');
     });
 
     // 导出数据
