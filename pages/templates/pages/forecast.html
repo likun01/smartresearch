@@ -299,14 +299,14 @@
           ranksArr.push([]);
           $.each(item, function (ind, ite) {
             ratiosArr[index].push(ite.value);
-            ranksArr[index].push(ite.value);
+            ranksArr[index].push(ite.rank);
           })
         });
 
         // 生成图表
         $.each(columsDatas, function (index, item) {
           var context = kind + '-chart-' + index;
-          topRankChart(context, titles, colors,titlesArr[index], ratiosArr[index]);
+          topRankChart(context, titles, colors,titlesArr[index], ratiosArr[index],ranksArr[index]);
         });
       },
       error: function (e) {
@@ -365,19 +365,18 @@
     //配置及数据
     optionWeek = {
       tooltip: {
-        trigger: 'axis',
         show: true,
-//        formatter: function (datas) {
-//          var res = '';
-//          if (datas[0].dataIndex < 8) {
-//            res += datas[0].seriesName + datas[0].value + '%' + '</br>';
-//          } else {
-//            res += '毛利润预测' + datas[0].value + '%' + '</br>';
-//          }
-//
-//          res += datas[1].seriesName + (datas[1].value * 100).toFixed(0) + '%' + '</br>';
-//          return res;
-//        }
+        trigger: 'axis',
+        textStyle:{
+          fontSize:10
+        },
+        formatter: function (datas) {
+          var res = '';
+          res += datas ? datas[0].axisValueLabel+'</br>' : '';
+          res += y_name + ':' + datas[0].value + '</br>';
+          res += '排名:' + (datas[1].value * 100).toFixed(0) + '%' + '</br>';
+          return res;
+        }
       },
       xAxis: [
         {
@@ -465,21 +464,21 @@
           },
           barWidth: 20
         },
-//        {
-//          name: '行业排名',
-//          type: 'line',
-//          data: ranks,
-//          yAxisIndex: 1,
-//          itemStyle: {
-//            normal: {
-//              color: '#E4190D',
-//              lineStyle: {
-//                color: '#E4190D',
-//                width: 1
-//              }
-//            }
-//          }
-//        }
+        {
+          name: '行业排名',
+          type: 'line',
+          data: ranks,
+          yAxisIndex: 1,
+          itemStyle: {
+            normal: {
+              color: '#E4190D',
+              lineStyle: {
+                color: '#E4190D',
+                width: 1
+              }
+            }
+          }
+        }
       ]
     };
     // 使用刚指定的配置项和数据显示图表。
@@ -1192,7 +1191,6 @@
             pageData.all6.push(res.table_data[i]);
             pageData.all7.push(res.table_data[i]);
           }
-          console.log(pageData);
 
           // 最后点击的是时间
           // 时间升  数值升
@@ -1447,6 +1445,13 @@
       var minDate = Math.min.apply(null, dates);
       var intervalDate = (maxDate - minDate) / 6;
       // 散点数据处理
+      seriesObj.push({
+        type: 'line',
+        data: line_data,
+        itemStyle: {normal: {color: '#151615', lineStyle: {width: 1}}},
+        symbol: 'none',
+        smooth: true
+      });
       $.each(analystsData, function (index, item) { // 对象遍历
         seriesObj.push({
           name: index + ' ' + item.analyst,
@@ -1457,13 +1462,11 @@
         })
 
       });
-      seriesObj.push({
-        type: 'line',
-        data: line_data,
-        itemStyle: {normal: {color: '#151615', lineStyle: {width: 1}}},
-        symbol: 'none',
-        smooth: true
-      });
+
+      console.log('seriesObj',seriesObj);
+
+
+
       var myChart = echarts.init(document.getElementById('point-cont'));
       option = {
         tooltip: {
@@ -1477,7 +1480,6 @@
             fontSize: 12,
           },
           formatter: function (datas) {
-            console.log('-------------',datas);
             var res = datas[0].seriesName + '</br>';
             for (var i = 0, length = datas.length; i < length; i++) {
               if (datas[i].componentSubType === 'scatter'){

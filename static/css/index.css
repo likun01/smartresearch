@@ -675,7 +675,7 @@ button, input {
   filter:alpha(opacity=1);
 }
 #report-chart{
-  z-index: 99;
+  z-index: -99;
   opacity: 0;
   filter:alpha(opacity=0);
 }
