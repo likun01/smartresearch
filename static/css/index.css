@@ -1073,17 +1073,11 @@ button, input {
   color: #676867;
 }
 
-.data-table .unknow-init,.data-table .forecase-init,.data-table .normal-init,.data-table .green-init,.data-table .red-init{
+.data-table .unknow-init,.data-table .forecase-init,.data-table .normal-init{
   cursor: pointer;
 
 }
 
 .data-table .forecase-init{
   color: #6364FC;
-}
-.data-table .green-init{
-  color: #4FFC51;
-}
-.data-table .red-init{
-  color: #F73F3D;
 }

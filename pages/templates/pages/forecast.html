@@ -691,10 +691,64 @@
             str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
             $.each(item, function (ind, ite) {
               if (ind < titles.length - 6) { // 13组数据显示后5列
-                //
-                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td data-val="' + ite.value + '"  style="display: none;" class="forecase-init">' + ite.value_format + '</td>' :(ite.status === 'normal'?'<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>':(ite.status === 'red'?'<td data-val="' + ite.value + '"  style="display: none;" class="red-init">' + ite.value_format + '</td>':'<td data-val="' + ite.value + '"  style="display: none;" class="green-init">' + ite.value_format + '</td>')))
+                if (ite.status === 'normal') {
+                  if (ite.abnormal === 'normal') {
+                    str += '<td data-val="' + ite.value + '"  style="display: none;" class="normal-init">' + ite.value_format + '</td>';
+
+                  }
+                  if (ite.abnormal === 'red') {
+                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #F73F3D;" class="normal-init">' + ite.value_format + '</td>';
+                  }
+                  if (ite.abnormal === 'green') {
+                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #4FFC51;" class="normal-init">' + ite.value_format + '</td>';
+                  }
+
+                }
+                if (ite.status === 'forecase') {
+                  if (ite.abnormal === 'normal') {
+                    str += '<td data-val="' + ite.value + '"  style="display: none;" class="forecase-init">' + ite.value_format + '</td>';
+
+                  }
+                  if (ite.abnormal === 'red') {
+                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #F73F3D;" class="forecase-init">' + ite.value_format + '</td>';
+                  }
+                  if (ite.abnormal === 'green') {
+                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #4FFC51;" class="forecase-init">' + ite.value_format + '</td>';
+                  }
+                }
+                if (ite.status === 'unknow') {
+                  str += '<td data-val="' + ite.value + '" style="display: none;" class="unknow-init"><i class="unknow-data">..</i></td>';
+
+                }
               } else {
-                str += ite.status === 'unknow' ? '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>' : (ite.status === 'forecase' ? '<td  data-val="' + ite.value + '"  class="forecase-init" >' + ite.value_format + '</td>' :(ite.status === 'normal'?'<td data-val="' + ite.value + '" class="normal-init">' + ite.value_format + '</td>':(ite.status === 'red'?'<td data-val="' + ite.value + '"   class="red-init">' + ite.value_format + '</td>':'<td data-val="' + ite.value + '" class="green-init">' + ite.value_format + '</td>')))
+                if (ite.status === 'normal') {
+                  if (ite.abnormal === 'normal') {
+                    str += '<td data-val="' + ite.value + '"  class="normal-init">' + ite.value_format + '</td>';
+
+                  }
+                  if (ite.abnormal === 'red') {
+                    str += '<td data-val="' + ite.value + '"  style="color: #F73F3D;" class="normal-init">' + ite.value_format + '</td>';
+                  }
+                  if (ite.abnormal === 'green') {
+                    str += '<td data-val="' + ite.value + '"  style="color: #4FFC51;" class="normal-init">' + ite.value_format + '</td>';
+                  }
+
+                }
+                if (ite.status === 'forecase') {
+                  if (ite.abnormal === 'normal') {
+                    str += '<td data-val="' + ite.value + '"   class="forecase-init">' + ite.value_format + '</td>';
+
+                  }
+                  if (ite.abnormal === 'red') {
+                    str += '<td data-val="' + ite.value + '"  style="color: #F73F3D;" class="forecase-init">' + ite.value_format + '</td>';
+                  }
+                  if (ite.abnormal === 'green') {
+                    str += '<td data-val="' + ite.value + '"  style="color: #4FFC51;" class="forecase-init">' + ite.value_format + '</td>';
+                  }
+                }
+                if (ite.status === 'unknow') {
+                  str += '<td data-val="' + ite.value + '"  class="unknow-init"><i class="unknow-data">..</i></td>';
+                }
               }
             });
             str += '</tr>';
