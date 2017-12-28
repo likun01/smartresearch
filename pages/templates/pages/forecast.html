@@ -1436,14 +1436,12 @@
     // 预测弹框 echart图表
     function forecastChart(analystsData, line_data,keyword_cn) { // legend 显示文字 当前行的title
       var seriesObj = [];
-      // 折线数据处理
+      // 日期数据
       var dates = [];
       line_data.forEach(function (item) {
         dates.push(item[0]);
       });
-      var maxDate = Math.max.apply(null, dates);
-      var minDate = Math.min.apply(null, dates);
-      var intervalDate = (maxDate - minDate) / 6;
+
       // 散点数据处理
       seriesObj.push({
         type: 'line',
@@ -1459,13 +1457,17 @@
           data: item.data,
           itemStyle: {normal: {color: '#D9565A'}},
           symbolSize: 5
-        })
+        });
 
+        $.each(item.data, function (ind, ite) {
+          dates.push(ite[0]);
+        })
       });
 
-      console.log('seriesObj',seriesObj);
 
-
+      var maxDate = Math.max.apply(null, dates);
+      var minDate = Math.min.apply(null, dates);
+      var intervalDate = (maxDate - minDate) / 6;
 
       var myChart = echarts.init(document.getElementById('point-cont'));
       option = {
