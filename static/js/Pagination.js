@@ -24,7 +24,6 @@
 
   // 生成数字选项
   Pagination.prototype.initSpan = function () {
-    console.log('allPage',this.allPage);
     if (this.total > 0&&this.allPage>1) {
       var spanStr = '';
       for (var i = 0; i < this.allPage; i++) {

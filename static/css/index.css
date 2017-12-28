@@ -1006,7 +1006,7 @@ button, input {
   /*background: #4FAF53;*/
 }
 
-.mask-data-container .chart-container .close-data-mask {
+.mask-data-container .chart-container .close-data-mask,.all-data-cont  .close-data-mask{
   position: absolute;
   top: -3px;
   right: 6px;
@@ -1052,13 +1052,13 @@ button, input {
 
 .all-data-cont{
   position: relative;
-  height: 380px;
+  min-height: 380px;
 
 }
 .download-cont{
   width: 60px;
   position: absolute;
-  bottom: 21px;
+  bottom: 18px;
   right: 10px;
   cursor: pointer;
 }

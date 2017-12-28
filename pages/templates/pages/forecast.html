@@ -107,17 +107,22 @@
     <div class="mask-data-container" style="display: none;">
         <!--文字内容_start-->
         <div class="all-data-cont" style="display: none">
+            <span class="close-data-mask">&times;</span>
             <div class="title-cont-chart">
                 <div>分析师(公司名称)</div>
                 <div>
                     时间
-                    <span class="rank"><i id="time-up" class="rank-up"></i><i id="time-down"
-                                                                              class="down-plain"></i></span>
+                    <span class="rank">
+                        <i id="time-up" class="rank-up"></i>
+                        <i id="time-down" class="down-plain"></i>
+                    </span>
                 </div>
                 <div>
                     数值
-                    <span class="rank"><i id="val-up" class="rank-up"></i><i id="val-down"
-                                                                             class="down-plain"></i></span>
+                    <span class="rank">
+                        <i id="val-up" class="rank-up"></i>
+                        <i id="val-down" class="down-plain"></i>
+                    </span>
                 </div>
                 <div id="toChart"><a href="javascript:;">图表</a></div>
             </div>
@@ -521,6 +526,10 @@
       all1: [], // 时间降  数值升 (down up)
       all2: [], // 时间升（以前到最新）  数值降 (up down)
       all3: [], // 时间升  数值升 (down down)
+      all4:[],
+      all5:[],
+      all6:[],
+      all7:[],
       dataList: [],
       total: 0,
       analystsData: {},
@@ -892,6 +901,7 @@
 
       // 按年度显示预测弹框
       $('.forecase-init').click(function () {
+        console.log(this);
         cur_title = $(this).parent().find('.first-col').html();
         $('.chart-title').html(cur_title);
         var parentId = $(this).parent().parent().parent().prop('id');
@@ -941,9 +951,11 @@
         }
         // 重新获取数据 重新渲染
         var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
+        var keyword_cn=$(this).siblings().eq(0).html();
         var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html()
         var code = '{{ stock_code }}';
-        getForecastData(code, report_period, keyword);
+
+        getForecastData(code, report_period, keyword,keyword_cn);
       });
 
       // 按年度显示历史弹框
@@ -1133,13 +1145,16 @@
 
     // 点击预测数据相关函数
     // 预测弹框 点击表格预测数据时调用
-    function getForecastData(code, report_period, keyword) {
-      // 再次请求数据时，把容器清空
-      pageData.all0 = [];
-      pageData.all1 = [];
-      pageData.all2 = [];
-      pageData.all3 = [];
-      pageData.all = [];
+    function getForecastData(code, report_period, keyword,keyword_cn) {
+      countTri++;
+      // 绑定数据前先把排序箭头恢复
+      // 把排序箭头恢复
+      $('#time-up').removeClass('up-plain').addClass('rank-up');
+      $('#time-down').removeClass('rank-down').addClass('down-plain');
+
+      $('#val-up').removeClass('up-plain').addClass('rank-up');
+      $('#val-down').removeClass('rank-down').addClass('down-plain');
+
 
       $.ajax({
         type: 'GET',
@@ -1154,6 +1169,16 @@
           pageData.total = res.table_data.length;
           pageData.analystsData = res.analysts || {};
           pageData.line_data = res.line_data || [];
+          // 再次请求数据时，把容器清空
+          pageData.all0 = [];
+          pageData.all1 = [];
+          pageData.all2 = [];
+          pageData.all3 = [];
+
+          pageData.all4 = [];
+          pageData.all5 = [];
+          pageData.all6 = [];
+          pageData.all7 = [];
 
 
           // 获取数据后再整理大小顺序
@@ -1162,41 +1187,89 @@
             pageData.all1.push(res.table_data[i]);
             pageData.all2.push(res.table_data[i]);
             pageData.all3.push(res.table_data[i]);
+            pageData.all4.push(res.table_data[i]);
+            pageData.all5.push(res.table_data[i]);
+            pageData.all6.push(res.table_data[i]);
+            pageData.all7.push(res.table_data[i]);
           }
-          //时间降  数值降
-          pageData.all0.sort(function (a, b) {
-            return -(a.published_dt_timestamp - b.published_dt_timestamp);
-          });
+          console.log(pageData);
+
+          // 最后点击的是时间
+          // 时间升  数值升
           pageData.all0.sort(function (a, b) {
             return -(a.value - b.value);
           });
+          pageData.all0.sort(function (a, b) {
+            return -(a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+
           //时间降  数值升
           pageData.all1.sort(function (a, b) {
-            return -(a.published_dt_timestamp - b.published_dt_timestamp);
-          });
-          pageData.all1.sort(function (a, b) {
-            return a.value - b.value;
-          });
-          //时间升  数值降
-          pageData.all2.sort(function (a, b) {
-            return (a.published_dt_timestamp - b.published_dt_timestamp);
-          });
-          pageData.all2.sort(function (a, b) {
             return -(a.value - b.value);
           });
-          // 时间升  数值升
+          pageData.all1.sort(function (a, b) {
+            return (a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+
+          //时间升  数值降
+          pageData.all2.sort(function (a, b) {
+            return (a.value - b.value);
+          });
+          pageData.all2.sort(function (a, b) {
+            return -(a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+
+          //时间降  数值降
           pageData.all3.sort(function (a, b) {
-            return a.published_dt_timestamp - b.published_dt_timestamp;
+            return (a.value - b.value);
           });
           pageData.all3.sort(function (a, b) {
-            return a.value - b.value;
+            return (a.published_dt_timestamp - b.published_dt_timestamp);
           });
+
+
+          // 最后点击的是数值
+          pageData.all4.sort(function (a, b) {
+            return -(a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+          pageData.all4.sort(function (a, b) {
+            return -(a.value - b.value);
+          });
+
+
+          //时间降  数值升
+          pageData.all5.sort(function (a, b) {
+            return (a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+          pageData.all5.sort(function (a, b) {
+            return -(a.value - b.value);
+          });
+
+
+          //时间升  数值降
+          pageData.all6.sort(function (a, b) {
+            return -(a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+          pageData.all6.sort(function (a, b) {
+            return (a.value - b.value);
+          });
+
+
+          //时间降  数值降
+          pageData.all7.sort(function (a, b) {
+            return (a.published_dt_timestamp - b.published_dt_timestamp);
+          });
+          pageData.all7.sort(function (a, b) {
+            return (a.value - b.value);
+          });
+
 
           // 列表数据渲染
-          clickRankBtn('up', 'up');
+          clickRankBtn('up', 'up','status_time');
+          timeOrder();
 
           // 图表数据渲染
-          forecastChart(res.analysts, res.line_data);
+          forecastChart(res.analysts, res.line_data,keyword_cn);
 
           // 导出数据href赋值
           $('#expForecastData').prop('href', res.export_url);
@@ -1211,16 +1284,18 @@
     }
 
     // 预测弹框  请求数据/数据渲染
-    function clickRankBtn(time, value) {
+    function clickRankBtn(time, value,status) {
       // 触发函数时先清理上次的容器
       if (countTri > 0) {
         var str = '';
-        str += '<ul class="data-cont" id="data-cont-' + countTri + '">';
+        str += '<ul class="data-cont-chart" id="data-cont-chart-' + countTri + '">';
         str += '</ul>';
         str += '<div class="page-container" id="page-container-' + countTri + '">';
         str += '</div>';
-        $('.data-cont').before(str);
-        $('#data-cont-' + (countTri - 1)).remove();
+        $('.data-cont-chart').before(str);
+        $('#data-cont-chart-'+countTri).siblings('.data-cont-chart').remove();
+        $('#page-container-'+countTri).siblings('.page-container').remove();
+        $('#data-cont-chart-' + (countTri - 1)).remove();
         $('#page-container-' + (countTri - 1)).remove();
       }
 
@@ -1229,15 +1304,28 @@
         pageData.dataList = [];
         var offset = curPage * pageSize;   //(curPage-1)*pageSize;  此处不需要减1，pagination中curPage存的是当前索引值
         var all = [];
-        if (time === 'up' && value === 'up') {
-          all = pageData.all0;
-        } else if (time === 'up' && value === 'down') {
-          all = pageData.all2;
-        } else if (time === 'down' && value === 'down') {
-          all = pageData.all3;
-        } else if (time === 'down' && value === 'up') {
-          all = pageData.all1;
+        if(status==='status_time'){
+          if (time === 'up' && value === 'up') {
+            all = pageData.all0;
+          } else if (time === 'up' && value === 'down') {
+            all = pageData.all2;
+          } else if (time === 'down' && value === 'down') {
+            all = pageData.all3;
+          } else if (time === 'down' && value === 'up') {
+            all = pageData.all1;
+          }
+        }else{
+          if (time === 'up' && value === 'up') {
+            all = pageData.all4;
+          } else if (time === 'up' && value === 'down') {
+            all = pageData.all6;
+          } else if (time === 'down' && value === 'down') {
+            all = pageData.all7;
+          } else if (time === 'down' && value === 'up') {
+            all = pageData.all5;
+          }
         }
+
         // 每一页
         for (var i = offset; i < offset + pageSize; i++) {
           if (all[i]) {
@@ -1280,7 +1368,7 @@
           $('#time-down').removeClass('rank-down');
           $('#time-down').addClass('down-plain');
           countTri++;
-          clickRankBtn(history[0], history[1]);
+          clickRankBtn(history[0], history[1],'status_time');
         }
       });
       $('#time-down').click(function () {
@@ -1293,8 +1381,7 @@
           $('#time-up').removeClass('rank-up');
           $('#time-up').addClass('up-plain');
           countTri++;
-          clickRankBtn(history[0], history[1]);
-
+          clickRankBtn(history[0], history[1],'status_time');
         }
       });
 
@@ -1308,8 +1395,7 @@
           $('#val-down').removeClass('rank-down');
           $('#val-down').addClass('down-plain');
           countTri++;
-          clickRankBtn(history[0], history[1]);
-
+          clickRankBtn(history[0], history[1],'status_val');
         }
 
       });
@@ -1323,12 +1409,12 @@
           $('#val-up').removeClass('rank-up');
           $('#val-up').addClass('up-plain');
           countTri++;
-          clickRankBtn(history[0], history[1]);
+          clickRankBtn(history[0], history[1],'status_val');
         }
       });
     }
 
-    timeOrder();
+
 
     // 预测弹框 切换到图表
     $('#toChart').click(function () {
@@ -1350,7 +1436,7 @@
     });
 
     // 预测弹框 echart图表
-    function forecastChart(analystsData, line_data) {
+    function forecastChart(analystsData, line_data,keyword_cn) { // legend 显示文字 当前行的title
       var seriesObj = [];
       // 折线数据处理
       var dates = [];
@@ -1372,7 +1458,6 @@
 
       });
       seriesObj.push({
-        name: '平均',
         type: 'line',
         data: line_data,
         itemStyle: {normal: {color: '#151615', lineStyle: {width: 1}}},
@@ -1392,12 +1477,15 @@
             fontSize: 12,
           },
           formatter: function (datas) {
+            console.log('-------------',datas);
             var res = datas[0].seriesName + '</br>';
             for (var i = 0, length = datas.length; i < length; i++) {
-              if (datas[i].componentSubType === 'scatter')
-                res += '所得税:' + datas[i].data[1] + '</br>';
-              else
+              if (datas[i].componentSubType === 'scatter'){
+                res += keyword_cn+':' + datas[i].data[1] + '</br>';
+              }
+              else if(datas[i].componentSubType === 'line'){
                 res += '平均值:' + datas[i].value[1] + '</br>';
+              }
             }
             return res;
           }
