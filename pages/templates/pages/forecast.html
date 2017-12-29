@@ -373,7 +373,7 @@
           var res = '';
           res += datas ? datas[0].axisValueLabel+'</br>' : '';
           res += y_name + ':' + datas[0].value + '</br>';
-          res += '排名:' + (datas[1].value * 100).toFixed(0) + '%' + '</br>';
+          res += (datas[1].value)?'排名:' + (datas[1].value * 100).toFixed(0) + '%' + '</br>':'';
           return res;
         }
       },
