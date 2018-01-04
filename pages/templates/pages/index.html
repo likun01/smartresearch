@@ -51,6 +51,7 @@
 
     // 搜索框
     $('.temp-inp').on('input focus propertychange', function () {
+      console.log('检测到变化')
       var q = $('.temp-inp').val();
       if (q) {
         $.ajax({
@@ -61,6 +62,7 @@
             q: q
           },
           success: function (res) {
+            console.log(res);
             if (res.results) {
               if(res.results&&res.results.length){
                 initSearch(res.results)
