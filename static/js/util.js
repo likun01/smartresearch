@@ -4,7 +4,7 @@
       var exdate = new Date();
       exdate.setTime(exdate.getTime() + expiremMinutes * 60 * 1000);
 
-      document.cookie = c_name + "=" + escape(value) + ((expiremMinutes == null) ? "" : ";expires=" + exdate.toGMTString())+';path=/';
+      document.cookie = c_name + "=" + escape(value) + ((expiremMinutes == null) ? "" : ";expires=" + exdate.toGMTString()) + ';path=/';
     },
 
     // 读取cookie
@@ -32,18 +32,17 @@
       }
     },
 
-    setSessionSto(s_name,s_val){
-      window.sessionStorage.setItem(s_name,s_val);
+    setSessionSto: function (s_name, s_val) {
+      window.sessionStorage.setItem(s_name, s_val);
     },
-    getSessionSto(s_name){
+    getSessionSto: function (s_name) {
       window.sessionStorage.getItem(s_name);
     },
-    delSessionSto(s_name){
-      window.sessionStorage.setItem(s_name,null)
+    delSessionSto: function (s_name) {
+      window.sessionStorage.setItem(s_name, null)
     }
 
   };
-
 
 
   window.util = util;

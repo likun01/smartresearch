@@ -42,11 +42,11 @@
 
 <!--<script src="/static/js/jquery-1.11.3.js"></script>-->
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-<script src="/static/js/util.js"></script>
+<!--<script src="/static/js/util.js"></script>-->
 <script>
   $(function () {
-    var token = util.getCookie('token');
-    // var token = '5b2d5bcda394d1247069b53dff32d304';
+//    var token = util.getCookie('token');
+     var token = '5b2d5bcda394d1247069b53dff32d304';
     var fix_url = 'http://api-pro.xin-shui.com';
 
     // 搜索框
@@ -58,8 +58,7 @@
           url: fix_url + '/api/research/search',
           type: 'GET',
           data: { // 向后台发送数据
-            q: q,
-            token: token
+            q: q
           },
           success: function (res) {
             if (res.results) {
