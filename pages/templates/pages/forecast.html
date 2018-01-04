@@ -124,7 +124,7 @@
                         <i id="val-down" class="down-plain"></i>
                     </span>
                 </div>
-                <div id="toChart"><a href="javascript:;">图表</a></div>
+                <div id="toChart" class="toChart"><a href="javascript:;">图表</a></div>
             </div>
             <ul class="data-cont-chart" id="data-cont-chart-0">
             </ul>
@@ -952,62 +952,72 @@
       });
 
       // 按年度显示预测弹框
-      $('.forecase-init').click(function () {
-        console.log(this);
-        cur_title = $(this).parent().find('.first-col').html();
-        $('.chart-title').html(cur_title);
-        var parentId = $(this).parent().parent().parent().prop('id');
-        // 位置设置
-        $('.mask-data-container').show();
-        // 默认显示图表页
-        $('.all-data-cont').hide();
-        $('.chart-container').show();
-        var conH = 382; // 默认弹框高度为200px
-        var tdH = $(this).height();
-        var bodyH = $(document.body).height();
-        var offT = $(this).offset().top;
-        var offL = $(this).offset().left;
-        var conL = $('.data-table').offset().left;
-        var conT = $('.data-table').offset().top;
-        var l = offL - conL - ($('.mask-data-container').width() - $(this).width()) / 2;
-        var t = null;
+//      $('.forecase-init').click(function () {
+//      });
+      var $tables=$('.data-table .table-container');
+      $tables.each(function (index,item) {
+        console.log(index);
+        console.log(item);
+        console.log($(item).prop("id"));
+        var item_id=$(item).prop("id");
+        if(item_id!=='report-data-0'&&item_id!=='year-data-0'){
+          $('#'+item_id+' .forecase-init').click(function () {
+            cur_title = $(this).parent().find('.first-col').html();
+            $('.chart-title').html(cur_title);
+            var parentId = $(this).parent().parent().parent().prop('id');
+            // 位置设置
+            $('.mask-data-container').show();
+            // 默认显示图表页
+            $('.all-data-cont').hide();
+            $('.chart-container').show();
+            var conH = 382; // 默认弹框高度为200px
+            var tdH = $(this).height();
+            var bodyH = $(document.body).height();
+            var offT = $(this).offset().top;
+            var offL = $(this).offset().left;
+            var conL = $('.data-table').offset().left;
+            var conT = $('.data-table').offset().top;
+            var l = offL - conL - ($('.mask-data-container').width() - $(this).width()) / 2;
+            var t = null;
 
-        var conL1 = $('#report-data').offset().left;
-        var conT1 = $('#report-data').offset().top;
-        var l1 = offL - conL1 - ($('.mask-data-container').width() - $(this).width()) / 2;
-        if (parentId.indexOf('year') > -1) { // 按年度
-          if (bodyH - (offT + tdH) > conH) {
-            // 显示在表格正下方
-            t = offT + tdH - conT + 10;
-            $('.mask-data-container').css('top', t);
-            $('.mask-data-container').css('left', l);
-          } else {
-            // 显示在表格的正上方
-            t = offT - tdH - conT - 292 - 72; // 292 rank-container 预测高度
-            $('.mask-data-container').css('top', t);
-            $('.mask-data-container').css('left', l);
-          }
-        } else { // 按报告期
-          if (bodyH - (offT + tdH) > conH) {
-            // 显示在表格正下方
-            t = offT + tdH - conT1 + 10;
-            $('.mask-data-container').css('top', t);
-            $('.mask-data-container').css('left', l1);
-          } else {
-            // 显示在表格的正上方
-            t = offT - tdH - conT1 - 292 - 72; // 292 rank-container 预测高度
-            $('.mask-data-container').css('top', t);
-            $('.mask-data-container').css('left', l1);
-          }
+            var conL1 = $('#report-data').offset().left;
+            var conT1 = $('#report-data').offset().top;
+            var l1 = offL - conL1 - ($('.mask-data-container').width() - $(this).width()) / 2;
+            if (parentId.indexOf('year') > -1) { // 按年度
+              if (bodyH - (offT + tdH) > conH) {
+                // 显示在表格正下方
+                t = offT + tdH - conT + 10;
+                $('.mask-data-container').css('top', t);
+                $('.mask-data-container').css('left', l);
+              } else {
+                // 显示在表格的正上方
+                t = offT - tdH - conT - 292 - 72; // 292 rank-container 预测高度
+                $('.mask-data-container').css('top', t);
+                $('.mask-data-container').css('left', l);
+              }
+            } else { // 按报告期
+              if (bodyH - (offT + tdH) > conH) {
+                // 显示在表格正下方
+                t = offT + tdH - conT1 + 10;
+                $('.mask-data-container').css('top', t);
+                $('.mask-data-container').css('left', l1);
+              } else {
+                // 显示在表格的正上方
+                t = offT - tdH - conT1 - 292 - 72; // 292 rank-container 预测高度
+                $('.mask-data-container').css('top', t);
+                $('.mask-data-container').css('left', l1);
+              }
 
+            }
+            // 重新获取数据 重新渲染
+            var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
+            var keyword_cn=$(this).siblings().eq(0).html();
+            var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html()
+            var code = '{{ stock_code }}';
+
+            getForecastData(code, report_period, keyword,keyword_cn);
+          });
         }
-        // 重新获取数据 重新渲染
-        var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
-        var keyword_cn=$(this).siblings().eq(0).html();
-        var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html()
-        var code = '{{ stock_code }}';
-
-        getForecastData(code, report_period, keyword,keyword_cn);
       });
 
       // 按年度显示历史弹框
@@ -1389,7 +1399,7 @@
           dataHtml += '<span>' + item.analyst + '(' + item.org + ')' + '</span>';
           dataHtml += '<span>' + item.published_dt_format + '</span>';
           dataHtml += '<span>' + item.value_format + '</span>';
-          dataHtml += item.gogoal_report_id ? '<span><a href="/article/?pk=' + item.gogoal_report_id + '&ct=report"><div class="span-link active">原文链接</div></a></span>' : '<span><div class="span-link">原文链接</div></span>';
+//          dataHtml += item.gogoal_report_id ? '<span><a href="/article/?pk=' + item.gogoal_report_id + '&ct=report"><div class="span-link active">原文链接</div></a></span>' : '<span><div class="span-link">原文链接</div></span>';
           dataHtml += '</li>';
         });
         $('#data-cont-chart-' + countTri).html(dataHtml);
