@@ -946,73 +946,78 @@
 
     // 点击某一个td触发事件 弹框 unknown forecase normal
     function clickTdInit() {
-      $('.unknow-init').click(function () {
+      // 未知的预测数据
+      function unknowEvent() {
         var q = $(this).parent().find('.first-col').html();
-
         window.location.href = '/forecast/more/?q=' + stock_name + q + '&stock_name=' + stock_name + '&ct=research';
-      });
+      }
+      $('.data-cont').off('click',unknowEvent);
+      $('.unknow-init').on('click',unknowEvent);
 
       // 按年度显示预测弹框
-      $('.forecase-init').click(function () {
-        $('.forecase-init').click(function () {
-          cur_title = $(this).parent().find('.first-col').html();
-          $('.chart-title').html(cur_title);
-          var parentId = $(this).parent().parent().parent().prop('id');
-          // 位置设置
-          $('.mask-data-container').show();
-          // 默认显示图表页
-          $('.all-data-cont').hide();
-          $('.chart-container').show();
-          var conH = 382; // 默认弹框高度为200px
-          var tdH = $(this).height();
-          var bodyH = $(document.body).height();
-          var offT = $(this).offset().top;
-          var offL = $(this).offset().left;
-          var conL = $('.data-table').offset().left;
-          var conT = $('.data-table').offset().top;
-          var l = offL - conL - ($('.mask-data-container').width() - $(this).width()) / 2;
-          var t = null;
+      function foreEven() {
+        cur_title = $(this).parent().find('.first-col').html();
+        $('.chart-title').html(cur_title);
+        var parentId = $(this).parent().parent().parent().prop('id');
+        // 位置设置
+        $('.mask-data-container').show();
+        // 默认显示图表页
+        $('.all-data-cont').hide();
+        $('.chart-container').show();
+        var conH = 382; // 默认弹框高度为200px
+        var tdH = $(this).height();
+        var bodyH = $(document.body).height();
+        var offT = $(this).offset().top;
+        var offL = $(this).offset().left;
+        var conL = $('.data-table').offset().left;
+        var conT = $('.data-table').offset().top;
+        var l = offL - conL - ($('.mask-data-container').width() - $(this).width()) / 2;
+        var t = null;
 
-          var conL1 = $('#report-data').offset().left;
-          var conT1 = $('#report-data').offset().top;
-          var l1 = offL - conL1 - ($('.mask-data-container').width() - $(this).width()) / 2;
-          if (parentId.indexOf('year') > -1) { // 按年度
-            if (bodyH - (offT + tdH) > conH) {
-              // 显示在表格正下方
-              t = offT + tdH - conT + 10;
-              $('.mask-data-container').css('top', t);
-              $('.mask-data-container').css('left', l);
-            } else {
-              // 显示在表格的正上方
-              t = offT - tdH - conT - 292 - 72; // 292 rank-container 预测高度
-              $('.mask-data-container').css('top', t);
-              $('.mask-data-container').css('left', l);
-            }
-          } else { // 按报告期
-            if (bodyH - (offT + tdH) > conH) {
-              // 显示在表格正下方
-              t = offT + tdH - conT1 + 10;
-              $('.mask-data-container').css('top', t);
-              $('.mask-data-container').css('left', l1);
-            } else {
-              // 显示在表格的正上方
-              t = offT - tdH - conT1 - 292 - 72; // 292 rank-container 预测高度
-              $('.mask-data-container').css('top', t);
-              $('.mask-data-container').css('left', l1);
-            }
-
+        var conL1 = $('#report-data').offset().left;
+        var conT1 = $('#report-data').offset().top;
+        var l1 = offL - conL1 - ($('.mask-data-container').width() - $(this).width()) / 2;
+        if (parentId.indexOf('year') > -1) { // 按年度
+          if (bodyH - (offT + tdH) > conH) {
+            // 显示在表格正下方
+            t = offT + tdH - conT + 10;
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l);
+          } else {
+            // 显示在表格的正上方
+            t = offT - tdH - conT - 292 - 72; // 292 rank-container 预测高度
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l);
           }
-          // 重新获取数据 重新渲染
-          var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
-          var keyword_cn=$(this).siblings().eq(0).html();
-          var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html();
-          var code = '{{ stock_code }}';
-          getForecastData(code, report_period, keyword,keyword_cn);
-        });
-      });
+        } else { // 按报告期
+          if (bodyH - (offT + tdH) > conH) {
+            // 显示在表格正下方
+            t = offT + tdH - conT1 + 10;
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l1);
+          } else {
+            // 显示在表格的正上方
+            t = offT - tdH - conT1 - 292 - 72; // 292 rank-container 预测高度
+            $('.mask-data-container').css('top', t);
+            $('.mask-data-container').css('left', l1);
+          }
+
+        }
+        // 重新获取数据 重新渲染
+        var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
+        var keyword_cn=$(this).siblings().eq(0).html();
+        var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html();
+        var code = '{{ stock_code }}';
+        console.log('按年度显示预测弹框')
+        getForecastData(code, report_period, keyword,keyword_cn);
+
+      }
+      $('.forecase-init').off('click',foreEven);
+      $('.forecase-init').on('click',foreEven);
+
 
       // 按年度显示历史弹框
-      $('.normal-init').click(function (e) {
+      function normalEvent() {
         var parentId = $(this).parent().parent().parent().prop('id');
         // 位置设置
         var conH = 292; // 默认弹框高度为200px
@@ -1074,7 +1079,9 @@
           initHistoryChart(tdArr, titleArr);
           closeHistory();
         });
-      });
+      }
+      $('.normal-init').off('click',normalEvent);
+      $('.normal-init').on('click',normalEvent);
     }
 
     // 渲染历史弹框图表
@@ -1500,13 +1507,13 @@
       });
 
       // 散点数据处理
-      seriesObj.push({
-        type: 'line',
-        data: line_data,
-        itemStyle: {normal: {color: '#151615', lineStyle: {width: 1}}},
-        symbol: 'none',
-        smooth: true
-      });
+//      seriesObj.push({
+//        type: 'line',
+//        data: line_data,
+//        itemStyle: {normal: {color: '#151615', lineStyle: {width: 1}}},
+//        symbol: 'none',
+//        smooth: true
+//      });
       $.each(analystsData, function (index, item) { // 对象遍历
         seriesObj.push({
           name: index + ' ' + item.analyst,

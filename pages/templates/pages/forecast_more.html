@@ -158,6 +158,7 @@
     var countNotice = 0;
     var url = window.location.href;
     var q = '{{ q }}';
+    console.log(q);
     var reg = new RegExp(q, 'g');
 
 
@@ -169,6 +170,7 @@
 
     // 新闻渲染到页面上，初始化时调用，搜索框变化时调用
     function initNews(kw) {
+      kw=encodeURI(kw);
       count++;
 
       if (count === 1) {
@@ -342,7 +344,7 @@
 
         // 研报数据
         $("#report-content-" + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=research',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + encodeURI($('#search-inp').val()) + '&ct=research',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -371,7 +373,7 @@
 
         // 公告数据
         $('#notice-content-' + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=notice',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + encodeURI($('#search-inp').val())+ '&ct=notice',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
@@ -397,7 +399,7 @@
 
         // 社交数据
         $('#social-content-' + (count - 1)).pageFun({
-          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + $('#search-inp').val() + '&ct=social',
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + encodeURI($('#search-inp').val()) + '&ct=social',
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染

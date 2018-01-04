@@ -114,7 +114,7 @@
           str += '<a href="/forecast/' + item.code + '"><span class="finance-btn">财报</span></a>';
           str += '</td>';
           str += '<td>';
-          str += '<a href="/forecast/more/?q=' + item.name + '&ct=research"><span class="search-btn">搜索</span></a>';
+          str += '<a href="/forecast/more/?q=' + encodeURI(item.name) + '&ct=research"><span class="search-btn">搜索</span></a>';
           str += '</td>';
           str += '</tr>';
         });
@@ -131,7 +131,7 @@
       var val = $('.temp-inp').val();
       if (val) {
         $('.temp-inp').val('');
-        $('.out-search-btn').prop('href', '/search/?q=' + val + '&ct=research&key=kw');
+        $('.out-search-btn').prop('href', '/search/?q=' + encodeURI(val) + '&ct=research&key=kw');
       } else {
         $('.out-search-btn').prop('href', 'javascript:;')
       }

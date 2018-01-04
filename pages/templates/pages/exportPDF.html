@@ -906,7 +906,9 @@
       axisTick: {
         show: false
       },
-
+      formatter:function (value) {
+        return value.toFixed(2);
+      },
       axisLabel: {
         textStyle: {
           fontSize: '10'
