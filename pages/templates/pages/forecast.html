@@ -652,7 +652,6 @@
     function initTable(fixId, data, ind) { // fixId  id的前缀  '#year-data-'
       if (data.cols_title && data.cols_title.length) { // 说明有数据
         // 渲染表头
-        console.log(data);
         data.cols_title.unshift(data.name);
         var titles = data.cols_title;
         var rows_title = data.rows_title;
@@ -686,7 +685,6 @@
         var str = '';
         if (fixId === '#year-data-' || fixId === '#report-data-') {
           $.each(data.rows_data, function (index, item) {
-            console.log(item);
             str += '<tr>';
             str += '<td class="first-col" data-title=' + rows_title[index] + '>' + index + '</td>'; // 第一列
             $.each(item, function (ind, ite) {
