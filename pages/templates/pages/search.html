@@ -1,1052 +1,541 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>智能图表PDF</title>
-    <link rel="stylesheet" href="/static/css/pageForPDF.css">
-    <link rel="stylesheet" href="/static/iconfont/iconfont.css">
-    <link rel="shortcut icon" href="/static/images/favicon.ico">
-</head>
-<body>
-<div class="container">
-    <i class="iconfont icon-xiazaidaoru"
-       style="color:#000;font-size: 17px; position: absolute;top:35px;right: 50px;cursor: pointer"><a
-            href="http://api-pro.xin-shui.com/research/finical/pick/export/{{stock_code}}/">下载PDF</a></i>
-    <h3 class="header-title">平安银行(000001)</h3>
-    <!--上半部分数据_start-->
-    <div class="top-container">
-        <!--左侧表格数据_start-->
-        <div class="table-left">
-            <!--财务信息表_start-->
-            <table class="finance-container">
-                <thead>
-                <td colspan="6">财务信息</td>
-                </thead>
-                <tbody>
-                <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">关键指标</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
-                        <table class="inner-table">
-                            <thead>
-                            <td></td>
-                            <td>16A</td>
-                            <td>17E</td>
-                            <td>18E</td>
-                            <td>19E</td>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>营业收入增长率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td style=" word-break : break-all;width:25%;">234.33234.33234.33234.33234.33234.33</td>
-                            </tr>
-                            <tr>
-                                <td>净利润增长率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>毛利率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>总资产收益率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>净资产收益率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>每股净利润(元)</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>市盈率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>市净率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
+{% extends 'pages/base_common.html' %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/detailMore.css">
+{% endblock %}
 
-                            <tr>
-                                <td>EV/EBITDA</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>股息收利率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            </tbody>
+{% block title %}
+搜索关键词
+{% endblock %}
 
-                        </table>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">资产负债</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
-                        <table class="inner-table">
-                            <tbody>
-                            <tr>
-                                <td>流动资产</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>非流动资产</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>流动负债</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>非流动负债</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>所有者权益</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">现金流量表</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
-                        <table class="inner-table">
-                            <tbody>
-                            <tr>
-                                <td>经营现金净额</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>投资现金净额</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>筹资现金净额</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">利润表</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
-                        <table class="inner-table">
-                            <tbody>
-                            <tr>
-                                <td>营业收入</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>营业成本</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>营业利润</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>净利润</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">专用指标</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
-                        <table class="inner-table">
-                            <tbody>
-                            <tr>
-                                <td>净息差</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>不良率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>不良生成率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>关注类贷款占比</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>非息收入占比</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>成本收入比</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            <tr>
-                                <td>核心一级资本充足率</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                                <td>234.33</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!--财务信息表_end-->
+{% block container %}
 
 
-            <!--行业对比表_start-->
-            <table class="comp-prepare">
-                <thead>
-                <td colspan="13">行业对比</td>
-                </thead>
-                <tbody>
-                <tr>
+<!--右侧新闻_start-->
 
-                    <td rowspan="2">代码</td>
-                    <td rowspan="2">简称</td>
-                    <td rowspan="2">总市值</td>
-                    <td rowspan="2">市净率</td>
+<!--顶部搜索_start-->
+<div class="report-query">
+    <input type="text" id="search-inp">
+    <button id="search-btn">搜索</button>
+</div>
+<!--顶部搜索_end-->
 
-                    <td colspan="3">市盈率</td>
-                    <td colspan="3">ROE</td>
-                    <td colspan="3">净利润增速</td>
-                </tr>
-                <tr>
-                    <td>16E</td>
-                    <td>17E</td>
-                    <td>18E</td>
-                    <td>16E</td>
-                    <td>17E</td>
-                    <td>18E</td>
-                    <td>16E</td>
-                    <td>17E</td>
-                    <td>18E</td>
-                </tr>
-                <tr>
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr class="even-bg">
-                    <td colspan="2">行业平均</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-
-                <tr>
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr class="even-bg">
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr>
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr class="even-bg">
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr>
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr class="even-bg">
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr>
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr class="even-bg">
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr>
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                <tr class="even-bg">
-                    <td>000001</td>
-                    <td>平安银行</td>
-                    <td>3004</td>
-                    <td>12.2</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                    <td>502</td>
-                    <td>321</td>
-                    <td>321</td>
-                    <td>11.4</td>
-                    <td>12.9</td>
-                    <td>9.8</td>
-                </tr>
-                </tbody>
-
-
-            </table>
-            <!--行业对比表_end-->
-        </div>
-        <!--左侧表格数据_end-->
-
-        <!--右侧图表和新闻_start-->
-        <div class="right-chart-news">
-            <div class="right-title">
-                <span>基本特征</span>
-            </div>
-            <table class="features-table">
-                <tbody>
-                <tr>
-                    <td>上市日</td>
-                    <td>1991-04-03</td>
-                    <td>行业</td>
-                    <td>银行</td>
-                </tr>
-                <tr>
-                    <td>总股本</td>
-                    <td>171.7亿</td>
-                    <td>总市值</td>
-                    <td>3000亿</td>
-                </tr>
-                <tr>
-                    <td>流通股</td>
-                    <td></td>
-                    <td>流通值</td>
-                    <td>169.2亿</td>
-                </tr>
-                <tr>
-                    <td>主题</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td>大股东</td>
-                    <td colspan="3"></td>
-                </tr>
-                </tbody>
-
-            </table>
-
-            <div class="right-title">
-                <span>近期走势</span>
-            </div>
-            <div class="tend-chart" id="tend-chart">
-            </div>
-            <table class="tend-des">
-                <tr>
-                    <td>近一周:</td>
-                    <td>1.12%</td>
-                    <td>近一月:</td>
-                    <td>2.12%</td>
-                </tr>
-                <tr>
-                    <td>近一季:</td>
-                    <td>-1.12%</td>
-                    <td>近一年:</td>
-                    <td>7.12%</td>
-                </tr>
-            </table>
-
-
-            <div class="right-title">
-                <span>2017年EPS预测</span>
-            </div>
-
-            <div style="position: relative;margin-top: -25px;margin-bottom: -30px;">
-                <div class="forecast-chart" id="forecast-chart"></div>
-                <!--<div class="xTitles"></div>-->
-            </div>
-
-
-            <div class="right-title">
-                <span>智能预警</span>
-            </div>
-            <ul class="news-container">
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-            </ul>
-
-
-            <div class="right-title">
-                <span>研究报告</span>
-            </div>
-            <ul class="news-container">
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <span class="square"></span>
-                    <div class="right-cont">
-                        <p>
-                            平安银行(000001)融资融券信息平安银行(000001)融资融券信息平安银行(000001)融资融券信息
-                            <span style="float: right">2017-12-18</span>
-                        </p>
-                    </div>
-                </li>
-            </ul>
-            <!--右侧图表和新闻_end-->
-        </div>
-        <!--上半部分数据_end-->
-
+<!--新闻_start-->
+<div class="query-container">
+    <!--标题tab_start-->
+    <div class="query-title">
+        <span class="active"><i class="iconfont icon-form"></i>研报</span>
+        <span><i class="iconfont icon-shengyin"></i>公告</span>
+        <span><i class="iconfont icon-friend"></i>社交</span>
     </div>
-    <!--下半部分脑图_start-->
-    <div class="brain-container">
-        <div class="brain-title">杜邦分析</div>
-        <div class="brain-pic">
-
-            <div class="ps-legend"><i class="ps-red">红色</i>
-                <i class="ps-new">:2017三季报告</i>
-                <i class="ps-blue">蓝色</i>
-                <i class="ps-pre">:2016三季报告</i>
-            </div>
+    <!--标题tab_end-->
 
 
-            <span class="row-1">11%</span>
-
-            <span class="pre-1">0</span>
-
-            <span class="row-2-1">0.63%</span>
-            <span class="row-2-2">100%</span>
-            <span class="row-2-3">14.38</span>
-
-            <span class="pre-2-1">0.63%</span>
-            <span class="pre-2-2">100%</span>
-            <span class="pre-2-3">14.38</span>
-
-            <span class="row-3-1">23.99%</span>
-            <span class="row-3-2">2.62%</span>
-            <span class="row-3-3">93.05%</span>
-
-            <span class="pre-3-1">23.99%</span>
-            <span class="pre-3-2">2.62%</span>
-            <span class="pre-3-3">93.05%</span>
-
-            <span class="row-4-1">192亿</span>
-            <span class="row-4-2">798亿</span>
-            <span class="row-4-3">798亿</span>
-            <span class="row-4-4">3.14亿</span>
-            <span class="row-4-5">2.92亿</span>
-            <span class="row-4-6">3.14亿</span>
-
-
-            <span class="pre-4-1">192亿</span>
-            <span class="pre-4-2">798亿</span>
-            <span class="pre-4-3">798亿</span>
-            <span class="pre-4-4">3.14亿</span>
-            <span class="pre-4-5">2.92亿</span>
-            <span class="pre-4-6">3.14亿</span>
-
-            <span class="row-5-1">805亿</span>
-            <span class="row-5-2">607亿</span>
-            <span class="row-5-3">--</span>
-            <span class="row-5-4">--</span>
-
-            <span class="pre-5-1">805亿</span>
-            <span class="pre-5-2">607亿</span>
-            <span class="pre-5-3">--</span>
-            <span class="pre-5-4">--</span>
-
+    <!--研报_start-->
+    <div class="report-content container" id="report-content-0">
+        <div class="report-container pageDiv clearfix">
 
         </div>
-        <p style="padding: 10px 0">注:以上数据优先摘录上市公司定期报告中公布的数据，若报告期中没公布此项数据，则通过计算得出此项数据。</p>
+        <div class="notContent hide">
+            无数据
+        </div>
+        <div class="page-container">
+            <ul class="pageMenu clearfix">
+                <li class="firstPage">首页</li>
+                <li class="prevPage">&lt;</li>
+                <div class="pageObj clearfix"></div>
+                <li class="nextPage"> &gt;</li>
+                <li class="lastPage">尾页</li>
+            </ul>
+        </div>
     </div>
-    <!--下半部分脑图_end-->
+    <!--研报_end-->
 
 
-    <div class="analysis-container">
-        <div class="analysis-title">
-            <span>智能杜邦分析，月底将上线</span>
-        </div>
-        <ul style="margin-top: 15px;">
+    <!--公告_start-->
+    <div class="notice-content container" id="notice-content-0">
+        <!--种类选择列表_start-->
+        <div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>
+        <ul id="notice-list" class="notice-list">
             <li>
-                <i class="square-point"></i>
-                <div class="analysis-info">
-                    <span class="color-item">净资产收益率</span>9.03%，同比增长-17.89%，行业排名35.00% （7/20）分位，平均10.18%，中位数9.72%，
-                </div>
+                <input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">
+                <label for="checkbox-1"></label>
+                <span>全部</span>
             </li>
             <li>
-                <i class="square-point"></i>
-                <div class="analysis-info">
-                    <span class="color-item">资产负债率</span>增长同比最高，达-0.16%，行业平均-0.07%； <span
-                        class="color-item">总资产周转率</span>次之，达-2.20%，行业平均-7.50%； <span class="color-item">营业净利润率</span>增速最低，为-7.28%，行业平均5.97%。
-                    三项指标中，营业净利润率行业排名20.00%分位， <span class="color-item">总资产周转率</span>65.00%；<span class="color-item">资产负债率</span>为65.00%。
-                </div>
+                <input type="checkbox" value="1" id="checkbox-2" style="display: none;">
+                <label for="checkbox-2"></label>
+                <span>财报</span>
             </li>
             <li>
-                <i class="square-point"></i>
-                <div class="analysis-info">
-                    与同行业公司相比，公司较偏向<span class="color-item">高净利率型</span>
-                </div>
+                <input type="checkbox" value="2" id="checkbox-3" style="display: none;">
+                <label for="checkbox-3"></label>
+                <span>重大事项</span>
+            </li>
+            <li>
+                <input type="checkbox" value="3" id="checkbox-4" style="display: none;">
+                <label for="checkbox-4"></label>
+                <span>其他</span>
+            </li>
+            <li>
+                <button id="kind-btn">提交</button>
             </li>
         </ul>
+        <!--种类选择列表_end-->
+
+        <!--公告内容_start-->
+        <ul class="news-container pageDiv clearfix" id="notice-container">
+
+        </ul>
+        <!--公告内容_end-->
+        <div class="notContent hide">
+            无数据
+        </div>
+        <div class="page-container">
+            <ul class="pageMenu clearfix">
+                <li class="firstPage">首页</li>
+                <li class="prevPage"> <</li>
+                <div class="pageObj clearfix">
+
+                </div>
+                <li class="nextPage"> ></li>
+                <li class="lastPage">尾页</li>
+            </ul>
+        </div>
     </div>
+    <!--公告_end-->
+
+
+    <!--社交_start-->
+    <div class="social-content container" id="social-content-0">
+        <ul class="news-container pageDiv clearfix" id="social-container">
+
+        </ul>
+        <div class="notContent hide">
+            无数据
+        </div>
+        <div class="page-container">
+            <ul class="pageMenu clearfix">
+                <li class="firstPage">首页</li>
+                <li class="prevPage"> <</li>
+                <div class="pageObj clearfix">
+
+                </div>
+                <li class="nextPage"> ></li>
+                <li class="lastPage">尾页</li>
+            </ul>
+        </div>
+    </div>
+    <!--社交_end-->
+
+
 </div>
+<!--新闻_end-->
+{% endblock %}
 
-
-<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
-<!--样式动态控制-->
+{% block js %}
+<script src="/static/js/inputSearch.js"></script>
+<script src="/static/js/page.js"></script>
 <script>
-  function offset(curEle) {
-    var l = curEle.offsetLeft,
-      t = curEle.offsetTop,
-      p = curEle.offsetParent;
-    while (p) {
-      if (navigator.userAgent.indexOf('MSIE 8.0') === -1) {
-        l += p.clientLeft;
-        t += p.clientTop;
+  $(function () {
+//    var token=util.getCookie('token');
+    var token = '253cd379536d93dae335deed00423889';
+    var fix_url = 'http://api-pro.xin-shui.com';
+    var count = 0; // 用于标记重新生成新闻容器
+    var countNotice = 0;
+    var q = '{{ q }}';
+    var reg = new RegExp(q, 'g');
+
+
+    // tab 内容切换
+    $('.query-title span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.query-container .container').eq($(this).index()).css('display', 'block').siblings('.query-container .container').css('display', 'none');
+    });
+
+    // 新闻渲染到页面上，初始化时调用，搜索框变化时调用
+    function initNews(kw) {
+      count++;
+
+      if (count === 1) {
+        // 研报数据
+        $("#report-content-" + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=research',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            item.content = item.content.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            item.title = item.title.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+
+            var dataHtml = '';
+            dataHtml += '<div class="plain-news">';
+            dataHtml += '<div class="title-line">';
+            dataHtml += '<span class="news-title"><a href="/article/?pk=' + item.pk + '&ct=research">' + item.title + '</a></span>';
+            dataHtml += '<span class="span-btn"><a href="/article/?pk=' + item.pk + '&ct=research">查看原文</a></span>';
+            dataHtml += '</div>';
+            dataHtml += '<div class="news-info">' + item.bigv.brief + (item.bigv.brief ? '' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</div>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 公告数据
+        $("#notice-content-" + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=notice',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            item.content = item.content.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            item.title = item.title.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=notice">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-info">' + item.publish_date + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 社交数据
+        $("#social-content-" + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=social',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            item.content = item.content.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            item.title = item.title.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=social">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-info">' + (item.bigv.brief ? item.bigv.brief : '') + (item.bigv.brief ? ':' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        noticeFilter();
+      } else {
+        var reportStr = '';
+        reportStr += '<div class="report-content container" id="report-content-' + (count - 1) + '">';
+        reportStr += '<div class="report-container pageDiv clearfix">';
+        reportStr += '</div>';
+        reportStr += '<div class="notContent hide">无数据 </div>';
+        reportStr += '<div class="page-container">';
+        reportStr += '<ul class="pageMenu clearfix">';
+        reportStr += '<li class="firstPage">首页</li>';
+        reportStr += '<li class="prevPage">&lt;</li>';
+        reportStr += '<div class="pageObj clearfix"></div>';
+        reportStr += '<li class="nextPage"> &gt;</li>';
+        reportStr += '<li class="lastPage">尾页</li>';
+        reportStr += '</ul>';
+        reportStr += '</div>';
+        reportStr += '</div>';
+        $('.report-content').before(reportStr);
+        $('#report-content-' + (count - 2)).remove();
+
+        var noticeStr = '';
+        noticeStr += '<div class="notice-content container" id="notice-content-' + (count - 1) + '">';
+        noticeStr += '<div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>';
+        noticeStr += '<ul id="notice-list" class="notice-list">';
+        noticeStr += '<li>';
+        noticeStr += '<input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">';
+        noticeStr += '<label for="checkbox-1"></label>';
+        noticeStr += '<span>全部</span>';
+        noticeStr += '</li>';
+        noticeStr += '<li>';
+        noticeStr += '<input type="checkbox" value="1" id="checkbox-2" style="display: none;">';
+        noticeStr += '<label for="checkbox-2"></label>';
+        noticeStr += '<span>财报</span>';
+        noticeStr += '</li>';
+        noticeStr += '<li>';
+        noticeStr += '<input type="checkbox" value="2" id="checkbox-3" style="display: none;">';
+        noticeStr += '<label for="checkbox-3"></label>';
+        noticeStr += '<span>重大事项</span>';
+        noticeStr += '</li>';
+        noticeStr += '<li>';
+        noticeStr += '<input type="checkbox" value="3" id="checkbox-4" style="display: none;">';
+        noticeStr += '<label for="checkbox-4"></label>';
+        noticeStr += '<span>其他</span>';
+        noticeStr += '</li>';
+        noticeStr += '<li>';
+        noticeStr += '<button id="kind-btn">提交</button>';
+        noticeStr += '</li>';
+        noticeStr += '</ul>';
+        noticeStr += '<ul class="news-container pageDiv clearfix" id="notice-container">';
+        noticeStr += '</ul>';
+        noticeStr += '<div class="notContent hide"> 无数据 </div>';
+        noticeStr += '<div class="page-container">';
+        noticeStr += '<ul class="pageMenu clearfix">';
+        noticeStr += '<li class="firstPage">首页</li>';
+        noticeStr += '<li class="prevPage"> <</li>';
+        noticeStr += '<div class="pageObj clearfix">';
+        noticeStr += '</div>';
+        noticeStr += '<li class="nextPage"> ></li>';
+        noticeStr += '<li class="lastPage">尾页</li>';
+        noticeStr += '</ul>';
+        noticeStr += '</div>';
+        noticeStr += '</div>';
+        $('.notice-content').before(noticeStr);
+        $('#notice-content-' + (count - 2)).remove();
+        $('#notice-content-0' + (countNotice - 1)).remove();
+
+
+        var socialStr = '';
+        socialStr += '<div class="social-content container" id="social-content-' + (count - 1) + '">';
+        socialStr += '<ul class="news-container pageDiv clearfix" id="social-container">';
+        socialStr += '</ul>';
+        socialStr += '<div class="notContent hide">数据</div>';
+        socialStr += '<div class="page-container">';
+        socialStr += '<ul class="pageMenu clearfix">';
+        socialStr += '<li class="firstPage">首页</li>';
+        socialStr += '<li class="prevPage"> <</li>';
+        socialStr += '<div class="pageObj clearfix">';
+        socialStr += '</div>';
+        socialStr += '<li class="nextPage"> ></li>';
+        socialStr += '<li class="lastPage">尾页</li>';
+        socialStr += '</ul>';
+        socialStr += '</div>';
+        socialStr += '</div>';
+        $('.social-content').before(socialStr);
+        $('#social-content-' + (count - 2)).remove();
+
+        // 研报数据
+        $("#report-content-" + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=research',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            item.content = item.content.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            item.title = item.title.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            var dataHtml = '';
+            dataHtml += '<div class="plain-news">';
+            dataHtml += '<div class="title-line">';
+            dataHtml += '<span class="news-title"><a href="/article/?pk=' + item.pk + '&ct=research">' + item.title + '</a></span>';
+            dataHtml += '<span class="span-btn"><a href="/article/?pk=' + item.pk + '&ct=research">查看原文</a></span>';
+            dataHtml += '</div>';
+            dataHtml += '<div class="news-info">' + item.bigv.brief + (item.bigv.brief ? '' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</div>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 公告数据
+        $("#notice-content-" + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=notice',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            item.content = item.content.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            item.title = item.title.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=notice">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-info">' + item.publish_date + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        // 社交数据
+        $("#social-content-" + (count - 1)).pageFun({
+          interFace: fix_url + '/api/research/forecast/search/?q=' + kw + '&ct=social',
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            item.content = item.content.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            item.title = item.title.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=social">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-info">' + item.bigv.brief + (item.bigv.brief ? '' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+
+        noticeFilter();
+
+
       }
-      l += p.offsetLeft;
-      t += p.offsetTop;
-      p = p.offsetParent;
     }
-    return {top: t, left: l}
-  }
 
-  var brain = document.querySelector('.brain-container');
-  var topCT = offset(document.querySelector('.top-container')).top;
-  var topCH = document.querySelector('.top-container').clientHeight;
-  brain.style.marginTop = (1650 - topCT - topCH) + 'px';
+    initNews('{{q}}');
 
 
-</script>
-<!--预测图-->
-<script>
+    // 搜索数据 重新渲染页面
+    $('#search-btn').click(function () {
+      var val = $('#search-inp').val();
+      if (val) {
+        $('.search-container').hide();
+        $('.query-title span').eq(0).addClass('active').siblings().removeClass('active');
+        $('.query-container .container').eq(0).css('display', 'block').siblings('.query-container .container').css('display', 'none');
+        reg = new RegExp(val, 'g');
+        initNews(val);
+      }
 
-  var data6 = [[1499957520000, 4016.0], [1502114820000, 14016.0], [1508110080000, 14016.0], [1508970900000, 14016.0], [1511110080000, 14228.0], [1513032300000, 14228.0]];
-  var data1 = [[1499957520000, 14016.0], [1502114820000, 14016.0], [1508110080000, 14016.0], [1508970900000, 14016.0], [1511110080000, 14058.4], [1513032300000, 14086.7]];
-  var dates = [];
+    });
 
-  data1.forEach(function (item) {
-    dates.push(item[0]);
-  });
-  var minDate = Math.min.apply(null, dates);
-  var maxDate = Math.max.apply(null, dates);
-  var interval = (maxDate - minDate) / 6;
-  var seriesObj = [
-    {
-      name: '东北证券  郑华',
-      type: 'scatter',
-      data: data6,
-      itemStyle:
-        {
-          normal: {
-            color: '#D9565A'
-          },
-        },
-      symbolSize: 5,
-    },
-    {
-      name: ' 平均',
-      type: 'line',
-      data: data1,
-      itemStyle: {
-        normal: {
-          color: '#151615',
-          lineStyle: {width: 1}
+
+    // 公告中  下拉选择事件绑定
+    function noticeFilter() {
+      // 显示公告 选择列表
+      $('#notice-kind').click(function () {
+        $('#notice-list').toggle();
+      });
+      // 全选全部选
+      $('.select-all').click(function () {
+        if ($('.select-all')[0].checked) {
+          $('input[type="checkbox"]').each(function (index, item) {
+            item.checked = true
+          });
         }
-      },
-      symbol: 'none',
-      smooth: true
+        else {
+          $('input[type="checkbox"]').each(function (index, item) {
+            item.checked = false;
+          });
+        }
+      });
+      // 检测其他的checkbox，有其他未选中，取消全选
+      $('input[type="checkbox"]').click(function () {
+        if (!this.checked) {
+          $('.select-all')[0].checked = false;
+        }
+      });
+      // 提交数据
+      $('#kind-btn').click(function () {
+        countNotice++;
+        var resList = [];
+        $('input[type="checkbox"]').each(function (index, item) {
+          item.checked ? resList.push(Number(item.value)) : null;
+        });
+        $('.notice-list').hide();
+        // 提交信息后清空选项
+        $('input[type="checkbox"]').each(function (index, item) {
+          item.checked = false;
+        });
+        // 公告中如果选择公告类别重新渲染公告页面
+        var noticeStr2 = '';
+        noticeStr2 += '<div class="notice-content container" style="display:block" id="notice-content-0' + (countNotice - 1) + '">';
+        noticeStr2 += '<div id="notice-kind" class="notice-kind">公告类别<i class="iconfont icon-xia"></i></div>';
+        noticeStr2 += '<ul id="notice-list" class="notice-list">';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input class="select-all" type="checkbox" value="0" id="checkbox-1" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-1"></label>';
+        noticeStr2 += '<span>全部</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input type="checkbox" value="1" id="checkbox-2" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-2"></label>';
+        noticeStr2 += '<span>财报</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input type="checkbox" value="2" id="checkbox-3" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-3"></label>';
+        noticeStr2 += '<span>重大事项</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<input type="checkbox" value="3" id="checkbox-4" style="display: none;">';
+        noticeStr2 += '<label for="checkbox-4"></label>';
+        noticeStr2 += '<span>其他</span>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '<li>';
+        noticeStr2 += '<button id="kind-btn">提交</button>';
+        noticeStr2 += '</li>';
+        noticeStr2 += '</ul>';
+        noticeStr2 += '<ul class="news-container pageDiv clearfix" id="notice-container">';
+        noticeStr2 += '</ul>';
+        noticeStr2 += '<div class="notContent hide"> 无数据 </div>';
+        noticeStr2 += '<div class="page-container">';
+        noticeStr2 += '<ul class="pageMenu clearfix">';
+        noticeStr2 += '<li class="firstPage">首页</li>';
+        noticeStr2 += '<li class="prevPage"> <</li>';
+        noticeStr2 += '<div class="pageObj clearfix">';
+        noticeStr2 += '</div>';
+        noticeStr2 += '<li class="nextPage"> ></li>';
+        noticeStr2 += '<li class="lastPage">尾页</li>';
+        noticeStr2 += '</ul>';
+        noticeStr2 += '</div>';
+        noticeStr2 += '</div>';
+        $('.notice-content').before(noticeStr2);
+        $('#notice-content-' + (count - 1)).remove();
+        $('#notice-content-0' + (countNotice - 2)).remove();
+        // 公告数据
+        $("#notice-content-0" + (countNotice - 1)).pageFun({
+          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val() + '&kind=' + kind,
+          pageSize: 10, /*pageSize*/
+          maxPage: 5, /*每次加载页数*/
+          dataFun: function (item) { // 数据渲染
+            var dataHtml = '';
+            dataHtml += '<li>';
+            dataHtml += '<div class="news-title">' + item.title + '</div>';
+            dataHtml += '<div class="news-info">' + item.author + item.time + '</div>';
+            dataHtml += '<div class="news-cont repairScale">' + item.cont + '</div>';
+            dataHtml += '</li>';
+            return dataHtml;
+          },
+          pageFun: function (i) { // 页码渲染
+            var pageHtml = '<li class="pageNum">' + i + '</li>';
+            return pageHtml;
+          }
+        });
+        noticeFilter();
+      });
     }
-  ];
-
-  var myChart = echarts.init(document.getElementById('forecast-chart'));
 
 
-  option = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross'
-      },
-      textStyle: {
-        color: '#EEEFEE',
-        decoration: 'none',
-        fontSize: 12,
-      },
-      formatter: function (datas) {
-        var res = datas[0].seriesName + '</br>';
-        for (var i = 0, length = datas.length; i < length; i++) {
-          if (datas[i].componentSubType === 'scatter')
-            res += '所得税:' + datas[i].data[1] + '</br>';
-          else
-            res += '平均值:' + datas[i].value[1] + '</br>';
-        }
-        return res;
-      }
-    },
-    xAxis: {
-      type: 'time',
-      name: '时间',
-      nameGap:5,
-      nameTextStyle:{
-        fontSize:10,
-      },
-      axisLabel: {
-        show: true,
-        textStyle: {
-          fontSize: '10'
-        },
-        formatter: function (value) {
-          if (echarts.format.formatTime('MM', new Date(value))) {
-          }
-          return echarts.format.formatTime('MM', new Date(value)) + '月';
-        }
-      },
-      axisTick: {
-        show: false
-      },
-      interval: interval,
-      splitLine: {
-        show: true,
-        lineStyle: {
-          type: 'dotted'
-        }
-      },
-    },
-    yAxis: {
-      type: 'value',
-      name: '元',
-      nameGap:5,
-      nameTextStyle:{
-        fontSize:10,
-      },
-      axisTick: {
-        show: false
-      },
-
-      axisLabel: {
-        textStyle: {
-          fontSize: '10'
-        },
-      },
-      splitLine: {
-        show: true,
-        lineStyle: {
-          type: 'dotted'
-        }
-      },
-//      axisLabel: {
-//        margin: 8,
-//      },
-    },
-    series: seriesObj
-  };
-  myChart.setOption(option);
-
+  })
 </script>
-<!--走势图-->
-<script>
-  var data = [[1482768000000, 0.0], [1482768000000, 0.0], [1482854400000, -0.003123373243102669], [1482854400000, -0.003123373243102669], [1482940800000, -0.004164497657470164], [1482940800000, -0.004164497657470164], [1483027200000, -0.0015616866215513346], [1483027200000, -0.0015616866215513346], [1483372800000, 0.026028110359187923], [1483372800000, 0.026028110359187923], [1483459200000, 0.02863092139510675], [1483459200000, 0.02863092139510675], [1483545600000, 0.040603852160333034], [1483545600000, 0.040603852160333034], [1483632000000, 0.03175429463820924], [1483632000000, 0.03175429463820924], [1483891200000, 0.03331598125976057], [1483891200000, 0.03331598125976057], [1483977600000, 0.024986985944820427], [1483977600000, 0.024986985944820427], [1484064000000, 0.023945861530452934], [1484064000000, 0.023945861530452934], [1484150400000, 0.01509630400832895], [1484150400000, 0.01509630400832895], [1484236800000, 0.01093180635085897], [1484236800000, 0.01093180635085897], [1484496000000, -0.0020822488287349896], [1484496000000, -0.0020822488287349896], [1484582400000, 0.03643935450286306], [1484582400000, 0.03643935450286306], [1484668800000, 0.03956272774596554], [1484668800000, 0.03956272774596554], [1484755200000, 0.022904737116085254], [1484755200000, 0.022904737116085254], [1484841600000, 0.029672045809474246], [1484841600000, 0.029672045809474246], [1485100800000, 0.03643935450286306], [1485100800000, 0.03643935450286306], [1485187200000, 0.01561686621551279], [1485187200000, 0.01561686621551279], [1485273600000, 0.021863612701717758], [1485273600000, 0.021863612701717758], [1485360000000, 0.01457574180114511], [1485360000000, 0.01457574180114511], [1486051200000, -0.08693388859968774], [1486051200000, -0.08693388859968774], [1486310400000, -0.13066111400312344], [1486310400000, -0.13066111400312344], [1486396800000, -0.1535658511192087], [1486396800000, -0.1535658511192087], [1486483200000, -0.15200416449765755], [1486483200000, -0.15200416449765755], [1486569600000, -0.1504424778761062], [1486569600000, -0.1504424778761062], [1486656000000, -0.15408641332639253], [1486656000000, -0.15408641332639253], [1486915200000, -0.163977095262884], [1486915200000, -0.163977095262884], [1487001600000, -0.15981259760541386], [1487001600000, -0.15981259760541386], [1487088000000, -0.15460697553357639], [1487088000000, -0.15460697553357639], [1487174400000, -0.14679854242581988], [1487174400000, -0.14679854242581988], [1487260800000, -0.1244143675169183], [1487260800000, -0.1244143675169183], [1487520000000, -0.12701717855283712], [1487520000000, -0.12701717855283712], [1487606400000, -0.12389380530973464], [1487606400000, -0.12389380530973464], [1487692800000, -0.11296199895887567], [1487692800000, -0.11296199895887567], [1487779200000, -0.1280583029672046], [1487779200000, -0.1280583029672046], [1487865600000, -0.13430504945340976], [1487865600000, -0.13430504945340976], [1488124800000, -0.14107235814679858], [1488124800000, -0.14107235814679858], [1488211200000, -0.13951067152524724], [1488211200000, -0.13951067152524724], [1488297600000, -0.13638729828214477], [1488297600000, -0.13638729828214477], [1488384000000, -0.1457574180114524], [1488384000000, -0.1457574180114524], [1488470400000, -0.15512753774076005], [1488470400000, -0.15512753774076005], [1488729600000, -0.1504424778761062], [1488729600000, -0.1504424778761062], [1488816000000, -0.1311816762103071], [1488816000000, -0.1311816762103071], [1488902400000, -0.14367516918271742], [1488902400000, -0.14367516918271742], [1488988800000, -0.15148360229047372], [1488988800000, -0.15148360229047372], [1489075200000, -0.1504424778761062], [1489075200000, -0.1504424778761062], [1489334400000, -0.1478396668401874], [1489334400000, -0.1478396668401874], [1489420800000, -0.14940135346173872], [1489420800000, -0.14940135346173872], [1489507200000, -0.15564809994794387], [1489507200000, -0.15564809994794387], [1489593600000, -0.1504424778761062], [1489593600000, -0.1504424778761062], [1489680000000, -0.1624154086413327], [1489680000000, -0.1624154086413327], [1489939200000, -0.1592920353982302], [1489939200000, -0.1592920353982302], [1490025600000, -0.1603331598125977], [1490025600000, -0.1603331598125977], [1490112000000, -0.17855283706402922], [1490112000000, -0.17855283706402922], [1490198400000, -0.19416970327954192], [1490198400000, -0.19416970327954192], [1490284800000, -0.21290994273815728], [1490284800000, -0.21290994273815728], [1490544000000, -0.2196772514315461], [1490544000000, -0.2196772514315461], [1490630400000, -0.21603331598125977], [1490630400000, -0.21603331598125977], [1490716800000, -0.23008849557522132], [1490716800000, -0.23008849557522132], [1490803200000, -0.25195210827693915], [1490803200000, -0.25195210827693915], [1490889600000, -0.2477876106194691], [1490889600000, -0.2477876106194691], [1491321600000, -0.226444560124935], [1491321600000, -0.226444560124935], [1491408000000, -0.22280062467464867], [1491408000000, -0.22280062467464867], [1491494400000, -0.2118688183237897], [1491494400000, -0.2118688183237897], [1491753600000, -0.22800624674648623], [1491753600000, -0.22800624674648623], [1491840000000, -0.2196772514315461], [1491840000000, -0.2196772514315461], [1491926400000, -0.2196772514315461], [1491926400000, -0.2196772514315461], [1492012800000, -0.22019781363872984], [1492012800000, -0.22019781363872984], [1492099200000, -0.21707444039562734], [1492099200000, -0.21707444039562734], [1492358400000, -0.24414367516918278], [1492358400000, -0.24414367516918278], [1492444800000, -0.25976054138469545], [1492444800000, -0.25976054138469545], [1492531200000, -0.2488287350338366], [1492531200000, -0.2488287350338366], [1492617600000, -0.2477876106194691], [1492617600000, -0.2477876106194691], [1492704000000, -0.2514315460697553], [1492704000000, -0.2514315460697553], [1492963200000, -0.2732951587714732], [1492963200000, -0.2732951587714732], [1493049600000, -0.26861009890681936], [1493049600000, -0.26861009890681936], [1493136000000, -0.2467464862051015], [1493136000000, -0.2467464862051015], [1493222400000, -0.2389380530973452], [1493222400000, -0.2389380530973452], [1493308800000, -0.2410203019260802], [1493308800000, -0.2410203019260802], [1493654400000, -0.16501821967725153], [1493654400000, -0.16501821967725153], [1493740800000, -0.10775637688703801], [1493740800000, -0.10775637688703801], [1493827200000, -0.11972930765226447], [1493827200000, -0.11972930765226447], [1493913600000, -0.16137428422696518], [1493913600000, -0.16137428422696518], [1494172800000, -0.10098906819364921], [1494172800000, -0.10098906819364921], [1494259200000, -0.10827693909422186], [1494259200000, -0.10827693909422186], [1494345600000, -0.07027589796980746], [1494345600000, -0.07027589796980746], [1494432000000, -0.052056220718375845], [1494432000000, -0.052056220718375845], [1494518400000, -0.014055179593961456], [1494518400000, -0.014055179593961456], [1494777600000, -0.01093180635085897], [1494777600000, -0.01093180635085897], [1494864000000, -0.01613742842269663], [1494864000000, -0.01613742842269663], [1494950400000, -0.04633003643935453], [1494950400000, -0.04633003643935453], [1495036800000, -0.04320666319625205], [1495036800000, -0.04320666319625205], [1495123200000, -0.09005726184279023], [1495123200000, -0.09005726184279023], [1495382400000, -0.08485163977095275], [1495382400000, -0.08485163977095275], [1495468800000, -0.02811035918792291], [1495468800000, -0.02811035918792291], [1495555200000, -0.034877667881311906], [1495555200000, -0.034877667881311906], [1495641600000, 0.006246746486204968], [1495641600000, 0.006246746486204968], [1495728000000, -0.007808433107756488], [1495728000000, -0.007808433107756488], [1496160000000, -0.03539823008849556], [1496160000000, -0.03539823008849556], [1496246400000, -0.08433107756376892], [1496246400000, -0.08433107756376892], [1496332800000, -0.10931806350858934], [1496332800000, -0.10931806350858934], [1496592000000, -0.08537220197813641], [1496592000000, -0.08537220197813641], [1496678400000, -0.08120770432066643], [1496678400000, -0.08120770432066643], [1496764800000, -0.07131702238417496], [1496764800000, -0.07131702238417496], [1496851200000, -0.07027589796980746], [1496851200000, -0.07027589796980746], [1496937600000, -0.03175429463820924], [1496937600000, -0.03175429463820924], [1497196800000, -0.004685059864653818], [1497196800000, -0.004685059864653818], [1497283200000, -0.021343050494534103], [1497283200000, -0.021343050494534103], [1497369600000, -0.04789172306090587], [1497369600000, -0.04789172306090587], [1497456000000, -0.034877667881311906], [1497456000000, -0.034877667881311906], [1497542400000, -0.030192608016658084], [1497542400000, -0.030192608016658084], [1497801600000, -0.0223841749089016], [1497801600000, -0.0223841749089016], [1497888000000, -0.04164497657470071], [1497888000000, -0.04164497657470071], [1497974400000, 0.013534617386777616], [1497974400000, 0.013534617386777616], [1498060800000, 0.04008328995314938], [1498060800000, 0.04008328995314938], [1498147200000, 0.08224882873503374], [1498147200000, 0.08224882873503374], [1498406400000, 0.0874544508068714], [1498406400000, 0.0874544508068714], [1498492800000, 0.07027589796980728], [1498492800000, 0.07027589796980728], [1498579200000, 0.07339927121290994], [1498579200000, 0.07339927121290994], [1498665600000, 0.10567412805830284], [1498665600000, 0.10567412805830284], [1498752000000, 0.14523685580426857], [1498752000000, 0.14523685580426857], [1499011200000, 0.13638729828214458], [1499011200000, 0.13638729828214458], [1499097600000, 0.12077043206663197], [1499097600000, 0.12077043206663197], [1499184000000, 0.2254034357105673], [1499184000000, 0.2254034357105673], [1499270400000, 0.30088495575221225], [1499270400000, 0.30088495575221225], [1499356800000, 0.30400832899531494], [1499356800000, 0.30400832899531494], [1499616000000, 0.34461218115564796], [1499616000000, 0.34461218115564796], [1499702400000, 0.2790213430504945], [1499702400000, 0.2790213430504945], [1499788800000, 0.3217074440395627], [1499788800000, 0.3217074440395627], [1499875200000, 0.3217074440395627], [1499875200000, 0.3217074440395627], [1499961600000, 0.43883394065590836], [1499961600000, 0.43883394065590836], [1500220800000, 0.4685059864653826], [1500220800000, 0.4685059864653826], [1500307200000, 0.5018219677251432], [1500307200000, 0.5018219677251432], [1500393600000, 0.5210827693909421], [1500393600000, 0.5210827693909421], [1500480000000, 0.642373763664758], [1500480000000, 0.642373763664758], [1500566400000, 0.8068714211348256], [1500566400000, 0.8068714211348256], [1500825600000, 0.7652264445601247], [1500825600000, 0.7652264445601247], [1500912000000, 0.9416970327954188], [1500912000000, 0.9416970327954188], [1500998400000, 0.9250390421655386], [1500998400000, 0.9250390421655386], [1501084800000, 0.7589796980739197], [1501084800000, 0.7589796980739197], [1501171200000, 0.7730348776678814], [1501171200000, 0.7730348776678814], [1501430400000, 0.9010931806350859], [1501430400000, 0.9010931806350859], [1501516800000, 0.8755856324830817], [1501516800000, 0.8755856324830817], [1501603200000, 0.8240499739718895], [1501603200000, 0.8240499739718895], [1501689600000, 0.665799062988027], [1501689600000, 0.665799062988027], [1501776000000, 0.6673607496095784], [1501776000000, 0.6673607496095784], [1502035200000, 0.5741801145236854], [1502035200000, 0.5741801145236854], [1502121600000, 0.6064549713690786], [1502121600000, 0.6064549713690786], [1502208000000, 0.5773034877667881], [1502208000000, 0.5773034877667881], [1502294400000, 0.5991671004685059], [1502294400000, 0.5991671004685059], [1502380800000, 0.44872462259239965], [1502380800000, 0.44872462259239965], [1502640000000, 0.4789172306090577], [1502640000000, 0.4789172306090577], [1502726400000, 0.5840707964601769], [1502726400000, 0.5840707964601769], [1502812800000, 0.5340968245705361], [1502812800000, 0.5340968245705361], [1502899200000, 0.5642894325871941], [1502899200000, 0.5642894325871941], [1502985600000, 0.6158250910983861], [1502985600000, 0.6158250910983861], [1503244800000, 0.5871941697032794], [1503244800000, 0.5871941697032794], [1503331200000, 0.5825091098386256], [1503331200000, 0.5825091098386256], [1503417600000, 0.5070275897969806], [1503417600000, 0.5070275897969806], [1503504000000, 0.5174388339406558], [1503504000000, 0.5174388339406558], [1503590400000, 0.5684539302446641], [1503590400000, 0.5684539302446641], [1503849600000, 0.6220718375845913], [1503849600000, 0.6220718375845913], [1503936000000, 0.605413846954711], [1503936000000, 0.605413846954711], [1504022400000, 0.6543466944299844], [1504022400000, 0.6543466944299844], [1504108800000, 0.6418532014575741], [1504108800000, 0.6418532014575741], [1504195200000, 0.607496095783446], [1504195200000, 0.607496095783446], [1504454400000, 0.5517959396147838], [1504454400000, 0.5517959396147838], [1504540800000, 0.5616866215512754], [1504540800000, 0.5616866215512754], [1504627200000, 0.5226444560124934], [1504627200000, 0.5226444560124934], [1504713600000, 0.5439875065070275], [1504713600000, 0.5439875065070275], [1504800000000, 0.5445080687142114], [1504800000000, 0.5445080687142114], [1505059200000, 0.525767829255596], [1505059200000, 0.525767829255596], [1505145600000, 0.6335242061426339], [1505145600000, 0.6335242061426339], [1505232000000, 0.6444560124934929], [1505232000000, 0.6444560124934929], [1505318400000, 0.6007287870900572], [1505318400000, 0.6007287870900572], [1505404800000, 0.6147839666840187], [1505404800000, 0.6147839666840187], [1505664000000, 0.5715773034877668], [1505664000000, 0.5715773034877668], [1505750400000, 0.5585632483081728], [1505750400000, 0.5585632483081728], [1505836800000, 0.5252472670484123], [1505836800000, 0.5252472670484123], [1505923200000, 0.5268089536699634], [1505923200000, 0.5268089536699634], [1506009600000, 0.4919312857886517], [1506009600000, 0.4919312857886517], [1506268800000, 0.4206142634044767], [1506268800000, 0.4206142634044767], [1506355200000, 0.43987506507027585], [1506355200000, 0.43987506507027585], [1506441600000, 0.4508068714211348], [1506441600000, 0.4508068714211348], [1506528000000, 0.41072358146798543], [1506528000000, 0.41072358146798543], [1506614400000, 0.3909422175950025], [1506614400000, 0.3909422175950025], [1507478400000, 0.4206142634044767], [1507478400000, 0.4206142634044767], [1507564800000, 0.4232170744403956], [1507564800000, 0.4232170744403956], [1507651200000, 0.4518479958355023], [1507651200000, 0.4518479958355023], [1507737600000, 0.44664237376366467], [1507737600000, 0.44664237376366467], [1507824000000, 0.43571056741280567], [1507824000000, 0.43571056741280567], [1508083200000, 0.4044768349817803], [1508083200000, 0.4044768349817803], [1508169600000, 0.39198334200936996], [1508169600000, 0.39198334200936996], [1508256000000, 0.32899531494013534], [1508256000000, 0.32899531494013534], [1508342400000, 0.27954190525767814], [1508342400000, 0.27954190525767814], [1508428800000, 0.29984383133784476], [1508428800000, 0.29984383133784476], [1508688000000, 0.2993232691306611], [1508774400000, 0.35762623633524193], [1508860800000, 0.3545028630921394], [1508947200000, 0.4102030192608016], [1509033600000, 0.4180114523685579], [1509292800000, 0.43571056741280567], [1509379200000, 0.3956272774596563], [1509465600000, 0.4154086413326393], [1509552000000, 0.37011972930765225], [1509638400000, 0.31441957313899005], [1509897600000, 0.3326392503904217], [1509984000000, 0.38417490890161365], [1510070400000, 0.37011972930765225], [1510156800000, 0.3612701717855282], [1510243200000, 0.435190005205622], [1510502400000, 0.446121811556481], [1510588800000, 0.5366996356064548], [1510675200000, 0.5205622071837585], [1510761600000, 0.5611660593440915], [1510848000000, 0.5080687142113481], [1511107200000, 0.42529932326913056], [1511193600000, 0.4820406038521602], [1511280000000, 0.4362311296199895], [1511366400000, 0.3550234252993233], [1511452800000, 0.327433628318584], [1511712000000, 0.26808953669963553], [1511798400000, 0.2977615825091098], [1511884800000, 0.31546069755335754], [1511971200000, 0.2915148360229046], [1512057600000, 0.29984383133784476], [1512316800000, 0.3243102550754815], [1512403200000, 0.26548672566371667], [1512489600000, 0.25715773034877654], [1512576000000, 0.23321186881832381], [1512662400000, 0.2566371681415929], [1512921600000, 0.2701717855283705], [1513008000000, 0.23321186881832381], [1513094400000, 0.24934929724102026], [1513180800000, 0.23373243102550745], [1513267200000, 0.21030713170223836], [1513526400000, 0.217595002602811], [1513612800000, 0.25715773034877654], [1513699200000, 0.23269130661113996], [1513785600000, 0.2410203019260801], [1513872000000, 0.23581467985424245], [1514131200000, 0.23789692868297763], [1514217600000, 0.2420614263404476]];
-  var myChart = echarts.init(document.getElementById('tend-chart'));
-  var const_num=20;
-  option = {
-    title: {
-      text: ''
-    },
-    legend: {
-      data: ['年度数据', '趋势'],
-      textStyle: {
-        fontSize: '10'
-      },
-      x: 'right',
-      y: 'top',
-      itemWidth: 20,             // 图例图形宽度
-      itemHeight: 10,
-      padding: 30,
-    },
-    xAxis: [
-      {
-//        name: '时间',
-        nameLocation: 'end',
-        type: 'time',
-        boundaryGap: false,
-        splitLine: {
-          show: true
-        },
-        axisLabel: {
-          textStyle: {
-            fontSize: '10'
-          },
-          showMaxLabel: 1,
-          show: true,
-//          formatter: function (value) {
-//            if (echarts.format.formatTime('MM', new Date(value))) {
-//            }
-//            return echarts.format.formatTime('MM-dd', new Date(value));
-//          }
-        },
-
-        axisTick: {
-          length: 0
-        }
-      }
-    ],
-    yAxis: [
-      {
-        name: '价格',
-        type: 'value',
-        splitLine: {
-          show: true
-        },
-        axisLabel: {
-          show: true,
-          textStyle: {
-            fontSize: '10'
-          },
-          margin: 5,
-          formatter:function (value) {
-            return (const_num+const_num*value).toFixed(2);
-          }
-        },
-//        interval: 7,
-        axisTick: {
-          length: 0
-        },
-      },
-      {
-        nameLocation: 'start',
-        type: 'value',
-        // inverse: true,
-        axisLabel: {
-          show: true,
-          textStyle: {
-            fontSize: '10'
-          },
-          margin: 5,
-          formatter: function (value) {
-            return value + '%';
-          }
-        },
-        axisTick: {
-          show: false
-        },
-        splitLine: {
-          show: false
-        }
-      }
-    ],
-    series: [
-      {
-        name: '年度数据',
-        type: 'line',
-        data: data,
-        itemStyle: {
-          normal: {
-            color: '#151615',
-            lineStyle: {width: 1}
-          }
-        },
-        symbol: 'none',
-        smooth: true
-      },
-      {
-        name: '趋势',
-        type: 'line',
-        data: data,
-        // yAxisIndex: 1,
-        itemStyle: {
-          normal: {
-            color: '#fcf',
-            lineStyle: {width: 1}
-          }
-        },
-        symbol: 'none',
-        smooth: true
-      }
-    ]
-  };
-
-  myChart.setOption(option);
-
-</script>
-</body>
-</html>
+{% endblock %}

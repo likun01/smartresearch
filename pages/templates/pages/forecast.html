@@ -956,9 +956,6 @@
 //      });
       var $tables=$('.data-table .table-container');
       $tables.each(function (index,item) {
-        console.log(index);
-        console.log(item);
-        console.log($(item).prop("id"));
         var item_id=$(item).prop("id");
         if(item_id!=='report-data-0'&&item_id!=='year-data-0'){
           $('#'+item_id+' .forecase-init').click(function () {
@@ -1012,9 +1009,8 @@
             // 重新获取数据 重新渲染
             var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
             var keyword_cn=$(this).siblings().eq(0).html();
-            var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html()
+            var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html();
             var code = '{{ stock_code }}';
-
             getForecastData(code, report_period, keyword,keyword_cn);
           });
         }

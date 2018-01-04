@@ -101,18 +101,21 @@ a:active {
   border-collapse: collapse;
 }
 .inner-table{
-
   table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
 }
 .inner-table td{
-  word-break : break-all
+  word-break : break-all;
+  width:25%;
 }
 
 .inner-table td {
   border: none;
   border-right: 1px solid #98BBE7;
+  text-align: right;
+  width: 25%;
+}
+.inner-table tbody td:first-child{
   text-align: center;
-
 }
 
 .inner-table tr td:last-child {
