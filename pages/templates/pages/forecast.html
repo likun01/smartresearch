@@ -106,7 +106,7 @@
     <!--预测弹框_start-->
     <div class="mask-data-container" style="display: none;">
         <!--文字内容_start-->
-        <div class="all-data-cont" style="display: block">
+        <div class="all-data-cont" style="display: none">
             <span class="close-data-mask">&times;</span>
             <div class="title-cont-chart">
                 <div>分析师(公司名称)</div>
@@ -136,7 +136,7 @@
         <!--文字内容_end-->
 
         <!--图表_start-->
-        <div class="chart-container" style="display: none;">
+        <div class="chart-container" style="display: block;">
             <span class="close-data-mask">&times;</span>
             <div class="to-word">
                 <a href="javascript:;">文字版</a>
@@ -961,8 +961,8 @@
           // 位置设置
           $('.mask-data-container').show();
           // 默认显示图表页
-          $('.all-data-cont').show();
-          $('.chart-container').hide();
+          $('.all-data-cont').hide();
+          $('.chart-container').show();
           var conH = 382; // 默认弹框高度为200px
           var tdH = $(this).height();
           var bodyH = $(document.body).height();
@@ -1486,8 +1486,8 @@
     // 预测弹框 关闭浮框
     $('.close-data-mask').click(function () {
       $('.mask-data-container').hide();
-      $('.all-data-cont').show();
-      $('.chart-container').hide();
+      $('.all-data-cont').hide();
+      $('.chart-container').show();
     });
 
     // 预测弹框 echart图表
