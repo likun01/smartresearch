@@ -111,8 +111,11 @@ a:active {
 .inner-table td {
   border: none;
   border-right: 1px solid #98BBE7;
-  text-align: right;
+  text-align: center;
   width: 25%;
+}
+.inner-table tbody td{
+  text-align: right;
 }
 .inner-table tbody td:first-child{
   text-align: center;
