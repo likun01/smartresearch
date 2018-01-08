@@ -1461,7 +1461,8 @@
       });
 
 
-      var maxDate = Math.max.apply(null, dates);
+      // var maxDate = Math.max.apply(null, dates);
+      var maxDate = new Date().getTime();
       var minDate = Math.min.apply(null, dates);
       if(maxDate-minDate<365*24*60*60*1000){
         minDate=maxDate-365*24*60*60*1000;
