@@ -1332,7 +1332,7 @@
           dataHtml += '<span>' + item.analyst + '(' + item.org + ')' + '</span>';
           dataHtml += '<span>' + item.published_dt_format + '</span>';
           dataHtml += '<span>' + item.value_format + '</span>';
-          dataHtml += item.gogoal_report_id ? '<span><a href="/article/?pk=' + item.gogoal_report_id + '&ct=report"><div class="span-link active">原文链接</div></a></span>' : '<span><div class="span-link">原文链接</div></span>';
+          dataHtml += item.yanbao_url ? '<span><a href="' + item.yanbao_url + '"><div class="span-link active">原文链接</div></a></span>' : '<span><div class="span-link">原文链接</div></span>';
           dataHtml += '</li>';
         });
         $('#data-cont-chart-' + countTri).html(dataHtml);
