@@ -757,7 +757,7 @@ button, input {
 
 /*历史数据弹框*/
 .rank-container {
-  width: 200px;
+  width: 220px;
   border: 1px solid #9FBFE9;
   background: #FEFFFE;
   font-size: 12px;
@@ -769,7 +769,7 @@ button, input {
 }
 
 .data-his-cont {
-  width: 200px;
+  width: 220px;
   border-bottom: 1px solid #EDEEED;
   border-radius: 2px;
   border-collapse: collapse;
@@ -806,7 +806,7 @@ button, input {
 }
 
 .chart-main {
-  width: 200px;
+  width: 220px;
   height: 200px;
   overflow: hidden;
   margin: -40px 0 -30px 0;
