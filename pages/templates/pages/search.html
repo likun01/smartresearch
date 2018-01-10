@@ -14,7 +14,7 @@
 
 <!--顶部搜索_start-->
 <div class="report-query">
-    <input type="text" id="search-inp">
+    <input type="text" id="search-inp" value='{{ q }}'>
     <button id="search-btn">搜索</button>
 </div>
 <!--顶部搜索_end-->
@@ -414,6 +414,18 @@
     }
 
     initNews('{{q}}');
+
+
+    // 回车键进行搜索
+    $('#search-inp').on('keydown',function (e) {
+      if(e.keyCode === 13){
+        var val=$('#search-inp').val();
+        if(val){
+          reg = new RegExp(val, 'g');
+          initNews(val);
+        }
+      }
+    });
 
 
     // 搜索数据 重新渲染页面

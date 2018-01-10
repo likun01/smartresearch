@@ -873,6 +873,16 @@
       }
     });
 
+    // 回车键进行相关搜索
+    $('#search-inp').on('keydown',function (e) {
+      if(e.keyCode === 13){
+        var q = $('#search-inp').val();
+        if (q) {
+          window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name=' + stock_name;
+        }
+      }
+    });
+
 
     // 点击某一个td触发事件 弹框 unknown forecase normal
     function clickTdInit() {
