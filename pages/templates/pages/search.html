@@ -174,8 +174,8 @@
             var dataHtml = '';
             dataHtml += '<div class="plain-news">';
             dataHtml += '<div class="title-line">';
-            dataHtml += '<span class="news-title"><a href="/article/?pk=' + item.pk + '&ct=research">' + item.title + '</a></span>';
-            dataHtml += '<span class="span-btn"><a href="/article/?pk=' + item.pk + '&ct=research">查看原文</a></span>';
+            dataHtml += '<span class="news-title"><a href="/article/?pk=' + item.pk + '&ct=research" target="_blank">' + item.title + '</a></span>';
+            dataHtml += '<span class="span-btn"><a href="/article/?pk=' + item.pk + '&ct=research" target="_blank">查看原文</a></span>';
             dataHtml += '</div>';
             dataHtml += '<div class="news-info">' + item.bigv.brief + (item.bigv.brief ? '' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
             dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
@@ -202,7 +202,7 @@
             });
             var dataHtml = '';
             dataHtml += '<li>';
-            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=notice">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=notice" target="_blank">' + item.title + '</a></div>';
             dataHtml += '<div class="news-info">' + item.publish_date + '</div>';
             dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
             dataHtml += '</li>';
@@ -228,7 +228,7 @@
             });
             var dataHtml = '';
             dataHtml += '<li>';
-            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=social">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=social" target="_blank">' + item.title + '</a></div>';
             dataHtml += '<div class="news-info">' + (item.bigv.brief ? item.bigv.brief : '') + (item.bigv.brief ? ':' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
             dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
             dataHtml += '</li>';
@@ -341,8 +341,8 @@
             var dataHtml = '';
             dataHtml += '<div class="plain-news">';
             dataHtml += '<div class="title-line">';
-            dataHtml += '<span class="news-title"><a href="/article/?pk=' + item.pk + '&ct=research">' + item.title + '</a></span>';
-            dataHtml += '<span class="span-btn"><a href="/article/?pk=' + item.pk + '&ct=research">查看原文</a></span>';
+            dataHtml += '<span class="news-title"><a href="/article/?pk=' + item.pk + '&ct=research" target="_blank">' + item.title + '</a></span>';
+            dataHtml += '<span class="span-btn"><a href="/article/?pk=' + item.pk + '&ct=research" target="_blank">查看原文</a></span>';
             dataHtml += '</div>';
             dataHtml += '<div class="news-info">' + item.bigv.brief + (item.bigv.brief ? '' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
             dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
@@ -369,7 +369,7 @@
               return '<i style="color:#E86664">' + e + '</i>'
             });
             dataHtml += '<li>';
-            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=notice">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=notice" target="_blank">' + item.title + '</a></div>';
             dataHtml += '<div class="news-info">' + item.publish_date + '</div>';
             dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
             dataHtml += '</li>';
@@ -395,7 +395,7 @@
             });
             var dataHtml = '';
             dataHtml += '<li>';
-            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=social">' + item.title + '</a></div>';
+            dataHtml += '<div class="news-title"><a href="/article/?pk=' + item.pk + '&ct=social" target="_blank">' + item.title + '</a></div>';
             dataHtml += '<div class="news-info">' + item.bigv.brief + (item.bigv.brief ? '' : '') + item.bigv.name + ' ' + item.publish_date + '</div>';
             dataHtml += '<div class="news-cont repairScale">' + item.content + '</div>';
             dataHtml += '</li>';

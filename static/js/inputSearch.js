@@ -28,10 +28,12 @@ InputSearch.prototype.inputChange = function () {
           token:_this.opts.token
         },
         success: function (result) {
-          if (result.results) {
+          if (result.results&&result.results.length) {
             _this.opts.bindData(result.results);
             _this.listAll = $(_this.listStr);
             _this.lastInd = _this.listAll.length - 1; // 元素数组最后一个索引
+          }else {
+            _this.listCont.hide();
           }
         }
       })
@@ -45,8 +47,8 @@ InputSearch.prototype.inputChange = function () {
 InputSearch.prototype.clickChoose = function () {
   var _this = this;
   this.listCont.on('click', function (e) {
-    var reg = /(<\w+>)|<\/\w+>/g;
-    _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+    var str=_this.listAll.eq(_this.count).find('td').eq(1).find('a').html();
+    _this.word=str;
     _this.inpEle.val(_this.word);
     _this.listCont.hide();
   });
@@ -61,33 +63,31 @@ InputSearch.prototype.keyCodeChange = function () {
         _this.count--;
         if (_this.count <= -2) {
           _this.count = _this.lastInd;
-          _this.listAll.eq(_this.lastInd).addClass('select');
+          _this.listAll.eq(_this.lastInd).css('background','#E4EEF9');
         } else if (_this.count === -1) {
-          _this.listAll.removeClass('select');
           _this.inpEle.val($(_this.inpEle).data('val')); // 输入框中设置为最开始输入时的关键词
+          _this.listAll.css('background','#FDFFFD');
           return;
         } else {
-          _this.listAll.eq(_this.count).addClass('select').siblings().removeClass('select');
+          _this.listAll.eq(_this.count).css('background','#E4EEF9').siblings().css('background','#FDFFFD');
         }
-        var reg = /(<\w+>)|<\/\w+>/g;
-        _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+        var str=_this.listAll.eq(_this.count).find('td').eq(1).find('a').html();
+        _this.word=str;
         _this.inpEle.val(_this.word);
-
 
       } else if (e.keyCode === 40) { //下
         _this.count++;
         if (_this.count > _this.lastInd) {
           _this.count = -1;
-          _this.listAll.removeClass('select');
+          _this.listAll.css('background','#FDFFFD');
           _this.inpEle.val($(_this.inpEle).data('val')); // 输入框中设置为最开始输入时的关键词
           return;
         }
-        _this.listAll.eq(_this.count).addClass('select').siblings().removeClass('select');
-        var reg = /(<\w+>)|<\/\w+>/g;
-        _this.word = _this.listAll.eq(_this.count).html().replace(reg, '');
+        _this.listAll.eq(_this.count).css('background','#E4EEF9').siblings().css('background','#FDFFFD');
+        var str=_this.listAll.eq(_this.count).find('td').eq(1).find('a').html();
+        _this.word=str;
         _this.inpEle.val(_this.word);
       } else if (e.keyCode === 13) {
-        console.log(_this.opts.searchRes);
         _this.listCont.hide();
         // enter 键后开始请求搜索内容对应数据
         _this.opts.searchRes();
@@ -100,7 +100,7 @@ InputSearch.prototype.keyCodeChange = function () {
 InputSearch.prototype.init = function () {
   this.inputChange();
   this.keyCodeChange();
-  this.clickChoose();
+  // this.clickChoose();
 };
 
 window.InputSearch = InputSearch;

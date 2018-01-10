@@ -15,25 +15,12 @@
     <img src="/static/images/logo_index.png" alt="">
     <div class="top-title">嘉实智能投研系统</div>
     <div class="search-header">
-        <input type="text" class="temp-inp" placeholder="输入股票代码、名称或者关键词">
+        <input type="text" class="temp-inp" id="temp-inp" placeholder="输入股票代码、名称或者关键词">
         <a href="" class="out-search-btn">智能检索</a>
     </div>
 
-    <table class="res-list" style="display:none">
+    <table class="res-list" id="res-list" style="display:none">
         <tbody>
-        <!--<tr>-->
-        <!--<td>600970</td>-->
-        <!--<td>中材国际</td>-->
-        <!--<td>-->
-        <!--<span class="report-btn">智能报告</span>-->
-        <!--</td>-->
-        <!--<td>-->
-        <!--<span class="finance-btn">财报</span>-->
-        <!--</td>-->
-        <!--<td>-->
-        <!--<span class="search-btn">搜索</span>-->
-        <!--</td>-->
-        <!--</tr>-->
         </tbody>
     </table>
 
@@ -42,49 +29,66 @@
 
 <!--<script src="/static/js/jquery-1.11.3.js"></script>-->
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="/static/js/inputSearch.js"></script>
 <!--<script src="/static/js/util.js"></script>-->
 <script>
   $(function () {
 //    var token = util.getCookie('token');
-     var token = '5b2d5bcda394d1247069b53dff32d304';
+    var token = '5b2d5bcda394d1247069b53dff32d304';
     var fix_url = 'http://api-pro.xin-shui.com';
 
+    // 自动获取焦点
+    $('.temp-inp').focus();
+    $('.temp-inp').val('');
+
+
     // 搜索框
-    $('.temp-inp').on('input focus propertychange', function () {
-      console.log('检测到变化')
-      var q = $('.temp-inp').val();
-      if (q) {
-        $.ajax({
-          // 百度搜索关键词 请求 接口API
-          url: fix_url + '/api/research/search',
-          type: 'GET',
-          data: { // 向后台发送数据
-            q: q
-          },
-          success: function (res) {
-            console.log(res);
-            if (res.results) {
-              if(res.results&&res.results.length){
-                initSearch(res.results)
-              }else {
-                $('.res-list').hide()
-              }
-            }
-          },
-          error: function (e) {
-            if (e.status === 401 && JSON.parse(e.responseText).code === 40003) {
-              // token过期
-              console.log('过期');
-              alert('登录信息失效，请重新登录');
-              window.location.href = '/login';
-            }
-            console.log(e);
-
-          }
-        })
-
+//    $('.temp-inp').on('input focus propertychange', function () {
+//      var q = $('.temp-inp').val();
+//      if (q) {
+//        $.ajax({
+//          // 百度搜索关键词 请求 接口API
+//          url: fix_url + '/api/research/search',
+//          type: 'GET',
+//          data: { // 向后台发送数据
+//            q: q
+//          },
+//          success: function (res) {
+//            console.log(res);
+//            if (res.results) {
+//              if(res.results&&res.results.length){
+//                initSearch(res.results)
+//              }else {
+//                $('.res-list').hide()
+//              }
+//            }
+//          },
+//          error: function (e) {
+//            if (e.status === 401 && JSON.parse(e.responseText).code === 40003) {
+//              // token过期
+//              console.log('过期');
+//              alert('登录信息失效，请重新登录');
+//              window.location.href = '/login';
+//            }
+//            console.log(e);
+//
+//          }
+//        })
+//
+//      }
+//    });
+    var opts = {
+      url: fix_url + '/api/research/search?q' + $('.temp-inp').val(),
+      bindData: initSearch,
+      searchRes: function () {
+        var val = $('.temp-inp').val();
+        if (val) {
+          $('.temp-inp').val('');
+          window.location.href = '/search/?q=' + encodeURI(val) + '&ct=research&key=kw'
+        }
       }
-    });
+    };
+    new InputSearch('#temp-inp', '#res-list', '#res-list tbody tr', opts);
 
     //渲染搜索结果
     function initSearch(data) {
@@ -124,7 +128,6 @@
         $('.res-list').hide();
       }
     }
-
 
     // 搜索
     $('.out-search-btn').click(function () {
