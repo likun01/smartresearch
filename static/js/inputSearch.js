@@ -64,7 +64,7 @@ InputSearch.prototype.keyCodeChange = function () {
         var value = null;
         var code = '';
         if (_this.listAll && _this.listAll.length) {
-          code = _this.listAll.eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
+          code = _this.listAll.eq(0).data('code');  // 鼠标没有选中项  默认进第一条
           _this.listAll.each(function (index, item) {
             if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
               // code = _this.listAll.eq(index).find('td').eq(0).find('a').html();
