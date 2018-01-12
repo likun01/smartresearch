@@ -143,7 +143,7 @@
     var count = 0; // 用于标记重新生成新闻容器
     var countNotice = 0;
     var q = '{{ q }}';
-    var reg = new RegExp(q, 'g');
+    var reg = new RegExp(q, 'gi');
 
 
     // tab 内容切换
@@ -421,7 +421,7 @@
       if(e.keyCode === 13){
         var val=$('#search-inp').val();
         if(val){
-          reg = new RegExp(val, 'g');
+          reg = new RegExp(val, 'gi');
           initNews(val);
         }
       }
@@ -435,7 +435,7 @@
         $('.search-container').hide();
         $('.query-title span').eq(0).addClass('active').siblings().removeClass('active');
         $('.query-container .container').eq(0).css('display', 'block').siblings('.query-container .container').css('display', 'none');
-        reg = new RegExp(val, 'g');
+        reg = new RegExp(val, 'gi');
         initNews(val);
       }
 

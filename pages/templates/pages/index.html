@@ -16,7 +16,7 @@
     <div class="top-title">嘉实智能投研系统</div>
     <div class="search-header">
         <input type="text" class="temp-inp" id="temp-inp" placeholder="输入股票代码、名称或者关键词">
-        <a href="" class="out-search-btn">智能检索</a>
+        <a href="javascript:;" class="out-search-btn">智能检索</a>
     </div>
 
     <table class="res-list" id="res-list" style="display:none">
@@ -80,11 +80,14 @@
     var opts = {
       url: fix_url + '/api/research/search?q' + $('.temp-inp').val(),
       bindData: initSearch,
-      searchRes: function () {
+      searchRes: function (code,value) {
         var val = $('.temp-inp').val();
         if (val) {
-          $('.temp-inp').val('');
-          window.location.href = '/search/?q=' + encodeURI(val) + '&ct=research&key=kw'
+          if(!value){
+            window.location.href = 'http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + code
+          }else {
+            window.location.href = '/search/?q=' + encodeURI(value) + '&ct=research&key=kw';
+          }
         }
       }
     };
@@ -96,7 +99,7 @@
         var str = '';
         $.each(data, function (index, item) {
           var q = $('.temp-inp').val();
-          var reg = new RegExp(q, 'g');
+          var reg = new RegExp(q, 'gi');
           var tCode = item.code.toString();
           var tName = item.name;
           if (Number(q)) {
@@ -133,13 +136,26 @@
     $('.out-search-btn').click(function () {
       var val = $('.temp-inp').val();
       if (val) {
-        $('.temp-inp').val('');
-        $('.out-search-btn').prop('href', '/search/?q=' + encodeURI(val) + '&ct=research&key=kw');
+        if ($('#res-list').css('display') !== 'none') { // 有联想词
+          var code = '';
+          code = $('#res-list tbody tr').eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
+          $('#res-list tbody tr').each(function (index, item) {
+            if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
+              code = $('#res-list tbody tr').eq(index).find('td').eq(0).find('a').html();
+            }
+          });
+          $('.out-search-btn').prop('href', 'http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + code);
+        } else { // 无联想词
+          $('.temp-inp').val('');
+          $('.out-search-btn').prop('href', '/search/?q=' + encodeURI(val) + '&ct=research&key=kw');
+        }
       } else {
         $('.out-search-btn').prop('href', 'javascript:;')
       }
-
     })
+
+
+
 
   })
 </script>

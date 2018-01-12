@@ -15,7 +15,6 @@ function InputSearch(inpEle, listCont, listAll, opts) {
 InputSearch.prototype.inputChange = function () {
   var _this = this;
   this.inpEle.on('input propertychange', function () {
-    console.log(_this.inpEle.val());
     _this.inpValue = _this.inpEle.val();
     if (_this.inpValue) {
       _this.inpEle.data('val', _this.inpValue);
@@ -25,14 +24,14 @@ InputSearch.prototype.inputChange = function () {
         type: 'GET',
         data: { // 向后台发送数据
           q: _this.inpValue,
-          token:_this.opts.token
+          token: _this.opts.token
         },
         success: function (result) {
-          if (result.results&&result.results.length) {
+          if (result.results && result.results.length) {
             _this.opts.bindData(result.results);
             _this.listAll = $(_this.listStr);
             _this.lastInd = _this.listAll.length - 1; // 元素数组最后一个索引
-          }else {
+          } else {
             _this.listCont.hide();
           }
         }
@@ -47,8 +46,8 @@ InputSearch.prototype.inputChange = function () {
 InputSearch.prototype.clickChoose = function () {
   var _this = this;
   this.listCont.on('click', function (e) {
-    var str=_this.listAll.eq(_this.count).find('td').eq(1).find('a').html();
-    _this.word=str;
+    var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+    _this.word = str;
     _this.inpEle.val(_this.word);
     _this.listCont.hide();
   });
@@ -58,39 +57,56 @@ InputSearch.prototype.clickChoose = function () {
 InputSearch.prototype.keyCodeChange = function () {
   var _this = this;
   this.inpEle.on('keydown', function (e) {
+    if (_this.inpEle.val()) {
+      if (e.keyCode === 13) {
+        // enter 键后开始请求搜索内容对应数据
+        var value = null;
+        var code = '';
+        if (_this.listAll && _this.listAll.length) {
+          code = _this.listAll.eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
+          _this.listAll.each(function (index, item) {
+            if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
+              code = _this.listAll.eq(index).find('td').eq(0).find('a').html();
+            }
+          });
+        }
+
+        if (_this.listCont.css('display') === 'none') {
+          value = _this.inpEle.val();
+        }
+        _this.opts.searchRes(code,value);
+        _this.listCont.hide();
+      }
+    }
     if (_this.listAll && _this.listAll.length) { // 只有渲染出列表的时候再判断keycode
       if (e.keyCode === 38) { // 上
         _this.count--;
         if (_this.count <= -2) {
           _this.count = _this.lastInd;
-          _this.listAll.eq(_this.lastInd).css('background','#E4EEF9');
+          _this.listAll.eq(_this.lastInd).css('background', '#E4EEF9');
         } else if (_this.count === -1) {
           _this.inpEle.val($(_this.inpEle).data('val')); // 输入框中设置为最开始输入时的关键词
-          _this.listAll.css('background','#FDFFFD');
+          _this.listAll.css('background', '#FDFFFD');
           return;
         } else {
-          _this.listAll.eq(_this.count).css('background','#E4EEF9').siblings().css('background','#FDFFFD');
+          _this.listAll.eq(_this.count).css('background', '#E4EEF9').siblings().css('background', '#FDFFFD');
         }
-        var str=_this.listAll.eq(_this.count).find('td').eq(1).find('a').html();
-        _this.word=str;
+        var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+        _this.word = str;
         _this.inpEle.val(_this.word);
 
       } else if (e.keyCode === 40) { //下
         _this.count++;
         if (_this.count > _this.lastInd) {
           _this.count = -1;
-          _this.listAll.css('background','#FDFFFD');
+          _this.listAll.css('background', '#FDFFFD');
           _this.inpEle.val($(_this.inpEle).data('val')); // 输入框中设置为最开始输入时的关键词
           return;
         }
-        _this.listAll.eq(_this.count).css('background','#E4EEF9').siblings().css('background','#FDFFFD');
-        var str=_this.listAll.eq(_this.count).find('td').eq(1).find('a').html();
-        _this.word=str;
+        _this.listAll.eq(_this.count).css('background', '#E4EEF9').siblings().css('background', '#FDFFFD');
+        var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+        _this.word = str;
         _this.inpEle.val(_this.word);
-      } else if (e.keyCode === 13) {
-        _this.listCont.hide();
-        // enter 键后开始请求搜索内容对应数据
-        _this.opts.searchRes();
       }
     }
   })

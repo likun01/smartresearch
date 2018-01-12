@@ -159,7 +159,7 @@
     var url = window.location.href;
     var q = '{{ q }}';
     console.log(q);
-    var reg = new RegExp(q, 'g');
+    var reg = new RegExp(q, 'gi');
 
 
     // tab 内容切换
@@ -436,7 +436,7 @@
       if(e.keyCode === 13){
         var val=$('#search-inp').val();
         if(val){
-          reg = new RegExp(val, 'g');
+          reg = new RegExp(val, 'gi');
           initNews(val);
         }
       }
@@ -445,7 +445,7 @@
     if (url.indexOf('stock_name') > -1) { // 从指标详情页跳转过来
       var stock_name = '{{stock_name}}';
       var q_index = '{{q}}';
-      var reg_index = new RegExp(stock_name, 'g');
+      var reg_index = new RegExp(stock_name, 'gi');
       q_index = q_index.replace(reg_index, ''); // 得到指标名
       $('.keyword').html(stock_name);
       $('.keyword').after('<span class="subkw"> / ' + q_index + '</span>');
@@ -458,7 +458,7 @@
         $('.search-container').hide();
         $('.query-title span').eq(0).addClass('active').siblings().removeClass('active');
         $('.query-container .container').eq(0).css('display', 'block').siblings('.query-container .container').css('display', 'none');
-        reg = new RegExp(val, 'g');
+        reg = new RegExp(val, 'gi');
         if (url.indexOf('key=kw') > -1) { // 含有key=kw说明是关键词搜索，再次搜索时直接替换头部
           $('.keyword').html(val);
           initNews('{{q}}');
