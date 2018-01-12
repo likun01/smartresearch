@@ -25,11 +25,11 @@
     </table>
 
 </div>
-<div class="footer-container">&copy; Harvest Fund 2017 . All Rights Reserved</div>
+<div class="footer-container">&copy; Harvest Fund 2018 . All Rights Reserved</div>
 
 <!--<script src="/static/js/jquery-1.11.3.js"></script>-->
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-<script src="/static/js/inputSearch.js"></script>
+<script src="/static/js/inputSearch.js?adsf"></script>
 <!--<script src="/static/js/util.js"></script>-->
 <script>
   $(function () {
@@ -111,7 +111,7 @@
               return '<i style="color:#E86664">' + e + '</i>'
             });
           }
-          str += '<tr>';
+          str += '<tr data-code="'+item.code+'">';
           str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '">' + tCode + '</a></td>';
           str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '">' + tName + '</a></td>';
           str += '<td >';
@@ -138,10 +138,12 @@
       if (val) {
         if ($('#res-list').css('display') !== 'none') { // 有联想词
           var code = '';
-          code = $('#res-list tbody tr').eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
+          // code = $('#res-list tbody tr').eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
+          code = $('#res-list tbody tr').data('code');  // 鼠标没有选中项  默认进第一条
           $('#res-list tbody tr').each(function (index, item) {
             if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
-              code = $('#res-list tbody tr').eq(index).find('td').eq(0).find('a').html();
+//              code = $('#res-list tbody tr').eq(index).find('td').eq(0).find('a').html();
+              code = $('#res-list tbody tr').eq(index).data('code');
             }
           });
           $('.out-search-btn').prop('href', 'http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + code);

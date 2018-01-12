@@ -46,7 +46,8 @@ InputSearch.prototype.inputChange = function () {
 InputSearch.prototype.clickChoose = function () {
   var _this = this;
   this.listCont.on('click', function (e) {
-    var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+    // var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+    var str = _this.listAll.eq(_this.count).data('code');
     _this.word = str;
     _this.inpEle.val(_this.word);
     _this.listCont.hide();
@@ -66,7 +67,8 @@ InputSearch.prototype.keyCodeChange = function () {
           code = _this.listAll.eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
           _this.listAll.each(function (index, item) {
             if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
-              code = _this.listAll.eq(index).find('td').eq(0).find('a').html();
+              // code = _this.listAll.eq(index).find('td').eq(0).find('a').html();
+              code = _this.listAll.eq(index).data('code');
             }
           });
         }
@@ -91,7 +93,8 @@ InputSearch.prototype.keyCodeChange = function () {
         } else {
           _this.listAll.eq(_this.count).css('background', '#E4EEF9').siblings().css('background', '#FDFFFD');
         }
-        var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+        // var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+        var str = _this.listAll.eq(_this.count).data('code');
         _this.word = str;
         _this.inpEle.val(_this.word);
 
@@ -104,7 +107,8 @@ InputSearch.prototype.keyCodeChange = function () {
           return;
         }
         _this.listAll.eq(_this.count).css('background', '#E4EEF9').siblings().css('background', '#FDFFFD');
-        var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+        // var str = _this.listAll.eq(_this.count).find('td').eq(0).find('a').html();
+        var str = _this.listAll.eq(_this.count).data('code');
         _this.word = str;
         _this.inpEle.val(_this.word);
       }

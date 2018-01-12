@@ -18,32 +18,40 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
 
-  $(document).ready(function(){
-    function fn() {
-      $(this).text("脚本之家欢迎您");
-    }
-    $("div").off("click",fn)
-    $("div").on("click",fn)
 
-  })
-
-  var q = '国';
-  var str = '中国彩钢';
-  var reg = new RegExp(q, 'g');
-  var str = str.replace(reg, function (e) {
-    console.log(e);
-    return '<i style="color:#E86664">' + e + '</i>'
-  });
-  console.log(str);
-
-  var obj={};
-  console.log(obj);
-  console.log(escape('股份'));
-
-
-
-  var date=new Date().getTime()-365*24*60*60*1000;
-  console.log(new Date(date));
+    var str='11<i style="color:#E86664">0025</i>60';
+    var reg=/(^\d+)|<i/g;
+    str=str.replace(reg,function (e) {
+      console.log(e)
+      return e;
+    });
+//    console.log(str);
+    //  $(document).ready(function(){
+//    function fn() {
+//      $(this).text("脚本之家欢迎您");
+//    }
+//    $("div").off("click",fn)
+//    $("div").on("click",fn)
+//
+//  })
+//
+//  var q = '国';
+//  var str = '中国彩钢';
+//  var reg = new RegExp(q, 'g');
+//  var str = str.replace(reg, function (e) {
+//    console.log(e);
+//    return '<i style="color:#E86664">' + e + '</i>'
+//  });
+//  console.log(str);
+//
+//  var obj={};
+//  console.log(obj);
+//  console.log(escape('股份'));
+//
+//
+//
+//  var date=new Date().getTime()-365*24*60*60*1000;
+//  console.log(new Date(date));
 
 </script>
 </body>
