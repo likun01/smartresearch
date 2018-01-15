@@ -18,6 +18,12 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
 
+    var numStr="600a";
+    if(Number(numStr)){
+      console.log('数字')
+    }else {
+      console.log('非数字')
+    }
 
     var str='11<i style="color:#E86664">0025</i>60';
     var reg=/(^\d+)|<i/g;

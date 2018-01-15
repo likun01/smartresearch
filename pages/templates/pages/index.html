@@ -95,6 +95,11 @@
 
     //渲染搜索结果
     function initSearch(data) {
+      if(Number($('.temp-inp').val())){
+        data.sort(function (a,b) {
+          return a.code-b.code;
+        });
+      }
       if (data) {
         var str = '';
         $.each(data, function (index, item) {
