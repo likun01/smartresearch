@@ -142,7 +142,7 @@
                 <a href="javascript:;">文字版</a>
             </div>
             <h4 class="chart-title"></h4>
-            <div class="point-chart" id="point-cont" style="width: 400px;height:400px;"></div>
+            <div class="point-chart" id="point-cont-0" style="width: 400px;height:400px;"></div>
         </div>
         <!--图表_end-->
     </div>
@@ -235,7 +235,7 @@
         // 生成图表
         $.each(columsDatas, function (index, item) {
           var context = kind + '-chart-' + index;
-          topRankChart(context, titles, colors,titlesArr[index], ratiosArr[index],ranksArr[index]);
+          topRankChart(context, titles, colors, titlesArr[index], ratiosArr[index], ranksArr[index]);
         });
       },
       error: function (e) {
@@ -259,9 +259,6 @@
     }
 
 
-
-
-
     if (data.report && data.report.length) {
       var reportStr = '';
       var reportCont = '';
@@ -276,12 +273,10 @@
     changeTopTab();
 
 
-
-
   }
 
   // 顶部柱状图和折线图
-  function topRankChart(context, titles, colors,y_name, ratios, ranks) {
+  function topRankChart(context, titles, colors, y_name, ratios, ranks) {
     // context, titles, colors,y_name,ratios,ranks  容器 标题 颜色 y轴名称 条形图数据  折线图数据
     var context = echarts.init(document.getElementById(context));
 //    var min = Math.min.apply(null, ratios);
@@ -296,14 +291,14 @@
       tooltip: {
         show: true,
         trigger: 'axis',
-        textStyle:{
-          fontSize:10
+        textStyle: {
+          fontSize: 10
         },
         formatter: function (datas) {
           var res = '';
-          res += datas ? datas[0].axisValueLabel+'</br>' : '';
+          res += datas ? datas[0].axisValueLabel + '</br>' : '';
           res += y_name + ':' + datas[0].value + '</br>';
-          res += (datas[1].value)?'排名:' + (datas[1].value * 100).toFixed(0) + '%' + '</br>':'';
+          res += (datas[1].value) ? '排名:' + (datas[1].value * 100).toFixed(0) + '%' + '</br>' : '';
           return res;
         }
       },
@@ -454,10 +449,10 @@
       all1: [], // 时间降  数值升 (down up)
       all2: [], // 时间升（以前到最新）  数值降 (up down)
       all3: [], // 时间升  数值升 (down down)
-      all4:[],
-      all5:[],
-      all6:[],
-      all7:[],
+      all4: [],
+      all5: [],
+      all6: [],
+      all7: [],
       dataList: [],
       total: 0,
       analystsData: {},
@@ -874,8 +869,8 @@
     });
 
     // 回车键进行相关搜索
-    $('#search-inp').on('keydown',function (e) {
-      if(e.keyCode === 13){
+    $('#search-inp').on('keydown', function (e) {
+      if (e.keyCode === 13) {
         var q = $('#search-inp').val();
         if (q) {
           window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name=' + stock_name;
@@ -891,12 +886,12 @@
         var q = $(this).parent().find('.first-col').html();
         window.location.href = '/forecast/more/?q=' + stock_name + q + '&stock_name=' + stock_name + '&ct=research';
       }
+
       $('.data-cont').off('click');
-      $('.unknow-init').on('click',unknowEvent);
+      $('.unknow-init').on('click', unknowEvent);
 
       // 按年度显示预测弹框
       function foreEven() {
-        console.log('被执行');
         cur_title = $(this).parent().find('.first-col').html();
         $('.chart-title').html(cur_title);
         var parentId = $(this).parent().parent().parent().prop('id');
@@ -946,16 +941,15 @@
         }
         // 重新获取数据 重新渲染
         var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
-        var keyword_cn=$(this).siblings().eq(0).html();
+        var keyword_cn = $(this).siblings().eq(0).html();
         var report_period = $(this).parent().parent().parent().find('thead td').eq($(this).index()).html();
         var code = '{{ stock_code }}';
-        getForecastData(code, report_period, keyword,keyword_cn);
+        getForecastData(code, report_period, keyword, keyword_cn);
 
       }
+
       $('.forecase-init').off('click');
-      $('.forecase-init').on('click',foreEven);
-
-
+      $('.forecase-init').on('click', foreEven);
 
 
       // 按年度显示历史弹框
@@ -1022,8 +1016,9 @@
           closeHistory();
         });
       }
+
       $('.normal-init').off('click');
-      $('.normal-init').on('click',normalEvent);
+      $('.normal-init').on('click', normalEvent);
     }
 
     // 渲染历史弹框图表
@@ -1147,7 +1142,7 @@
 
     // 点击预测数据相关函数
     // 预测弹框 点击表格预测数据时调用
-    function getForecastData(code, report_period, keyword,keyword_cn) {
+    function getForecastData(code, report_period, keyword, keyword_cn) {
       countTri++;
       // 绑定数据前先把排序箭头恢复
       // 把排序箭头恢复
@@ -1266,14 +1261,12 @@
 
 
           // 列表数据渲染
-          clickRankBtn('up', 'up','status_time');
+          clickRankBtn('up', 'up', 'status_time');
           timeOrder();
 
 
-          console.log(' res.analysts-----------------',res.analysts);
-          console.log(' res.line_data-----------------',res.line_data);
           // 图表数据渲染
-          forecastChart(res.analysts, res.line_data,keyword_cn);
+          forecastChart(res.analysts, res.line_data, keyword_cn, 'point-cont-' + countTri);
 
           // 导出数据href赋值
           $('#expForecastData').prop('href', res.export_url);
@@ -1288,7 +1281,7 @@
     }
 
     // 预测弹框  请求数据/数据渲染
-    function clickRankBtn(time, value,status) {
+    function clickRankBtn(time, value, status) {
       // 触发函数时先清理上次的容器
       if (countTri > 0) {
         var str = '';
@@ -1297,10 +1290,18 @@
         str += '<div class="page-container" id="page-container-' + countTri + '">';
         str += '</div>';
         $('.data-cont-chart').before(str);
-        $('#data-cont-chart-'+countTri).siblings('.data-cont-chart').remove();
-        $('#page-container-'+countTri).siblings('.page-container').remove();
+        $('#data-cont-chart-' + countTri).siblings('.data-cont-chart').remove();
+        $('#page-container-' + countTri).siblings('.page-container').remove();
         $('#data-cont-chart-' + (countTri - 1)).remove();
         $('#page-container-' + (countTri - 1)).remove();
+
+
+        var point_str = ' <div class="point-chart" id="point-cont-' + countTri + '" style="width: 400px;height:400px;"></div>';
+
+        $('.point-chart').before(point_str);
+        $('#point-cont-' + countTri).siblings('.point-chart').remove();
+
+
       }
 
       // 渲染对应页的数据
@@ -1308,7 +1309,7 @@
         pageData.dataList = [];
         var offset = curPage * pageSize;   //(curPage-1)*pageSize;  此处不需要减1，pagination中curPage存的是当前索引值
         var all = [];
-        if(status==='status_time'){
+        if (status === 'status_time') {
           if (time === 'up' && value === 'up') {
             all = pageData.all0;
           } else if (time === 'up' && value === 'down') {
@@ -1318,7 +1319,7 @@
           } else if (time === 'down' && value === 'up') {
             all = pageData.all1;
           }
-        }else{
+        } else {
           if (time === 'up' && value === 'up') {
             all = pageData.all4;
           } else if (time === 'up' && value === 'down') {
@@ -1339,7 +1340,7 @@
         var dataHtml = '';
         $.each(pageData.dataList, function (index, item) {
           dataHtml += '<li>';
-          dataHtml += '<span>' + item.analyst + '(' + item.org + ')' + '</span>';
+          dataHtml += '<span>' + (item.analyst ? item.analyst : item.org) + '(' + item.org + ')' + '</span>';
           dataHtml += '<span>' + item.published_dt_format + '</span>';
           dataHtml += '<span>' + item.value_format + '</span>';
           dataHtml += item.yanbao_url ? '<span><a href="' + item.yanbao_url + '" target="_blank"><div class="span-link active">原文链接</div></a></span>' : '<span><div class="span-link">原文链接</div></span>';
@@ -1372,7 +1373,7 @@
           $('#time-down').removeClass('rank-down');
           $('#time-down').addClass('down-plain');
           countTri++;
-          clickRankBtn(history[0], history[1],'status_time');
+          clickRankBtn(history[0], history[1], 'status_time');
         }
       });
       $('#time-down').click(function () {
@@ -1385,7 +1386,7 @@
           $('#time-up').removeClass('rank-up');
           $('#time-up').addClass('up-plain');
           countTri++;
-          clickRankBtn(history[0], history[1],'status_time');
+          clickRankBtn(history[0], history[1], 'status_time');
         }
       });
 
@@ -1399,7 +1400,7 @@
           $('#val-down').removeClass('rank-down');
           $('#val-down').addClass('down-plain');
           countTri++;
-          clickRankBtn(history[0], history[1],'status_val');
+          clickRankBtn(history[0], history[1], 'status_val');
         }
 
       });
@@ -1413,11 +1414,10 @@
           $('#val-up').removeClass('rank-up');
           $('#val-up').addClass('up-plain');
           countTri++;
-          clickRankBtn(history[0], history[1],'status_val');
+          clickRankBtn(history[0], history[1], 'status_val');
         }
       });
     }
-
 
 
     // 预测弹框 切换到图表
@@ -1440,7 +1440,7 @@
     });
 
     // 预测弹框 echart图表
-    function forecastChart(analystsData, line_data,keyword_cn) { // legend 显示文字 当前行的title
+    function forecastChart(analystsData, line_data, keyword_cn, cont_id) { // legend 显示文字 当前行的title
       var seriesObj = [];
       // 日期数据
       var dates = [];
@@ -1474,12 +1474,12 @@
       // var maxDate = Math.max.apply(null, dates);
       var maxDate = new Date().getTime();
       var minDate = Math.min.apply(null, dates);
-      if(maxDate-minDate<365*24*60*60*1000){
-        minDate=maxDate-365*24*60*60*1000;
+      if (maxDate - minDate < 365 * 24 * 60 * 60 * 1000) {
+        minDate = maxDate - 365 * 24 * 60 * 60 * 1000;
       }
       var intervalDate = (maxDate - minDate) / 6;
 
-      var myChart = echarts.init(document.getElementById('point-cont'));
+      var myChart = echarts.init(document.getElementById(cont_id));
       option = {
         tooltip: {
           trigger: 'axis',
@@ -1494,11 +1494,11 @@
           formatter: function (datas) {
             var res = '';
             for (var i = 0, length = datas.length; i < length; i++) {
-              res+=datas[i].seriesName + '</br>';
-              if (datas[i].componentSubType === 'scatter'){
-                res += keyword_cn+':' + datas[i].data[1] + '</br>';
+              res += datas[i].seriesName + '</br>';
+              if (datas[i].componentSubType === 'scatter') {
+                res += keyword_cn + ':' + datas[i].data[1] + '</br>';
               }
-              else if(datas[i].componentSubType === 'line'){
+              else if (datas[i].componentSubType === 'line') {
                 res += '平均值:' + datas[i].value[1] + '</br>';
               }
             }
