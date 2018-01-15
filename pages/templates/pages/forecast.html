@@ -1261,7 +1261,7 @@
 
 
           // 列表数据渲染
-          clickRankBtn('up', 'up', 'status_time');
+          clickRankBtn('up', 'up', 'status_time', 'init');
           timeOrder();
 
 
@@ -1281,7 +1281,7 @@
     }
 
     // 预测弹框  请求数据/数据渲染
-    function clickRankBtn(time, value, status) {
+    function clickRankBtn(time, value, status, rank_kind) { // rank_kind 区分初始化和点击排序按钮
       // 触发函数时先清理上次的容器
       if (countTri > 0) {
         var str = '';
@@ -1296,10 +1296,12 @@
         $('#page-container-' + (countTri - 1)).remove();
 
 
-        var point_str = ' <div class="point-chart" id="point-cont-' + countTri + '" style="width: 400px;height:400px;"></div>';
+        if (rank_kind === 'init') {
+          var point_str = ' <div class="point-chart" id="point-cont-' + countTri + '" style="width: 400px;height:400px;"></div>';
 
-        $('.point-chart').before(point_str);
-        $('#point-cont-' + countTri).siblings('.point-chart').remove();
+          $('.point-chart').before(point_str);
+          $('#point-cont-' + countTri).siblings('.point-chart').remove();
+        }
 
 
       }
@@ -1373,7 +1375,7 @@
           $('#time-down').removeClass('rank-down');
           $('#time-down').addClass('down-plain');
           countTri++;
-          clickRankBtn(history[0], history[1], 'status_time');
+          clickRankBtn(history[0], history[1], 'status_time', 'rank');
         }
       });
       $('#time-down').click(function () {
@@ -1386,7 +1388,7 @@
           $('#time-up').removeClass('rank-up');
           $('#time-up').addClass('up-plain');
           countTri++;
-          clickRankBtn(history[0], history[1], 'status_time');
+          clickRankBtn(history[0], history[1], 'status_time', 'rank');
         }
       });
 
@@ -1400,7 +1402,7 @@
           $('#val-down').removeClass('rank-down');
           $('#val-down').addClass('down-plain');
           countTri++;
-          clickRankBtn(history[0], history[1], 'status_val');
+          clickRankBtn(history[0], history[1], 'status_val', 'rank');
         }
 
       });
@@ -1414,7 +1416,7 @@
           $('#val-up').removeClass('rank-up');
           $('#val-up').addClass('up-plain');
           countTri++;
-          clickRankBtn(history[0], history[1], 'status_val');
+          clickRankBtn(history[0], history[1], 'status_val', 'rank');
         }
       });
     }
@@ -1441,9 +1443,11 @@
 
     // 预测弹框 echart图表
     function forecastChart(analystsData, line_data, keyword_cn, cont_id) { // legend 显示文字 当前行的title
+      console.log('容器', cont_id);
       var seriesObj = [];
-      // 日期数据
-      var dates = [];
+
+      var dates = []; // 日期数据
+      var vals = [];
       line_data.forEach(function (item) {
         dates.push(item[0]);
       });
@@ -1467,8 +1471,12 @@
 
         $.each(item.data, function (ind, ite) {
           dates.push(ite[0]);
+          vals.push(ite[1]);
         })
       });
+//      $.each(line_data,function (index,item) {
+//        vals.push(item[1]);
+//      });
 
 
       // var maxDate = Math.max.apply(null, dates);
@@ -1478,6 +1486,14 @@
         minDate = maxDate - 365 * 24 * 60 * 60 * 1000;
       }
       var intervalDate = (maxDate - minDate) / 6;
+
+      var equalFlag = false;
+      var maxVal = Math.max.apply(null, vals);
+      var minVal = Math.min.apply(null, vals);
+      equalFlag = (maxVal === minVal) ? true : false; // 最大值最小值是否相等
+      var intervalVal = !equalFlag ? (maxVal - minVal) / 4 : maxVal / 8;
+      maxVal = equalFlag ? maxVal + 3 * intervalVal : maxVal + intervalVal;
+      minVal = equalFlag ? minVal - 3 * intervalVal : minVal - intervalVal;
 
       var myChart = echarts.init(document.getElementById(cont_id));
       option = {
@@ -1539,6 +1555,9 @@
         },
         yAxis: {
           type: 'value',
+          min: minVal,
+          max: maxVal,
+          interval: intervalVal,
           axisTick: {
             show: false
           },
@@ -1552,6 +1571,9 @@
             textStyle: {
               fontSize: '10'
             },
+            formatter: function (value) {
+              return value.toFixed(2);
+            }
           },
           axisLine: {
             lineStyle: {
