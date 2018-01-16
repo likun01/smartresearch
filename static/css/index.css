@@ -836,7 +836,7 @@ button, input {
   border: 1px solid #DA6D77;
   background: #FDFFFE;
   z-index: 99;
-  /*display: none;*/
+  display: none;
 }
 
 /*预测数据弹框*/
