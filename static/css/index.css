@@ -826,7 +826,7 @@ button, input {
 
 /*异常数据显示提醒*/
 .abnormal-info {
-  width: 100px;
+  min-width: 100px;
   padding: 5px 5px;
   position: absolute;
   left: 0;
@@ -835,6 +835,7 @@ button, input {
   background: #FDFFFE;
   z-index: 99;
   display: none;
+  white-space: nowrap;
 }
 
 /*预测数据弹框*/
@@ -934,7 +935,7 @@ button, input {
 }
 
 .mask-data-container .data-cont-chart {
-  width: 400px;
+  width: 100%;
   min-height: 320px;
   border-radius: 3px;
   font-size: 0;

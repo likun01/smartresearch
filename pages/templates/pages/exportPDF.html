@@ -40,13 +40,13 @@
                                 <td>营业收入增长率</td>
                                 <td>234.33&nbsp;</td>
                                 <td>234.33</td>
-                                <td class="green">234.33</td>
+                                <td class="green color-note" data-note="行业平均值：19.76，排名：19/19">234.33</td>
                                 <td style=" word-break : break-all;width:25%;">33234.33</td>
                             </tr>
                             <tr>
                                 <td>净利润增长率</td>
                                 <td>234.33</td>
-                                <td class="red">234.33</td>
+                                <td class="red color-note" data-note="行业平均值：19.76，排名：19/19">234.33</td>
                                 <td>234.33</td>
                                 <td>234.33</td>
                             </tr>
@@ -1113,35 +1113,6 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
-
-  $('.finance-container .green').on('mouseenter', function () {
-    var t = computePosi(this).t;
-    var l = computePosi(this).l;
-    $('.abnormal-info').css('top', t);
-    $('.abnormal-info').css('left', l);
-    $('.abnormal-info').css('display', 'block');
-    $('.abnormal-info').html('蓝色特殊数据');
-
-  });
-
-  $('.finance-container .green').on('mouseleave', function () {
-    $('.abnormal-info').css('display', 'none')
-  });
-
-  $('.finance-container .red').on('mouseenter', function () {
-    var t = computePosi(this).t;
-    var l = computePosi(this).l;
-    $('.abnormal-info').css('top', t);
-    $('.abnormal-info').css('left', l);
-    $('.abnormal-info').css('display', 'block');
-    $('.abnormal-info').html('红色特殊数据');
-
-  });
-
-  $('.finance-container .red').on('mouseleave', function () {
-    $('.abnormal-info').css('display', 'none')
-  });
-
   function computePosi(_this) {
     var tdH = $(_this).height();
     var tdW = $(_this).width();
@@ -1153,6 +1124,28 @@
     var l = tdL - outL + tdW / 2;
     return {l: l, t: t}
   }
+
+  $('.color-note').off('mouseenter');
+  $('.color-note').off('mouseleave');
+
+  $('.color-note').on('mouseenter', function () {
+    console.log('enter')
+    var note = $(this).data('note');
+    if (note) {
+      var t = computePosi(this).t;
+      var l = computePosi(this).l;
+      $('.abnormal-info').css('top', t);
+      $('.abnormal-info').css('left', l);
+      $('.abnormal-info').css('display', 'block');
+      $('.abnormal-info').html(note);
+    } else {
+      $('.abnormal-info').css('display', 'none');
+    }
+  });
+
+  $('.color-note').on('mouseleave', function () {
+    $('.abnormal-info').css('display', 'none')
+  });
 </script>
 </body>
 </html>

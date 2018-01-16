@@ -153,7 +153,7 @@
 
 
     <!--鼠标滑过显示数据异常原因_start-->
-    <div class="abnormal-info">异常数据提示</div>
+    <div class="abnormal-info">行业平均值：19.76，排名：19/19</div>
     <!--鼠标滑过显示数据异常原因_end-->
 
 
@@ -628,10 +628,10 @@
 
                   }
                   if (ite.abnormal === 'red') {
-                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #F44336 ;" class="normal-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '"  data-note="' + ite.note + '" style="display: none;color: #F44336 ;" class="normal-init color-note">' + ite.value_format + '</td>';
                   }
                   if (ite.abnormal === 'green') {
-                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #4CAF50;" class="normal-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '"  data-note="' + ite.note + '" style="display: none;color: #4CAF50;" class="normal-init color-note">' + ite.value_format + '</td>';
                   }
 
                 }
@@ -641,10 +641,10 @@
 
                   }
                   if (ite.abnormal === 'red') {
-                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #F44336 ;" class="forecase-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '" data-note="' + ite.note + '" style="display: none;color: #F44336 ;" class="forecase-init color-note">' + ite.value_format + '</td>';
                   }
                   if (ite.abnormal === 'green') {
-                    str += '<td data-val="' + ite.value + '"  style="display: none;color: #4CAF50;" class="forecase-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '"  data-note="' + ite.note + '"  style="display: none;color: #4CAF50;" class="forecase-init color-note">' + ite.value_format + '</td>';
                   }
                 }
                 if (ite.status === 'unknow') {
@@ -659,10 +659,10 @@
 
                   }
                   if (ite.abnormal === 'red') {
-                    str += '<td data-val="' + ite.value + '"  style="color: #F44336 ;" class="normal-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '" data-note="' + ite.note + '"  style="color: #F44336 ;" class="normal-init color-note">' + ite.value_format + '</td>';
                   }
                   if (ite.abnormal === 'green') {
-                    str += '<td data-val="' + ite.value + '"  style="color: #4CAF50;" class="normal-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '" data-note="' + ite.note + '" style="color: #4CAF50;" class="normal-init color-note">' + ite.value_format + '</td>';
                   }
 
                 }
@@ -672,10 +672,10 @@
 
                   }
                   if (ite.abnormal === 'red') {
-                    str += '<td data-val="' + ite.value + '"  style="color: #F73F3D;" class="forecase-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '" data-note="' + ite.note + '" style="color: #F73F3D;" class="forecase-init color-note">' + ite.value_format + '</td>';
                   }
                   if (ite.abnormal === 'green') {
-                    str += '<td data-val="' + ite.value + '"  style="color: #4CAF50;" class="forecase-init">' + ite.value_format + '</td>';
+                    str += '<td data-val="' + ite.value + '" data-note="' + ite.note + '" style="color: #4CAF50;" class="forecase-init color-note">' + ite.value_format + '</td>';
                   }
                 }
                 if (ite.status === 'unknow') {
@@ -1031,24 +1031,32 @@
 
       // 异常数据提示原因
       function computePosi() {
-        console.log(this);
-        var tdH = $(this).height();
-        var tdW = $(this).width();
-        var tdT = $(this).offset().top;
-        var tdL = $(this).offset().left;
-        var outT = $('.data-cont').offset().top;
-        var outL = $('.data-cont').offset().left;
-        var t = tdT - outT + tdH + 9;
-        var l = tdL - outL + tdW / 2;
-        $('.abnormal-info').css('left', l);
-        $('.abnormal-info').css('top', t);
-        $('.abnormal-info').css('display', 'block');
+        var note = $(this).data('note');
+        if (note) {
+          var tdH = $(this).height();
+          var tdW = $(this).width();
+          var tdT = $(this).offset().top;
+          var tdL = $(this).offset().left;
+          var outT = $('.data-cont').offset().top;
+          var outL = $('.data-cont').offset().left;
+          var t = tdT - outT + tdH + 9;
+          var l = tdL - outL + tdW / 2;
+          $('.abnormal-info').css('left', l);
+          $('.abnormal-info').css('top', t);
+          $('.abnormal-info').html(note);
+          $('.abnormal-info').css('display', 'block');
+        } else {
+          $('.abnormal-info').css('display', 'none');
+        }
       }
 
-//      $('.forecase-init').on('mouseenter', computePosi);
-//      $('.forecase-init').on('mouseleave', function () {
-//        $('.abnormal-info').css('display', 'none');
-//      })
+
+      $('.color-note').off('mouseenter');
+      $('.color-note').off('mouseleave');
+      $('.color-note').on('mouseenter', computePosi);
+      $('.color-note').on('mouseleave', function () {
+        $('.abnormal-info').css('display', 'none');
+      })
     }
 
     // 渲染历史弹框图表
@@ -1505,9 +1513,9 @@
           vals.push(ite[1]);
         })
       });
-//      $.each(line_data,function (index,item) {
-//        vals.push(item[1]);
-//      });
+      $.each(line_data, function (index, item) {
+        vals.push(item[1]);
+      });
 
 
       // var maxDate = Math.max.apply(null, dates);
@@ -1527,7 +1535,27 @@
       minVal = equalFlag ? minVal - 3 * intervalVal : minVal - intervalVal;
 
       var myChart = echarts.init(document.getElementById(cont_id));
+      var gridX = 40;
+      if (maxVal > 1000)
+        gridX = 45;
+      if (maxVal > 10000)
+        gridX = 50;
+      if (maxVal > 100000)
+        gridX = 55;
+      if (maxVal > 1000000)
+        gridX = 60;
+      if (maxVal > 10000000)
+        gridX = 65;
+      if (maxVal > 100000000)
+        gridX = 70;
+      if (maxVal > 1000000000)
+        gridX = 75;
+      if (maxVal > 10000000000)
+        gridX = 80;
       option = {
+        grid: {
+          x: gridX,
+        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -1543,7 +1571,7 @@
             for (var i = 0, length = datas.length; i < length; i++) {
               res += datas[i].seriesName + '</br>';
               if (datas[i].componentSubType === 'scatter') {
-                res += keyword_cn + ':' + datas[i].data[1] + '</br>';
+                res += keyword_cn + ':' + (datas[i].data[1] ? datas[i].data[1] : '') + '</br>';
               }
               else if (datas[i].componentSubType === 'line') {
                 res += '平均值:' + datas[i].value[1] + '</br>';

@@ -75,7 +75,7 @@ a {
 }
 
 .table-left .abnormal-info {
-  width: 100px;
+  min-width: 100px;
   padding: 5px 5px;
   position: absolute;
   left: 0;
@@ -84,6 +84,7 @@ a {
   background: #FDFFFE;
   z-index: 99;
   display: none;
+  white-space: nowrap;
 }
 
 .table-left .left-title {
