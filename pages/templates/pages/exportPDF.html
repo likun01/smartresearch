@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>智能图表PDF</title>
-    <link rel="stylesheet" href="/static/css/pageForPDF.css">
+    <link rel="stylesheet" href="/static/css/pageForPDF.css?abcdef">
     <link rel="stylesheet" href="/static/iconfont/iconfont.css">
     <link rel="shortcut icon" href="/static/images/favicon.ico">
 </head>
@@ -30,10 +30,10 @@
                         <table class="inner-table">
                             <thead>
                             <td></td>
-                            <td>16A</td>
-                            <td>17E</td>
-                            <td>18E</td>
-                            <td>19E</td>
+                            <td>2016A</td>
+                            <td>2017E</td>
+                            <td>2018E</td>
+                            <td>2019E</td>
                             </thead>
                             <tbody>
                             <tr>
@@ -46,7 +46,7 @@
                             <tr>
                                 <td>净利润增长率</td>
                                 <td>234.33</td>
-                                <td class="red color-note" data-note="行业平均值：19.76，排名：19/19">234.33</td>
+                                <td class="red color-note" >234.33</td>
                                 <td>234.33</td>
                                 <td>234.33</td>
                             </tr>
@@ -1129,9 +1129,9 @@
   $('.color-note').off('mouseleave');
 
   $('.color-note').on('mouseenter', function () {
-    console.log('enter')
     var note = $(this).data('note');
     if (note) {
+      $('.color-note').css('cursor','pointer')
       var t = computePosi(this).t;
       var l = computePosi(this).l;
       $('.abnormal-info').css('top', t);

@@ -49,12 +49,10 @@ a {
 
 .red {
   color: #F44336;
-  cursor: pointer;
 }
 
 .green {
   color: #4CAF50;
-  cursor: pointer;
 }
 
 .header-title {
@@ -126,6 +124,7 @@ a {
 .table-left .finance-container thead {
   text-align: center;
   border-bottom: 1px solid #E2E4E5;
+  border-right: 1px solid #E2E4E5;
 }
 
 .table-left .finance-container thead td {
@@ -144,6 +143,7 @@ a {
   border-spacing: 0;
   border-collapse: collapse;
   table-layout: fixed;
+  border-right: 1px solid #E2E4E5;
 }
 
 .inner-table tr {
@@ -175,7 +175,8 @@ a {
 }
 
 .inner-table thead td:first-child, .inner-table tbody td:first-child {
-  width: 20%
+  width: 20%;
+  text-align: right;
 }
 
 .inner-table tbody td {
@@ -183,6 +184,7 @@ a {
   border: none;
   word-break: break-all;
   text-align: right;
+  border-right: 1px solid #E2E4E5;
 }
 
 .inner-table tbody tr:nth-child(even) {
@@ -196,32 +198,15 @@ a {
 /*行业对比*/
 .comp-prepare {
   width: 100%;
-  border-top: 1px solid #E2E4E5;
-  /*border-bottom: 1px solid #E2E4E5;*/
+  border: 1px solid #E2E4E5;
   border-spacing: 0;
   border-collapse: collapse;
   text-align: center;
   margin-top: 15px;
 }
 
-.comp-prepare thead {
-  background: #E4EEF9;
-  text-align: center;
-  border-bottom: 1px solid #E2E4E5;
-}
-
-.comp-prepare thead td {
-  padding: 9px 0;
-  font-weight: 500;
-  font-size: 14px;
-}
-
 .comp-prepare tbody tr {
   border-bottom: 1px solid #E2E4E5;
-}
-
-.comp-prepare tbody tr:nth-child(1) {
-  border-bottom: none;
 }
 
 .comp-prepare tbody tr:nth-child(1) td {
@@ -239,6 +224,7 @@ a {
 
 .comp-prepare tbody tr td {
   padding: 4px 0;
+  border-right: 1px solid #E2E4E5;
 }
 
 .comp-prepare tbody tr:nth-child(2) {
