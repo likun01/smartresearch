@@ -664,20 +664,21 @@ button, input {
   width: 100%;
   overflow: hidden;
   position: absolute;
-  top:50px;
+  top: 50px;
   left: 0;
 }
-#year-chart{
+
+#year-chart {
   z-index: 99;
   opacity: 1;
-  filter:alpha(opacity=1);
-}
-#report-chart{
-  z-index: -99;
-  opacity: 0;
-  filter:alpha(opacity=0);
+  filter: alpha(opacity=1);
 }
 
+#report-chart {
+  z-index: -99;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
 
 .statistics-chart .chart-tab {
   width: 100%;
@@ -751,8 +752,6 @@ button, input {
   font-style: normal;
 }
 
-
-
 /*图表样式_end*/
 
 /*历史数据弹框*/
@@ -825,7 +824,6 @@ button, input {
   cursor: pointer;
 }
 
-
 /*异常数据显示提醒*/
 .abnormal-info {
   width: 100px;
@@ -842,10 +840,10 @@ button, input {
 /*预测数据弹框*/
 .mask-data-container {
   position: absolute;
-  top:30px;
+  top: 30px;
   left: 0;
   width: 400px;
-  min-height: 378px;
+  min-height: 388px;
   border: 1px solid #9FBFE9;
   background: #FEFFFE;
 }
@@ -865,15 +863,22 @@ button, input {
   display: inline-block;
   font-size: 12px;
   text-align: center;
-  width:25%
+  width: 20%
 }
 
 .mask-data-container .title-cont-chart div:nth-child(1) {
-  width: 35%;
+  width: 40%;
 }
 
-
 .mask-data-container .title-cont-chart div:nth-child(3) {
+  width: 9%;
+}
+
+.mask-data-container .title-cont-chart div:nth-child(4) {
+  width: 16%;
+}
+
+.mask-data-container .title-cont-chart div:nth-child(5) {
   width: 15%;
 }
 
@@ -930,7 +935,7 @@ button, input {
 
 .mask-data-container .data-cont-chart {
   width: 400px;
-  min-height: 300px;
+  min-height: 320px;
   border-radius: 3px;
   font-size: 0;
   padding-top: 5px;
@@ -941,17 +946,20 @@ button, input {
   display: inline-block;
   font-size: 12px;
   text-align: center;
-  width: 25%;
+  width: 20%;
 }
 
 .mask-data-container .data-cont-chart span:nth-child(1) {
-  width: 35%;
+  width: 40%;
 }
 
 .mask-data-container .data-cont-chart span:nth-child(3) {
-  width: 15%;
+  width: 10%;
 }
 
+.mask-data-container .data-cont-chart span:nth-child(4) {
+  width: 10%;
+}
 
 .mask-data-container .data-cont-chart li span {
   font-size: 12px;
@@ -1016,7 +1024,7 @@ button, input {
   overflow: hidden;
 }
 
-.mask-data-container .chart-container .close-data-mask,.all-data-cont  .close-data-mask{
+.mask-data-container .chart-container .close-data-mask, .all-data-cont .close-data-mask {
   position: absolute;
   top: -3px;
   right: 6px;
@@ -1053,41 +1061,43 @@ button, input {
   text-align: center;
 }
 
-
 .point-chart {
   position: absolute;
   top: 0;
-  left: 20px;
+  left: 10px;
 }
 
-.all-data-cont{
+.all-data-cont {
   position: relative;
   min-height: 380px;
 
 }
-.download-cont{
+
+.download-cont {
   width: 60px;
   position: absolute;
   bottom: 18px;
   right: 10px;
   cursor: pointer;
 }
-.download-cont img{
+
+.download-cont img {
   width: 12px;
   height: 15px;
   display: inline-block;
   float: left;
 }
-.download-cont span{
+
+.download-cont span {
   display: inline-block;
   color: #676867;
 }
 
-.data-table .unknow-init,.data-table .forecase-init,.data-table .normal-init{
+.data-table .unknow-init, .data-table .forecase-init, .data-table .normal-init {
   cursor: pointer;
 
 }
 
-.data-table .forecase-init{
+.data-table .forecase-init {
   color: #6364FC;
 }

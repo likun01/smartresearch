@@ -124,6 +124,9 @@
                         <i id="val-down" class="down-plain"></i>
                     </span>
                 </div>
+                <div>
+                    言值
+                </div>
                 <div id="toChart" class="toChart"><a href="javascript:;">图表</a></div>
             </div>
             <ul class="data-cont-chart" id="data-cont-chart-0">
@@ -1372,6 +1375,7 @@
           dataHtml += '<span>' + (item.analyst ? item.analyst : item.org) + '(' + item.org + ')' + '</span>';
           dataHtml += '<span>' + item.published_dt_format + '</span>';
           dataHtml += '<span>' + item.value_format + '</span>';
+          dataHtml += '<span>' + item.words_weight + '</span>';
           dataHtml += item.yanbao_url ? '<span><a href="' + item.yanbao_url + '" target="_blank"><div class="span-link active">原文链接</div></a></span>' : '<span><div class="span-link">原文链接</div></span>';
           dataHtml += '</li>';
         });
