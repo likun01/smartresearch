@@ -15,12 +15,11 @@ body {
 }
 
 .container {
-  width: 1000px; /*  150像素分辨率下  宽度1240px*/
+  width: 1200px; /*  150像素分辨率下  宽度1240px*/
   margin: 0 auto;
   background: #FEFFFE;
   padding: 20px 20px;
   overflow: hidden;
-  position: relative;
 }
 
 a {
@@ -43,67 +42,24 @@ a:active {
   color: #000
 }
 
-a {
-  text-decoration: none;
-}
-
-.red {
-  color: #F44336;
-  cursor: pointer;
-}
-
-.green {
-  color: #4CAF50;
-  cursor: pointer;
-}
-
 .header-title {
-  height: 55px;
-  line-height: 55px;
-  font-size: 29px;
-  font-weight: 500;
-  color: #090A0B;
+  height: 50px;
+  line-height: 50px;
+  background: #F4F5F4;
+  font-size: 21px;
+  font-weight: normal;
+  color: #E43934;
   padding-left: 5px;
-  border-bottom: 3px solid #D04548;
 }
 
 .table-left {
-  width: 668px;
+  width: 768px;
   float: left;
-  position: relative;
 
-}
-
-.table-left .abnormal-info {
-  width: 100px;
-  padding: 5px 5px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border: 1px solid #DA6D77;
-  background: #FDFFFE;
-  z-index: 99;
-  display: none;
-}
-
-.table-left .left-title {
-  width: 100%;
-  border-bottom: 1px solid #D7707E;
-  margin-top: 15px;
-}
-
-.table-left .left-title span {
-  font-size: 20px;
-  color: #D00000;
-  font-weight: 500;
-  display: inline-block;
-  padding: 0 0 2px 0;
-  border-bottom: 2px solid #D34758;
-  margin-bottom: -1px;
 }
 
 .right-chart-news {
-  width: 300px;
+  width: 400px;
   float: right;
 }
 
@@ -115,7 +71,7 @@ a {
 /* 财务对比*/
 .table-left .finance-container {
   width: 100%;
-  border: 1px solid #E2E4E5;
+  border: 1px solid #98BBE7;
   border-spacing: 0;
   border-collapse: collapse;
   text-align: center;
@@ -123,8 +79,9 @@ a {
 }
 
 .table-left .finance-container thead {
+  background: #E4EEF9;
   text-align: center;
-  border-bottom: 1px solid #E2E4E5;
+  border-bottom: 1px solid #98BBE7;
 }
 
 .table-left .finance-container thead td {
@@ -142,18 +99,25 @@ a {
   height: 100%;
   border-spacing: 0;
   border-collapse: collapse;
-  table-layout: fixed;
+}
+.inner-table{
+  table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
+.inner-table td{
+  word-break : break-all;
+  width:25%;
 }
 
-.inner-table tr {
-  border-bottom: 1px solid #E2E4E5;
+.inner-table td {
+  border: none;
+  border-right: 1px solid #98BBE7;
+  text-align: center;
+  width: 25%;
 }
-
-.inner-table tr:last-child {
-  border-bottom: none;
+.inner-table tbody td{
+  text-align: right;
 }
-
-.inner-table tr td:first-child {
+.inner-table tbody td:first-child{
   text-align: center;
 }
 
@@ -165,7 +129,6 @@ a {
   border: none;
   background: none !important;
   font-weight: 500;
-  text-align: center;
 }
 
 .inner-table thead td，.inner-table tbody td {
@@ -179,13 +142,10 @@ a {
 
 .inner-table tbody td {
   padding: 4px 0;
-  border: none;
-  word-break: break-all;
-  text-align: right;
 }
 
 .inner-table tbody tr:nth-child(even) {
-  background: #F3F5F6;
+  background: #F1F2F1;
 }
 
 .inner-table tbody td:first-child {
@@ -195,18 +155,17 @@ a {
 /*行业对比*/
 .comp-prepare {
   width: 100%;
-  border-top: 1px solid #E2E4E5;
-  /*border-bottom: 1px solid #E2E4E5;*/
+  border: 1px solid #98BBE7;
   border-spacing: 0;
   border-collapse: collapse;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .comp-prepare thead {
   background: #E4EEF9;
   text-align: center;
-  border-bottom: 1px solid #E2E4E5;
+  border-bottom: 1px solid #98BBE7;
 }
 
 .comp-prepare thead td {
@@ -215,16 +174,12 @@ a {
   font-size: 14px;
 }
 
-.comp-prepare tbody tr {
-  border-bottom: 1px solid #E2E4E5;
+.comp-prepare tbody td {
+  border-right: 1px solid #98BBE7;
 }
 
 .comp-prepare tbody tr:nth-child(1) {
-  border-bottom: none;
-}
-
-.comp-prepare tbody tr:nth-child(1) td {
-  border-bottom: 1px solid #E2E4E5;
+  border-bottom: 1px solid #98BBE7;
   font-weight: 700;
 }
 
@@ -241,34 +196,31 @@ a {
 }
 
 .comp-prepare tbody tr:nth-child(2) {
-  border-bottom: 1px solid #E2E4E5;
+  border-bottom: 1px solid #98BBE7;
 }
 
 .comp-prepare tbody .even-bg {
-  background: #F0F2F3;
+  background: #F1F2F1;
 }
 
 /*基本特征*/
 .right-chart-news .right-title {
   width: 100%;
-  border-bottom: 1px solid #D7707E;
+  border-bottom: 1px solid #E4E5E4;
   margin-top: 15px;
   font-size: 14px;
 }
 
 .right-title span {
-  font-size: 20px;
-  color: #D00000;
-  font-weight: 500;
   display: inline-block;
   padding: 0 0 2px 0;
-  border-bottom: 2px solid #D34758;
+  border-bottom: 1px solid #B10000;
   margin-bottom: -1px;
 }
 
 .features-table {
   width: 100%;
-  border: 1px solid #C6D5DF;
+  border: 1px solid #98BBE7;
   border-spacing: 0;
   border-collapse: collapse;
   text-align: center;
@@ -278,7 +230,7 @@ a {
 .features-table td {
   padding: 3px 0;
   text-align: center;
-  border: 1px solid #C6D5DF;
+  border: 1px solid #98BBE7;
   font-weight: 700;
 }
 
@@ -302,7 +254,7 @@ a {
 }
 
 .tend-des {
-  width: 280px;
+  width: 362px;
   border-spacing: 0;
   border-collapse: collapse;
 }
@@ -318,8 +270,8 @@ a {
 
 /*预测图*/
 .forecast-chart {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 350px;
 }
 
 .xTitles {
@@ -359,7 +311,7 @@ a {
 .news-container .square {
   width: 10px;
   height: 10px;
-  background: #CC0921;
+  background: #B10000;
   border-radius: 1px;
   display: inline-block;;
   float: left;
@@ -368,38 +320,28 @@ a {
 
 .right-cont {
   float: right;
-  width: 285px;
+  width: 385px;
+  word-break: break-all;
 }
 
 /*脑图*/
 .brain-container {
   width: 100%;
-  margin-top: 20px;
-}
-
-.table-left .left-title {
-
 }
 
 .brain-container .brain-title {
   width: 100%;
-  border-bottom: 1px solid #D7707E;
-  margin-top: 15px;
-}
-
-.brain-container .brain-title span {
-  font-size: 20px;
-  color: #D00000;
-  font-weight: 500;
-  display: inline-block;
-  padding: 0 0 2px 0;
-  border-bottom: 2px solid #D34758;
-  margin-bottom: -1px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid #98BBE7;
+  background: #E4EEF8;
 }
 
 .brain-pic {
   width: 900px;
-  height: 470px;
+  height: 670px;
   margin: 0 auto;
   background: url('/static/images/analysis_bg.png') no-repeat;
   background-size: contain;
@@ -420,7 +362,7 @@ a {
   position: absolute;
   width: 100%;
   top: 0;
-  right: -52px;
+  right: -150px;
   font-size: 12px;
   text-align: right;
 }
@@ -658,10 +600,9 @@ a {
 }
 
 /*杜邦分析*/
-ul {
+ul{
   list-style: none;
 }
-
 .analysis-container {
   width: 100%;
 }
@@ -682,25 +623,22 @@ ul {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: #CC0921;
+  background: #A30000;
   margin-right: 3px;
   border-radius: 2px;
   float: left;
   margin-top: 3px;
 }
-
-.analysis-container ul li {
+.analysis-container ul li{
   padding: 3px 0;
   overflow: hidden;
 }
-
-.analysis-info {
+.analysis-info{
   display: inline-block;
   float: left;
   width: 98%;
-  line-height: 17px;
 }
 
-.color-item {
+.color-item{
   color: #6AB1ED;
 }

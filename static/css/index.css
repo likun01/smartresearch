@@ -826,6 +826,18 @@ button, input {
 }
 
 
+/*异常数据显示提醒*/
+.abnormal-info {
+  width: 100px;
+  padding: 5px 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 1px solid #DA6D77;
+  background: #FDFFFE;
+  z-index: 99;
+  /*display: none;*/
+}
 
 /*预测数据弹框*/
 .mask-data-container {

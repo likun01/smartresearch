@@ -149,6 +149,11 @@
     <!--预测弹框_start-->
 
 
+    <!--鼠标滑过显示数据异常原因_start-->
+    <div class="abnormal-info">异常数据提示</div>
+    <!--鼠标滑过显示数据异常原因_end-->
+
+
     <!--左右切换年份_start-->
     <span class="pre-time" id="year-pre-time" style="display: block">&lt;</span>
     <span class="next-time" id="year-next-time" style="display: block">&gt;</span>
@@ -1019,6 +1024,28 @@
 
       $('.normal-init').off('click');
       $('.normal-init').on('click', normalEvent);
+
+
+      // 异常数据提示原因
+      function computePosi() {
+        console.log(this);
+        var tdH = $(this).height();
+        var tdW = $(this).width();
+        var tdT = $(this).offset().top;
+        var tdL = $(this).offset().left;
+        var outT = $('.data-cont').offset().top;
+        var outL = $('.data-cont').offset().left;
+        var t = tdT - outT + tdH + 9;
+        var l = tdL - outL + tdW / 2;
+        $('.abnormal-info').css('left', l);
+        $('.abnormal-info').css('top', t);
+        $('.abnormal-info').css('display', 'block');
+      }
+
+//      $('.forecase-init').on('mouseenter', computePosi);
+//      $('.forecase-init').on('mouseleave', function () {
+//        $('.abnormal-info').css('display', 'none');
+//      })
     }
 
     // 渲染历史弹框图表

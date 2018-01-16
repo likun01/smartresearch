@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/static/images/favicon.ico">
 </head>
 <body>
-<div class="container">
+<div class="container con-position">
     <i class="iconfont icon-xiazaidaoru"
        style="color:#000;font-size: 17px; position: absolute;top:35px;right: 50px;cursor: pointer"><a
             href="http://api-pro.xin-shui.com/research/finical/pick/export/{{stock_code}}/">下载PDF</a></i>
@@ -18,14 +18,15 @@
         <!--左侧表格数据_start-->
         <div class="table-left">
             <!--财务信息表_start-->
+            <div class="abnormal-info">异常数据提示</div>
+            <div class="left-title">
+                <span>财务信息</span>
+            </div>
             <table class="finance-container">
-                <thead>
-                <td colspan="6">财务信息</td>
-                </thead>
                 <tbody>
                 <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">关键指标</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5;">关键指标</td>
+                    <td style="width: 87%;border-right: 1px solid #FDFFFD;border-bottom: 1px solid #E2E4E5;">
                         <table class="inner-table">
                             <thead>
                             <td></td>
@@ -39,13 +40,13 @@
                                 <td>营业收入增长率</td>
                                 <td>234.33&nbsp;</td>
                                 <td>234.33</td>
-                                <td>234.33</td>
-                                <td style=" word-break : break-all;width:25%;">234.33234.33234.33234.33234.33234.33</td>
+                                <td class="green">234.33</td>
+                                <td style=" word-break : break-all;width:25%;">33234.33</td>
                             </tr>
                             <tr>
                                 <td>净利润增长率</td>
                                 <td>234.33</td>
-                                <td>234.33</td>
+                                <td class="red">234.33</td>
                                 <td>234.33</td>
                                 <td>234.33</td>
                             </tr>
@@ -113,8 +114,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">资产负债</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5;">资产负债</td>
+                    <td style="width: 87%;border-right: 1px solid #FDFFFD;border-bottom: 1px solid #E2E4E5;">
                         <table class="inner-table">
                             <tbody>
                             <tr>
@@ -157,8 +158,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">现金流量表</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5;">现金流量表</td>
+                    <td style="width: 87%;border-right: 1px solid #FDFFFD;border-bottom: 1px solid #E2E4E5;">
                         <table class="inner-table">
                             <tbody>
                             <tr>
@@ -187,8 +188,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">利润表</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5;">利润表</td>
+                    <td style="width: 87%;border-right: 1px solid #FDFFFD;border-bottom: 1px solid #E2E4E5;">
                         <table class="inner-table">
                             <tbody>
                             <tr>
@@ -224,8 +225,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 13%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">专用指标</td>
-                    <td style="width: 87%;border-right: 1px solid #98BBE7;border-bottom: 1px solid #98BBE7;">
+                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5;">专用指标</td>
+                    <td style="width: 87%;border-right: 1px solid #FDFFFD;border-bottom: 1px solid #E2E4E5;">
                         <table class="inner-table">
                             <tbody>
                             <tr>
@@ -291,10 +292,10 @@
 
 
             <!--行业对比表_start-->
+            <div class="left-title">
+                <span>行业对比</span>
+            </div>
             <table class="comp-prepare">
-                <thead>
-                <td colspan="13">行业对比</td>
-                </thead>
                 <tbody>
                 <tr>
 
@@ -303,9 +304,9 @@
                     <td rowspan="2">总市值</td>
                     <td rowspan="2">市净率</td>
 
-                    <td colspan="3">市盈率</td>
-                    <td colspan="3">ROE</td>
-                    <td colspan="3">净利润增速</td>
+                    <td colspan="3" style="border-bottom: none">市盈率</td>
+                    <td colspan="3" style="border-bottom: none">ROE</td>
+                    <td colspan="3" style="border-bottom: none">净利润增速</td>
                 </tr>
                 <tr>
                     <td>16E</td>
@@ -678,7 +679,32 @@
     </div>
     <!--下半部分脑图_start-->
     <div class="brain-container">
-        <div class="brain-title">杜邦分析</div>
+        <div class="brain-title"><span>智能杜邦分析</span></div>
+        <div class="analysis-container">
+            <ul style="margin-top: 15px;">
+                <li>
+                    <i class="square-point"></i>
+                    <div class="analysis-info">
+                        <span class="color-item">净资产收益率</span>9.03%，同比增长-17.89%，行业排名35.00% （7/20）分位，平均10.18%，中位数9.72%，
+                    </div>
+                </li>
+                <li>
+                    <i class="square-point"></i>
+                    <div class="analysis-info">
+                        <span class="color-item">资产负债率</span>增长同比最高，达-0.16%，行业平均-0.07%； <span
+                            class="color-item">总资产周转率</span>次之，达-2.20%，行业平均-7.50%； <span
+                            class="color-item">营业净利润率</span>增速最低，为-7.28%，行业平均5.97%。
+                        三项指标中，营业净利润率行业排名20.00%分位， <span class="color-item">总资产周转率</span>65.00%；<span class="color-item">资产负债率</span>为65.00%。
+                    </div>
+                </li>
+                <li>
+                    <i class="square-point"></i>
+                    <div class="analysis-info">
+                        与同行业公司相比，公司较偏向<span class="color-item">高净利率型</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <div class="brain-pic">
 
             <div class="ps-legend"><i class="ps-red">红色</i>
@@ -740,33 +766,6 @@
     <!--下半部分脑图_end-->
 
 
-    <div class="analysis-container">
-        <div class="analysis-title">
-            <span>智能杜邦分析，月底将上线</span>
-        </div>
-        <ul style="margin-top: 15px;">
-            <li>
-                <i class="square-point"></i>
-                <div class="analysis-info">
-                    <span class="color-item">净资产收益率</span>9.03%，同比增长-17.89%，行业排名35.00% （7/20）分位，平均10.18%，中位数9.72%，
-                </div>
-            </li>
-            <li>
-                <i class="square-point"></i>
-                <div class="analysis-info">
-                    <span class="color-item">资产负债率</span>增长同比最高，达-0.16%，行业平均-0.07%； <span
-                        class="color-item">总资产周转率</span>次之，达-2.20%，行业平均-7.50%； <span class="color-item">营业净利润率</span>增速最低，为-7.28%，行业平均5.97%。
-                    三项指标中，营业净利润率行业排名20.00%分位， <span class="color-item">总资产周转率</span>65.00%；<span class="color-item">资产负债率</span>为65.00%。
-                </div>
-            </li>
-            <li>
-                <i class="square-point"></i>
-                <div class="analysis-info">
-                    与同行业公司相比，公司较偏向<span class="color-item">高净利率型</span>
-                </div>
-            </li>
-        </ul>
-    </div>
 </div>
 
 
@@ -811,21 +810,21 @@
   var y = now.getFullYear();
   var m = now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth();
   var d = now.getDate() < 10 ? '0' + now.getDate() : now.getDate();
-  var yStamp=new Date(y, m, d, '23', '59', '59').getTime()-1000*24*60*60;
-  var yPreStamp=new Date(y-1, m, d, '00', '00', '01').getTime()-1000*24*60*60; // 去年昨天的时间戳
-  for(var i=0;i<data6.length;i++){
-    if(data6[i][0]<yStamp||data6[i][0]>yPreStamp){
-      data6.splice(i,1);
+  var yStamp = new Date(y, m, d, '23', '59', '59').getTime() - 1000 * 24 * 60 * 60;
+  var yPreStamp = new Date(y - 1, m, d, '00', '00', '01').getTime() - 1000 * 24 * 60 * 60; // 去年昨天的时间戳
+  for (var i = 0; i < data6.length; i++) {
+    if (data6[i][0] < yStamp || data6[i][0] > yPreStamp) {
+      data6.splice(i, 1);
     }
   }
-  for(var i=0;i<data1.length;i++){
-    if(data1[i][0]<yStamp||data1[i][0]>yPreStamp){
-      data1.splice(i,1);
+  for (var i = 0; i < data1.length; i++) {
+    if (data1[i][0] < yStamp || data1[i][0] > yPreStamp) {
+      data1.splice(i, 1);
     }
   }
-  var minDate=yPreStamp;
-  var maxDate=yStamp;
-  var xInterval=(yStamp-yPreStamp)/4;
+  var minDate = yPreStamp;
+  var maxDate = yStamp;
+  var xInterval = (yStamp - yPreStamp) / 4;
 
   var seriesObj = [
     {
@@ -866,13 +865,19 @@
       nameTextStyle: {
         fontSize: 10,
       },
-      min:minDate,
-      max:maxDate,
-      interval:xInterval,
+      min: minDate,
+      max: maxDate,
+      interval: xInterval,
+      axisLine: {
+        lineStyle: {
+          color: '#CCD5DA'
+        }
+      },
       axisLabel: {
         show: true,
         textStyle: {
-          fontSize: '10'
+          fontSize: '10',
+          color: '#0E1012'
         },
         formatter: function (value) {
           var real_year = echarts.format.formatTime('yy', new Date(value));
@@ -908,9 +913,15 @@
       formatter: function (value) {
         return value.toFixed(2);
       },
+      axisLine: {
+        lineStyle: {
+          color: '#CCD5DA'
+        }
+      },
       axisLabel: {
         textStyle: {
-          fontSize: '10'
+          fontSize: '10',
+          color: '#0E1012'
         },
       },
       splitLine: {
@@ -937,17 +948,16 @@
   var y = now.getFullYear();
   var m = now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth();
   var d = now.getDate() < 10 ? '0' + now.getDate() : now.getDate();
-  var yStamp=new Date(y, m, d, '23', '59', '59').getTime()-1000*24*60*60;
-  var yPreStamp=new Date(y-1, m, d, '00', '00', '01').getTime()-1000*24*60*60; // 去年昨天的时间戳
-  for(var i=0;i<data.length;i++){
-    if(data[i][0]<yStamp||data[i][0]>yPreStamp){
-      data.splice(i,1);
+  var yStamp = new Date(y, m, d, '23', '59', '59').getTime() - 1000 * 24 * 60 * 60;
+  var yPreStamp = new Date(y - 1, m, d, '00', '00', '01').getTime() - 1000 * 24 * 60 * 60; // 去年昨天的时间戳
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][0] < yStamp || data[i][0] > yPreStamp) {
+      data.splice(i, 1);
     }
   }
-  var minDate=yPreStamp;
-  var maxDate=yStamp;
-  var xInterval=(yStamp-yPreStamp)/4;
-
+  var minDate = yPreStamp;
+  var maxDate = yStamp;
+  var xInterval = (yStamp - yPreStamp) / 4;
 
 
   var myChart = echarts.init(document.getElementById('tend-chart'));
@@ -973,16 +983,26 @@
 //        name: '时间',
         nameLocation: 'end',
         type: 'time',
-        min:minDate,
-        max:maxDate,
-        interval:xInterval,
+        min: minDate,
+        max: maxDate,
+        interval: xInterval,
         boundaryGap: false,
         splitLine: {
-          show: true
+          show: true,
+          textStyle: {
+            fontSize: '10'
+          }
+
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#CCD5DA'
+          }
         },
         axisLabel: {
           textStyle: {
-            fontSize: '10'
+            fontSize: '10',
+            color: '#0E1012'
           },
           showMaxLabel: 1,
           show: true,
@@ -1004,15 +1024,23 @@
     ],
     yAxis: [
       {
-        name: '价格',
         type: 'value',
         splitLine: {
-          show: true
+          show: true,
+          textStyle: {
+            fontSize: '10'
+          },
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#CCD5DA'
+          }
         },
         axisLabel: {
           show: true,
           textStyle: {
-            fontSize: '10'
+            fontSize: '10',
+            color: '#0E1012'
           },
           margin: 5,
           formatter: function (value) {
@@ -1027,11 +1055,16 @@
       {
         nameLocation: 'start',
         type: 'value',
-        // inverse: true,
+        axisLine: {
+          lineStyle: {
+            color: '#CCD5DA'
+          }
+        },
         axisLabel: {
           show: true,
           textStyle: {
-            fontSize: '10'
+            fontSize: '10',
+            color: '#0E1012'
           },
           margin: 5,
           formatter: function (value) {
@@ -1064,7 +1097,6 @@
         name: '趋势',
         type: 'line',
         data: data,
-        // yAxisIndex: 1,
         itemStyle: {
           normal: {
             color: '#fcf',
@@ -1079,6 +1111,50 @@
 
   myChart.setOption(option);
 
+</script>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+
+  $('.finance-container .green').on('mouseenter', function () {
+    var t = computePosi(this).t;
+    var l = computePosi(this).l;
+    $('.abnormal-info').css('top', t);
+    $('.abnormal-info').css('left', l);
+    $('.abnormal-info').css('display', 'block');
+    $('.abnormal-info').html('蓝色特殊数据');
+
+  });
+
+  $('.finance-container .green').on('mouseleave', function () {
+    $('.abnormal-info').css('display', 'none')
+  });
+
+  $('.finance-container .red').on('mouseenter', function () {
+    var t = computePosi(this).t;
+    var l = computePosi(this).l;
+    $('.abnormal-info').css('top', t);
+    $('.abnormal-info').css('left', l);
+    $('.abnormal-info').css('display', 'block');
+    $('.abnormal-info').html('红色特殊数据');
+
+  });
+
+  $('.finance-container .red').on('mouseleave', function () {
+    $('.abnormal-info').css('display', 'none')
+  });
+
+  function computePosi(_this) {
+    var tdH = $(_this).height();
+    var tdW = $(_this).width();
+    var tdT = $(_this).offset().top;
+    var tdL = $(_this).offset().left;
+    var outT = $('.table-left').offset().top;
+    var outL = $('.table-left').offset().left;
+    var t = tdT - outT + tdH + 9;
+    var l = tdL - outL + tdW / 2;
+    return {l: l, t: t}
+  }
 </script>
 </body>
 </html>
