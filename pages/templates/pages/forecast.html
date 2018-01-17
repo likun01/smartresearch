@@ -214,6 +214,7 @@
       success: function (res) {
         var rows_title = res.data.rows_title;
         var rows_data = res.data.rows_data;
+        console.log(rows_data);
         var titlesArr = []; // 每组数据的标题数组
         var columsDatas = [];
         var titles = res.data.cols_title; // 图表底部标题
@@ -231,8 +232,14 @@
         $.each(rows_data, function (index, item) {
           temp = rows_data[index]
         });
-        $.each(temp, function (index, item) {
-          item.status === 'normal' ? colors.push('#62B4F5') : colors.push('#6F64BA');
+
+//        $.each(temp, function (index, item) {
+//          item.status === 'normal' ? colors.push('#62B4F5') : colors.push('#6F64BA');
+//        });
+
+        $.each(titles, function (index, item) {
+          console.log(item);
+          item.indexOf('E') > -1 ? colors.push('#6F64BA') : colors.push('#62B4F5');
         });
 
         // 处理柱状图数据
