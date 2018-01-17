@@ -70,7 +70,6 @@
               for (var i = 0; i < opts.res.length; i++) {
                 opts.pageDiv.append(opts.dataFun(opts.res[i]));
               }
-            console.log(opts.pageDiv);
 
             // 页码渲染
               for (var i = 0; i < opts.pNum; i++) {

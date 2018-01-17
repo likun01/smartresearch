@@ -169,6 +169,10 @@ a {
   text-align: center;
 }
 
+.inner-table thead td {
+  border-right: 1px solid #E2E4E5;
+}
+
 .inner-table thead td，.inner-table tbody td {
   padding: 5px 0 !important;
   width: 20%;

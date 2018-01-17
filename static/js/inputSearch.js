@@ -77,6 +77,7 @@ InputSearch.prototype.keyCodeChange = function () {
           value = _this.inpEle.val();
         }
         _this.opts.searchRes(code,value);
+        _this.inpEle.val('');
         _this.listCont.hide();
       }
     }

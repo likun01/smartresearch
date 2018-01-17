@@ -309,12 +309,22 @@ button, input {
   position: relative;
 }
 
+.header-outer {
+  height: 64px;
+  position: relative;
+}
+
 .content-container .header-title {
   padding: 13.33px 15px 13.33px 8px;
   background: #F5F5F5;
   font-size: 26px;
   color: #7E7777;
+
   overflow: hidden;
+}
+
+.content-container .header-title div {
+  float: left;
 }
 
 .content-container .header-title span {
@@ -322,7 +332,7 @@ button, input {
 }
 
 .content-container .header-search {
-  float: right;
+  float: right !important;
   height: 32px;
   line-height: 32px;
   overflow: hidden;
@@ -355,13 +365,97 @@ button, input {
   float: right;
 }
 
-.header-title {
-  position: relative;
-  /*overflow: hidden;*/
+.res-list {
+  position: absolute;
+  top: 49px;
+  right: 15px;
+  width: 280px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  font-size: 12px;
+  border: 1px solid #DCDDDC;
+  box-shadow: 0 1px 1px 1px #E7E8E7;
+  color: #686968;
+  background: #FEFFFE;
+  z-index: 999;
+  display: none;
 }
 
-.header-title div {
-  float: left;
+.res-list tbody {
+  width: 100%;
+}
+
+.res-list tbody td {
+  font-size: 12px;
+  text-align: center;
+  padding: 5px 0;
+  cursor: pointer;
+  width: 24%;
+}
+
+.res-list tbody td:nth-child(4) {
+  width: 14%
+}
+
+.res-list tbody td:nth-child(5) {
+  width: 14%
+}
+
+.res-list tbody td a {
+  text-decoration: none;
+  color: #717271;
+}
+
+.res-list tbody td a:link {
+  color: #717271;
+}
+
+.res-list tbody td a:visited {
+  color: #717271;
+}
+
+.res-list tbody td a:hover {
+  color: #717271;
+}
+
+.res-list tbody td a:active {
+  color: #717271;
+}
+
+.res-list tbody tr:hover {
+  background: #E4EEF9;
+}
+
+.res-list tbody tr span {
+  padding: 0 4px 1px 4px;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 12px;
+  -webkit-transform: scale(0.90);
+  -moz-transform: scale(0.90);
+  -ms-transform: scale(0.90);
+  -o-transform: scale(0.90);
+  transform: scale(0.90);
+  cursor: pointer;
+}
+
+.res-list .report-btn {
+  background: #E7524E;
+  color: #FDF2F2;
+}
+
+.res-list .finance-btn {
+  background: #49535E;
+  color: #E6E8EA;
+}
+
+.res-list .search-btn {
+  background: #0079BA;
+  color: #EDF6FA;
+}
+
+.res-list i {
+  font-style: normal;
 }
 
 .content-container .search-container {
@@ -833,7 +927,7 @@ button, input {
   top: 0;
   border: 1px solid #DA6D77;
   background: #FDFFFE;
-  z-index: 99;
+  z-index: 999999;
   display: none;
   white-space: nowrap;
 }
@@ -1047,7 +1141,7 @@ button, input {
   height: 14px;
   float: right;
   cursor: pointer;
-  z-index: 99999;
+  z-index: 9999;
 }
 
 .mask-data-container .chart-container .to-word a {

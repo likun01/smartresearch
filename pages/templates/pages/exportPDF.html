@@ -25,7 +25,7 @@
             <table class="finance-container">
                 <tbody>
                 <tr>
-                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5;">关键指标</td>
+                    <td style="width: 13%;border-right: 1px solid #E2E4E5;border-bottom: 1px solid #E2E4E5; font-size:15px; ">关键指标</td>
                     <td style="width: 87%;border-right: 1px solid #FDFFFD;border-bottom: 1px solid #E2E4E5;">
                         <table class="inner-table">
                             <thead>
@@ -1131,7 +1131,7 @@
   $('.color-note').on('mouseenter', function () {
     var note = $(this).data('note');
     if (note) {
-      $('.color-note').css('cursor','pointer')
+      $('.color-note').css('cursor','pointer');
       var t = computePosi(this).t;
       var l = computePosi(this).l;
       $('.abnormal-info').css('top', t);

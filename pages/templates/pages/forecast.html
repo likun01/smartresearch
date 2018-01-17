@@ -11,15 +11,43 @@
 
 <!--右侧新闻_start-->
 <!--顶部标题/搜索_start-->
-<div class="header-title">
-    <div>
-        <span id="stock-title"><i></i>({{ stock_code }})&nbsp;</span>/&nbsp;指标详细
+<div class="header-outer">
+    <div class="header-title">
+        <div>
+            <span id="stock-title"><i></i>({{ stock_code }})&nbsp;</span>/&nbsp;指标详细
+        </div>
+        <div class="header-search">
+            <span id="search-relative">找相关</span>
+            <input type="text" id="search-inp" class="search-inp">
+        </div>
     </div>
-    <div class="header-search">
-        <span id="search-relative">找相关</span>
-        <input type="text" id="search-inp">
-    </div>
+    <table class="res-list" id="res-list">
+        <tbody>
+        <tr>
+            <td>600010</td>
+            <td>中国平安</td>
+            <td><a href=""><span class="report-btn">智能报告</span></a></td>
+            <td><a href=""><span class="finance-btn">财报</span></a></td>
+            <td><a href=""><span class="search-btn">搜索</span></a></td>
+        </tr>
+        <tr>
+            <td>600010</td>
+            <td>中国平安</td>
+            <td><a href=""><span class="report-btn">智能报告</span></a></td>
+            <td><a href=""><span class="finance-btn">财报</span></a></td>
+            <td><a href=""><span class="search-btn">搜索</span></a></td>
+        </tr>
+        <tr>
+            <td>600010</td>
+            <td>中国平安</td>
+            <td><a href=""><span class="report-btn">智能报告</span></a></td>
+            <td><a href=""><span class="finance-btn">财报</span></a></td>
+            <td><a href=""><span class="search-btn">搜索</span></a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
 <!--顶部标题/搜索_end-->
 
 <!--图表_start-->
@@ -472,6 +500,9 @@
     var total_report = 0;
 
 
+    $('#search-inp').val(''); // 首次进入有页面清除文本框的内容
+
+
     // 左右tab切换（按年度/按报告期）
     $('.left-group span').click(function () {
       $(this).addClass('active').siblings().removeClass('active');
@@ -870,21 +901,105 @@
 
     // 查找相关
     $('#search-relative').click(function () {
-      var q = $('#search-inp').val();
-      if (q) {
-        window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name=' + stock_name;
+      var val = $('#search-inp').val();
+      if (val) {
+        if ($('#res-list').css('display') !== 'none') { // 有联想词
+          var code = '';
+          // code = $('#res-list tbody tr').eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
+          code = $('#res-list tbody tr').data('code');  // 鼠标没有选中项  默认进第一条
+          $('#res-list tbody tr').each(function (index, item) {
+            if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
+              code = $('#res-list tbody tr').eq(index).data('code');
+            }
+          });
+          window.location.href = 'http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + code;
+          $('#search-inp').val('')
+        } else { // 无联想词
+          $('#search-inp').val('');
+          window.location.href = '/search/?q=' + encodeURI(val) + '&ct=research&key=kw';
+        }
+      } else {
       }
     });
 
-    // 回车键进行相关搜索
-    $('#search-inp').on('keydown', function (e) {
-      if (e.keyCode === 13) {
-        var q = $('#search-inp').val();
-        if (q) {
-          window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name=' + stock_name;
+
+//    // 查找相关
+//    $('#search-relative').click(function () {
+//      var q = $('#search-inp').val();
+//      if (q) {
+//        window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name=' + stock_name;
+//      }
+//    });
+
+//    // 回车键进行相关搜索
+//    $('#search-inp').on('keydown', function (e) {
+//      if (e.keyCode === 13) {
+//        var q = $('#search-inp').val();
+//        if (q) {
+//          window.location.href = '/forecast/more/?q=' + stock_name + q + '&ct=search&stock_name=' + stock_name;
+//        }
+//      }
+//    });
+
+    var opts = {
+      url: fix_url + '/api/research/search?q' + $('#search-inp').val(),
+      bindData: initSearch,
+      searchRes: function (code, value) {
+        var val = $('#search-inp').val();
+        if (val) {
+          if (!value) {
+            window.location.href = 'http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + code
+          } else {
+            window.location.href = '/search/?q=' + encodeURI(value) + '&ct=research&key=kw';
+          }
         }
       }
-    });
+    };
+    new InputSearch('#search-inp', '#res-list', '#res-list tbody tr', opts);
+
+    //渲染搜索结果
+    function initSearch(data) {
+      if (Number($('.search-inp').val())) {
+        data.sort(function (a, b) {
+          return a.code - b.code;
+        });
+      }
+      if (data) {
+        var str = '';
+        $.each(data, function (index, item) {
+          var q = $('.search-inp').val();
+          var reg = new RegExp(q, 'gi');
+          var tCode = item.code.toString();
+          var tName = item.name;
+          if (Number(q)) {
+            tCode = tCode.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+          } else {
+            tName = tName.replace(reg, function (e) {
+              return '<i style="color:#E86664">' + e + '</i>'
+            });
+          }
+          str += '<tr data-code="' + item.code + '">';
+          str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '">' + tCode + '</a></td>';
+          str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '">' + tName + '</a></td>';
+          str += '<td >';
+          str += '<a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '"><span class="report-btn">智能报告</span></a>';
+          str += '</td>';
+          str += '<td>';
+          str += '<a href="/forecast/' + item.code + '"><span class="finance-btn">财报</span></a>';
+          str += '</td>';
+          str += '<td>';
+          str += '<a href="/forecast/more/?q=' + encodeURI(item.name) + '&ct=research"><span class="search-btn">搜索</span></a>';
+          str += '</td>';
+          str += '</tr>';
+        });
+        $('.res-list tbody').html(str);
+        $('.res-list').show();
+      } else {
+        $('.res-list').hide();
+      }
+    }
 
 
     // 点击某一个td触发事件 弹框 unknown forecase normal
@@ -900,6 +1015,8 @@
 
       // 按年度显示预测弹框
       function foreEven() {
+        $('.abnormal-info').css('display', 'none');
+        $('.rank-container').hide();
         cur_title = $(this).parent().find('.first-col').html();
         $('.chart-title').html(cur_title);
         var parentId = $(this).parent().parent().parent().prop('id');
@@ -962,6 +1079,8 @@
 
       // 按年度显示历史弹框
       function normalEvent() {
+        $('.abnormal-info').css('display', 'none');
+        $('.mask-data-container').hide();
         var parentId = $(this).parent().parent().parent().prop('id');
         // 位置设置
         var conH = 292; // 默认弹框高度为200px
@@ -1178,7 +1297,6 @@
       });
     }
 
-    // 点击预测数据相关函数
     // 预测弹框 点击表格预测数据时调用
     function getForecastData(code, report_period, keyword, keyword_cn) {
       countTri++;
@@ -1459,7 +1577,6 @@
         }
       });
     }
-
 
     // 预测弹框 切换到图表
     $('#toChart').click(function () {
