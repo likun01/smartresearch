@@ -214,7 +214,6 @@
       success: function (res) {
         var rows_title = res.data.rows_title;
         var rows_data = res.data.rows_data;
-        console.log(rows_data);
         var titlesArr = []; // 每组数据的标题数组
         var columsDatas = [];
         var titles = res.data.cols_title; // 图表底部标题
@@ -238,7 +237,6 @@
 //        });
 
         $.each(titles, function (index, item) {
-          console.log(item);
           item.indexOf('E') > -1 ? colors.push('#6F64BA') : colors.push('#62B4F5');
         });
 
@@ -1027,12 +1025,12 @@
         if (parentId.indexOf('year') > -1) { // 按年度
           if (bodyH - (offT + tdH) > conH) {
             // 显示在表格正下方
-            t = offT + tdH - conT + 10;
+            t = offT - tdH - conT + 10;
             $('.mask-data-container').css('top', t);
             $('.mask-data-container').css('left', l);
           } else {
             // 显示在表格的正上方
-            t = offT - tdH - conT - 292 - 72; // 292 rank-container 预测高度
+            t = offT - tdH - conT - 292 - 100; // 292 rank-container 预测高度
             $('.mask-data-container').css('top', t);
             $('.mask-data-container').css('left', l);
           }
@@ -1044,11 +1042,10 @@
             $('.mask-data-container').css('left', l1);
           } else {
             // 显示在表格的正上方
-            t = offT - tdH - conT1 - 292 - 72; // 292 rank-container 预测高度
+            t = offT - tdH - conT1 - 292 - 100; // 292 rank-container 预测高度
             $('.mask-data-container').css('top', t);
             $('.mask-data-container').css('left', l1);
           }
-
         }
         // 重新获取数据 重新渲染
         var keyword = $(this).siblings().eq(0).data('title'); // 列名对应字段
@@ -1090,7 +1087,7 @@
             $('.rank-container').css('left', l);
           } else {
             // 显示在表格的正上方
-            t = offT - tdH - conT - 292 + 17; // 292 rank-container 预测高度
+            t = offT - tdH - conT - 292 + 12; // 292 rank-container 预测高度
             $('.rank-container').css('top', t);
             $('.rank-container').css('left', l);
           }
@@ -1102,7 +1099,7 @@
             $('.rank-container').css('left', l1);
           } else {
             // 显示在表格的正上方
-            t = offT - tdH - conT1 - 292 + 17; // 292 rank-container 预测高度
+            t = offT - tdH - conT1 - 292 + 12; // 292 rank-container 预测高度
             $('.rank-container').css('top', t);
             $('.rank-container').css('left', l1);
           }
@@ -1169,11 +1166,47 @@
       $('.rank-container').show();
       var min = Math.min.apply(null, tdArr) - 1;
       var max = Math.max.apply(null, tdArr) + 1;
+      var gridX=30;
+      if (min < 0 && Math.abs(min) > Math.abs(max)) {
+        if (Math.abs(min) > 1000)
+          gridX = 45;
+        if (Math.abs(min) > 10000)
+          gridX = 50;
+        if (Math.abs(min) > 100000)
+          gridX = 55;
+        if (Math.abs(min) > 1000000)
+          gridX = 60;
+        if (Math.abs(min) > 10000000)
+          gridX = 65;
+        if (Math.abs(min) > 100000000)
+          gridX = 70;
+        if (Math.abs(min) > 1000000000)
+          gridX = 75;
+        if (Math.abs(min) > 10000000000)
+          gridX = 80;
+      } else {
+        if (max > 1000)
+          gridX = 45;
+        if (max > 10000)
+          gridX = 50;
+        if (max > 100000)
+          gridX = 55;
+        if (max > 1000000)
+          gridX = 60;
+        if (max > 10000000)
+          gridX = 65;
+        if (max > 100000000)
+          gridX = 70;
+        if (max > 1000000000)
+          gridX = 75;
+        if (max > 10000000000)
+          gridX = 80;
+      }
       var interval = (max - min) / 5;
       var myChart = echarts.init(document.getElementById('main'));
       option = {
         grid: {
-          x: 40,
+          x: gridX,
         },
         title: {
           text: ''
@@ -1639,22 +1672,43 @@
 
       var myChart = echarts.init(document.getElementById(cont_id));
       var gridX = 40;
-      if (maxVal > 1000)
-        gridX = 45;
-      if (maxVal > 10000)
-        gridX = 50;
-      if (maxVal > 100000)
-        gridX = 55;
-      if (maxVal > 1000000)
-        gridX = 60;
-      if (maxVal > 10000000)
-        gridX = 65;
-      if (maxVal > 100000000)
-        gridX = 70;
-      if (maxVal > 1000000000)
-        gridX = 75;
-      if (maxVal > 10000000000)
-        gridX = 80;
+      if (minVal < 0 && Math.abs(minVal) > Math.abs(maxVal)) {
+        if (Math.abs(minVal) > 1000)
+          gridX = 45;
+        if (Math.abs(minVal) > 10000)
+          gridX = 50;
+        if (Math.abs(minVal) > 100000)
+          gridX = 55;
+        if (Math.abs(minVal) > 1000000)
+          gridX = 60;
+        if (Math.abs(minVal) > 10000000)
+          gridX = 65;
+        if (Math.abs(minVal) > 100000000)
+          gridX = 70;
+        if (Math.abs(minVal) > 1000000000)
+          gridX = 75;
+        if (Math.abs(minVal) > 10000000000)
+          gridX = 80;
+      } else {
+        if (maxVal > 1000)
+          gridX = 45;
+        if (maxVal > 10000)
+          gridX = 50;
+        if (maxVal > 100000)
+          gridX = 55;
+        if (maxVal > 1000000)
+          gridX = 60;
+        if (maxVal > 10000000)
+          gridX = 65;
+        if (maxVal > 100000000)
+          gridX = 70;
+        if (maxVal > 1000000000)
+          gridX = 75;
+        if (maxVal > 10000000000)
+          gridX = 80;
+      }
+
+
       option = {
         grid: {
           x: gridX,
