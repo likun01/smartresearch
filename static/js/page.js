@@ -34,6 +34,7 @@
 
 
       getData: function () {
+        console.log('zhixing111111111111111')
         $.ajax({
           url: opts.interFace,
           type: 'GET',
@@ -41,6 +42,7 @@
           data:{
             page:opts.cacheNum
           },
+          crossDomain: true == !(document.all),
           dataType: 'json',
           success: function (res) {
               opts.res = res.results;
@@ -197,6 +199,7 @@
           data:{
             page:opts.cacheNum
           },
+          crossDomain: true == !(document.all),
           success: function (res) {
 
               opts.res = res.results;

@@ -70,6 +70,7 @@
           url: fix_url+'/api/research/login/',
           type: 'POST',
           data: data,
+          crossDomain: true == !(document.all),
           success: function (res) {
             if (res.code === 0) { // 账号密码正确
               util.setCookie('token',res.active_token); // 更新token

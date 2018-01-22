@@ -234,6 +234,7 @@
           token: token
         },
         dataType: 'json',
+        crossDomain: true == !(document.all),
         success: function (res) {
           initFollow(res);
         },
@@ -279,6 +280,7 @@
               token: token,
               code: Number(code)
             },
+            crossDomain: true == !(document.all),
             success: function (res) {
               if (res.code === 0) {
                 getFollow();
@@ -337,6 +339,7 @@
             data: opts,
             contentType: 'application/json',
             dataType: 'json',
+            crossDomain: true == !(document.all),
             success: function (res) {
               if (res.code === 0) { // 添加成功
                 $('.search-container').html(str).hide();
@@ -385,6 +388,7 @@
           length: dataDetail.warnDetail.length,
           token: token
         },
+        crossDomain: true == !(document.all),
         success: function (res) {
           if (res.state === 200) {
             initEarlyWarn(res);
@@ -456,6 +460,7 @@
           length: dataDetail.sellDetail.length,
           token: token
         },
+        crossDomain: true == !(document.all),
         success: function (res) {
           if (res.state === 200) {
             initSell(res);
@@ -528,6 +533,7 @@
           length: dataDetail.hotDetail.length,
           token: token
         },
+        crossDomain: true == !(document.all),
         success: function (res) {
           if (res.state === 200) {
             initHot(res);

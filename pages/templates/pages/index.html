@@ -4,6 +4,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;" />
     <title>嘉实智能投研系统</title>
     <link rel="stylesheet" href="/static/css/tempIndex.css">
     <link rel="shortcut icon" href="/static/images/favicon.ico">
@@ -29,11 +30,14 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script src="/static/js/inputSearch.js?adsf"></script>
+<script src="/static/js/util.js"></script>
 <script>
   $(function () {
+    // 判断浏览器版本显示错误
+    util.getExplore('temp-container','#FFF');
 
 
-//    var token = util.getCookie('token');
+    // var token = util.getCookie('token');
     var token = '5b2d5bcda394d1247069b53dff32d304';
     var fix_url = 'http://api-pro.xin-shui.com';
 
@@ -77,6 +81,8 @@
 //
 //      }
 //    });
+
+    console.log($('#temp-inp')[0]);
     var opts = {
       url: fix_url + '/api/research/search?q' + $('.temp-inp').val(),
       bindData: initSearch,
@@ -143,11 +149,9 @@
       if (val) {
         if ($('#res-list').css('display') !== 'none') { // 有联想词
           var code = '';
-          // code = $('#res-list tbody tr').eq(0).find('td').eq(0).find('a').html();  // 鼠标没有选中项  默认进第一条
           code = $('#res-list tbody tr').data('code');  // 鼠标没有选中项  默认进第一条
           $('#res-list tbody tr').each(function (index, item) {
             if (item.style.backgroundColor === 'rgb(228, 238, 249)' || item.style.backgroundColor === '#FDFFFD') { // 鼠标有选中项  进选中条
-//              code = $('#res-list tbody tr').eq(index).find('td').eq(0).find('a').html();
               code = $('#res-list tbody tr').eq(index).data('code');
             }
           });

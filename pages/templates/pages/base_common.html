@@ -1,6 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;" />
     <title>
         {% block title %}
         {% endblock %}
@@ -93,9 +94,12 @@
 {% block js %}
 {% endblock %}
 
-
+<script src="/static/js/util.js"></script>
 <script>
   $(function () {
+    // 判断浏览器版本显示错误
+    util.getExplore('right-container','#000');
+
     // nav
     $('.nav-list li').click(function () {
       $(this).addClass('active').siblings().removeClass('active')

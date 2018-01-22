@@ -140,8 +140,9 @@
             </ul>
             <div class="page-container" id="page-container-0">
             </div>
-            <div class="download-cont"><a id="expForecastData" href="" target="_blank"><img
-                    src="/static/images/download.png" alt=""><span>导出数据</span></a></div>
+            <div class="download-cont"><a id="expForecastData" href="" target="_blank">
+                <!--<img src="/static/images/download.png" alt="">-->
+                <span>导出数据</span></a></div>
         </div>
         <!--文字内容_end-->
 
@@ -211,6 +212,7 @@
     $.ajax({
       type: 'GET',
       url: 'http://api-pro.xin-shui.com/api/research/forecast/picked/?code={{stock_code}}&report_type=' + kind,
+      crossDomain: true == !(document.all),
       success: function (res) {
         var rows_title = res.data.rows_title;
         var rows_data = res.data.rows_data;
@@ -291,8 +293,7 @@
     }
     // 生成tab和容器后調用 切換tab
     changeTopTab();
-
-
+    $('.chart-cont').eq(0).css('opacity', 1).css('z-index', 99).siblings('.chart-cont').css('opacity', 0).css('z-index', -99);
   }
 
   // 顶部柱状图和折线图
@@ -528,6 +529,7 @@
         code: '{{ stock_code }}',
         // token: token
       },
+      crossDomain: true == !(document.all),
       success: function (res) {
         // 替换标题
         var nameSpan = $('#stock-title');
@@ -568,7 +570,7 @@
         code: '{{ stock_code }}',
         // token: token
       },
-
+      crossDomain: true == !(document.all),
       success: function (res) {
         var nameSpan = $('#stock-title');
         var val = nameSpan.html();
@@ -1166,7 +1168,7 @@
       $('.rank-container').show();
       var min = Math.min.apply(null, tdArr) - 1;
       var max = Math.max.apply(null, tdArr) + 1;
-      var gridX=30;
+      var gridX = 30;
       if (min < 0 && Math.abs(min) > Math.abs(max)) {
         if (Math.abs(min) > 1000)
           gridX = 45;
@@ -1336,6 +1338,7 @@
           report_period: report_period,
           keyword: keyword
         },
+        crossDomain: true == !(document.all),
         success: function (res) {
           pageData.all = res.table_data || []; // 默认排序
           pageData.total = res.table_data.length;
@@ -1529,7 +1532,7 @@
 
 
       // 生成Pagination实例
-      let opts1 = {
+      var opts1 = {
         context: 'page-container-' + countTri,
         pageSize: 10,
         total: pageData.total,

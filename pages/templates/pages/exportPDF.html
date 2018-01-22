@@ -11,7 +11,7 @@
 <div class="container">
     <i class="iconfont icon-xiazaidaoru"
        style="color:#000;font-size: 17px; position: absolute;top:35px;right: 50px;cursor: pointer"><a
-            href="http://api-pro.xin-shui.com/research/finical/pick/export/{{stock_code}}/">下载PDF</a></i>
+            href="http://api-pro.xin-shui.com/research/finical/pick/export/000001/">下载PDF</a></i>
     <h3 class="header-title">平安银行(000001)</h3>
     <!--上半部分数据_start-->
     <div class="top-container">
@@ -789,7 +789,9 @@
   var brain = document.querySelector('.brain-container');
   var topCT = offset(document.querySelector('.top-container')).top;
   var topCH = document.querySelector('.top-container').clientHeight;
-  brain.style.marginTop = (1650 - topCT - topCH) + 'px';
+  if(brain.style.marginTop>1811){
+    brain.style.marginTop = (1811 - topCT - topCH) + 'px';
+  }
 
 
 </script>
@@ -1110,7 +1112,6 @@
   myChart.setOption(option);
 
 </script>
-
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
   function computePosi(_this) {

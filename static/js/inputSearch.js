@@ -26,6 +26,7 @@ InputSearch.prototype.inputChange = function () {
           q: _this.inpValue,
           token: _this.opts.token
         },
+        crossDomain: true == !(document.all),
         success: function (result) {
           if (result.results && result.results.length) {
             _this.opts.bindData(result.results);

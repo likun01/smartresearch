@@ -527,7 +527,7 @@
         $('#notice-content-0' + (countNotice - 2)).remove();
         // 公告数据
         $("#notice-content-0" + (countNotice - 1)).pageFun({
-          interFace: fix_url + 'xxxxxx?q=' + $('#search-inp').val() + '&kind=' + kind,
+          interFace: fix_url + '?q=' + $('#search-inp').val() + '&kind=' + kind,
           pageSize: 10, /*pageSize*/
           maxPage: 5, /*每次加载页数*/
           dataFun: function (item) { // 数据渲染
