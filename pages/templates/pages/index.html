@@ -28,13 +28,16 @@
 </div>
 <div class="footer-container">&copy; Harvest Fund 2018 . All Rights Reserved</div>
 
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-<script src="/static/js/inputSearch.js?adsf"></script>
+
 <script src="/static/js/util.js"></script>
 <script>
+  // 判断浏览器版本显示错误
+  util.getExplore('temp-container','#FFF');
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="/static/js/inputSearch.js?adsf"></script>
+<script>
   $(function () {
-    // 判断浏览器版本显示错误
-    util.getExplore('temp-container','#FFF');
 
 
     // var token = util.getCookie('token');

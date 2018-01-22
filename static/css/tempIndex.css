@@ -6,10 +6,9 @@
 body, html {
   width: 100%;
   height: 100%;
-  /*background-color: #FEFFFE;*/
   background-image: url("/static/images/bg.png");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   background-attachment: fixed;
 }
 

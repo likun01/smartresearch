@@ -40,7 +40,7 @@
     delSessionSto: function (s_name) {
       window.sessionStorage.setItem(s_name, null)
     },
-    getExplore(context, color) {
+    getExplore:function(context, color) {
       var Sys = {};
       var ua = navigator.userAgent.toLowerCase();
       var s;
@@ -62,7 +62,7 @@
       if (obj.Browser === 'IE' && Number(obj.version) < 9) {
         var domStr = '<div style="width: 80%;margin: 200px auto;font-size: 20px;' +
           'font-weight: 600;text-align: center;color:' + color + '"><p>当前浏览器：' + obj.cur + '</p><p>推荐使用谷歌浏览器</p><p>请使用谷歌、火狐、IE 9.0及以上、Safari等</p></div>';
-        $('.' + context).html(domStr);
+        document.querySelector('.'+context).innerHTML=domStr;
       }
       return obj;
     }

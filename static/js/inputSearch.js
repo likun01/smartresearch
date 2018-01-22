@@ -15,6 +15,7 @@ function InputSearch(inpEle, listCont, listAll, opts) {
 InputSearch.prototype.inputChange = function () {
   var _this = this;
   this.inpEle.on('input propertychange', function () {
+    console.log('zhixing ----------------')
     _this.inpValue = _this.inpEle.val();
     if (_this.inpValue) {
       _this.inpEle.data('val', _this.inpValue);

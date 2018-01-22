@@ -34,7 +34,6 @@
 
 
       getData: function () {
-        console.log('zhixing111111111111111')
         $.ajax({
           url: opts.interFace,
           type: 'GET',
