@@ -70,8 +70,9 @@ class StockForecastDiffView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context_data = super(StockForecastDiffView, self).get_context_data()
-        code = self.request.GET.get('code')
-        context_data.update({'stock_code': code})
+        code = self.request.GET.get('stock_code')
+        name = self.request.GET.get('stock_name')
+        context_data.update({'stock_code': code, 'stock_name': name})
         return context_data
 
 
