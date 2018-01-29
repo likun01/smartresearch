@@ -183,6 +183,7 @@
 .add-stock-cont .select-footer .select-item {
   width: 100%;
   overflow: hidden;
+  padding-bottom: 20px;
 }
 
 .add-stock-cont .select-footer .select-item li {
@@ -191,7 +192,7 @@
 }
 
 .add-stock-cont .select-footer .select-item li .del-btn {
-  color: #D7D9D8;
+  color: #006BEB;
   cursor: pointer;
 }
 
@@ -231,6 +232,8 @@
   width: 16%;
   float: left;
   text-align: center;
+  word-wrap:break-word;
+  word-break:break-all;
 }
 
 .select-comp li:first-child {
@@ -267,6 +270,8 @@
   border-right: 1px solid #E1E6E8;
   text-align: center;
   width: 16%;
+  word-wrap:break-word;
+  word-break:break-all;
 }
 
 .comp-table thead .first-col {
@@ -282,6 +287,8 @@
   text-align: right;
   color: #171817;
   font-family: arial, sans-serif, tahoma;
+  word-wrap:break-word;
+  word-break:break-all;
   width: 16%;
 }
 

@@ -14,7 +14,7 @@
 <div class="header-outer">
     <div class="header-title">
         <div>
-            <span id="stock-title"><i></i>({{ stock_code }})&nbsp;</span>/&nbsp;指标详细
+            <span id="stock-title">{{ stock_name }}({{ stock_code }})&nbsp;</span>/&nbsp;指标详细
         </div>
         <div class="header-search">
             <span id="search-relative">智能检索</span>
@@ -479,7 +479,6 @@
       analystsData: {},
       line_data: []
     };
-    var stock_name = '';
     var cur_title = '';
     var total_year = 0;
     var total_report = 0;
@@ -523,7 +522,7 @@
 
     // 股票对比
     $('#stock-comp').click(function () {
-      window.location.href = '/forecast/diff/?stock_code={{ stock_code }}&stock_name=' + encodeURI(stock_name);
+      window.location.href = '/forecast/diff/?stock_code={{ stock_code }}&stock_name=' + encodeURI('{{ stock_name }}');
     });
 
     // 按年度数据
@@ -536,12 +535,6 @@
       },
       crossDomain: true == !(document.all),
       success: function (res) {
-        // 替换标题
-        var nameSpan = $('#stock-title');
-        var val = nameSpan.html();
-        val = val.replace(/<i><\/i>/g, res.stock_name);
-        $('title').html('指标详情（' + res.stock_name + '）');
-        stock_name = res.stock_name;
         // 按年度保存并且修改导出链接
         exportLink[0].csv = res.export_csv;
         exportLink[0].excel = res.export_excel;
@@ -577,10 +570,6 @@
       },
       crossDomain: true == !(document.all),
       success: function (res) {
-        var nameSpan = $('#stock-title');
-        var val = nameSpan.html();
-        val = val.replace(/<i><\/i>/g, res.stock_name);
-        nameSpan.html(val);
         // 按报告期 保存导出链接
         exportLink[1].csv = res.export_csv;
         exportLink[1].excel = res.export_excel;

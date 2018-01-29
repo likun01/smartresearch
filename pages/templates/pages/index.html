@@ -132,7 +132,7 @@
           str += '<a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '"><span class="report-btn">智能报告</span></a>';
           str += '</td>';
           str += '<td>';
-          str += '<a href="/forecast/' + item.code + '"><span class="finance-btn">财报</span></a>';
+          str += '<a href="/forecast/' + item.code + '?stock_name='+encodeURI(item.name)+'"><span class="finance-btn">财报</span></a>';
           str += '</td>';
           str += '<td>';
           str += '<a href="/forecast/more/?q=' + encodeURI(item.name) + '&ct=research"><span class="search-btn">搜索</span></a>';
