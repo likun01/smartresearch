@@ -1,0 +1,296 @@
+/*顶部样式*/
+.header-relative {
+  position: relative;
+}
+
+.header-relative .header-info {
+  font-size: 16px;
+  font-weight: normal;
+  color: #171817 !important;
+  margin: 0 0 0 35px;
+}
+
+.header-relative .select-inp {
+  display: inline-block;
+  width: 70px;
+  height: 17px;
+  padding: 0 3px;
+  background: url(/static/images/downBg.png) no-repeat;
+  background-size: 6px 4px;
+  background-position-x: 59px;
+  background-position-y: 5px;
+  border: 1px solid #C3C4C6;
+  cursor: pointer;
+}
+
+.header-relative .add-stock-btn {
+  float: right;
+  margin: 6px 0;
+  padding: 3px 15px;
+  background: #E5514D;
+  border: 1px solid #E43732;
+  color: #FCF6F5 !important;
+  font-size: 12px;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.year-list, .kind-list {
+  width: 68px;
+  border: 1px solid #BFC0C2;
+  position: absolute;
+  top: 48px;
+  text-align: left;
+  background: #FEFFFE;
+  font-size: 12px;
+  display: none;
+  z-index: 9;
+}
+
+.year-list {
+  left: 196px;
+}
+
+.kind-list {
+  left: 383px;
+}
+
+.year-list li, .kind-list li {
+  padding: 1px 0 1px 2px;
+  height: 15px;
+  line-height: 15px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.year-list li:hover, .kind-list li:hover {
+  background: #F4F5F4;
+}
+
+.li-disabled {
+  color: #D3D5D6 !important;
+  cursor: not-allowed !important;
+}
+
+.add-stock-cont {
+  width: 79.78%;
+  min-width: 565px;
+  min-height: 430px;
+  border: 1px solid #D3D5D6;
+  position: absolute;
+  top: 89px;
+  right: 0;
+  z-index: 99999;
+  background: #FEFFFE;
+  display: none;
+}
+
+.add-stock-cont .header-tit {
+  width: 100%;
+  height: 22px;
+  line-height: 22px;
+  overflow: hidden;
+  border-bottom: 1px solid #D3D5D6;
+  background: #F5F7F8;
+}
+
+.add-stock-cont .header-tit .title {
+  padding: 0 10px;
+  color: #E24340;
+  font-weight: 500;
+}
+
+.add-stock-cont .header-tit .add-stock-close {
+  background: #E5514D;
+  border: 1px solid #E43732;
+  color: #FCF6F5 !important;
+  float: right;
+  margin: 5px 6px;
+  height: 10px;
+  width: 10px;
+  line-height: 8.5px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.add-stock-cont .list-cont {
+  height: 347px;
+  width: 100%;
+  border-bottom: 1px solid #D3D5D6;
+  overflow: hidden;
+}
+
+.add-stock-cont .list-cont .left {
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid #D3D5D6;
+  float: left;
+  overflow-y: auto;
+}
+
+.add-stock-cont .list-cont .left li {
+  padding: 2px 3px;
+}
+
+.add-stock-cont .list-cont .left li:hover {
+  background: #F4F5F4;
+  cursor: pointer;
+}
+
+.add-stock-cont .list-cont .right {
+  width: 79%;
+  height: 100%;
+  float: left;
+  overflow-y: auto;
+}
+
+.add-stock-cont .list-cont .right ul {
+  overflow: hidden;
+  padding: 3px 3px;
+}
+
+.add-stock-cont .list-cont .right ul li {
+  float: left;
+  padding: 3px 15px 3px 5px;
+}
+
+.add-stock-cont .list-cont .right .add-btn {
+  font-size: 14px;
+  color: #D7D9D8;
+  cursor: pointer;
+  margin-left: 2px;
+  font-style: normal;
+}
+
+.add-stock-cont .select-footer {
+  width: 100%;
+  min-height: 72px;
+  position: relative;
+  background: #F6F7F6;
+}
+
+.add-stock-cont .select-footer .select-item {
+  width: 100%;
+  overflow: hidden;
+}
+
+.add-stock-cont .select-footer .select-item li {
+  padding: 3px 10px 3px 5px;
+  float: left;
+}
+
+.add-stock-cont .select-footer .select-item li .del-btn {
+  color: #D7D9D8;
+  cursor: pointer;
+}
+
+.add-stock-cont .select-footer .submit-add {
+  display: block;
+  width: 60px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  background: #E5514D;
+  border: 1px solid #E43732;
+  color: #FCF6F5 !important;
+  font-size: 12px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.add-stock-cont .select-footer .err-info {
+  position: absolute;
+  bottom: 5px;
+  right: 85px;
+  color: #FB0000;
+}
+
+/*已选公司列表样式*/
+.select-comp {
+  width: 99.7%;
+  margin-top: 25px;
+  padding: 10px 0;
+  border: 1px solid #E1E6E8;
+  overflow: hidden;
+}
+
+.select-comp li {
+  width: 20%;
+  float: left;
+  text-align: center;
+}
+
+.select-comp li .del-comp {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  line-height: 10px;
+  cursor: pointer;
+  color: #D7D9D8;
+  overflow: hidden;
+}
+
+/*表格样式*/
+.comp-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 1px solid #E1E6E8;
+  font-size: 12px;
+  margin-top: -1px;
+}
+
+.comp-table thead {
+  border-bottom: 1px solid #E1E6E8;
+  color: #171817;
+}
+
+.comp-table thead th {
+  padding: 8px 0;
+  border-right: 1px solid #E1E6E8;
+  text-align: center;
+  width: 20%;
+}
+
+.comp-table thead .first-col {
+  width: 20%;
+  color: #FC0000;
+  font-weight: 600;
+}
+
+.comp-table tbody td {
+  border-right: 1px solid #E1E6E8;
+  border-bottom: 1px solid #E1E6E8;
+  padding: 4px 5px;
+  text-align: right;
+  color: #171817;
+  font-family: arial, sans-serif, tahoma;
+  width: 20%;
+}
+
+.comp-table tbody tr:nth-child(even) {
+  background: #F3F5F6;
+}
+
+.comp-table tbody .tr-title {
+  text-align: left;
+  color: #171817;
+  width: 20%;
+}
+
+.comp-table tbody .even-bg {
+  background: #F0F2F3;
+}
+
+.comp-table tbody .first-col {
+  font-weight: 500;
+}
