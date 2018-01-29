@@ -43,7 +43,9 @@ class StockForecastView(TemplateView):
     def get_context_data(self, **kwargs):
         context_data = super(StockForecastView, self).get_context_data()
         stock_code = kwargs.get('code')
-        context_data.update({'stock_code': stock_code})
+        stock_name = self.request.GET.get('stock_name')
+        context_data.update(
+            {'stock_code': stock_code, 'stock_name': stock_name})
         return context_data
 
 
