@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style type="text/css">
-        div{
-            width:60px;
-            height:60px;
-            border:1px solid green;
-            font-size:12px;
+        div {
+            width: 60px;
+            height: 60px;
+            border: 1px solid green;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -17,53 +17,60 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
-    var codes=['000001','300070',600010];
-    console.log(codes.join(','));
+  var cache_codes = ['000001'];
+  var stock_codes = ['000001', '300070', '111111'];
+  $.each(stock_codes,function (index,item) {
+    $.each(cache_codes,function (ind,ite) {
+      if(item===ite){
+        stock_codes.splice(index,1);
+      }
+    })
+  });
+  console.log(stock_codes);
 
+  var version = "7.03";
+  console.log(Number(version))
 
-    var version="7.03";
-    console.log(Number(version))
+  var numStr = "600a";
+  if (Number(numStr)) {
+    console.log('数字')
+  } else {
+    console.log('非数字')
+  }
 
-    var numStr="600a";
-    if(Number(numStr)){
-      console.log('数字')
-    }else {
-      console.log('非数字')
-    }
-
-    var str='11<i style="color:#E86664">0025</i>60';
-    var reg=/(^\d+)|<i/g;
-    str=str.replace(reg,function (e) {
-      console.log(e)
-      return e;
-    });
-//    console.log(str);
-    //  $(document).ready(function(){
-//    function fn() {
-//      $(this).text("脚本之家欢迎您");
-//    }
-//    $("div").off("click",fn)
-//    $("div").on("click",fn)
-//
-//  })
-//
-//  var q = '国';
-//  var str = '中国彩钢';
-//  var reg = new RegExp(q, 'g');
-//  var str = str.replace(reg, function (e) {
-//    console.log(e);
-//    return '<i style="color:#E86664">' + e + '</i>'
-//  });
-//  console.log(str);
-//
-//  var obj={};
-//  console.log(obj);
-//  console.log(escape('股份'));
-//
-//
-//
-//  var date=new Date().getTime()-365*24*60*60*1000;
-//  console.log(new Date(date));
+  var str = '11<i style="color:#E86664">0025</i>60';
+  var reg = /(^\d+)|<i/g;
+  str = str.replace(reg, function (e) {
+    console.log(e)
+    return e;
+  });
+  //    console.log(str);
+  //  $(document).ready(function(){
+  //    function fn() {
+  //      $(this).text("脚本之家欢迎您");
+  //    }
+  //    $("div").off("click",fn)
+  //    $("div").on("click",fn)
+  //
+  //  })
+  //
+  //  var q = '国';
+  //  var str = '中国彩钢';
+  //  var reg = new RegExp(q, 'g');
+  //  var str = str.replace(reg, function (e) {
+  //    console.log(e);
+  //    return '<i style="color:#E86664">' + e + '</i>'
+  //  });
+  //  console.log(str);
+  //
+  //  var obj={};
+  //  console.log(obj);
+  //  console.log(escape('股份'));
+  //
+  //
+  //
+  //  var date=new Date().getTime()-365*24*60*60*1000;
+  //  console.log(new Date(date));
 
 </script>
 </body>
