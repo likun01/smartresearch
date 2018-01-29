@@ -319,7 +319,6 @@ button, input {
   background: #F5F5F5;
   font-size: 26px;
   color: #7E7777;
-
   overflow: hidden;
 }
 
@@ -490,7 +489,7 @@ button, input {
 
 .kind-tab {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 25px;
   cursor: pointer;
   font-size: 0;
   margin-bottom: 1px;

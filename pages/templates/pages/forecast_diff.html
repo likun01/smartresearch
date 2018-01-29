@@ -1,1 +1,917 @@
-对比页面{{ stock_code }}
+{% extends 'pages/base_common.html' %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/stockComp.css">
+{% endblock %}
+
+{% block title %}
+股票对比{{ stock_code }}
+{% endblock %}
+
+{% block container %}
+
+<!--顶部_start-->
+<div class="header-outer">
+    <div class="header-title header-relative">
+        <span id="stock-title">股票对比</span>
+        <span class="header-info">年份</span>
+        <input type="text" readonly="readonly" id="year-inp" class="select-inp">
+        <span class="header-info">报告类型</span>
+        <input type="text" readonly="readonly" id="kind-inp" class="select-inp">
+        <span class="add-stock-btn">添加股票</span>
+    </div>
+    <!--年份筛选-->
+    <ul class="year-list">
+    </ul>
+    <!--报告期类型筛选-->
+    <ul class="kind-list">
+    </ul>
+    <!--添加对比股票弹框-->
+    <div class="add-stock-cont">
+        <div class="header-tit">
+            <span class="title">添加股票</span>
+            <span id="sel-industry"></span>
+            <span class="add-stock-close">&times;</span>
+        </div>
+        <div class="list-cont">
+            <!--左侧行业分类-->
+            <ul class="left">
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>环保及公用事业</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+                <li>化学制药</li>
+            </ul>
+            <!--右侧企业列表-->
+            <div class="right">
+                <ul class="right-ul">
+                    <!--<li>平安(000001)<i class="add-btn">+</i></li>-->
+                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
+                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
+                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
+                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
+                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
+                </ul>
+            </div>
+        </div>
+        <!--底部已选择列表-->
+        <div class="select-footer">
+            <ul class="select-item">
+            </ul>
+            <span class="err-info">*最多选择四项</span>
+            <span class="submit-add">提交</span>
+        </div>
+    </div>
+</div>
+<!--顶部_end-->
+
+<!--select_comp_start-->
+<ul class="select-comp">
+    <li>&nbsp;已选择</li>
+    <!--<li>海康威视<span class="del-comp">&times;</span></li>-->
+    <!--<li>海康威视<span class="del-comp">&times;</span></li>-->
+    <!--<li>海康威视<span class="del-comp">&times;</span></li>-->
+    <!--<li>海康威视<span class="del-comp">&times;</span></li>-->
+</ul>
+<!--select_comp_end-->
+
+<!--tab_start-->
+<div class="kind-tab">
+    <div style="overflow: hidden">
+        <div class="left-group">
+            <span class="active">公司能力</span>
+            <span style="width: 90px">财务数据对比</span>
+        </div>
+    </div>
+</div>
+<!--tab_end-->
+
+<!--数据_start-->
+<div class="data-cont" style="z-index:1">
+    <div class="data-table" style="display: none" id="ability">
+        <!--<table class="comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>1</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>2</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td>3</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>4</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td>5</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<table class="comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>1</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>2</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td>3</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>4</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<table class=" comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<table class=" comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+    </div>
+    <div class="data-table" style="display: block" id="keywords">
+        <!--<table class=" comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">利润表</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>1</td>-->
+        <!--<td>2</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td>1</td>-->
+        <!--<td>2</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td>1</td>-->
+        <!--<td>2</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<table class=" comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<table class=" comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<table class=" comp-table">-->
+        <!--<thead>-->
+        <!--<th class="first-col">盈利能力</th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--<th></th>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">净资产收益</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td class="first-col">主营业务利润表</td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+    </div>
+</div>
+<!--数据_end-->
+
+
+{% endblock %}
+
+{% block js %}
+<script>
+  $(function () {
+    var stock_names = []; // 用来存储已选的股票名称
+    var stock_codes = []; // 用来存储已选的股票代码  字符串
+    var temp_names = []; // 弹框中未提交的股票名称
+    var temp_codes = []; // 弹框中未提交的股票代码
+    var stock_code = '000001'; //'{{ stock_code }}'; // 如果存在表明从指标详情页进入
+    var stock_name = '中国平安'; //'{{ stock_code }}'; // 如果存在表明从指标详情页进入
+    var fix_url = 'http://api-pro.xin-shui.com';
+    var kind_code = '1231'; // 初始化年报对应的code   存放选择的类型
+    var year_max = '2016'; // 初始化最大历史年份  存放选择的年份
+    var first_icode = "CC3510";
+    var first_name = "1.化学制药";
+
+
+    // tab切换
+    $('.left-group span').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.data-table').eq($(this).index()).show().siblings('.data-table').hide();
+    });
+
+    // 筛选下拉选框---请求数据(同步，年份和报告期代码)
+    $.ajax({
+      type: 'GET',
+      url: fix_url + '/api/research/stock/diff/report_period/',
+      crossDomain: true == !(document.all),
+      async: false,
+      success: function (res) {
+        // 获取年报对应的code
+        $.each(res.quarter, function (index, item) {
+          item === '年报' ? kind_code = index : null;
+        });
+        var years = [];
+        var exitHis = false;
+        var temp_years = [];
+        $.each(res.years, function (index, item) {
+          temp_years.push(index);
+          if (item.indexOf('E') === -1) {
+            exitHis = true;
+            years.push(index);
+          }
+        });
+        if (!exitHis) { // 不存在历史数据
+          year_max = Math.max.apply(null, temp_years);
+        }
+        year_max = Math.max.apply(null, years);
+        initYearSelect(res.years);
+        initKindSelect(res.quarter);
+        selectEventBind();
+      },
+      error: function (e) {
+        console.log(e);
+      }
+    });
+
+    // 从指标详情页进入
+    if (stock_code) {
+      stock_codes.push(stock_code);
+      stock_names.push(stock_name);
+      temp_codes.push(stock_code);
+      temp_names.push(stock_name);
+      showCompList(stock_names);
+      // 请求该条信息
+      $('#year-inp').val(year_max);
+      $('#kind-inp').val('年报');
+      getCompData('keywords', stock_codes);
+      getCompData('ability', stock_codes);
+    }
+
+    // 筛选下拉选框---显示年份下拉/报告类型下拉
+    $('.select-inp').click(function () {
+      $(this).index() === 2 ? $('.year-list').toggle() : $('.kind-list').toggle()
+    });
+
+    // 筛选下拉选框---渲染筛选下拉选框--年份
+    function initYearSelect(data) {
+      var yearStr = '';
+      $.each(data, function (index, item) {
+        yearStr += item.indexOf('E') > -1 ? '<li class="year-forecast li-able" data-year="' + index + '">' + item + '</li>' : '<li class="year-his li-able" data-year="' + index + '">' + item + '</li>';
+
+      });
+      $('ul.year-list').html(yearStr);
+    }
+
+    // 筛选下拉选框---渲染筛选下拉选框--报告期类型
+    function initKindSelect(data) {
+      var kindStr = '';
+      $.each(data, function (index, item) {
+        kindStr += item === '年报' ? '<li class="year-report li-able" data-kind="' + index + '">' + item + '</li>' : '<li class="other-report li-able" data-kind="' + index + '">' + item + '</li>';
+      });
+      $('ul.kind-list').html(kindStr);
+    }
+
+    // 筛选下拉选框---下拉筛选事件绑定
+    function selectEventBind() {
+      // 选择年份
+      $('.year-list li').click(function () {
+        var kind = $('#kind-inp').val();
+        var val = $(this).html();
+        if (val.indexOf('E') > -1) {
+          $('.kind-list li.year-report').removeClass('li-disabled').addClass('li-able');
+          $('.kind-list li.other-report').removeClass('li-able').addClass('li-disabled');
+        } else {
+          $('.kind-list li.other-report').removeClass('li-disabled').addClass('li-able');
+        }
+        if (kind === '年报') {
+          if (year_max != $(this).data('year') && stock_codes.length) { //year_max!==$(this).data('year') 说明没有重复选择
+            year_max = $(this).data('year');
+            $('#year-inp').val(val);
+            getCompData('keywords', stock_codes);
+            getCompData('ability', stock_codes);
+          }
+          $('.year-list').hide();
+        } else {
+          if (val.indexOf('E') === -1) {
+            if (year_max != $(this).data('year') && stock_codes.length) {
+              year_max = $(this).data('year');
+              $('#year-inp').val(val);
+              getCompData('keywords', stock_codes);
+              getCompData('ability', stock_codes);
+            }
+            $('.year-list').hide();
+          }
+        }
+
+      });
+
+
+      // 选择种类
+      $('.kind-list li').click(function () {
+        var val = $(this).html();
+        if (val !== '年报') { //year-forecast   year-his
+          $('.year-list li.year-his').removeClass('li-disabled').addClass('li-able');
+          $('.year-list li.year-forecast').removeClass('li-able').addClass('li-disabled');
+        } else {
+          $('.year-list li.year-his').removeClass('li-disabled').addClass('li-able');
+          $('.year-list li.year-forecast').removeClass('li-disabled').addClass('li-able');
+        }
+
+        if ($('#year-inp').val().indexOf('E') > -1) { // 说明是年报
+          if (val === '年报') {
+            if (kind_code != $(this).data('kind') && stock_codes.length) { //kind_code!==$(this).data('kind') 说明没有重复选择
+              kind_code = $(this).data('kind');
+              $('#kind-inp').val(val);
+              getCompData('keywords', stock_codes);
+              getCompData('ability', stock_codes);
+            }
+            $('.kind-list').hide();
+          }
+        } else {
+          if (kind_code != $(this).data('kind') && stock_codes.length) {
+            kind_code = $(this).data('kind');
+            $('#kind-inp').val(val);
+            getCompData('keywords', stock_codes);
+            getCompData('ability', stock_codes);
+          }
+          $('.kind-list').hide();
+        }
+
+      });
+    }
+
+
+
+    // 添加股票---显示添加股票弹框
+    $('.add-stock-btn').click(function () {
+      $('.add-stock-cont').toggle();
+    });
+
+    // 添加股票---关闭添加股票弹框
+    $('.add-stock-close').click(function () {
+      $('.add-stock-cont').hide();
+      temp_codes = [];
+      temp_names = [];
+      $.each(stock_codes, function (index, item) {
+        temp_codes.push(item);
+        temp_names.push(stock_names[index]);
+      });
+    });
+
+    // 添加股票---提交搜索股票
+    $('.add-stock-cont .submit-add').click(function () {
+      $('.add-stock-cont').hide();
+      stock_names = [];
+      stock_codes = [];
+      $.each(temp_codes, function (index, item) {
+        stock_codes.push(item);
+        stock_names.push(temp_names[index]);
+      });
+      getCompData('keywords', stock_codes);
+      getCompData('ability', stock_codes);
+      // 已选公司列表上显示
+      $('.select-comp').find('span').parent().remove();
+      showCompList(stock_names);
+    });
+
+    // 添加股票---请求行业分类
+    $.ajax({
+      type: 'GET',
+      url: fix_url + '/api/research/stock/industry/',
+      crossDomain: true == !(document.all),
+      success: function (res) {
+        if (res.data && res.data.length) {
+          first_icode = res.data[0].icode;
+          first_name = '1. ' + res.data[0].name
+        }
+        $('#sel-industry').html(first_name);
+        getCompsList(first_icode);
+        initIndustryKind(res.data);
+        selectIndustry();
+      },
+      error: function (e) {
+        console.log(e);
+      }
+    });
+
+    // 添加股票---渲染分类
+    function initIndustryKind(data) {
+      var industryStr = '';
+      $.each(data, function (index, item) {
+        industryStr += '<li data-icode="' + item.icode + '">' + item.index + '. ' + item.name + '</li>';
+      });
+      $('.list-cont .left').html(industryStr)
+    }
+
+    // 添加股票---选择行业后请求数据
+    function selectIndustry() {
+      $('.list-cont .left li').click(function () {
+        $('#sel-industry').html($(this).html());
+        // 请求该行业企业列表
+        getCompsList($(this).data('icode'));
+      });
+    }
+
+    // 添加股票---请求某一行业企业列表
+    function getCompsList(icode) {
+      $.ajax({
+        type: 'GET',
+        url: fix_url + '/api/research/stock/industry?icode=' + icode,
+        crossDomain: true == !(document.all),
+        success: function (res) {
+          initCopms(res.data);
+          addEventBind();
+        },
+        error: function (e) {
+          console.log(e);
+        }
+      });
+    }
+
+    // 添加股票---渲染某一行业对应的企业
+    function initCopms(data) {
+      var compStr = '';
+      $.each(data, function (index, item) {
+        compStr += '<li>' + item.stock_name + '(' + item.stock_code + ')<i data-name="' + item.stock_name + '" data-code="' + item.stock_code + '" class="add-btn">+</i></li>';
+      });
+      $('.list-cont .right .right-ul').html(compStr);
+    }
+
+    // 添加股票---添加一个企业事件绑定(弹框中)
+    function addEventBind() {
+      // 添加股票---选择某一个股票添加
+      $('.list-cont .right .right-ul .add-btn').click(function () {
+        var code = $(this).data('code') + '';
+        var name = $(this).data('name');
+        var flag = false;
+        if (temp_codes.length === 4) {
+          alert('最多选择四项');
+          return false;
+        }
+        $.each(temp_codes, function (index, item) {
+          item === code ? flag = true : null;
+        });
+        if (!flag) { // 不存在该code
+          // 添加到数组
+          temp_codes.push(code);
+          temp_names.push(name);
+          // 显示到页面上
+          $('.select-footer .select-item').append('<li>' + name + '(' + code + ')<span data-code="' + code + '" class="del-btn"> &times;</span></li>');
+        }
+      });
+    }
+
+    // 添加股票---显示已经选择的股票
+    function showSelectStock(names, codes) {
+      var lis = '';
+      $.each(codes, function (index, item) {
+        lis += '<li>' + names[index] + '(' + item + ')<span data-code="' + item + '" class="del-btn"> &times;</span></li>';
+
+      });
+      $('.select-footer .select-item').html(lis);
+    }
+
+    showSelectStock(temp_names,temp_codes);
+
+    // 添加股票---删除事件绑定(弹框中)
+    function delEventBind() {
+      // 添加股票---选择某一个股票删除
+      $(document).on("click", '.select-footer .select-item .del-btn', function () {
+        var code = $(this).data('code') + '';
+        $(this).parent().remove();
+        $.each(temp_codes, function (index, item) {
+          if (item === code) {
+            temp_codes.splice(index, 1);
+            temp_names.splice(index, 1);
+          }
+        });
+        $.each(stock_codes, function (index, item) {
+          if (item === code) {
+            stock_codes.splice(index, 1);
+            stock_names.splice(index, 1);
+          }
+        });
+      });
+    }
+
+    delEventBind();
+
+
+
+    // 页面已选企业列表----显示
+    function showCompList(arr) {
+      var compStr = '';
+      $.each(arr, function (index, item) {
+        compStr += ' <li>' + item + '<span data-code="' + stock_codes[index] + '" class="del-comp">&times;</span></li>';
+      });
+      $('.select-comp').append(compStr);
+    }
+
+    // 页面已选企业列表---删除
+    function listDelBind() {
+
+      $(document).on('click', '.select-comp .del-comp', function () {
+        console.log('执行');
+        var code = $(this).data('code') + '';
+        var curInd = null;
+        // 数组中删除
+        $.each(stock_codes, function (index, item) {
+          if (item === code) {
+            curInd = index;
+            stock_codes.splice(index, 1);
+            stock_names.splice(index, 1);
+          }
+        });
+        $.each(temp_codes, function (index, item) {
+          if (item === code) {
+            temp_codes.splice(index, 1);
+            temp_names.splice(index, 1);
+          }
+        });
+        showSelectStock(temp_names,temp_codes);
+        console.log('stock_names',stock_names)
+        console.log('stock_codes',stock_codes)
+        console.log('temp_names',temp_names);
+        console.log('temp_codes',temp_codes);
+        // 页面上删除
+        // 列表中删除
+        $(this).parent().remove();
+        // 表格数据中删除
+        $('.data-table .comp-table tbody tr').each(function (index, item) {
+          $(item).find('td').eq(curInd + 1).remove();
+          $(item).append('<td></td>');
+        })
+      })
+    }
+
+    listDelBind();
+
+    // 表格数据---请求
+    function getCompData(type, codes) { // kind:keywords：财务数据，ability：公司能力  codes:数组，需要转化为字符串逗号分隔
+      var str = codes.join(',');
+      $.ajax({
+        type: 'GET',
+        url: fix_url + '/api/research/stock/diff/?stock_codes=' + codes.join(','),
+        data: {
+          report_year: year_max,
+          report_quarter: kind_code,
+          // stock_codes: codes.join(' '), //这样写,被转义为%2
+          report_type: type,
+
+        },
+        crossDomain: true == !(document.all),
+        success: function (res) {
+          var res_data = res.table_data;
+          $.each(stock_codes, function (index, item) {
+            res_data[item]
+            initTableTd('#' + type, index, res_data[item])
+          });
+
+        },
+        error: function (e) {
+          console.log(e);
+        }
+      });
+    }
+
+    // 表格数据---给表格某一列填充数据
+    function initTableTd(contxt, ind, data) { // contxt:公司能力/财务数据对比的id #ability/#finance   ind第几列数据(数据从0开始，表格填充从1开始)  data数组[{},{},{},{}]
+      // 填充数据前先判断是否已经是有表格容器，没有时先创建表格容器并填充表头
+      if (!$('.data-cont .data-table').find('.comp-table').length) {
+        // 生成表格容器/表头/第一列表题
+        var tableStr = '';
+        $.each(data, function (index, item) {
+          var titles = item.row_title; // 第一列标题
+          var trs = '';
+          $.each(titles, function (ind_tit, ite_tit) {
+            trs += '<tr><td class="first-col">' + ite_tit + '</td><td></td><td></td><td></td><td></td></tr>';
+          });
+          tableStr = '<table class="comp-table"><thead><th class="first-col">' + item.name + '</th><th></th><th></th><th></th><th></th></thead><tbody>' + trs + '</tbody></table>';
+          $(contxt).append(tableStr);
+        })
+      }
+
+      // 填充数据
+      if (data) {
+        $('.comp-table tbody').each(function (index, item) { // 遍历表格;
+          var temp_tr = $(item).find('tr');
+          var temp_data = data[index].row_data; // 数据
+          var temp_title = data[index].row_title; // 表头
+          var val = null;
+          $.each(temp_tr, function (ind_tr, ite_tr) {
+            val = temp_data[temp_title[ind_tr]] || '--';
+            $(ite_tr).find('td').eq(ind + 1).html(val);
+          });
+        });
+      } else {
+//        $('.comp-table tbody').each(function (index, item) { // 遍历表格;
+//          var temp_tr = $(item).find('tr');
+//          $.each(temp_tr, function (ind_tr, ite_tr) {
+//            $(ite_tr).find('td').eq(ind + 1).html('--');
+//          });
+//        });
+      }
+    }
+
+  })
+</script>
+{% endblock %}
