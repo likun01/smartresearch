@@ -161,16 +161,18 @@
       }
     });
 
+    // 显示默认选择
+    $('#year-inp').val(year_max);
+    $('#kind-inp').val('年报');
+
     // 从指标详情页进入
-    if (stock_code) {
+    if (stock_code && stock_code !== 'None') {
       stock_codes.push(stock_code);
       stock_names.push(stock_name);
       temp_codes.push(stock_code);
       temp_names.push(stock_name);
       showCompList(stock_names);
       // 请求该条信息
-      $('#year-inp').val(year_max);
-      $('#kind-inp').val('年报');
       getCompData('keywords', stock_codes);
       getCompData('ability', stock_codes);
     }
@@ -531,7 +533,6 @@
 
       // 填充数据
       if (data) {
-        console.log('data--------', data);
         $('.comp-table tbody').each(function (index, item) { // 遍历表格;
           var temp_tr = $(item).find('tr');
           var temp_data = data[index] ? data[index].row_data : {}; // 数据
