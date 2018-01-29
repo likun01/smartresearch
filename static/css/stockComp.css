@@ -224,9 +224,12 @@
 }
 
 .select-comp li {
-  width: 20%;
+  width: 16%;
   float: left;
   text-align: center;
+}
+.select-comp li:first-child{
+  width: 20%;
 }
 
 .select-comp li .del-comp {
@@ -258,7 +261,7 @@
   padding: 8px 0;
   border-right: 1px solid #E1E6E8;
   text-align: center;
-  width: 20%;
+  width: 16%;
 }
 
 .comp-table thead .first-col {
@@ -274,7 +277,7 @@
   text-align: right;
   color: #171817;
   font-family: arial, sans-serif, tahoma;
-  width: 20%;
+  width: 16%;
 }
 
 .comp-table tbody tr:nth-child(even) {
