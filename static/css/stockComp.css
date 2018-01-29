@@ -49,7 +49,7 @@
   background: #FEFFFE;
   font-size: 12px;
   display: none;
-  z-index: 9;
+  z-index: 99;
 }
 
 .year-list {
@@ -85,7 +85,7 @@
   position: absolute;
   top: 89px;
   right: 0;
-  z-index: 99999;
+  z-index: 9;
   background: #FEFFFE;
   display: none;
 }
@@ -169,6 +169,10 @@
   font-style: normal;
 }
 
+.add-stock-cont .list-cont .right .item-add{
+  cursor: pointer;
+}
+
 .add-stock-cont .select-footer {
   width: 100%;
   min-height: 72px;
@@ -228,7 +232,8 @@
   float: left;
   text-align: center;
 }
-.select-comp li:first-child{
+
+.select-comp li:first-child {
   width: 20%;
 }
 
@@ -273,7 +278,7 @@
 .comp-table tbody td {
   border-right: 1px solid #E1E6E8;
   border-bottom: 1px solid #E1E6E8;
-  padding: 4px 5px;
+  padding: 4px 5px 4px 0;
   text-align: right;
   color: #171817;
   font-family: arial, sans-serif, tahoma;

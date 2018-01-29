@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block title %}
-股票对比{{ stock_code }}
+股票对比
 {% endblock %}
 
 {% block container %}
@@ -82,7 +82,7 @@
 <!--select_comp_end-->
 
 <!--tab_start-->
-<div class="kind-tab">
+<div class="kind-tab" style="z-index: 1">
     <div style="overflow: hidden">
         <div class="left-group">
             <span class="active">公司能力</span>
@@ -111,13 +111,13 @@
     var stock_codes = []; // 用来存储已选的股票代码  字符串
     var temp_names = []; // 弹框中未提交的股票名称
     var temp_codes = []; // 弹框中未提交的股票代码
-    var stock_code = '000001'; //'{{ stock_code }}'; // 如果存在表明从指标详情页进入
-    var stock_name = '中国平安'; //'{{ stock_code }}'; // 如果存在表明从指标详情页进入
+    var stock_code = '{{ stock_code }}'; // 如果存在表明从指标详情页进入
+    var stock_name = '{{ stock_name }}'; // 如果存在表明从指标详情页进入
     var fix_url = 'http://api-pro.xin-shui.com';
     var kind_code = '1231'; // 初始化年报对应的code   存放选择的类型
     var year_max = '2016'; // 初始化最大历史年份  存放选择的年份
     var first_icode = "CC3510";
-    var first_name = "1.化学制药";
+    var first_name = "化学制药";
 
 
     // tab切换
@@ -317,7 +317,7 @@
       success: function (res) {
         if (res.data && res.data.length) {
           first_icode = res.data[0].icode;
-          first_name = '1. ' + res.data[0].name
+          first_name = res.data[0].name
         }
         $('#sel-industry').html(first_name);
         getCompsList(first_icode);
@@ -333,7 +333,7 @@
     function initIndustryKind(data) {
       var industryStr = '';
       $.each(data, function (index, item) {
-        industryStr += '<li data-icode="' + item.icode + '">' + item.index + '. ' + item.name + '</li>';
+        industryStr += '<li data-icode="' + item.icode + '">' + item.name + '</li>';
       });
       $('.list-cont .left').html(industryStr)
     }
@@ -367,7 +367,7 @@
     function initCopms(data) {
       var compStr = '';
       $.each(data, function (index, item) {
-        compStr += '<li>' + item.stock_name + '(' + item.stock_code + ')<i data-name="' + item.stock_name + '" data-code="' + item.stock_code + '" class="add-btn">+</i></li>';
+        compStr += '<li class="item-add" data-code="' + item.stock_code + '" data-name="' + item.stock_name + '" >' + item.stock_name + '(' + item.stock_code + ')<i class="add-btn">+</i></li>';
       });
       $('.list-cont .right .right-ul').html(compStr);
     }
@@ -375,7 +375,7 @@
     // 添加股票---添加一个企业事件绑定(弹框中)
     function addEventBind() {
       // 添加股票---选择某一个股票添加
-      $('.list-cont .right .right-ul .add-btn').click(function () {
+      $('.list-cont .right .right-ul .item-add').click(function () {
         var code = $(this).data('code') + '';
         var name = $(this).data('name');
         var flag = false;

@@ -60,8 +60,8 @@
             <span>按报告期</span>
         </div>
         <div class="right-group">
+            <span id="stock-comp">加入对比</span>
             <span class="active" id="export-btn">导出数据</span>
-            <!--<span>加入对比</span>-->
             <!--导出数据弹框-->
         </div>
     </div>
@@ -519,6 +519,11 @@
           $('.export-container').hide();
         })
       }
+    });
+
+    // 股票对比
+    $('#stock-comp').click(function () {
+      window.location.href = '/forecast/diff/?stock_code={{ stock_code }}&stock_name=' + encodeURI(stock_name);
     });
 
     // 按年度数据
