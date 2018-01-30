@@ -324,7 +324,7 @@
           first_icode = res.data[0].icode;
           first_name = res.data[0].name
         }
-        $('#sel-industry').html(first_name);
+        $('#sel-industry').html('1. '+first_name);
         getCompsList(first_icode);
         initIndustryKind(res.data);
         selectIndustry();
@@ -338,7 +338,7 @@
     function initIndustryKind(data) {
       var industryStr = '';
       $.each(data, function (index, item) {
-        industryStr += '<li data-icode="' + item.icode + '">' + item.name + '</li>';
+        industryStr += '<li data-icode="' + item.icode + '">' + item.index + '. ' + item.name + '</li>';
       });
       $('.list-cont .left').html(industryStr)
     }
