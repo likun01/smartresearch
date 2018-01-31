@@ -227,7 +227,6 @@
             if (year_max != $(this).data('year') && stock_codes.length) {
               year_max = $(this).data('year');
               $('#year-inp').val(val);
-              clearTables(); // 清除表格容器
               getCompData('keywords', stock_codes);
               getCompData('ability', stock_codes);
             }
