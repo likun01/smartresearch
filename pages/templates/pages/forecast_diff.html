@@ -303,7 +303,6 @@
         delColData(codes_len); // 清空表格
         $('.select-comp').find('span').parent().remove(); // 清空原来显示的企业列表
         showCompList(stock_names);
-        addTdComputeWid(codes_len, 'add', null);
         getCompData('keywords', stock_codes);
         getCompData('ability', stock_codes);
         $('.add-stock-cont').hide();
@@ -530,6 +529,9 @@
           $(contxt).append(tableStr);
         })
       }
+
+      var codes_len=stock_codes.length;
+      addTdComputeWid(codes_len, 'add', null);
 
       // 填充数据
       if (data) {
