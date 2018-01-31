@@ -501,6 +501,7 @@
         },
         crossDomain: true == !(document.all),
         success: function (res) {
+          clearTables();
           var res_data = res.table_data;
           $.each(stock_codes, function (index, item) {
             res_data[item]
