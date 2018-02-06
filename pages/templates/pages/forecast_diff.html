@@ -26,41 +26,24 @@
     <ul class="kind-list">
     </ul>
     <!--添加对比股票弹框-->
-    <div class="add-stock-cont">
+    <div class="add-stock-cont" style="display: block;">
         <div class="header-tit">
             <span class="title">添加股票</span>
-            <span id="sel-industry"></span>
+            <input class="search-inp" placeholder="输入股票名称/代码"/>
             <span class="add-stock-close">&times;</span>
         </div>
+        <ul class="stocks-list">
+            <!--<li>中国平安(3558892) <span class="add-stock">+</span></li>-->
+            <!--<li>中国平安(3558892) <span class="add-stock">+</span></li>-->
+            <!--<li>中国平安(3558892) <span class="add-stock">+</span></li>-->
+        </ul>
         <div class="list-cont">
             <!--左侧行业分类-->
             <ul class="left">
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>环保及公用事业</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
-                <li>化学制药</li>
             </ul>
             <!--右侧企业列表-->
             <div class="right">
                 <ul class="right-ul">
-                    <!--<li>平安(000001)<i class="add-btn">+</i></li>-->
-                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
-                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
-                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
-                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
-                    <!--<li>中国平安(000001)<i class="add-btn">+</i></li>-->
                 </ul>
             </div>
         </div>
@@ -74,6 +57,8 @@
     </div>
 </div>
 <!--顶部_end-->
+
+<div class="add-mask"></div>
 
 <!--select_comp_start-->
 <ul class="select-comp">
@@ -119,6 +104,14 @@
     var first_icode = "CC3510";
     var first_name = "化学制药";
     var codes_len = 0;
+
+    // 设置遮罩层最小高度
+    var winH = $(window).height();
+    $('.add-mask').css('min-height', winH);
+    $(window).on('resize', function () {
+      var winH = $(window).height();
+      $('.add-mask').css('min-height', winH);
+    });
 
 
     // tab切换
@@ -173,8 +166,7 @@
       temp_names.push(stock_name);
       showCompList(stock_names);
       // 请求该条信息
-      getCompData('keywords', stock_codes);
-      getCompData('ability', stock_codes);
+      getCompData(stock_codes);
     }
 
     // 筛选下拉选框---显示年份下拉/报告类型下拉
@@ -218,8 +210,7 @@
             year_max = $(this).data('year');
             $('#year-inp').val(val);
             clearTables(); // 清除表格容器
-            getCompData('keywords', stock_codes);
-            getCompData('ability', stock_codes);
+            getCompData(stock_codes);
           }
           $('.year-list').hide();
         } else {
@@ -227,8 +218,7 @@
             if (year_max != $(this).data('year') && stock_codes.length) {
               year_max = $(this).data('year');
               $('#year-inp').val(val);
-              getCompData('keywords', stock_codes);
-              getCompData('ability', stock_codes);
+              getCompData(stock_codes);
             }
             $('.year-list').hide();
           }
@@ -253,8 +243,7 @@
             if (kind_code != $(this).data('kind') && stock_codes.length) { //kind_code!==$(this).data('kind') 说明没有重复选择
               kind_code = $(this).data('kind');
               $('#kind-inp').val(val);
-              getCompData('keywords', stock_codes);
-              getCompData('ability', stock_codes);
+              getCompData(stock_codes);
             }
             $('.kind-list').hide();
           }
@@ -262,8 +251,7 @@
           if (kind_code != $(this).data('kind') && stock_codes.length) {
             kind_code = $(this).data('kind');
             $('#kind-inp').val(val);
-            getCompData('keywords', stock_codes);
-            getCompData('ability', stock_codes);
+            getCompData(stock_codes);
           }
           $('.kind-list').hide();
         }
@@ -273,6 +261,11 @@
 
     // 添加股票---显示添加股票弹框
     $('.add-stock-btn').click(function () {
+      if ($('.add-stock-cont').css('display') === 'none') {
+        $('.add-mask').show();
+      } else {
+        $('.add-mask').hide();
+      }
       $('.add-stock-cont').toggle();
     });
 
@@ -286,6 +279,7 @@
         temp_names.push(stock_names[index]);
       });
       showSelectStock(temp_names, temp_codes);
+      $('.add-mask').hide();
     });
 
     // 添加股票---提交
@@ -303,10 +297,9 @@
         delColData(codes_len); // 清空表格
         $('.select-comp').find('span').parent().remove(); // 清空原来显示的企业列表
         showCompList(stock_names);
-        getCompData('keywords', stock_codes);
-        getCompData('ability', stock_codes);
+        getCompData(stock_codes);
         $('.add-stock-cont').hide();
-
+        $('.add-mask').hide();
       } else {
         alert('请挑选对比股票！')
       }
@@ -322,7 +315,6 @@
           first_icode = res.data[0].icode;
           first_name = res.data[0].name
         }
-        $('#sel-industry').html('1. '+first_name);
         getCompsList(first_icode);
         initIndustryKind(res.data);
         selectIndustry();
@@ -344,8 +336,9 @@
     // 添加股票---选择行业后请求数据
     function selectIndustry() {
       $('.list-cont .left li').click(function () {
-        $('#sel-industry').html($(this).html());
         // 请求该行业企业列表
+        console.log('--------', this);
+        $(this).addClass('selected').siblings('li').removeClass('selected');
         getCompsList($(this).data('icode'));
       });
     }
@@ -429,6 +422,70 @@
 
     delEventBind();
 
+    // 添加股票---搜索股票
+    function searchAddStock() {
+      // 搜索框输入状态监控
+      $('.search-inp').on('input propertychange', function () {
+        var q = $('.search-inp').val();
+        $.ajax({
+          // 百度搜索关键词 请求 接口API
+          url: fix_url + '/api/research/search',
+          type: 'GET',
+          data: { // 向后台发送数据
+            q: q
+          },
+          crossDomain: true == !(document.all),
+          success: function (res) {
+            if (res.results && res.results.length) {
+              $('.stocks-list').show();
+              initStockData(res.results);
+              selectAdd();
+            } else {
+              $('.stocks-list').hide();
+            }
+          }
+        })
+      });
+
+
+      // 渲染搜索的结果
+      function initStockData(data) {
+        var str = '';
+        $.each(data, function (index, item) {
+          str += '<li data-code="' + item.code + '" data-name="' + item.name + '">' + item.name + '(' + item.code + ') <span>+</span></li>'
+        });
+        $('.stocks-list').html(str);
+      }
+
+      // 选择某一个股票进行添加
+      function selectAdd() {
+        $('.stocks-list li').on('click', function () {
+          var flag = false;
+          console.log('before', temp_codes);
+          var code = $(this).data('code');
+          $.each(temp_codes, function (index, item) {
+            if (item == code) {
+              flag = true;
+              alert('该股票已经添加！')
+            }
+          });
+          if (!flag) {
+            if (temp_codes.length < 10) {
+              temp_codes.push($(this).data('code'));
+              temp_names.push($(this).data('name'));
+              showSelectStock(temp_names, temp_codes);
+            } else {
+              alert('最多添加十项！')
+            }
+            $('.search-inp').val('');
+            $('.stocks-list').hide();
+          }
+        })
+      }
+    }
+
+    searchAddStock();
+
     // 页面已选企业列表----显示
     function showCompList(arr) {
       var compStr = '';
@@ -485,7 +542,7 @@
     listDelBind();
 
     // 表格数据---请求
-    function getCompData(type, codes) { // kind:keywords：财务数据，ability：公司能力  codes:数组，需要转化为字符串逗号分隔
+    function getCompData(codes) { // kind:keywords：财务数据，ability：公司能力  codes:数组，需要转化为字符串逗号分隔
       var str = codes.join(',');
       $.ajax({
         type: 'GET',
@@ -494,18 +551,24 @@
           report_year: year_max,
           report_quarter: kind_code,
           // stock_codes: codes.join(' '), //这样写,被转义为%2
-          report_type: type,
+//          report_type: type,
 
         },
         crossDomain: true == !(document.all),
         success: function (res) {
           clearTables();
           var res_data = res.table_data;
-          $.each(stock_codes, function (index, item) {
-            res_data[item]
-            initTableTd('#' + type, index, res_data[item])
-          });
-
+          if (res_data) {
+            $.each(stock_codes, function (index, item) {
+              initTableTd('#keywords', index, res_data[item])
+            });
+          }
+          var ability_data = res.ability_data;
+          if (ability_data) {
+            $.each(stock_codes, function (index, item) {
+              initTableTd('#ability', index, ability_data[item])
+            });
+          }
         },
         error: function (e) {
           console.log(e);
@@ -530,12 +593,11 @@
         })
       }
 
-      var codes_len=stock_codes.length;
+      var codes_len = stock_codes.length;
       addTdComputeWid(codes_len, 'add', null);
-
       // 填充数据
       if (data) {
-        $('.comp-table tbody').each(function (index, item) { // 遍历表格;
+        $(contxt + ' tbody').each(function (index, item) { // 遍历表格;
           var temp_tr = $(item).find('tr');
           var temp_data = data[index] ? data[index].row_data : {}; // 数据
           var temp_title = data[index] ? data[index].row_title : {}; // 表头
@@ -546,7 +608,7 @@
           });
         });
       } else { // 如果没改code数据
-        $('.comp-table tbody').each(function (index, item) { // 遍历表格;
+        $(contxt + ' tbody').each(function (index, item) { // 遍历表格;
           var temp_tr = $(item).find('tr');
           $.each(temp_tr, function (ind_tr, ite_tr) {
             $(ite_tr).find('td').eq(ind + 1).html('--');

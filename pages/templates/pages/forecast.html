@@ -922,7 +922,7 @@
 //    });
 
     var opts = {
-      url: fix_url + '/api/research/search?q' + $('#search-inp').val(),
+      url: fix_url + '/api/research/search' + $('#search-inp').val(),
       bindData: initSearch,
       searchRes: function (code, value) {
         var val = $('#search-inp').val();

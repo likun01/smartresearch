@@ -1,3 +1,19 @@
+/*添加选项时遮罩层*/
+.add-mask {
+  width: 140%;
+  height: 120%;
+  position: absolute;
+  top: 0;
+  left: -20%;
+  margin: 0 auto;
+  opacity: 0.6;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  background: #000;
+  z-index: 9;
+  /*display: none;*/
+}
+
 /*顶部样式*/
 .header-relative {
   position: relative;
@@ -85,7 +101,7 @@
   position: absolute;
   top: 89px;
   right: 0;
-  z-index: 9;
+  z-index: 99;
   background: #FEFFFE;
   display: none;
 }
@@ -103,6 +119,43 @@
   padding: 0 10px;
   color: #E24340;
   font-weight: 500;
+}
+
+.add-stock-cont .header-tit .search-inp {
+  width: 115px;
+  height: 16px;
+  border: 1px solid #CFCECF;
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.add-stock-cont .stocks-list {
+  position: absolute;
+  border: 1px solid #CFCECF;
+  background: #FEFFFE;
+  width: 125px;
+  top: 21px;
+  left: 72px;
+  display: none;
+}
+
+.add-stock-cont .stocks-list li {
+  height: 20px;
+  line-height: 20px;
+  padding: 0 3px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.add-stock-cont .stocks-list li:hover {
+  background: #D9DEDE;
+}
+
+.add-stock-cont .stocks-list li span {
+  float: right;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-block;
 }
 
 .add-stock-cont .header-tit .add-stock-close {
@@ -140,8 +193,12 @@
 }
 
 .add-stock-cont .list-cont .left li:hover {
-  background: #F4F5F4;
   cursor: pointer;
+}
+
+.add-stock-cont .list-cont .left .selected {
+  background: #656565;
+  color: #FEFFFE;
 }
 
 .add-stock-cont .list-cont .right {
@@ -169,7 +226,7 @@
   font-style: normal;
 }
 
-.add-stock-cont .list-cont .right .item-add{
+.add-stock-cont .list-cont .right .item-add {
   cursor: pointer;
 }
 
@@ -232,8 +289,8 @@
   width: 16%;
   float: left;
   text-align: center;
-  word-wrap:break-word;
-  word-break:break-all;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .select-comp li:first-child {
@@ -270,8 +327,8 @@
   border-right: 1px solid #E1E6E8;
   text-align: center;
   width: 16%;
-  word-wrap:break-word;
-  word-break:break-all;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .comp-table thead .first-col {
@@ -287,8 +344,8 @@
   text-align: right;
   color: #171817;
   font-family: arial, sans-serif, tahoma;
-  word-wrap:break-word;
-  word-break:break-all;
+  word-wrap: break-word;
+  word-break: break-all;
   width: 16%;
 }
 
