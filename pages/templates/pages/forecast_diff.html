@@ -529,19 +529,22 @@
         // 页面上删除
         // 列表中删除
         $(this).parent().remove();
-        // 表格数据中删除
-        if (temp_codes.length < 5) {
-          $('.data-table .comp-table tbody tr').each(function (index, item) {
-            $(item).find('td').eq(curInd + 1).remove();
-            $(item).append('<td></td>');
-          })
-          $('.data-table .comp-table thead tr').each(function (index, item) {
-            $(item).find('th').eq(curInd + 1).remove();
-            $(item).append('<th></th>');
-          })
-        } else {
-          addTdComputeWid(stock_codes.length, 'reduce', curInd, null);
-        }
+//        // 表格数据中删除
+//        if (temp_codes.length < 5) {
+//          $('.data-table .comp-table tbody tr').each(function (index, item) {
+//            $(item).find('td').eq(curInd + 1).remove();
+//            $(item).append('<td></td>');
+//          })
+//          $('.data-table .comp-table thead tr').each(function (index, item) {
+//            $(item).find('th').eq(curInd + 1).remove();
+//            $(item).append('<th></th>');
+//          })
+//        } else {
+//          addTdComputeWid(stock_codes.length, 'reduce', curInd, null);
+//        }
+        // 删除时从新请求数据
+        clearTables();
+        getCompData(stock_codes);
       })
     }
 
@@ -549,6 +552,7 @@
 
     // 表格数据---请求
     function getCompData(codes) { // kind:keywords：财务数据，ability：公司能力  codes:数组，需要转化为字符串逗号分隔
+      console.log('执行')
       var str = codes.join(',');
       $.ajax({
         type: 'GET',
