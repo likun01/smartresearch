@@ -308,6 +308,12 @@
 }
 
 /*表格样式*/
+.data-cont .data-table .red{
+  color: #F44336;
+}
+.data-cont .data-table .green{
+  color: #4CAF50;
+}
 .comp-table {
   width: 100%;
   border-spacing: 0;

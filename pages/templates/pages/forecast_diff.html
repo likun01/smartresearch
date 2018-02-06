@@ -607,9 +607,13 @@
           var temp_data = data[index] ? data[index].row_data : {}; // 数据
           var temp_title = data[index] ? data[index].row_title : {}; // 表头
           var val = null;
+          var abnormal=null;
           $.each(temp_tr, function (ind_tr, ite_tr) {
             val = temp_data[temp_title[ind_tr]].value || '--';
+            abnormal = temp_data[temp_title[ind_tr]].abnormal || 'normal';
+            console.log(abnormal);
             $(ite_tr).find('td').eq(ind + 1).html(val);
+            abnormal==='red'?$(ite_tr).find('td').eq(ind + 1).addClass('red'):(abnormal==='green'?$(ite_tr).find('td').eq(ind + 1).addClass('green'):null);
           });
         });
 
