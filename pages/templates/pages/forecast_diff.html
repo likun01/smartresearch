@@ -101,8 +101,8 @@
     var fix_url = 'http://api-pro.xin-shui.com';
     var kind_code = '1231'; // 初始化年报对应的code   存放选择的类型
     var year_max = '2016'; // 初始化最大历史年份  存放选择的年份
-    var first_icode = "CC3510";
-    var first_name = "化学制药";
+    var first_icode = "CC1010";
+    var first_name = "石油开采";
     var codes_len = 0;
 
     // 设置遮罩层最小高度
@@ -280,6 +280,8 @@
       });
       showSelectStock(temp_names, temp_codes);
       $('.add-mask').hide();
+      $('.search-inp').val('');
+      $('.stocks-list').hide();
     });
 
     // 添加股票---提交
@@ -328,7 +330,7 @@
     function initIndustryKind(data) {
       var industryStr = '';
       $.each(data, function (index, item) {
-        industryStr += '<li data-icode="' + item.icode + '">' + item.index + '. ' + item.name + '</li>';
+        index === 0 ? industryStr += '<li class="selected" data-icode="' + item.icode + '">' + item.index + '. ' + item.name + '</li>' : industryStr += '<li data-icode="' + item.icode + '">' + item.index + '. ' + item.name + '</li>';
       });
       $('.list-cont .left').html(industryStr)
     }
@@ -533,8 +535,12 @@
             $(item).find('td').eq(curInd + 1).remove();
             $(item).append('<td></td>');
           })
+          $('.data-table .comp-table thead tr').each(function (index, item) {
+            $(item).find('th').eq(curInd + 1).remove();
+            $(item).append('<th></th>');
+          })
         } else {
-          addTdComputeWid(stock_codes.length, 'reduce', curInd);
+          addTdComputeWid(stock_codes.length, 'reduce', curInd, null);
         }
       })
     }
@@ -551,8 +557,6 @@
           report_year: year_max,
           report_quarter: kind_code,
           // stock_codes: codes.join(' '), //这样写,被转义为%2
-//          report_type: type,
-
         },
         crossDomain: true == !(document.all),
         success: function (res) {
@@ -579,7 +583,7 @@
     // 表格数据---给表格某一列填充数据
     function initTableTd(contxt, ind, data) { // contxt:公司能力/财务数据对比的id #ability/#finance   ind第几列数据(数据从0开始，表格填充从1开始)  data数组[{},{},{},{}]
       // 填充数据前先判断是否已经是有表格容器，没有时先创建表格容器并填充表头
-      if (!$('.data-cont .data-table').find('.comp-table').length) {
+      if (!$(contxt).find('.comp-table').length) {
         // 生成表格容器/表头/第一列表题
         var tableStr = '';
         $.each(data, function (index, item) {
@@ -594,7 +598,7 @@
       }
 
       var codes_len = stock_codes.length;
-      addTdComputeWid(codes_len, 'add', null);
+      addTdComputeWid(codes_len, 'add', null, contxt);
       // 填充数据
       if (data) {
         // 遍历表格tbody
@@ -604,7 +608,7 @@
           var temp_title = data[index] ? data[index].row_title : {}; // 表头
           var val = null;
           $.each(temp_tr, function (ind_tr, ite_tr) {
-            val = temp_data[temp_title[ind_tr]] || '--';
+            val = temp_data[temp_title[ind_tr]].value || '--';
             $(ite_tr).find('td').eq(ind + 1).html(val);
           });
         });
@@ -620,7 +624,6 @@
       }
       // 遍历表格thead，显示股票名称
       $(contxt + ' thead tr').each(function (index, item) {
-        console.log('thead', contxt, item);
         $.each(stock_names, function (stock_ind, stock_ite) {
           $(item).find('th').eq(stock_ind + 1).html(stock_ite);
         });
@@ -628,12 +631,17 @@
     }
 
     // 表格数据---添加空格子，重新计算表格宽度
-    function addTdComputeWid(len, flag, curInd) { // flag为add时添加表格数量，reduce减少表格数量 每次减1 , curInd第几列数据被删除
+    function addTdComputeWid(len, flag, curInd, contxt) { // flag为add时添加表格数量，reduce减少表格数量 每次减1 , curInd第几列数据被删除
       var td_len = $('.data-cont table').eq(0).find('thead tr th').length || 6;
       if (flag === 'add' && len > 5) {
         for (var i = td_len; i <= len; i++) {
-          $('.data-cont table thead tr').append('<th></th>');
-          $('.data-cont table tbody tr').append('<td></td>');
+          if (contxt === '#keywords') {
+            $('#keywords table thead tr').append('<th></th>');
+            $('#keywords table tbody tr').append('<td></td>');
+          } else if (contxt === '#ability') {
+            $('#ability table thead tr').append('<th></th>');
+            $('#ability table tbody tr').append('<td></td>');
+          }
         }
       }
       if (flag === 'reduce' && len >= 5) {
@@ -704,8 +712,8 @@
 
     // 表格数据---清空容器重新(日期更改是表项修改，需要重新渲染表格)
     function clearTables() {
-      $('#ability table').remove();
-      $('#keywords table').remove();
+      $('#ability').find('table').remove();
+      $('#keywords').find('table').remove();
     }
 
   })
