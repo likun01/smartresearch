@@ -26,7 +26,7 @@
     <ul class="kind-list">
     </ul>
     <!--添加对比股票弹框-->
-    <div class="add-stock-cont" style="display: block;">
+    <div class="add-stock-cont">
         <div class="header-tit">
             <span class="title">添加股票</span>
             <input class="search-inp" placeholder="输入股票名称/代码"/>
@@ -597,7 +597,8 @@
       addTdComputeWid(codes_len, 'add', null);
       // 填充数据
       if (data) {
-        $(contxt + ' tbody').each(function (index, item) { // 遍历表格;
+        // 遍历表格tbody
+        $(contxt + ' tbody').each(function (index, item) {
           var temp_tr = $(item).find('tr');
           var temp_data = data[index] ? data[index].row_data : {}; // 数据
           var temp_title = data[index] ? data[index].row_title : {}; // 表头
@@ -607,14 +608,23 @@
             $(ite_tr).find('td').eq(ind + 1).html(val);
           });
         });
+
       } else { // 如果没改code数据
-        $(contxt + ' tbody').each(function (index, item) { // 遍历表格;
+        // 遍历表格tbody
+        $(contxt + ' tbody').each(function (index, item) {
           var temp_tr = $(item).find('tr');
           $.each(temp_tr, function (ind_tr, ite_tr) {
             $(ite_tr).find('td').eq(ind + 1).html('--');
           });
         });
       }
+      // 遍历表格thead，显示股票名称
+      $(contxt + ' thead tr').each(function (index, item) {
+        console.log('thead', contxt, item);
+        $.each(stock_names, function (stock_ind, stock_ite) {
+          $(item).find('th').eq(stock_ind + 1).html(stock_ite);
+        });
+      })
     }
 
     // 表格数据---添加空格子，重新计算表格宽度
