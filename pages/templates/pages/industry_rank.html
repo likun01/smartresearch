@@ -66,6 +66,7 @@
   var count = 0;
   var index_obj = []; // 存放某一行业指标信息，以便查找
   var cur_tab = '';
+  var colors = ['#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350']; // 柱状图颜色表
 
 
   // 行业---选择行业显示隐藏
@@ -118,6 +119,8 @@
       // 重置tab状态
       $('.chart-left span').eq(0).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+      // 还原colors默认值
+      colors = ['#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350']
     })
   }
 
@@ -144,9 +147,9 @@
         }
       });
       if (!exitHis) { // 不存在历史数据
-        defaut_year = Math.max.apply(null, temp_years);
+        defaut_year = Math.min.apply(null, temp_years);
       }
-      defaut_year = Math.max.apply(null, years);
+      defaut_year = Math.min.apply(null, years);
       // 进入页面设置默认时间
       $('#year-inp').val(defaut_year);
       initYearSelect(res.years);
@@ -344,7 +347,13 @@
       success: function (res) {
         // 渲染图表
         if (res.data.length) {
-
+          if (colors.length === 9 && res.data.length > 9) { // 在此处执行，保证某一行业中 每个指标对应柱状图colors相同
+            // 生成颜色表
+            colors = [];
+            $.each(res.data, function (index, item) {
+              colors.push(getRandomColor());
+            });
+          }
           initChart(contxt, res.cols_title.reverse(), res.data.reverse())
         } else {
           $('#' + contxt).html('<p style="line-height: 30px;font-size: 14px;color: #D0D0D0">无该指标排名数据！</p>')
@@ -358,20 +367,24 @@
 
   // 渲染条形图
   function initChart(contxt, data_y, data_s,) { // contxt chart-1 cur_tab当前tab
-    $('.chart-cont').css('height', data_y.length * 35);
-    $('.chart-cont .chart-bar').css('height', data_y.length * 35);
+    console.log(contxt,'>>>',data_y.toString());
+    console.log(data_s);
+    if (data_y.length >5) {
+      $('.chart-cont').css('height', data_y.length * 35);
+      $('.chart-cont .chart-bar').css('height', data_y.length * 35);
+    } else if(data_y.length>=3) {
+      $('.chart-cont').css('height', data_y.length * 55);
+      $('.chart-cont .chart-bar').css('height', data_y.length * 55);
+    }else {
+      $('.chart-cont').css('height', data_y.length * 100);
+      $('.chart-cont .chart-bar').css('height', data_y.length * 100);
+    }
     var serise_data = [];
     $.each(data_s, function (idnex, item) {
       serise_data.push(item.value);
     });
-    var colors = ['#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350']; // 默认颜色表
-    if (data_y.length > 9) {
-      // 生成颜色表
-      colors = [];
-      $.each(data_y, function (index, item) {
-        colors.push(getRandomColor());
-      });
-    }
+
+
     // 条形图
     var context = echarts.init(document.getElementById(contxt));
     var option = {
@@ -401,6 +414,7 @@
       },
       yAxis: {
         type: 'category',
+        axisLabel:{interval: 0},
         data: data_y
       },
       series: [
