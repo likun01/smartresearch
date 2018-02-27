@@ -1,0 +1,288 @@
+/*顶部样式*/
+.header-relative {
+  position: relative;
+}
+
+.header-relative .header-info {
+  font-size: 16px;
+  font-weight: normal;
+  color: #171817 !important;
+  margin: 0 0 0 35px;
+}
+
+.select-inp {
+  display: inline-block;
+  width: 70px;
+  height: 17px;
+  padding: 0 3px;
+  background: url(/static/images/downBg.png) no-repeat;
+  background-size: 6px 4px;
+  background-position-x: 59px;
+  background-position-y: 5px;
+  border: 1px solid #C3C4C6;
+  cursor: pointer;
+}
+
+.industry-inp {
+  width: 90px;
+  background-position-x: 79px;
+  padding-right: 10px;
+}
+
+.header-relative .add-stock-btn {
+  float: right;
+  margin: 6px 0;
+  padding: 3px 15px;
+  background: #E5514D;
+  border: 1px solid #E43732;
+  color: #FCF6F5 !important;
+  font-size: 12px;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.industry-list, .comp-cont .year-list {
+  width: 68px;
+  border: 1px solid #BFC0C2;
+  position: absolute;
+  top: 48px;
+  text-align: left;
+  background: #FEFFFE;
+  font-size: 12px;
+  display: none;
+  z-index: 999;
+
+}
+
+.industry-list {
+  width: 120px !important;
+  height: 300px;
+  overflow-y: auto;
+  left: 196px;
+}
+
+.industry-list li, .comp-cont .year-list li {
+  padding: 1px 0 1px 2px;
+  height: 15px;
+  line-height: 15px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.industry-list li:hover, .comp-cont .year-list li:hover {
+  background: #F4F5F4;
+}
+
+.li-disabled {
+  color: #D3D5D6 !important;
+  cursor: not-allowed !important;
+}
+
+/*指标关键词*/
+.cloud-cont {
+  width: 700px;
+  margin: 0 auto;
+  height: 350px;
+}
+
+div.jqcloud {
+  font-family: "微软雅黑", "微软雅黑", sans-serif;
+  font-size: 10px;
+  line-height: normal;
+}
+
+div.jqcloud a {
+  font-size: inherit;
+  text-decoration: none;
+}
+
+div.jqcloud span.w10 {
+  font-size: 200%;
+}
+
+div.jqcloud span.w9 {
+  font-size: 180%;
+}
+
+div.jqcloud span.w8 {
+  font-size: 175%;
+}
+
+div.jqcloud span.w7 {
+  font-size: 120%;
+}
+
+div.jqcloud span.w6 {
+  font-size: 115%;
+}
+
+div.jqcloud span.w5 {
+  font-size: 95%;
+}
+
+div.jqcloud span.w4 {
+  font-size: 85%;
+}
+
+div.jqcloud span.w3 {
+  font-size: 75%;
+}
+
+div.jqcloud span.w2 {
+  font-size: 65%;
+}
+
+div.jqcloud span.w1 {
+  font-size: 55%;
+}
+
+/* colors */
+
+div.jqcloud {
+  color: #09f;
+}
+
+div.jqcloud a {
+  color: inherit;
+}
+
+div.jqcloud span:hover {
+  color: red;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+div.jqcloud span.w10 {
+  color: #0cf;
+}
+
+div.jqcloud span.w9 {
+  color: #0cf;
+}
+
+div.jqcloud span.w8 {
+  color: #0cf;
+}
+
+div.jqcloud span.w7 {
+  color: #39d;
+}
+
+div.jqcloud span.w6 {
+  color: #90c5f0;
+}
+
+div.jqcloud span.w5 {
+  color: #90a0dd;
+}
+
+div.jqcloud span.w4 {
+  color: #90c5f0;
+}
+
+div.jqcloud span.w3 {
+  color: #a0ddff;
+}
+
+div.jqcloud span.w2 {
+  color: #99ccee;
+}
+
+div.jqcloud span.w1 {
+  color: #aab5f0;
+}
+
+#my_favorite_latin_words span {
+  cursor: pointer;
+}
+
+div.jqcloud {
+  overflow: hidden;
+  position: relative;
+}
+
+div.jqcloud span {
+  padding: 0;
+}
+
+/*底部条形图*/
+.comp-cont {
+  width: 100%;
+  position: relative;
+}
+
+.comp-cont .chart-tit {
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid #E7524F;
+}
+
+.comp-cont .chart-tit .chart-left {
+  width: 90%;
+  float: left;
+  font-size: 0;
+}
+
+.comp-cont .chart-tit .chart-left .del-index {
+  font-style: normal;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.comp-cont .chart-tit .chart-left .del-index:hover {
+  color: #F2F2F2;
+}
+
+.comp-cont .chart-tit .chart-left span {
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.comp-cont .chart-tit .chart-left span:hover .del-index {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.comp-cont .chart-tit .chart-left .active {
+  background: #E7524F;
+  color: #FEFFFE;
+}
+
+.comp-cont .chart-tit .chart-right {
+  width: 10%;
+  height: 29px;
+  float: left;
+  overflow: hidden;
+}
+
+.comp-cont .chart-tit .chart-right .select-inp {
+  margin-top: 8px;
+  float: right;
+}
+
+.chart-cont {
+  width: 100%;
+  position: relative;
+  height: 400px;
+}
+
+.chart-cont .chart-bar {
+  width: 100%;
+  height: 350px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.comp-cont .year-list {
+  position: absolute;
+  top: 27px;
+  right: 0;
+}

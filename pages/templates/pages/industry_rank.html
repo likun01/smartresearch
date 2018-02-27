@@ -1,0 +1,440 @@
+{% extends 'pages/base_common.html' %}
+{% block css %}
+<link rel="stylesheet" href="/static/css/industryComp.css">
+{% endblock %}
+
+{% block title %}
+行业对比
+
+{% endblock %}
+
+{% block container %}
+
+<!--顶部_start-->
+<div class="header-outer">
+    <div class="header-title header-relative">
+        <span id="stock-title">股票对比</span>
+        <span class="header-info">行业</span>
+        <input type="text" readonly="readonly" id="industry-inp" class="select-inp industry-inp">
+    </div>
+    <!--行业筛选-->
+    <ul class="industry-list">
+        <li>教育</li>
+        <li>银行</li>
+    </ul>
+</div>
+<!--顶部_end-->
+
+<!--指标墙_start-->
+<div class="cloud-cont" id="my_favorite_latin_words"></div>
+<!--指标墙_end-->
+
+<!--对比图_start-->
+<div class="comp-cont">
+    <div class="chart-tit">
+        <div class="chart-left">
+        </div>
+        <div class="chart-right">
+            <input type="text" readonly="readonly" id="year-inp" class="select-inp">
+        </div>
+    </div>
+    <ul class="year-list">
+        <li>2017</li>
+        <li>2018</li>
+    </ul>
+    <div class="chart-cont">
+        <!--<div class="chart-bar" id="chart-0"></div>-->
+        <!--<div class="chart-bar" id="chart-1"></div>-->
+        <!--<div class="chart-bar" id="chart-2"></div>-->
+    </div>
+</div>
+<!--对比图_end-->
+
+
+{% endblock %}
+
+{% block js %}
+<script src="/static/js/jqcloud.js"></script>
+<script src="/static/js/echarts.min.js"></script>
+<script>
+  var fix_url = 'http://api-pro.xin-shui.com';
+  var indexs = []; // 已选择指标
+  var indexs_name = []; // 已选指标对应的column_name
+  var default_name = '石油开采';
+  var defaut_code = 'CC1010';
+  var defaut_year = '2016';
+  var count = 0;
+  var index_obj = []; // 存放某一行业指标信息，以便查找
+  var cur_tab = '';
+
+
+  // 行业---选择行业显示隐藏
+  $('#industry-inp').click(function () {
+    $('.industry-list').toggle();
+  });
+
+  // 行业---请求行业列表数据
+  $.ajax({
+    type: 'GET',
+    url: fix_url + '/api/research/stock/industry/',
+    crossDomain: true == !(document.all),
+    async: false,
+    success: function (res) {
+      initIndustry(res.data);
+      getOneIndustry();
+      if (res.data && res.data.length) {
+        default_name = res.data[0].name;
+        defaut_code = res.data[0].icode;
+        // 进入页面设置默认行业
+        $('#industry-inp').val(default_name);
+      }
+    },
+    error: function (e) {
+      console.log(e);
+    }
+  });
+
+  // 行业---渲染行业列表
+  function initIndustry(data) {
+    var str = '';
+    $.each(data, function (index, item) {
+      str += '<li data-icode="' + item.icode + '">' + item.name + '</li>';
+    });
+    $('.industry-list').html(str);
+  }
+
+  // 行业---选择行业并请求行业数据
+  function getOneIndustry() {
+    $('.industry-list li').on('click', function () {
+      defaut_code = $(this).data('icode');
+      var name = $(this).html();
+      $('#industry-inp').val(name);
+      $('.industry-list').hide();
+      // 清空原有的tab/chart 容器,重新生成容器在填充数据
+      $('.chart-left span').remove();
+      $('.chart-cont .chart-bar').remove();
+      getIndexData(defaut_code); // 获取指标并且渲染指标墙
+      initTabChart(); // 重新渲染默认容器
+      // 重置tab状态
+      $('.chart-left span').eq(0).addClass('active').siblings().removeClass('active');
+      $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+    })
+  }
+
+  // 时间---显示隐藏
+  $('#year-inp').click(function () {
+    $('.year-list').toggle();
+  });
+
+  // 时间---请求列表
+  $.ajax({
+    type: 'GET',
+    url: fix_url + '/api/research/stock/diff/report_period/',
+    crossDomain: true == !(document.all),
+    async: false,
+    success: function (res) {
+      var years = [];
+      var exitHis = false;
+      var temp_years = [];
+      $.each(res.years, function (index, item) {
+        temp_years.push(index);
+        if (item.indexOf('E') === -1) {
+          exitHis = true;
+          years.push(index);
+        }
+      });
+      if (!exitHis) { // 不存在历史数据
+        defaut_year = Math.max.apply(null, temp_years);
+      }
+      defaut_year = Math.max.apply(null, years);
+      // 进入页面设置默认时间
+      $('#year-inp').val(defaut_year);
+      initYearSelect(res.years);
+      getOneYear();
+    },
+    error: function (e) {
+      console.log(e);
+    }
+  });
+
+  // 时间---渲染列表
+  function initYearSelect(data) {
+    var yearStr = '';
+    $.each(data, function (index, item) {
+      yearStr += '<li data-year="' + index + '">' + item + '</li> ';
+
+    });
+    $('ul.year-list').html(yearStr);
+  }
+
+  // 时间---选择某一项
+  function getOneYear() {
+    $('.year-list li').on('click', function () {
+      defaut_year = $(this).html();
+      $('#year-inp').val(defaut_year);
+      $('.year-list').hide();
+      // 重新请求指标对应数据
+      $('.chart-cont .chart-bar').each(function (index, item) {
+        getChartData(defaut_code, indexs_name[index], defaut_year, item.getAttribute('id'));
+      });
+    })
+  }
+
+  // 指标墙---获取指标墙数据
+  function getIndexData(icode) {
+    $.ajax({
+      type: 'GET',
+      url: fix_url + '/api/research/stock/industry/frequency/',
+      data: {
+        icode: icode
+      },
+      crossDomain: true == !(document.all),
+      async: false,
+      success: function (res) {
+        indexs_name = [];
+        indexs = [];
+        if (res.data && res.data.length >= 3) {
+          count = res.data.length >= 3 ? 3 : res.data.length;
+          for (var i = 0; i < count; i++) {
+            indexs.push(res.data[i].alias);
+            indexs_name.push(res.data[i].column_name)
+          }
+        }
+        index_obj = res.data;
+        initIndexWord(res.data);
+      },
+      error: function (e) {
+        console.log(e);
+      }
+    });
+  }
+
+  defaut_code ? getIndexData(defaut_code) : null;
+
+  // 指标墙---渲染指标墙
+  function initIndexWord(data_obj) {
+    $('#my_favorite_latin_words span').remove();
+    var data = [];
+    $.each(data_obj, function (index, item) {
+      data.push([item.alias, item.weight]);
+    });
+    var string_ = "";
+    for (var i = 0; i < data.length; i++) {
+      var string_f = data[i][0];
+      var string_n = data[i][1];
+      string_ += "{text: '" + string_f + "', weight: '" + string_n + "',html: {'class': 'span_list',onclick:'on_click(this,event)'}},";
+    }
+    var string_list = string_;
+    var word_list = eval("[" + string_list + "]");
+    $("#my_favorite_latin_words").jQCloud(word_list);
+  }
+
+  // 指标墙---选择指标墙某一项
+  function on_click(e, ev) {
+    var txt = $(e).html();
+    addComputeIndex(txt);
+//    $.each(index_obj, function (index, item) {
+//      if (item.alias === txt) {
+//        console.log(item.column_name);
+//        return;
+//      }
+//    })
+  }
+
+  // 指标墙---添加tab指标---判断如何添加指标
+  function addComputeIndex(txt) {
+    var exit_index = false; // 是否存在该指标
+    $.each(indexs, function (index, item) {
+      if (txt === item) {
+        exit_index = true;
+        alert('该指标已存在,请重新挑选!');
+      }
+    });
+
+    if (!exit_index) {
+      indexs.push(txt);
+      var column_name = null;
+      $.each(index_obj, function (index, item) {
+        if (item.alias === txt) {
+          indexs_name.push(item.column_name);
+          column_name = item.column_name;
+        }
+      });
+
+      $('.chart-left').append('<span>' + txt + '<i class="del-index"> &times;</i></span>');
+      $('.chart-left span').last().css('opacity', 0);
+      var first_t = $('.chart-left span').eq(0).offset().top;
+      var cur_t = $('.chart-left span').last().offset().top;
+      var active_ind = null;
+      var exit_active = $('.chart-left .active').index();
+      while (cur_t > first_t) {
+        $('.chart-left span').eq(0).remove();
+        $('.chart-cont .chart-bar').eq(0).remove();
+        cur_t = $('.chart-left span').last().offset().top;
+        indexs.splice(0, 1);
+      }
+      if (!exit_active) {
+        $('.chart-left span').eq(0).addClass('active');
+        $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+      }
+      $('.chart-left span').last().css('opacity', 1);
+      // bar 添加新的容器
+      $('.chart-cont').append('<div class="chart-bar" id="chart-' + count + '"></div>');
+      getChartData(defaut_code, column_name, defaut_year, 'chart-' + count);
+      count++;
+      if (indexs.length === 1) {
+        $('.chart-left span').first().addClass('active');
+        $('.chart-cont .chart-bar').last().css('opacity', 1).css('z-index', 99);
+      } else {
+        $('.chart-cont .chart-bar').last().css('opacity', 0).css('z-index', -99);
+      }
+    }
+  }
+
+  // tab/数据---初始化（默认三条）
+  function initTabChart() {
+    if (indexs.length <= 3) {
+      cur_tab = indexs[0];
+      $.each(indexs, function (index, item) {
+        index === 0 ? $('.chart-left').append('<span class="active">' + item + '<i class="del-index"> &times;</i></span>') : $('.chart-left').append('<span>' + item + '<i class="del-index"> &times;</i></span></span>');
+        $('.chart-cont').append('<div class="chart-bar" id="chart-' + index + '"></div>');
+        $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+        getChartData(defaut_code, indexs_name[index], defaut_year, 'chart-' + index);
+      });
+    }
+  }
+
+  initTabChart();
+
+  // tab---删除指表  ***删除必须在切换之前，span事件冒泡**
+  $(document).on('click', '.chart-left span .del-index', function () {
+    var active_index = $('.chart-left .active').index();
+    var cur_index = $(this).parent().index();
+    if (cur_index === active_index) {
+      $(this).parent().remove();
+      $('.chart-left span').eq(0).addClass('active');
+      $('.chart-cont .chart-bar').eq(cur_index).remove();
+      $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99);
+    } else {
+      $(this).parent().remove();
+      $('.chart-cont .chart-bar').eq(cur_index).remove();
+    }
+    indexs.splice(cur_index, 1);
+    indexs_name.splice(cur_index, 1);
+  });
+
+  // tab---切换
+  $(document).on('click', '.chart-left span', function () {
+    cur_tab = indexs[$(this).index()];
+    $(this).addClass('active').siblings().removeClass('active');
+    $('.chart-cont .chart-bar').eq($(this).index()).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+  });
+
+  // 请求图表数据
+  function getChartData(icode, column_name, report_year, contxt) { // contxt chart-1
+    $.ajax({
+      type: 'GET',
+      url: fix_url + '/api/research/stock/industry/rank/',
+      data: {
+        icode: icode,
+        report_year: report_year,
+        column_name: column_name
+      },
+      crossDomain: true == !(document.all),
+      success: function (res) {
+        // 渲染图表
+        if (res.data.length) {
+
+          initChart(contxt, res.cols_title.reverse(), res.data.reverse())
+        } else {
+          $('#' + contxt).html('<p style="line-height: 30px;font-size: 14px;color: #D0D0D0">无该指标排名数据！</p>')
+        }
+      },
+      error: function (e) {
+        console.log(e);
+      }
+    });
+  }
+
+  // 渲染条形图
+  function initChart(contxt, data_y, data_s,) { // contxt chart-1 cur_tab当前tab
+    $('.chart-cont').css('height', data_y.length * 35);
+    $('.chart-cont .chart-bar').css('height', data_y.length * 35);
+    var serise_data = [];
+    $.each(data_s, function (idnex, item) {
+      serise_data.push(item.value);
+    });
+    var colors = ['#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350']; // 默认颜色表
+    if (data_y.length > 9) {
+      // 生成颜色表
+      colors = [];
+      $.each(data_y, function (index, item) {
+        colors.push(getRandomColor());
+      });
+    }
+    // 条形图
+    var context = echarts.init(document.getElementById(contxt));
+    var option = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        },
+        formatter: function (e) {
+          var temp = data_s[e[0].dataIndex];
+          var str = '';
+          str += temp.stock_name + '(' + temp.stock_code + ')</br>';
+          str += cur_tab + ':' + temp.value + '</br>';
+          str += '排名：' + temp.rank + '</br>';
+          return str;
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+      },
+      yAxis: {
+        type: 'category',
+        data: data_y
+      },
+      series: [
+        {
+          name: 'city',
+          type: 'bar',
+          barWidth: 16,
+          itemStyle: {
+            normal: {
+              color: function (params) {
+                var colorList = [
+                  '#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350'];
+                return colors[params.dataIndex];
+              }
+            }
+          },
+          data: serise_data
+        }
+      ]
+    };
+    context.setOption(option);
+  }
+
+  // 随机生成颜色
+  function getRandomColor() {
+    return '#' +
+      (function (color) {
+        return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
+        && (color.length == 6) ? color : arguments.callee(color);
+      })('');
+  }
+
+
+  // 重新选择行业时，清空条形图容器，在原有count基础上生成容器，填充数据
+  // 重新选取时间时，更改条形图数据(需要知道容器id)
+</script>
+{% endblock %}

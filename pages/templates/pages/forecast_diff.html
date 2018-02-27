@@ -552,7 +552,6 @@
 
     // 表格数据---请求
     function getCompData(codes) { // kind:keywords：财务数据，ability：公司能力  codes:数组，需要转化为字符串逗号分隔
-      console.log('执行')
       var str = codes.join(',');
       $.ajax({
         type: 'GET',
