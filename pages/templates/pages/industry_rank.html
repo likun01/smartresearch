@@ -58,8 +58,8 @@
   var indexs = []; // 已选择指标
   var indexs_name = []; // 已选指标对应的column_name
   var default_name = '石油开采';
-  var defaut_code = 'CC1010';
-  var defaut_year = '2016';
+  var default_code = 'CC1010';
+  var default_year = '2015';
   var count = 0;
   var index_obj = []; // 存放某一行业指标信息，以便查找
   var cur_tab = '';
@@ -82,7 +82,7 @@
       getOneIndustry();
       if (res.data && res.data.length) {
         default_name = res.data[0].name;
-        defaut_code = res.data[0].icode;
+        default_code = res.data[0].icode;
         // 进入页面设置默认行业
         $('#industry-inp').val(default_name);
       }
@@ -104,14 +104,14 @@
   // 行业---选择行业并请求行业数据
   function getOneIndustry() {
     $('.industry-list li').on('click', function () {
-      defaut_code = $(this).data('icode');
+      default_code = $(this).data('icode');
       var name = $(this).html();
       $('#industry-inp').val(name);
       $('.industry-list').hide();
       // 清空原有的tab/chart 容器,重新生成容器在填充数据
       $('.chart-left span').remove();
       $('.chart-cont .chart-bar').remove();
-      getIndexData(defaut_code); // 获取指标并且渲染指标墙
+      getIndexData(default_code); // 获取指标并且渲染指标墙
       initTabChart(); // 重新渲染默认容器
       // 重置tab状态
       $('.chart-left span').eq(0).addClass('active').siblings().removeClass('active');
@@ -144,19 +144,19 @@
         }
       });
       if (!exitHis) { // 不存在历史数据
-        year_max = Math.min.apply(null, temp_years);
+        default_year = Math.min.apply(null, temp_years);
       } else {
-        year_max = Math.max.apply(null, years);
+        default_year = Math.max.apply(null, years);
         var cur_year = new Date().getFullYear();
-        if (year_max === cur_year) {
+        if (default_year === cur_year) {
           years.sort(function (a, b) {
             return b - a;
           }).splice(0, 1);
-          years.length ? year_max = years[0] : year_max = Math.min.apply(null, temp_years);
+          years.length ? default_year = years[0] : default_year = Math.min.apply(null, temp_years);
         }
       }
       // 进入页面设置默认时间
-      $('#year-inp').val(defaut_year);
+      $('#year-inp').val(default_year);
       initYearSelect(res.years);
       getOneYear();
     },
@@ -178,8 +178,8 @@
   // 时间---选择某一项
   function getOneYear() {
     $('.year-list li').on('click', function () {
-      defaut_year = $(this).html();
-      $('#year-inp').val(defaut_year);
+      default_year = $(this).html();
+      $('#year-inp').val(default_year);
       $('.year-list').hide();
       // 重新请求指标对应数据
       // 重新生成容器，预防在经历过有无再到有是渲染数据失败现象
@@ -190,7 +190,7 @@
       $('.chart-cont .chart-bar').remove();
       $.each(ids, function (index, item) {
         $('.chart-cont').append('<div class="chart-bar" id="' + item + '"></div>');
-        getChartData(defaut_code, indexs_name[index], defaut_year, item);
+        getChartData(default_code, indexs_name[index], default_year, item);
       });
       $('.chart-cont .chart-bar').eq($('.chart-left .active').index()).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
     })
@@ -225,7 +225,7 @@
     });
   }
 
-  defaut_code ? getIndexData(defaut_code) : null;
+  default_code ? getIndexData(default_code) : null;
 
   // 指标墙---渲染指标墙
   function initIndexWord(data_obj) {
@@ -289,7 +289,7 @@
       $('.chart-left span').last().css('opacity', 1);
       // bar 添加新的容器
       $('.chart-cont').append('<div class="chart-bar" id="chart-' + count + '"></div>');
-      getChartData(defaut_code, column_name, defaut_year, 'chart-' + count);
+      getChartData(default_code, column_name, default_year, 'chart-' + count);
       count++;
       if (indexs.length === 1) {
         $('.chart-left span').first().addClass('active');
@@ -308,7 +308,7 @@
         index === 0 ? $('.chart-left').append('<span class="active">' + item + '<i class="del-index"> &times;</i></span>') : $('.chart-left').append('<span>' + item + '<i class="del-index"> &times;</i></span></span>');
         $('.chart-cont').append('<div class="chart-bar" id="chart-' + index + '"></div>');
         $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
-        getChartData(defaut_code, indexs_name[index], defaut_year, 'chart-' + index);
+        getChartData(default_code, indexs_name[index], default_year, 'chart-' + index);
       });
     }
   }
