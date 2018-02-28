@@ -236,12 +236,6 @@
   function on_click(e, ev) {
     var txt = $(e).html();
     addComputeIndex(txt);
-//    $.each(index_obj, function (index, item) {
-//      if (item.alias === txt) {
-//        console.log(item.column_name);
-//        return;
-//      }
-//    })
   }
 
   // 指标墙---添加tab指标---判断如何添加指标
@@ -263,7 +257,6 @@
           column_name = item.column_name;
         }
       });
-
       $('.chart-left').append('<span>' + txt + '<i class="del-index"> &times;</i></span>');
       $('.chart-left span').last().css('opacity', 0);
       var first_t = $('.chart-left span').eq(0).offset().top;
@@ -367,8 +360,6 @@
 
   // 渲染条形图
   function initChart(contxt, data_y, data_s,) { // contxt chart-1 cur_tab当前tab
-    console.log(contxt,'>>>',data_y.toString());
-    console.log(data_s);
     if (data_y.length >5) {
       $('.chart-cont').css('height', data_y.length * 35);
       $('.chart-cont .chart-bar').css('height', data_y.length * 35);
