@@ -131,9 +131,9 @@
         $.each(res.quarter, function (index, item) {
           item === '年报' ? kind_code = index : null;
         });
-        var years = [];
+        var years = []; // 不带E
         var exitHis = false;
-        var temp_years = [];
+        var temp_years = []; // 全部
         $.each(res.years, function (index, item) {
           temp_years.push(index);
           if (item.indexOf('E') === -1) {
@@ -142,9 +142,17 @@
           }
         });
         if (!exitHis) { // 不存在历史数据
-          year_max = Math.max.apply(null, temp_years);
+          year_max = Math.min.apply(null, temp_years);
+        } else {
+          year_max = Math.max.apply(null, years);
+          var cur_year = new Date().getFullYear();
+          if (year_max === cur_year) {
+            years.sort(function (a, b) {
+              return b - a;
+            }).splice(0, 1);
+            years.length ? year_max = years[0] : year_max = Math.min.apply(null, temp_years);
+          }
         }
-        year_max = Math.max.apply(null, years);
         initYearSelect(res.years);
         initKindSelect(res.quarter);
         selectEventBind();
@@ -339,7 +347,6 @@
     function selectIndustry() {
       $('.list-cont .left li').click(function () {
         // 请求该行业企业列表
-        console.log('--------', this);
         $(this).addClass('selected').siblings('li').removeClass('selected');
         getCompsList($(this).data('icode'));
       });
@@ -463,7 +470,6 @@
       function selectAdd() {
         $('.stocks-list li').on('click', function () {
           var flag = false;
-          console.log('before', temp_codes);
           var code = $(this).data('code');
           $.each(temp_codes, function (index, item) {
             if (item == code) {
@@ -610,13 +616,12 @@
           var temp_data = data[index] ? data[index].row_data : {}; // 数据
           var temp_title = data[index] ? data[index].row_title : {}; // 表头
           var val = null;
-          var abnormal=null;
+          var abnormal = null;
           $.each(temp_tr, function (ind_tr, ite_tr) {
             val = temp_data[temp_title[ind_tr]].value || '--';
             abnormal = temp_data[temp_title[ind_tr]].abnormal || 'normal';
-            console.log(abnormal);
             $(ite_tr).find('td').eq(ind + 1).html(val);
-            abnormal==='red'?$(ite_tr).find('td').eq(ind + 1).addClass('red'):(abnormal==='green'?$(ite_tr).find('td').eq(ind + 1).addClass('green'):null);
+            abnormal === 'red' ? $(ite_tr).find('td').eq(ind + 1).addClass('red') : (abnormal === 'green' ? $(ite_tr).find('td').eq(ind + 1).addClass('green') : null);
           });
         });
 

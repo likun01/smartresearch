@@ -90,6 +90,30 @@ body, html {
   z-index: 99;
 }
 
+.temp-container .comp-cont {
+  width: 200px;
+  height: 50px;
+  overflow: hidden;
+  margin: 50px auto;
+}
+
+.temp-container .comp-cont a {
+  font-size: 13px;
+  border: 1px solid #9E9D9E;
+  color: #9E9D9E;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.temp-container .comp-cont a:first-child {
+  float: left;
+}
+
+.temp-container .comp-cont a:last-child {
+  float: right;
+}
+
 .footer-container {
   width: 100%;
   height: 40px;

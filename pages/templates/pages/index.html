@@ -4,10 +4,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;" />
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9;"/>
     <title>嘉实智能投研系统</title>
     <link rel="stylesheet" href="/static/css/tempIndex.css">
     <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="/static/iconfont/iconfont.css">
 </head>
 <body>
 
@@ -25,6 +26,10 @@
         </tbody>
     </table>
 
+    <div class="comp-cont">
+        <a href="/forecast/diff">股票对比 <i class="iconfont icon-form" style="font-size: 12px;"></i></a>
+        <a href="/industryrank">行业对比 <i class="iconfont icon-tiaoxingtu" style="font-size: 14px;"></i></a>
+    </div>
 </div>
 <div class="footer-container">&copy; Harvest Fund 2018 . All Rights Reserved</div>
 
@@ -32,7 +37,7 @@
 <script src="/static/js/util.js"></script>
 <script>
   // 判断浏览器版本显示错误
-  util.getExplore('temp-container','#FFF');
+  util.getExplore('temp-container', '#FFF');
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script src="/static/js/inputSearch.js?adsf"></script>
@@ -48,53 +53,15 @@
     $('.temp-inp').focus();
     $('.temp-inp').val('');
 
-
-    // 搜索框
-//    $('.temp-inp').on('input focus propertychange', function () {
-//      var q = $('.temp-inp').val();
-//      if (q) {
-//        $.ajax({
-//          // 百度搜索关键词 请求 接口API
-//          url: fix_url + '/api/research/search',
-//          type: 'GET',
-//          data: { // 向后台发送数据
-//            q: q
-//          },
-//          success: function (res) {
-//            console.log(res);
-//            if (res.results) {
-//              if(res.results&&res.results.length){
-//                initSearch(res.results)
-//              }else {
-//                $('.res-list').hide()
-//              }
-//            }
-//          },
-//          error: function (e) {
-//            if (e.status === 401 && JSON.parse(e.responseText).code === 40003) {
-//              // token过期
-//              console.log('过期');
-//              alert('登录信息失效，请重新登录');
-//              window.location.href = '/login';
-//            }
-//            console.log(e);
-//
-//          }
-//        })
-//
-//      }
-//    });
-
-    console.log($('#temp-inp')[0]);
     var opts = {
       url: fix_url + '/api/research/search?q' + $('.temp-inp').val(),
       bindData: initSearch,
-      searchRes: function (code,value) {
+      searchRes: function (code, value) {
         var val = $('.temp-inp').val();
         if (val) {
-          if(!value){
+          if (!value) {
             window.location.href = 'http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + code
-          }else {
+          } else {
             window.location.href = '/search/?q=' + encodeURI(value) + '&ct=research&key=kw';
           }
         }
@@ -104,9 +71,9 @@
 
     //渲染搜索结果
     function initSearch(data) {
-      if(Number($('.temp-inp').val())){
-        data.sort(function (a,b) {
-          return a.code-b.code;
+      if (Number($('.temp-inp').val())) {
+        data.sort(function (a, b) {
+          return a.code - b.code;
         });
       }
       if (data) {
@@ -125,14 +92,14 @@
               return '<i style="color:#E86664">' + e + '</i>'
             });
           }
-          str += '<tr data-code="'+item.code+'">';
+          str += '<tr data-code="' + item.code + '">';
           str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '">' + tCode + '</a></td>';
           str += '<td><a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '">' + tName + '</a></td>';
           str += '<td >';
           str += '<a href="http://api-pro.xin-shui.com/research/finical/pick/pdf_html/' + item.code + '"><span class="report-btn">智能报告</span></a>';
           str += '</td>';
           str += '<td>';
-          str += '<a href="/forecast/' + item.code + '?stock_name='+encodeURI(item.name)+'"><span class="finance-btn">财报</span></a>';
+          str += '<a href="/forecast/' + item.code + '?stock_name=' + encodeURI(item.name) + '"><span class="finance-btn">财报</span></a>';
           str += '</td>';
           str += '<td>';
           str += '<a href="/forecast/more/?q=' + encodeURI(item.name) + '&ct=research"><span class="search-btn">搜索</span></a>';
@@ -167,8 +134,6 @@
         $('.out-search-btn').prop('href', 'javascript:;')
       }
     })
-
-
 
 
   })

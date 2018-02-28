@@ -43,9 +43,6 @@
         <li>2018</li>
     </ul>
     <div class="chart-cont">
-        <!--<div class="chart-bar" id="chart-0"></div>-->
-        <!--<div class="chart-bar" id="chart-1"></div>-->
-        <!--<div class="chart-bar" id="chart-2"></div>-->
     </div>
 </div>
 <!--对比图_end-->
@@ -136,9 +133,9 @@
     crossDomain: true == !(document.all),
     async: false,
     success: function (res) {
-      var years = [];
+      var years = []; // 不带E
       var exitHis = false;
-      var temp_years = [];
+      var temp_years = []; // 全部
       $.each(res.years, function (index, item) {
         temp_years.push(index);
         if (item.indexOf('E') === -1) {
@@ -147,9 +144,17 @@
         }
       });
       if (!exitHis) { // 不存在历史数据
-        defaut_year = Math.min.apply(null, temp_years);
+        year_max = Math.min.apply(null, temp_years);
+      } else {
+        year_max = Math.max.apply(null, years);
+        var cur_year = new Date().getFullYear();
+        if (year_max === cur_year) {
+          years.sort(function (a, b) {
+            return b - a;
+          }).splice(0, 1);
+          years.length ? year_max = years[0] : year_max = Math.min.apply(null, temp_years);
+        }
       }
-      defaut_year = Math.min.apply(null, years);
       // 进入页面设置默认时间
       $('#year-inp').val(defaut_year);
       initYearSelect(res.years);
@@ -177,9 +182,17 @@
       $('#year-inp').val(defaut_year);
       $('.year-list').hide();
       // 重新请求指标对应数据
+      // 重新生成容器，预防在经历过有无再到有是渲染数据失败现象
+      var ids = [];
       $('.chart-cont .chart-bar').each(function (index, item) {
-        getChartData(defaut_code, indexs_name[index], defaut_year, item.getAttribute('id'));
+        ids.push(item.getAttribute('id'));
       });
+      $('.chart-cont .chart-bar').remove();
+      $.each(ids, function (index, item) {
+        $('.chart-cont').append('<div class="chart-bar" id="' + item + '"></div>');
+        getChartData(defaut_code, indexs_name[index], defaut_year, item);
+      });
+      $('.chart-cont .chart-bar').eq($('.chart-left .active').index()).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
     })
   }
 
@@ -338,6 +351,7 @@
       },
       crossDomain: true == !(document.all),
       success: function (res) {
+        $('#' + contxt + ' p').remove();
         // 渲染图表
         if (res.data.length) {
           if (colors.length === 9 && res.data.length > 9) { // 在此处执行，保证某一行业中 每个指标对应柱状图colors相同
@@ -360,13 +374,13 @@
 
   // 渲染条形图
   function initChart(contxt, data_y, data_s,) { // contxt chart-1 cur_tab当前tab
-    if (data_y.length >5) {
+    if (data_y.length > 5) {
       $('.chart-cont').css('height', data_y.length * 35);
       $('.chart-cont .chart-bar').css('height', data_y.length * 35);
-    } else if(data_y.length>=3) {
+    } else if (data_y.length >= 3) {
       $('.chart-cont').css('height', data_y.length * 55);
       $('.chart-cont .chart-bar').css('height', data_y.length * 55);
-    }else {
+    } else {
       $('.chart-cont').css('height', data_y.length * 100);
       $('.chart-cont .chart-bar').css('height', data_y.length * 100);
     }
@@ -374,7 +388,6 @@
     $.each(data_s, function (idnex, item) {
       serise_data.push(item.value);
     });
-
 
     // 条形图
     var context = echarts.init(document.getElementById(contxt));
@@ -405,7 +418,7 @@
       },
       yAxis: {
         type: 'category',
-        axisLabel:{interval: 0},
+        axisLabel: {interval: 0},
         data: data_y
       },
       series: [
