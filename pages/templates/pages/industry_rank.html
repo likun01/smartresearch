@@ -315,15 +315,15 @@
 
   initTabChart();
 
-  // tab---删除指表  ***删除必须在切换之前，span事件冒泡**
+  // tab---删除指表
   $(document).on('click', '.chart-left span .del-index', function () {
     var active_index = $('.chart-left .active').index();
     var cur_index = $(this).parent().index();
     if (cur_index === active_index) {
+      $('.chart-cont .chart-bar').eq(cur_index).remove();
+      $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
       $(this).parent().remove();
       $('.chart-left span').eq(0).addClass('active');
-      $('.chart-cont .chart-bar').eq(cur_index).remove();
-      $('.chart-cont .chart-bar').eq(0).css('opacity', 1).css('z-index', 99);
     } else {
       $(this).parent().remove();
       $('.chart-cont .chart-bar').eq(cur_index).remove();
@@ -333,10 +333,13 @@
   });
 
   // tab---切换
-  $(document).on('click', '.chart-left span', function () {
-    cur_tab = indexs[$(this).index()];
-    $(this).addClass('active').siblings().removeClass('active');
-    $('.chart-cont .chart-bar').eq($(this).index()).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+  $(document).on('click', '.chart-left span', function (e) {
+    var obj = e.target || e.srcElement;
+    if (obj.nodeName.toUpperCase() === 'SPAN') {
+      cur_tab = indexs[$(this).index()];
+      $(this).addClass('active').siblings().removeClass('active');
+      $('.chart-cont .chart-bar').eq($(this).index()).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
+    }
   });
 
   // 请求图表数据
@@ -390,12 +393,15 @@
     });
 
     // 条形图
-    var context = echarts.init(document.getElementById(contxt));
+    var myEcharts = echarts.init(document.getElementById(contxt));
     var option = {
       tooltip: {
         trigger: 'axis',
         axisPointer: {
           type: 'shadow'
+        },
+        textStyle: {
+          fontSize: 10
         },
         formatter: function (e) {
           var temp = data_s[e[0].dataIndex];
@@ -439,7 +445,15 @@
         }
       ]
     };
-    context.setOption(option);
+    myEcharts.setOption(option);
+    myEcharts.on('click', function (e) {
+      console.log(e.name);
+      var stock_code = null;
+      $.each(data_s, function (index, item) {
+        item.stock_name === e.name ? stock_code = item.stock_code : null;
+      });
+      window.location.href = '/forecast/' + stock_code + '?stock_name=' + encodeURI(e.name);
+    })
   }
 
   // 随机生成颜色

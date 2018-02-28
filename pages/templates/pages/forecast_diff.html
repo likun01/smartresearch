@@ -62,7 +62,7 @@
 
 <!--select_comp_start-->
 <ul class="select-comp">
-    <li>&nbsp;已选择</li>
+    <li>已选择</li>
 </ul>
 <!--select_comp_end-->
 
@@ -80,8 +80,10 @@
 <!--数据_start-->
 <div class="data-cont" style="z-index:1">
     <div class="data-table" style="display: block" id="ability">
+        <p class="no-data">无数据</p>
     </div>
     <div class="data-table" style="display: none" id="keywords">
+        <p class="no-data">无数据</p>
     </div>
 </div>
 <!--数据_end-->
@@ -374,8 +376,14 @@
         getCompData(stock_codes);
         $('.add-stock-cont').hide();
         $('.add-mask').hide();
-      } else {
-        alert('请挑选对比股票！')
+      }
+      else {
+        clearTables();
+        $('.select-comp li').remove();
+        $('.select-comp').append('<li>已选择</li>');
+        $('.add-stock-cont').hide();
+        $('.add-mask').hide();
+        $('.no-data').show();
       }
     });
 
@@ -599,22 +607,11 @@
         // 页面上删除
         // 列表中删除
         $(this).parent().remove();
-//        // 表格数据中删除
-//        if (temp_codes.length < 5) {
-//          $('.data-table .comp-table tbody tr').each(function (index, item) {
-//            $(item).find('td').eq(curInd + 1).remove();
-//            $(item).append('<td></td>');
-//          })
-//          $('.data-table .comp-table thead tr').each(function (index, item) {
-//            $(item).find('th').eq(curInd + 1).remove();
-//            $(item).append('<th></th>');
-//          })
-//        } else {
-//          addTdComputeWid(stock_codes.length, 'reduce', curInd, null);
-//        }
+        !stock_codes.length ? $('.no-data').show() : null;
+
         // 删除时从新请求数据
         clearTables();
-        getCompData(stock_codes);
+        stock_codes.length ? getCompData(stock_codes) : null;
       })
     }
 
@@ -635,16 +632,22 @@
         success: function (res) {
           clearTables();
           var res_data = res.table_data;
-          if (res_data) {
+          if (res_data && JSON.stringify(res_data) !== "{}") {
             $.each(stock_codes, function (index, item) {
               initTableTd('#keywords', index, res_data[item])
             });
+            $('.no-data').hide();
+          } else {
+            $('.no-data').show();
           }
           var ability_data = res.ability_data;
-          if (ability_data) {
+          if (ability_data && JSON.stringify(ability_data) !== "{}") {
             $.each(stock_codes, function (index, item) {
               initTableTd('#ability', index, ability_data[item])
             });
+            $('.no-data').hide();
+          } else {
+            $('.no-data').show();
           }
         },
         error: function (e) {
@@ -686,6 +689,10 @@
             abnormal = temp_data[temp_title[ind_tr]].abnormal || 'normal';
             $(ite_tr).find('td').eq(ind + 1).html(val);
             abnormal === 'red' ? $(ite_tr).find('td').eq(ind + 1).addClass('red') : (abnormal === 'green' ? $(ite_tr).find('td').eq(ind + 1).addClass('green') : null);
+            // 如果第一个code无数据其他有，不处理表格是空。在填充下一个非空的数据时，把前面的空值赋值为--
+            for (var i = 0; i < ind; i++) {
+              $(ite_tr).find('td').eq(i + 1).html($(ite_tr).find('td').eq(i + 1).html() || '--');
+            }
           });
         });
 
