@@ -80,10 +80,10 @@
 <!--数据_start-->
 <div class="data-cont" style="z-index:1">
     <div class="data-table" style="display: block" id="ability">
-        <p class="no-data">无数据</p>
+        <p class="no-data" style="text-align: center;margin-top: 40px;">没有选择对比股票</p>
     </div>
     <div class="data-table" style="display: none" id="keywords">
-        <p class="no-data">无数据</p>
+        <p class="no-data"  style="text-align: center;margin-top: 40px;">没有选择对比股票</p>
     </div>
 </div>
 <!--数据_end-->
@@ -177,6 +177,9 @@
       showCompList(stock_names);
       // 请求该条信息
       getCompData(stock_codes);
+    } else { // 从首页进入显示添加弹框
+      $('.add-mask').show();
+      $('.add-stock-cont').show();
     }
 
     // 筛选下拉选框---显示年份下拉/报告类型下拉
@@ -199,7 +202,7 @@
     function initKindSelect(data) {
       var kindStr = '';
       $.each(data, function (index, item) {
-//        kindStr += item === '年报' ? '<li class="year-report li-able" data-kind="' + index + '">' + item + '</li>' : '<li class="other-report li-able" data-kind="' + index + '">' + item + '</li>';
+        item === '年报' ? default_quarter = index : null; // 年报编号默认赋值
         if (item === '年报') {
           kindStr += '<li class="year-report li-able" data-kind="' + index + '">' + item + '</li>';
         }
@@ -221,114 +224,90 @@
       // 规则：E---年报  !E(非今年)---年报  !E(非今年)---季报  !E(今年)---季报(有条件)
       // 选择年份
       $('.year-list li').click(function () {
-        var kind = $('#kind-inp').val();
-        var val = $(this).html();
-        // 选择年份后，设置报告期类型可选状态
-        if (val.indexOf('E') > -1) {
-          $('.kind-list li.year-report').removeClass('li-disabled').addClass('li-able');
-          $('.kind-list li.other-report').removeClass('li-able').addClass('li-disabled');
-        } else {
-          var cur_year = new Date().getFullYear().toString();
-          var cur_m = new Date().getMonth() + 1;
-          if (val === cur_year) { // 当前年
-            $('.kind-list li.other-report').removeClass('li-able').addClass('li-disabled');
-            $('.kind-list li.year-report').removeClass('li-able').addClass('li-disabled');
-            if (cur_m > 3) {
-              $('.kind-list li.quarter-1').removeClass('li-disabled').addClass('li-able');
-            } else if (cur_m > 6) {
-              $('.kind-list li.quarter-2').removeClass('li-disabled').addClass('li-able');
-            } else if (cur_m > 9) {
-              $('.kind-list li.quarter-3').removeClass('li-disabled').addClass('li-able');
-            }
-          } else { // 不是当前年
-            $('.kind-list li.year-report').removeClass('li-disabled').addClass('li-able');
-            $('.kind-list li.other-report').removeClass('li-disabled').addClass('li-able');
-          }
-        }
-        // 判断是否需要重新请求数据
-        if (kind === '年报') {
-          if (year_max != $(this).data('year') && stock_codes.length) { //year_max!==$(this).data('year') 说明没有重复选择
-            year_max = $(this).data('year');
-            $('#year-inp').val(val);
-            clearTables(); // 清除表格容器
-            getCompData(stock_codes);
-          }
+        if ($(this).prop('className').indexOf('li-disabled') === -1) {
+          var val = $(this).html();
+          year_max = $(this).data('year');
+          $('#year-inp').val(val);
+          clearTables(); // 清除表格容器
+          getCompData(stock_codes);
           $('.year-list').hide();
-        } else {
-          if (val.indexOf('E') === -1) {
-            if (year_max != $(this).data('year') && stock_codes.length) {
-              year_max = $(this).data('year');
-              $('#year-inp').val(val);
-              getCompData(stock_codes);
+
+
+          // 选择年份后，设置报告期类型可选状态
+          if (val.indexOf('E') > -1) {
+            $('.kind-list li.year-report').removeClass('li-disabled').addClass('li-able');
+            $('.kind-list li.other-report').removeClass('li-able').addClass('li-disabled');
+          } else {
+            var cur_year = new Date().getFullYear().toString();
+            var cur_m = new Date().getMonth() + 1;
+            if (val === cur_year) { // 当前年
+              $('.kind-list li.other-report').removeClass('li-able').addClass('li-disabled');
+              $('.kind-list li.year-report').removeClass('li-able').addClass('li-disabled');
+              if (cur_m > 3) {
+                $('.kind-list li.quarter-1').removeClass('li-disabled').addClass('li-able');
+              } else if (cur_m > 6) {
+                $('.kind-list li.quarter-2').removeClass('li-disabled').addClass('li-able');
+              } else if (cur_m > 9) {
+                $('.kind-list li.quarter-3').removeClass('li-disabled').addClass('li-able');
+              }
+            } else { // 不是当前年
+              $('.kind-list li.year-report').removeClass('li-disabled').addClass('li-able');
+              $('.kind-list li.other-report').removeClass('li-disabled').addClass('li-able');
             }
-            $('.year-list').hide();
           }
         }
-
       });
 
 
       // 选择种类
       $('.kind-list li').click(function () {
-        var val = $(this).html();
-        // 选择报告类型后，设置年份可选状态
-        if (val !== '年报') { //year-forecast   year-his
-          var cur_year = new Date().getFullYear().toString();
-          var cur_m = new Date().getMonth() + 1;
-          $('.year-list li.year-forecast').removeClass('li-able').addClass('li-disabled');
-          $('.year-list li.year-his').removeClass('li-disabled').addClass('li-able');
-          $('.year-list li.cur-year').removeClass('li-able').addClass('li-disabled');
-          switch (val) {
-            case '一季报':
-              if (cur_m > 3) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              } else if (cur_m > 6) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              } else if (cur_m > 9) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              }
-              break;
-            case '半年报':
-              if (cur_m > 3) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              } else if (cur_m > 6) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              } else if (cur_m > 9) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              }
-              break;
-            case '三季报':
-              if (cur_m > 3) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              } else if (cur_m > 6) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              } else if (cur_m > 9) {
-                $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
-              }
-              break;
-          }
-        } else {
-          $('.year-list li.year-his').removeClass('li-disabled').addClass('li-able');
-          $('.year-list li.cur-year').removeClass('li-able').addClass('li-disabled');
-          $('.year-list li.year-forecast').removeClass('li-disabled').addClass('li-able');
-        }
-        // 判断是否需要重新请求数据
-        if ($('#year-inp').val().indexOf('E') > -1) { // 说明是年报
-          if (val === '年报') {
-            if (kind_code != $(this).data('kind') && stock_codes.length) { //kind_code!==$(this).data('kind') 说明没有重复选择
-              kind_code = $(this).data('kind');
-              $('#kind-inp').val(val);
-              getCompData(stock_codes);
-            }
-            $('.kind-list').hide();
-          }
-        } else {
-          if (kind_code != $(this).data('kind') && stock_codes.length) {
-            kind_code = $(this).data('kind');
-            $('#kind-inp').val(val);
-            getCompData(stock_codes);
-          }
+        if ($(this).prop('className').indexOf('li-disabled') === -1) {
+          var val = $(this).html();
+          kind_code = $(this).data('kind');
+          $('#kind-inp').val(val);
+          getCompData(stock_codes);
           $('.kind-list').hide();
+
+          // 选择报告类型后，设置年份可选状态
+          if (val !== '年报') { //year-forecast   year-his
+            var cur_m = new Date().getMonth() + 1;
+            $('.year-list li.year-forecast').removeClass('li-able').addClass('li-disabled');
+            $('.year-list li.year-his').removeClass('li-disabled').addClass('li-able');
+            $('.year-list li.cur-year').removeClass('li-able').addClass('li-disabled');
+            switch (val) {
+              case '一季报':
+                if (cur_m > 3) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                } else if (cur_m > 6) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                } else if (cur_m > 9) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                }
+                break;
+              case '半年报':
+                if (cur_m > 3) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                } else if (cur_m > 6) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                } else if (cur_m > 9) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                }
+                break;
+              case '三季报':
+                if (cur_m > 3) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                } else if (cur_m > 6) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                } else if (cur_m > 9) {
+                  $('.year-list li.cur-year').removeClass('li-disabled').addClass('li-able');
+                }
+                break;
+            }
+          } else {
+            $('.year-list li.year-his').removeClass('li-disabled').addClass('li-able');
+            $('.year-list li.cur-year').removeClass('li-able').addClass('li-disabled');
+            $('.year-list li.year-forecast').removeClass('li-disabled').addClass('li-able');
+          }
         }
       });
     }
@@ -607,11 +586,15 @@
         // 页面上删除
         // 列表中删除
         $(this).parent().remove();
-        !stock_codes.length ? $('.no-data').show() : null;
 
+        if (!stock_codes.length) {
+          $('.no-data').show();
+          $('.no-data').html('没有选择对比股票');
+        } else {
+          getCompData(stock_codes)
+        }
         // 删除时从新请求数据
         clearTables();
-        stock_codes.length ? getCompData(stock_codes) : null;
       })
     }
 
@@ -639,6 +622,7 @@
             $('.no-data').hide();
           } else {
             $('.no-data').show();
+            $('.no-data').html('暂无该股票所选时间的数据，请重新选择时间。');
           }
           var ability_data = res.ability_data;
           if (ability_data && JSON.stringify(ability_data) !== "{}") {
@@ -648,6 +632,7 @@
             $('.no-data').hide();
           } else {
             $('.no-data').show();
+            $('.no-data').html('暂无该股票所选时间的数据，请重新选择时间。');
           }
         },
         error: function (e) {

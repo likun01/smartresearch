@@ -46,7 +46,7 @@
   user-select: none;
 }
 
-.industry-list, .comp-cont .year-list {
+.industry-list, .comp-cont .year-list, .comp-cont .kind-list {
   width: 68px;
   border: 1px solid #BFC0C2;
   position: absolute;
@@ -66,7 +66,7 @@
   left: 196px;
 }
 
-.industry-list li, .comp-cont .year-list li {
+.industry-list li, .comp-cont .year-list li, .comp-cont .kind-list li {
   padding: 1px 0 1px 2px;
   height: 15px;
   line-height: 15px;
@@ -74,7 +74,7 @@
   cursor: pointer;
 }
 
-.industry-list li:hover, .comp-cont .year-list li:hover {
+.industry-list li:hover, .comp-cont .year-list li:hover, .comp-cont .kind-list li:hover {
   background: #F4F5F4;
 }
 
@@ -223,7 +223,7 @@ div.jqcloud span {
 }
 
 .comp-cont .chart-tit .chart-left {
-  width: 90%;
+  width: 79%;
   float: left;
   font-size: 0;
 }
@@ -256,15 +256,16 @@ div.jqcloud span {
 }
 
 .comp-cont .chart-tit .chart-right {
-  width: 10%;
+  width: 21%;
   height: 29px;
-  float: left;
+  float: right;
   overflow: hidden;
 }
 
 .comp-cont .chart-tit .chart-right .select-inp {
   margin-top: 8px;
   float: right;
+  margin-left: 3px;
 }
 
 .chart-cont {
@@ -285,4 +286,15 @@ div.jqcloud span {
   position: absolute;
   top: 27px;
   right: 0;
+}
+
+.comp-cont .kind-list {
+  position: absolute;
+  top: 27px;
+  right: 73px;
+}
+
+.li-disabled {
+  color: #D3D5D6 !important;
+  cursor: not-allowed !important;
 }
