@@ -303,7 +303,7 @@
   }
 
 
-  // 年份、报告期 选择时，重新生成表格容器，再渲染数据，泛珠经历从有到无再到有数据渲染失败
+  // 年份、报告期 选择时，重新生成表格容器，再渲染数据，经历从有到无再到有数据渲染失败
   function reCreateChartCont() {
     var ids = [];
     $('.chart-cont .chart-bar').each(function (index, item) {
@@ -374,6 +374,7 @@
 
   // 指标墙---添加tab指标---判断如何添加指标
   function addComputeIndex(txt) {
+    cur_tab = txt;
     var exit_index = false; // 是否存在该指标
     $.each(indexs, function (index, item) {
       if (txt === item) {
@@ -492,7 +493,7 @@
       error: function (e) {
         console.log(e);
       }
-    });
+    }); 
   }
 
   // 渲染条形图
