@@ -62,7 +62,8 @@
   var default_code = 'CC1010';
   var default_year = '2015';
   var default_quarter = ''; // 年报
-  var temp_queater = {}; // 季报数据 {年报: "1231", 一季报: "0331", 半年报: "0630", 三季报: "0930"}
+
+  var temp_queater = {}; // 季报数据
   var count = 0;
   var index_obj = []; // 存放某一行业指标信息，以便查找指标对应字段
   var cur_tab = '';
@@ -141,43 +142,12 @@
         icode: default_code
       },
       success: function (res) {
-
-        if (JSON.stringify(temp_queater) === '{}') {
-          $.each(res.quarter, function (index, item) {
-            temp_queater[item] = index;
-          })
-        }
-        console.log(temp_queater);
-
-        //  res.max_stamp; 行业有数据的最大时间戳
-        var cur = new Date(res.report_period_timestamp * 1000);
-        var year = cur.getFullYear();
-        var m = cur.getMonth(); // 比当前月小1
-        var temp = null;
-        switch (Math.floor(m / 3)) {
-          case 0:
-            default_year = year - 1;
-            temp = '年报';
-            break;
-          case 1:
-            default_year = year;
-            temp = '一季报';
-            break;
-          case 2:
-            default_year = year;
-            temp = '半年报';
-            break;
-          case 3:
-            default_year = year;
-            temp = '三季报';
-            break;
-          default:
-            default_year = year;
-            temp = '一季报';
-        }
+        JSON.stringify(temp_queater) === '{}' ? temp_queater = res.quarter:null;
         // 进入页面设置默认时间
-        default_quarter = temp_queater[temp];
-        $('#quarter-inp').val(temp);
+        var r=/(\d{4})(\d{4})/;
+        default_year=r.exec(res.report_period)[1];
+        default_quarter =r.exec(res.report_period)[2];
+        $('#quarter-inp').val(temp_queater[default_quarter]);
         $('#year-inp').val(default_year);
 
         initYearSelect(res.years);

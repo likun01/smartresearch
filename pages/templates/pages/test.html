@@ -18,6 +18,11 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
 
+    var temp='20170930';
+    var r=/(\d{4})(\d{4})/;
+    console.log(r.exec(temp));
+    console.log('----------------');
+
   // 随机生成颜色
   function getRandomColor() {
     return '#' +
