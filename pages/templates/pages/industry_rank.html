@@ -61,13 +61,13 @@
   var default_name = '石油开采';
   var default_code = 'CC1010';
   var default_year = '2015';
-  var default_quarter = '0331'; // 年报
+  var default_quarter = ''; // 年报
+  var temp_queater = {}; // 季报数据 {年报: "1231", 一季报: "0331", 半年报: "0630", 三季报: "0930"}
   var count = 0;
-  var index_obj = []; // 存放某一行业指标信息，以便查找
+  var index_obj = []; // 存放某一行业指标信息，以便查找指标对应字段
   var cur_tab = '';
   var colors = ['#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350']; // 柱状图颜色表
 
-  $('#quarter-inp').val('年报');
 
   // 行业---选择行业显示隐藏
   $('#industry-inp').click(function () {
@@ -115,6 +115,7 @@
       $('.chart-left span').remove();
       $('.chart-cont .chart-bar').remove();
       getIndexData(default_code); // 获取指标并且渲染指标墙
+      getYearQuartar(); // 获取有数据的最大时间戳
       initTabChart(); // 重新渲染默认容器
       // 重置tab状态
       $('.chart-left span').eq(0).addClass('active').siblings().removeClass('active');
@@ -130,44 +131,67 @@
   });
 
   // 时间/报告期---请求列表
-  $.ajax({
-    type: 'GET',
-    url: fix_url + '/api/research/stock/diff/report_period/',
-    crossDomain: true == !(document.all),
-    async: false,
-    success: function (res) {
-      var years = []; // 不带E
-      var exitHis = false;
-      var temp_years = []; // 全部
-      $.each(res.years, function (index, item) {
-        temp_years.push(index);
-        if (item.indexOf('E') === -1) {
-          exitHis = true;
-          years.push(index);
+  function getYearQuartar() {
+    $.ajax({
+      type: 'GET',
+      url: fix_url + '/api/research/stock/diff/report_period/',
+      crossDomain: true == !(document.all),
+      async: false,
+      data: {
+        icode: default_code
+      },
+      success: function (res) {
+
+        if (JSON.stringify(temp_queater) === '{}') {
+          $.each(res.quarter, function (index, item) {
+            temp_queater[item] = index;
+          })
         }
-      });
-      if (!exitHis) { // 不存在历史数据
-        default_year = Math.min.apply(null, temp_years);
-      } else {
-        default_year = Math.max.apply(null, years);
-        var cur_year = new Date().getFullYear();
-        if (default_year === cur_year) {
-          years.sort(function (a, b) {
-            return b - a;
-          }).splice(0, 1);
-          years.length ? default_year = years[0] : default_year = Math.min.apply(null, temp_years);
+        console.log(temp_queater);
+
+        //  res.max_stamp; 行业有数据的最大时间戳
+        var cur = new Date(res.report_period_timestamp * 1000);
+        var year = cur.getFullYear();
+        var m = cur.getMonth(); // 比当前月小1
+        var temp = null;
+        switch (Math.floor(m / 3)) {
+          case 0:
+            default_year = year - 1;
+            temp = '年报';
+            break;
+          case 1:
+            default_year = year;
+            temp = '一季报';
+            break;
+          case 2:
+            default_year = year;
+            temp = '半年报';
+            break;
+          case 3:
+            default_year = year;
+            temp = '三季报';
+            break;
+          default:
+            default_year = year;
+            temp = '一季报';
         }
+        // 进入页面设置默认时间
+        default_quarter = temp_queater[temp];
+        $('#quarter-inp').val(temp);
+        $('#year-inp').val(default_year);
+
+        initYearSelect(res.years);
+        initQuarter(res.quarter);
+        selectEventBind();
+      },
+      error: function (e) {
+        console.log(e);
       }
-      // 进入页面设置默认时间
-      $('#year-inp').val(default_year);
-      initYearSelect(res.years);
-      initQuarter(res.quarter);
-      selectEventBind();
-    },
-    error: function (e) {
-      console.log(e);
-    }
-  });
+    });
+  }
+
+  getYearQuartar();
+
 
   // 时间---渲染列表
   function initYearSelect(data) {
@@ -189,7 +213,6 @@
   function initQuarter(data) {
     var kindStr = '';
     $.each(data, function (index, item) {
-      item === '年报' ? default_quarter = index : null; // 年报编号默认赋值
       if (item === '年报') {
         kindStr += '<li class="year-report li-able" data-kind="' + index + '">' + item + '</li>';
       }
@@ -210,7 +233,7 @@
   function selectEventBind() {
     //  时间---选择某一项
     $('.year-list li').on('click', function () {
-      if ($(this).prop('className').indexOf('li-disabled') === -1){
+      if ($(this).prop('className').indexOf('li-disabled') === -1) {
         default_year = $(this).html();
         $('#year-inp').val(default_year);
         $('.year-list').hide();
@@ -473,6 +496,7 @@
         report_quarter: report_quarter,
         column_name: column_name
       },
+      async: false,
       crossDomain: true == !(document.all),
       success: function (res) {
         $('#' + contxt + ' p').remove();
@@ -493,7 +517,7 @@
       error: function (e) {
         console.log(e);
       }
-    }); 
+    });
   }
 
   // 渲染条形图
