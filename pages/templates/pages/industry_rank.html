@@ -115,7 +115,7 @@
       // 清空原有的tab/chart 容器,重新生成容器在填充数据
       $('.chart-left span').remove();
       $('.chart-cont .chart-bar').remove();
-      getIndexData(default_code, true); // 获取指标并且渲染指标墙
+      getIndexData(default_code, false); // 获取指标并且渲染指标墙
       getYearQuartar(true); // 获取有数据的最大时间戳
       initTabChart(); // 重新渲染默认容器
       // 重置tab状态
