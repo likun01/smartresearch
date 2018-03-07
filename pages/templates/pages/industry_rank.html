@@ -115,8 +115,8 @@
       // 清空原有的tab/chart 容器,重新生成容器在填充数据
       $('.chart-left span').remove();
       $('.chart-cont .chart-bar').remove();
-      getIndexData(default_code); // 获取指标并且渲染指标墙
-      getYearQuartar(); // 获取有数据的最大时间戳
+      getIndexData(default_code, true); // 获取指标并且渲染指标墙
+      getYearQuartar(true); // 获取有数据的最大时间戳
       initTabChart(); // 重新渲染默认容器
       // 重置tab状态
       $('.chart-left span').eq(0).addClass('active').siblings().removeClass('active');
@@ -132,21 +132,21 @@
   });
 
   // 时间/报告期---请求列表
-  function getYearQuartar() {
+  function getYearQuartar(async_flag) {
     $.ajax({
       type: 'GET',
       url: fix_url + '/api/research/stock/diff/report_period/',
       crossDomain: true == !(document.all),
-      async: false,
+      async: async_flag,
       data: {
         icode: default_code
       },
       success: function (res) {
-        JSON.stringify(temp_queater) === '{}' ? temp_queater = res.quarter:null;
+        JSON.stringify(temp_queater) === '{}' ? temp_queater = res.quarter : null;
         // 进入页面设置默认时间
-        var r=/(\d{4})(\d{4})/;
-        default_year=r.exec(res.report_period)[1];
-        default_quarter =r.exec(res.report_period)[2];
+        var r = /(\d{4})(\d{4})/;
+        default_year = r.exec(res.report_period)[1];
+        default_quarter = r.exec(res.report_period)[2];
         $('#quarter-inp').val(temp_queater[default_quarter]);
         $('#year-inp').val(default_year);
 
@@ -160,7 +160,7 @@
     });
   }
 
-  getYearQuartar();
+  getYearQuartar(false);
 
 
   // 时间---渲染列表
@@ -311,7 +311,7 @@
   }
 
   // 指标墙---获取指标墙数据
-  function getIndexData(icode) {
+  function getIndexData(icode, async_flag) {
     $.ajax({
       type: 'GET',
       url: fix_url + '/api/research/stock/industry/frequency/',
@@ -319,7 +319,7 @@
         icode: icode
       },
       crossDomain: true == !(document.all),
-      async: false,
+      async: async_flag,
       success: function (res) {
         indexs_name = [];
         indexs = [];
@@ -339,7 +339,7 @@
     });
   }
 
-  default_code ? getIndexData(default_code) : null;
+  default_code ? getIndexData(default_code, false) : null;
 
   // 指标墙---渲染指标墙
   function initIndexWord(data_obj) {
@@ -415,7 +415,7 @@
 
   // tab/数据---初始化（默认三条）
   function initTabChart() {
-    if (indexs.length <= 3) {
+    if (indexs.length && indexs.length <= 3) {
       cur_tab = indexs[0];
       $.each(indexs, function (index, item) {
         index === 0 ? $('.chart-left').append('<span class="active">' + item + '<i class="del-index"> &times;</i></span>') : $('.chart-left').append('<span>' + item + '<i class="del-index"> &times;</i></span></span>');
@@ -466,7 +466,7 @@
         report_quarter: report_quarter,
         column_name: column_name
       },
-      async: false,
+      async: true,
       crossDomain: true == !(document.all),
       success: function (res) {
         $('#' + contxt + ' p').remove();
