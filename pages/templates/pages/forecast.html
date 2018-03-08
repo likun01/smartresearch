@@ -200,6 +200,7 @@
 
 <!--上半部分-->
 <script>
+  var chart_cont = [];
   // 按年度
   getDataInitDom('year');
 
@@ -257,7 +258,8 @@
         // 生成图表
         $.each(columsDatas, function (index, item) {
           var context = kind + '-chart-' + index;
-          topRankChart(context, titles, colors, titlesArr[index], ratiosArr[index], ranksArr[index]);
+          var obj_chart = topRankChart(context, titles, colors, titlesArr[index], ratiosArr[index], ranksArr[index]);
+          chart_cont.push(obj_chart);
         });
       },
       error: function (e) {
@@ -428,6 +430,7 @@
     };
     // 使用刚指定的配置项和数据显示图表。
     context.setOption(optionWeek);
+    return context;
   }
 
   // 切換tab和圖表
@@ -447,7 +450,11 @@
     });
   }
 
-
+  $(window).resize(function () {
+    $.each(chart_cont, function (index, item) {
+      item.resize();
+    })
+  });
 </script>
 <!--下半部分-->
 <script>

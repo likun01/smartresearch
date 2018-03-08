@@ -62,13 +62,12 @@
   var default_code = 'CC1010';
   var default_year = '2015';
   var default_quarter = ''; // 年报
-
   var temp_queater = {}; // 季报数据
   var count = 0;
   var index_obj = []; // 存放某一行业指标信息，以便查找指标对应字段
   var cur_tab = '';
   var colors = ['#BDBDBD', '#D3E056', '#9CCC64', '#65BA69', '#65BA69', '#29B5F6', '#7E56C1', '#AA46BC', '#EF5350']; // 柱状图颜色表
-
+  var chart_cont=[]; // 存放echart返回的实例，resize时使用
 
   // 行业---选择行业显示隐藏
   $('#industry-inp').click(function () {
@@ -483,7 +482,8 @@
               colors.push(getRandomColor());
             });
           }
-          initChart(contxt, res.cols_title.reverse(), res.data.reverse())
+          var obj_chart=initChart(contxt, res.cols_title.reverse(), res.data.reverse());
+          chart_cont.push(obj_chart);
         } else {
           $('#' + contxt).html('<p style="font-size: 12px;margin-top: 40px;text-align: center">暂无该指标所选时间的数据，请重新选择时间。</p>')
         }
@@ -572,7 +572,8 @@
         item.stock_name === e.name ? stock_code = item.stock_code : null;
       });
       window.location.href = '/forecast/' + stock_code + '?stock_name=' + encodeURI(e.name);
-    })
+    });
+    return myEcharts;
   }
 
   // 随机生成颜色
@@ -584,6 +585,11 @@
       })('');
   }
 
+  $(window).resize(function () {
+    $.each(chart_cont,function (index,item) {
+      item.resize();
+    })
+  });
 
   // 重新选择行业时，清空条形图容器，在原有count基础上生成容器，填充数据
   // 重新选取时间时，更改条形图数据(需要知道容器id)
