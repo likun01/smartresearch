@@ -447,12 +447,16 @@
 
   // tab---切换
   $(document).on('click', '.chart-left span', function (e) {
+    console.log($('.chart-cont .chart-bar').eq($(this).index()).height());
+    console.log($(this).index());
+        $('.chart-cont').css('height', $('.chart-cont .chart-bar').eq($(this).index()).height());
     var obj = e.target || e.srcElement;
     if (obj.nodeName.toUpperCase() === 'SPAN') {
       cur_tab = indexs[$(this).index()];
       $(this).addClass('active').siblings().removeClass('active');
       $('.chart-cont .chart-bar').eq($(this).index()).css('opacity', 1).css('z-index', 99).siblings().css('opacity', 0).css('z-index', -99);
     }
+
   });
 
   // 请求图表数据
@@ -494,13 +498,13 @@
   function initChart(contxt, data_y, data_s,) { // contxt chart-1 cur_tab当前tab
     if (data_y.length > 5) {
       $('.chart-cont').css('height', data_y.length * 35);
-      $('.chart-cont .chart-bar').css('height', data_y.length * 35);
+      $('#'+contxt).css('height', data_y.length * 35);
     } else if (data_y.length >= 3) {
       $('.chart-cont').css('height', data_y.length * 55);
-      $('.chart-cont .chart-bar').css('height', data_y.length * 55);
+      $('#'+contxt).css('height', data_y.length * 55);
     } else {
-      $('.chart-cont').css('height', data_y.length * 100);
-      $('.chart-cont .chart-bar').css('height', data_y.length * 100);
+      $('.chart-cont').css('height', data_y.length * 110);
+      $('#'+contxt).css('height', data_y.length * 110);
     }
     var serise_data = [];
     $.each(data_s, function (idnex, item) {
