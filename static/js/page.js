@@ -170,8 +170,8 @@
           opts.nextPage.removeClass("disabled");
           that.find(".pageObj li").eq(0).addClass("active");
           that.find(".pageObj li").eq(0).siblings("li").removeClass("active");
-          Method.initHTML();
           opts.cacheNum = 1;
+          Method.initHTML();
           Method.showPageindex(0, opts.maxPage, 0);
         });
 
